@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<body>
+<header class="jh" th:fragment="header">
+    <div class="header">
+        <div class="logo"><a href="../main/main.html">SkyCode</a></div>
+        <div class="navBg2"></div>
+        <div class="navBg1"></div>
+        <nav>
+            <ul class="main">
+                <li>
+                    <a href="#">여행추천</a>
+                </li>
+                <li><a href="#">여행리뷰</a>
+                    <ul class="sub">
+                        <li><a href="#">국내 여행</a></li>
+                        <li><a href="#">해외 여행</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">여행상품</a>
+                    <ul class="sub">
+                        <li><a href="#">비행기</a></li>
+                        <li><a href="#">패키지</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="map_JH.html">지도</a>
+                </li>
+                <li><a href="#">이벤트</a>
+                    <ul class="sub">
+                        <li><a href="#">진행중 이벤트</a></li>
+                        <li><a href="#">종료된 이벤트</a></li>
+                        <li><a href="#">당첨자 발표</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">고객센터</a>
+                    <ul class="sub">
+                        <li><a href="#">공지사항</a></li>
+                        <li><a href="#">문의</a></li>
+                        <li><a href="#">Q&A</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div class="search_user">
+            <img class="jhicon cart" src="images/Cart.png" alt="">
+            <img class="jhicon searchBtn" src="images/alarmMenu.png" alt="">
+            <img class="jhicon userModal" src="images/searchUser.png" alt="user">
+
+            <!-- user  -->
+            <div class="jhModalUser">
+                <div class="jhModalUserBg"></div>
+                <div class="jhUser">
+                    <button class="closeMenu">X</button>
+                    <button class="jhicon cartMenu">장바구니</button>
+                    <button class="jhicon alarmMenu">내 알람</button>
+                    <h2>홍지혜</h2>
+                    <img class="userImg" src="images/UserImg.jpg" alt="userImg">
+                    <div class="jhuserBox1">
+                        <ul>
+                            <li>8</li>
+                            <li>내여행</li>
+                        </ul>
+                        <ul>
+                            <li>5</li>
+                            <li>리뷰</li>
+                        </ul>
+                        <ul>
+                            <li>1</li>
+                            <li>여행기</li>
+                        </ul>
+                    </div>
+                    <div class="jhuserBox2">
+                        <ul>
+                            <li>내 저장
+                                <div><span class="userCount">71</span></div>
+                            </li>
+                            <li>내 예약
+                                <div></div>
+                            </li>
+                            <li>쿠폰함
+                                <div><span class="userCount">0</span>개</div>
+                            </li>
+                            <li>마일리지
+                                <div><span class="userCount">0</span>p</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="jhuserBox3">
+                        <div></div>
+                        <ul>
+                            <li>공지사항</li>
+                            <li>오프라인 가이드</li>
+                            <li>일행초대</li>
+                            <li>고객센터</li>
+                        </ul>
+                        <img src="images/banner123.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+
+/* font */
+
+html {
+    font-size: 10px;
+}
+
+body {
+    font: 1.5rem/1.8 'Noto Sans KR', sans-serif;
+    color: #000;
+}
+
+h1 {
+    font-size: 3.2rem;
+}
+
+h2 {
+    font-size: 2.4rem;
+    font-weight: 400;
+}
+
+h3 {
+    font-size: 1.8rem;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.logo a{
+    font-size: 2.5rem;
+    font-weight: 600;
+}
