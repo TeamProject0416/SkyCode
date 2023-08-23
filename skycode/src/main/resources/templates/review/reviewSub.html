@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/review/reviewStyle.css}" rel="stylesheet">
+    <link th:href="@{/css/review/header.css}" rel="stylesheet">
+    <link th:href="@{/css/review/footer.css}" rel="stylesheet">
+
+</head>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<section class="section reviewSection">
+  <div class="reviewPage">
+    <!-- 상단 제목 -->
+    <div class="reviewTitle">
+      <h2 class="reviewTag">#여행 리뷰</h2>
+    </div>
+
+    <!-- bestReview -->
+    <div class="bestReview">
+      <h3 class="bestReviewTitle">베스트 리뷰</h3>
+      <div class="rankNumber">
+        <span>1위</span>
+        <span>2위</span>
+        <span>3위</span>
+      </div>
+      <!-- ranking -->
+      <div class="ranking">
+        <!-- 카드 시작 -->
+        <div class="cards">
+          <div class="card">
+            <div class="cardImg"></div>
+            <div class="cardInnerText">
+              <h3>닉네임</h3>
+              <p>내용</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="cardImg">
+              <video autoplay loop muted>
+                <source src="../sub/video/rankingVideo.mp4">
+              </video>
+            </div>
+            <div class="cardInnerText">
+              <h3>닉네임</h3>
+              <p>내용</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="cardImg"></div>
+            <div class="cardInnerText">
+              <h3>닉네임</h3>
+              <p>내용</p>
+            </div>
+          </div>
+        </div>
+      </div><!-- ranking 끝 -->
+    </div><!-- bestReview 끝 -->
+
+    <!-- search -->
+    <div class="reviewSearchArea">
+      <div class="reviewSearchTitle">
+        <h2 class="Title">Review Road</h2>
+      </div>
+      <div class="search">
+        <a href="#" class="searchOption">
+          제목
+          <span><i class="fa-solid fa-caret-down"></i></span>
+        </a>
+        <ul class="optionList">
+          <li>제목</li>
+          <li>작성자</li>
+        </ul>
+        <input type="text" placeholder="검색어를 입력해주세요.">
+        <button type="submit">검색</button>
+      </div>
+
+      <div class="searchRank">
+        <p>인기검색어</p>
+      </div>
+    </div>
+    <!-- reviewAll -->
+    <div class="reviewAllArea">
+      <div class="reviewBoard">
+        <div class="reviewContents">
+          <div class="reviewInfo">
+            <div class="reviewUser">
+              <a href="#">
+                <img src="../sub/images/searchUser.png" alt="" class="reviewUserImg">
+                <div>
+                  <p class="reviewUserNickName">보라돌이</p>
+                  <span>6시간 전</span>
+                </div>
+              </a>
+            </div>
+            <div class="userReviewText">
+              <a href="#">
+                <h2 class="userReviewTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
+                </h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
+                  aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
+                  nemo
+                  nobis. Asperiores odit impedit minus accusamus expedita!</p>
+                <span>2022-03-03</span>
+              </a>
+            </div>
+            <div class="reviewImg">
+              <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
+            </div>
+          </div>
+        </div>
+        <div class="reviewContents">
+          <div class="reviewInfo">
+            <div class="reviewUser">
+              <a href="#">
+                <img src="../sub/images/searchUser.png" alt="" class="reviewUserImg">
+                <div>
+                  <p class="reviewUserNickName">뚜비</p>
+                  <span>6시간 전</span>
+                </div>
+              </a>
+            </div>
+            <div class="userReviewText">
+              <a href="#">
+                <h2 class="userReviewTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
+                </h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
+                  aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
+                  nemo
+                  nobis. Asperiores odit impedit minus accusamus expedita!</p>
+                <span>2022-03-03</span>
+              </a>
+            </div>
+            <div class="reviewImg">
+              <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
+            </div>
+          </div>
+        </div>
+        <div class="reviewContents">
+          <div class="reviewInfo">
+            <div class="reviewUser">
+              <a href="#">
+                <img src="../sub/images/searchUser.png" alt="" class="reviewUserImg">
+                <div>
+                  <p class="reviewUserNickName">나나나</p>
+                  <span>6시간 전</span>
+                </div>
+              </a>
+            </div>
+            <div class="userReviewText">
+              <a href="#">
+                <h2 class="userReviewTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
+                </h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
+                  aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
+                  nemo
+                  nobis. Asperiores odit impedit minus accusamus expedita!</p>
+                <span>2022-03-03</span>
+              </a>
+            </div>
+            <div class="reviewImg">
+              <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
+            </div>
+          </div>
+        </div>
+        <div class="reviewContents">
+          <div class="reviewInfo">
+            <div class="reviewUser">
+              <a href="#">
+                <img src="../sub/images/searchUser.png" alt="" class="reviewUserImg">
+                <div>
+                  <p class="reviewUserNickName">뽀오</p>
+                  <span>6시간 전</span>
+                </div>
+              </a>
+            </div>
+            <div class="userReviewText">
+              <a href="#">
+                <h2 class="userReviewTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
+                </h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
+                  aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
+                  nemo
+                  nobis. Asperiores odit impedit minus accusamus expedita!</p>
+                <span>2022-03-03</span>
+              </a>
+            </div>
+            <div class="reviewImg">
+              <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
+            </div>
+          </div>
+        </div>
+        <div class="reviewContents">
+          <div class="reviewInfo">
+            <div class="reviewUser">
+              <a href="#">
+                <img src="../sub/images/searchUser.png" alt="" class="reviewUserImg">
+                <div>
+                  <p class="reviewUserNickName">햇님</p>
+                  <span>6시간 전</span>
+                </div>
+              </a>
+            </div>
+            <div class="userReviewText">
+              <a href="#">
+                <h2 class="userReviewTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
+                </h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
+                  aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
+                  nemo
+                  nobis. Asperiores odit impedit minus accusamus expedita!</p>
+                <span>2022-03-03</span>
+              </a>
+            </div>
+            <div class="reviewImg">
+              <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /reviewAll -->
+  </div>
+  <!-- /reviewPage -->
+</section>
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+</body>
+</html>
