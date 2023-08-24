@@ -134,7 +134,7 @@ nav>.main>li {
     text-indent: -9999px;
     left: 20px;
     top: 20px;
-    background: url(/subImages/closeMenu.png) no-repeat;
+    background: url(../images/closeMenu.png) no-repeat;
 }
 
 .cartMenu {
@@ -147,7 +147,7 @@ nav>.main>li {
     top: 20px;
     right: 70px;
     text-indent: -9999px;
-    background: url(/subImages/Cart.png) no-repeat center;
+    background: url(../images/Cart.png) no-repeat center;
 }
 
 .alarmMenu {
@@ -160,7 +160,7 @@ nav>.main>li {
     top: 20px;
     right: 20px;
     text-indent: -9999px;
-    background: url(/subImages/alarmMenu.png) no-repeat center;
+    background: url(../images/alarmMenu.png) no-repeat center;
 }
 
 .userImg {
@@ -222,7 +222,7 @@ nav>.main>li {
 .jhuserBox2>ul>li>div {
     height: 36px;
     width: 100px;
-    background: url(/subImages/nextUserPage.png) no-repeat right center;
+    background: url(../images/nextUserPage.png) no-repeat right center;
 }
 
 .jhuserBox3 {
@@ -246,87 +246,3 @@ nav>.main>li {
     line-height: 100px;
 }
 
-/* section */
-
-section {
-    position: relative;
-    width: 100%;
-    top: 100px;
-}
-
-section>div {
-    width: 1320px;
-    margin: 0 auto;
-}
-
-.mainTab {
-    display: flex;
-    justify-content: center;
-    border-bottom: 1px solid #eee;
-}
-
-.mainTab>li {
-    font-weight: 600;
-    text-align: center;
-}
-
-.firstTab {
-    line-height: 60px;
-}
-
-.firstTab>li {
-    width: 200px;
-    position: relative;
-}
-
-.firstTab>li>a{
-    font-size: 1.8rem;
-    display: block;
-}
-
-.secondTab{
-    line-height: 60px;
-}
-
-.secondTab>ul>li {
-    width: 150px;
-}
-
-.mainTab>li:hover> a{
-    transition: .5s;
-    color: #0065BA;
-
-}
-
-.on a{
-    color: #0065BA;
-
-}
-
-.firstTab li.on a:before {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-top: -10px;
-    margin-left: -5px;
-    border-color: transparent transparent #dbdbdb;
-    border-style: solid;
-    border-width: 0 10px 10px;
-}
-
-.firstTab li.on a:after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-top: -9px;
-    margin-left: -5px;
-    border-color: transparent transparent #fff;
-    border-style: solid;
-    border-width: 0 10px 10px;
-}
-
-.secondTab>ul>li.on{
-    border-bottom: 3px solid #0065BA;
-}
