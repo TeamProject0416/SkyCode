@@ -21,4 +21,8 @@ public class newsController {
         return "news/notionSub";
     }
 
+    @GetMapping(value = "/inquiry")
+    public String newsInquiry(){
+        return "news/inquiry";
+    }
 }
