@@ -52,18 +52,18 @@
 .nyNewsWrap .nyNewsSubContainer .nyNewsSubPager div i{
     margin-right: 20px;
 }
-.nyNewsWrap .nyNewsList button {
+.nyNewsWrap .nyNewsList a {
     /* border: none; */
     font-size: 2rem;
     background: #fff;
     border-radius: 10px;
-    border: 2px solid #8ED3FF;
+    /* border: 2px solid #8ED3FF; */
     color: #0065BA;
     padding: 10px 20px;
     font-weight: 700;
 }
 
-.nyNewsWrap .nyNewsList button:hover{
-    background: #8ED3FF;
+.nyNewsWrap .nyNewsList a:hover{
+    background: #0065BA;
     color: #fff;
 }
