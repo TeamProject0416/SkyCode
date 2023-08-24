@@ -1,30 +1,10 @@
 package teamproject.skycode.review;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.*;
-
-@Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Review {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column
-    private String nickname;
-    @Column
-    private String body;
-    @Column
-    private Long regTime;
+    private Long id;    // 리뷰 id
+    private String nickName;    // 작성자 닉네임
+    private String body;    // 리뷰 내용
+    private Long regTime;   // 작성시간
 
-    public static Review createReviewDto(ReviewDto dto) {
-
-        return null;
-    }
 }
