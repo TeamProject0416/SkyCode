@@ -1,6 +1,6 @@
 /* 공지사항 서브페이지 */
 .nyNewsWrap{
-    /*position: relative;*/
+    position: relative;
     max-width: 1320px;
     margin: 0 auto;
     padding: 0 60px;
