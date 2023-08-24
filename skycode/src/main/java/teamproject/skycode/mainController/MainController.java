@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 //@RequestMapping(value = "/main")
 public class MainController {
 
-        @GetMapping(value = "/main")
+        @GetMapping(value = "/")
         public String skyCode() {
             return "main";
+        }
+
+        @GetMapping(value = "/map")
+        public String map() {
+            return "map/map";
         }
 }
