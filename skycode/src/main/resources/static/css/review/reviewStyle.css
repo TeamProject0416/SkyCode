@@ -39,7 +39,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url(../sub/images/reviewRanking1.jpg) no-repeat cover;
+            background: url(/subImg/reviewRanking1.jpg) no-repeat cover;
         }
 
         .card {

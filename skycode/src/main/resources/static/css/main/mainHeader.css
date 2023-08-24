@@ -213,7 +213,7 @@ nav>.main>li {
     text-indent: -9999px;
     left: 20px;
     top: 20px;
-    background: url(/img/closeMenu.png) no-repeat;
+    background: url(/mainImages/closeMenu.png) no-repeat;
 }
 
 .cartMenu{
@@ -226,7 +226,7 @@ nav>.main>li {
     top: 20px;
     right: 70px;
     text-indent: -9999px;
-    background: url(/img/Cart.png) no-repeat center;
+    background: url(/mainImages/Cart.png) no-repeat center;
 }
 
 .alarmMenu {
@@ -239,7 +239,7 @@ nav>.main>li {
     top: 20px;
     right: 20px;
     text-indent: -9999px;
-    background: url(/img/alarmMenu.png) no-repeat center;
+    background: url(/mainImages/alarmMenu.png) no-repeat center;
 }
 
 .userImg {
