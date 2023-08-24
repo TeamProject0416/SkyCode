@@ -21,7 +21,7 @@
 
 .section1>.cloud>.airplane {
     position: absolute;
-    background: url(../images/airplane.png) 50px/50px;
+    background: url(/img/airplane.png) 50px/50px;
     width: 50px;
     height: 50px;
     animation: airplane 15s infinite linear;
@@ -207,7 +207,8 @@
     text-indent: -9999px;
     width: 17px;
     height: 16px;
-    background: url(../images/btn_showcase_arw.png) no-repeat;
+    background: url(/img/btn_showcase_arw.png) no-repeat;
+
     cursor: pointer;
 }
 
@@ -217,7 +218,7 @@
     text-indent: -9999px;
     width: 17px;
     height: 16px;
-    background: url(../images/btn_showcase_arw.png) no-repeat 0 -16px;
+    background: url(/img/btn_showcase_arw.png) no-repeat 0 -16px;
     cursor: pointer;
 }
 
@@ -226,7 +227,7 @@
     text-indent: -9999px;
     width: 15px;
     height: 17px;
-    background: url(../images/btn_slide_play02.png) no-repeat;
+    background: url(/img/btn_slide_play02.png) no-repeat;
     vertical-align: top;
     border: none;
     cursor: pointer;
@@ -237,7 +238,7 @@
     text-indent: -9999px;
     width: 15px;
     height: 17px;
-    background: url(../images/btn_slidem_stop02.png) no-repeat;
+    background: url(/img/btn_slidem_stop02.png) no-repeat;
     vertical-align: top;
     border: none;
     cursor: pointer;
@@ -641,7 +642,7 @@ button {
     width: 100%;
     height: 250px;
     border-bottom: 1px solid black;
-    background-image: url(../images/travelImg.jpg);
+    background-image: url(/img/travelImg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -888,8 +889,9 @@ button {
     transform: translate(-50%,-50%);
     width: 32px;
     height: 32px;
-    background-image: url(../images/transferImg.png);
+    background: url(/img/transferImg.png) no-repeat;
     cursor: pointer;
+    background-color : #000;
   }
 
 
@@ -1025,7 +1027,7 @@ button {
     z-index: 1;
     width: 20px;
     height: 20px;
-    background-image: url(../images/locationIcon.png);
+    background: url(/img/locationIcon.png);
   }
 
   .modalContentCenterArea input {
