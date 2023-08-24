@@ -7,7 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class newsController {
 
     @GetMapping(value = "/faq")
-    public String reviewSub(){
+    public String newsFaq(){
         return "news/faq";
     }
+
+    @GetMapping(value = "/notion")
+    public String newsNotion(){
+        return "news/notion";
+    }
+
+    @GetMapping(value = "/notionSub")
+    public String newsNotionSub(){
+        return "news/notionSub";
+    }
+
 }

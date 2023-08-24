@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/news/notionSubStyle.css}" rel="stylesheet">
+</head>
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<!-- 공지사항 -->
+<section class="nyNewsWrap">
+    <h2>공지사항</h2>
+    <div class="nyNewsSubContainer">
+        <div class="nyNewsTitle">
+            <span class="nyTitle">제목</span>
+            <span class="nyTitleDate">날짜</span>
+        </div>
+        <div class="nyNewsContent">
+            <img src="http://placehold.it/320x100" />
+            <p>공지사항에 대한 정보</p>
+        </div>
+        <div class="nyNewsSubPager">
+            <div><a href=""><i class="fa-solid fa-caret-up"></i> 다음글</a></div>
+            <div><a href=""><i class="fa-solid fa-caret-down"></i> 이전글</a></div>
+        </div>
+    </div>
+    <div class="nyNewsList">
+        <button type="button">목록보기</button>
+    </div>
+</section>
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+</body>
+</html>
