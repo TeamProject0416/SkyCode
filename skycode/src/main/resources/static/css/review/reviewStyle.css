@@ -39,7 +39,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url(/subImg/reviewRanking1.jpg) no-repeat cover;
+            background: url(/subImages/reviewRanking1.jpg) no-repeat cover;
         }
 
         .card {
@@ -78,7 +78,7 @@
         }
 
         .card:first-of-type {
-            background: url(../sub/images/reviewRanking1.jpg) no-repeat 50%/cover;
+            background: url(/subImages/reviewRanking1.jpg) no-repeat 50%/cover;
         }
 
         .card:nth-of-type(2) video {
@@ -86,7 +86,7 @@
         }
 
         .card:last-of-type {
-            background: url(../sub/images/reviewRanking2.jpg) no-repeat 50%/cover;
+            background: url(/subImages/reviewRanking2.jpg) no-repeat 50%/cover;
         }
 
         .card:not(.card:last-of-type) {
@@ -98,9 +98,7 @@
             position: relative;
             width: 100%;
             height: 250px;
-            background-image: url(images/travelImg.jpg);
-            background-repeat: no-repeat;
-            background-size: cover;
+
         }
 
         /* cards 끝 */

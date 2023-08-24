@@ -8,7 +8,7 @@
     <link th:href="@{/css/review/reviewStyle.css}" rel="stylesheet">
     <link th:href="@{/css/review/header.css}" rel="stylesheet">
     <link th:href="@{/css/review/footer.css}" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
@@ -43,7 +43,7 @@
           <div class="card">
             <div class="cardImg">
               <video autoplay loop muted>
-                <source src="../sub/video/rankingVideo.mp4">
+                <source src="/video/rankingVideo.mp4">
               </video>
             </div>
             <div class="cardInnerText">
@@ -91,7 +91,7 @@
           <div class="reviewInfo">
             <div class="reviewUser">
               <a href="#">
-                <img src="../sub/images/searchUser.png" alt="" class="reviewUserImg">
+                <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
                 <div>
                   <p class="reviewUserNickName">보라돌이</p>
                   <span>6시간 전</span>
@@ -118,7 +118,7 @@
           <div class="reviewInfo">
             <div class="reviewUser">
               <a href="#">
-                <img src="../sub/images/searchUser.png" alt="" class="reviewUserImg">
+                <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
                 <div>
                   <p class="reviewUserNickName">뚜비</p>
                   <span>6시간 전</span>
@@ -145,7 +145,7 @@
           <div class="reviewInfo">
             <div class="reviewUser">
               <a href="#">
-                <img src="../sub/images/searchUser.png" alt="" class="reviewUserImg">
+                <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
                 <div>
                   <p class="reviewUserNickName">나나나</p>
                   <span>6시간 전</span>
@@ -172,7 +172,7 @@
           <div class="reviewInfo">
             <div class="reviewUser">
               <a href="#">
-                <img src="../sub/images/searchUser.png" alt="" class="reviewUserImg">
+                <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
                 <div>
                   <p class="reviewUserNickName">뽀오</p>
                   <span>6시간 전</span>
@@ -199,7 +199,7 @@
           <div class="reviewInfo">
             <div class="reviewUser">
               <a href="#">
-                <img src="../sub/images/searchUser.png" alt="" class="reviewUserImg">
+                <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
                 <div>
                   <p class="reviewUserNickName">햇님</p>
                   <span>6시간 전</span>
@@ -228,5 +228,10 @@
   <!-- /reviewPage -->
 </section>
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/review/subHeader.js"></script>
+<script src="/js/review/reviewSub.js"></script>
+<script src="/js/review/subFooter.js"></script>
 </body>
 </html>
