@@ -1,251 +1,250 @@
 /*지혜 css*/
-/* section1 */
-.section1 {
-    width: 100%;
-    height: 800px;
-}
-
-.section1Box {
-    max-width: 1920px;
-    margin: 0 auto;
-}
-
-.section1>.bgColor {
-    z-index: -10;
-    background: #C0E4FF;
-    height: 700px;
-    width: 100%;
-    position: absolute;
-    transition: .3s;
-}
-
-.section1>.cloud>.airplane {
-    position: absolute;
-    background: url(/mainImages/airplane.png) 50px/50px;
-    width: 50px;
-    height: 50px;
-    animation: airplane 15s infinite linear;
-}
-
-
-@keyframes airplane {
-    0% {
-        bottom: -50px;
-        left: -200px;
+    /* section1 */
+    .section1 {
+        width: 100%;
+        height: 800px;
     }
 
-    100% {
-        bottom: 300px;
-        left: 1000px;
+    .section1Box {
+        max-width: 1920px;
+        margin: 0 auto;
     }
-}
 
-.section1>.cloud {
-    z-index: -10;
-    height: 700px;
-    max-width: 1920px;
-    margin: 0 auto;
-    position: relative;
-}
+    .section1>.bgColor {
+        z-index: -10;
+        background: #C0E4FF;
+        height: 700px;
+        width: 100%;
+        position: absolute;
+        transition: .3s;
+    }
 
-.section1>.cloud>img:nth-of-type(1) {
-    position: relative;
-    bottom: -450px;
-    left: 1500px;
-    height: 255px;
-    width: 375px;
-}
+    .section1>.cloud>.airplane {
+        position: absolute;
+        background: url(/mainImages/airplane.png) 50px/50px;
+        width: 50px;
+        height: 50px;
+        animation: airplane 15s infinite linear;
+    }
 
-.section1>.cloud>img:nth-of-type(2) {
-    position: relative;
-    bottom: -550px;
-    left: 440px;
-    height: 170px;
-    width: 250px;
-}
 
-.section1>.cloud>img:nth-of-type(3) {
-    position: relative;
-    bottom: -430px;
-    right: 700px;
-    height: 255px;
-    width: 375px;
-}
+    @keyframes airplane {
+        0% {
+            bottom: -50px;
+            left: -200px;
+        }
 
-.section1>.cloud>img:nth-of-type(4) {
-    position: relative;
-    bottom: -550px;
-    right: 1100px;
-    height: 170px;
-    width: 255px;
-}
+        100% {
+            bottom: 300px;
+            left: 1000px;
+        }
+    }
 
-.section1>.cloud>img:nth-of-type(5) {
-    position: relative;
-    bottom: -150px;
-    right: 550px;
-    height: 90px;
-    width: 135px;
-}
+    .section1>.cloud {
+        z-index: -10;
+        height: 700px;
+        max-width: 1920px;
+        margin: 0 auto;
+        position: relative;
+    }
 
-.section1>.cloud>img:nth-of-type(6) {
-    position: relative;
-    bottom: -280px;
-    right: 1100px;
-    height: 40px;
-    width: 60px;
-}
+    .section1>.cloud>img:nth-of-type(1) {
+        position: relative;
+        bottom: -450px;
+        left: 1500px;
+        height: 255px;
+        width: 375px;
+    }
 
-.jh .textBox {
-    display: block;
-    position: relative;
-    width: 380px;
-    bottom: 500px;
-    left: 400px;
-}
+    .section1>.cloud>img:nth-of-type(2) {
+        position: relative;
+        bottom: -550px;
+        left: 440px;
+        height: 170px;
+        width: 250px;
+    }
 
-.section1Box>.textBox>.text1 {
-    position: absolute;
-    padding: 6px 12px;
-    background: rgb(41, 41, 41);
-    border: 1px solid rgb(41, 41, 41);
-    border-radius: 20px 20px 20px 0;
-    color: #eee;
-    transition: .3s;
-}
+    .section1>.cloud>img:nth-of-type(3) {
+        position: relative;
+        bottom: -430px;
+        right: 700px;
+        height: 255px;
+        width: 375px;
+    }
 
-.section1Box>.textBox>.text2 {
-    position: absolute;
-    top: 50px;
-    word-break: keep-all;
-    font-size: 4rem;
-    transition: .3s;
-}
+    .section1>.cloud>img:nth-of-type(4) {
+        position: relative;
+        bottom: -550px;
+        right: 1100px;
+        height: 170px;
+        width: 255px;
+    }
 
-.jh .textBox>p:nth-of-type(n+2):nth-of-type(-n+3),
-.jh .textBox>p:nth-of-type(n+5):nth-of-type(-n+6) {
-    opacity: 0;
-}
+    .section1>.cloud>img:nth-of-type(5) {
+        position: relative;
+        bottom: -150px;
+        right: 550px;
+        height: 90px;
+        width: 135px;
+    }
 
-.section1Box>.textBox>a {
-    position: absolute;
-    top: 200px;
-    text-decoration: underline;
-}
+    .section1>.cloud>img:nth-of-type(6) {
+        position: relative;
+        bottom: -280px;
+        right: 1100px;
+        height: 40px;
+        width: 60px;
+    }
 
-/* imgSilder */
+    .jh .textBox {
+        display: block;
+        position: relative;
+        width: 380px;
+        bottom: 500px;
+        left: 400px;
+    }
 
-.section1Box>.imgBox {
-    position: absolute;
-    left: 50%;
-    top: 100px;
-    height: 660px;
-    width: 760px;
-}
+    .section1Box>.textBox>.text1 {
+        position: absolute;
+        padding: 6px 12px;
+        background: rgb(41, 41, 41);
+        border: 1px solid rgb(41, 41, 41);
+        border-radius: 20px 20px 20px 0;
+        color: #eee;
+        transition: .3s;
+    }
 
-.section1Box>.imgBox>img {
-    position: absolute;
-    z-index: 20;
-}
+    .section1Box>.textBox>.text2 {
+        position: absolute;
+        top: 50px;
+        word-break: keep-all;
+        font-size: 4rem;
+        transition: .3s;
+    }
 
-.section1Box>.imgBox>ul>li {
-    height: 660px;
-    width: 740px;
-    position: absolute;
-}
+    .jh .textBox>p:nth-of-type(n+2):nth-of-type(-n+3),
+    .jh .textBox>p:nth-of-type(n+5):nth-of-type(-n+6) {
+        opacity: 0;
+    }
 
-.jh .slider {
-    display: flex;
-    position: absolute;
-}
+    .section1Box>.textBox>a {
+        position: absolute;
+        top: 200px;
+        text-decoration: underline;
+    }
 
-/* page */
-.jh .page {
-    position: relative;
-    display: flex;
-    width: 400px;
-    bottom: 50px;
-    left: 400px;
-    align-items: center;
-}
+    /* imgSilder */
 
-.jh .progressBar {
-    height: 2px;
-    background: #b2b2b2;
-    width: 150px;
-}
+    .section1Box>.imgBox {
+        position: absolute;
+        left: 50%;
+        top: 100px;
+        height: 660px;
+        width: 760px;
+    }
 
-.jh .progressBar>div {
-    height: 2px;
-    background: #1b1b1b;
-    width: 0;
-}
+    .section1Box>.imgBox>img {
+        position: absolute;
+        z-index: 20;
+    }
 
-@keyframes identifier {
-    0% {
+    .section1Box>.imgBox>ul>li {
+        height: 660px;
+        width: 740px;
+        position: absolute;
+    }
+
+    .jh .slider {
+        display: flex;
+        position: absolute;
+    }
+
+    /* page */
+    .jh .page {
+        position: relative;
+        display: flex;
+        width: 400px;
+        bottom: 50px;
+        left: 400px;
+        align-items: center;
+    }
+
+    .jh .progressBar {
+        height: 2px;
+        background: #b2b2b2;
+        width: 150px;
+    }
+
+    .jh .progressBar>div {
+        height: 2px;
+        background: #1b1b1b;
         width: 0;
     }
 
-    100% {
-        width: 150px;
+    @keyframes identifier {
+        0% {
+            width: 0;
+        }
+
+        100% {
+            width: 150px;
+        }
     }
-}
 
-.jh .pagination {
-    padding: 0 10px;
-}
+    .jh .pagination {
+        padding: 0 10px;
+    }
 
-.jh .pageBtn {
-    display: flex;
-    position: relative;
-    top: 2px;
-    left: 50px;
-}
+    .jh .pageBtn {
+        display: flex;
+        position: relative;
+        top: 2px;
+        left: 50px;
+    }
 
-.jh .pageBtn>.pageBtnPrev {
-    position: relative;
-    text-indent: -9999px;
-    width: 17px;
-    height: 16px;
-    background: url(/mainImages/btn_showcase_arw.png) no-repeat;
+    .jh .pageBtn>.pageBtnPrev {
+        position: relative;
+        text-indent: -9999px;
+        width: 17px;
+        height: 16px;
+        background: url(/mainImages/btn_showcase_arw.png) no-repeat;
 
-    cursor: pointer;
-}
+        cursor: pointer;
+    }
 
-.jh .pageBtn>.pageBtnNext {
-    position: relative;
-    left: 47px;
-    text-indent: -9999px;
-    width: 17px;
-    height: 16px;
-    background: url(/mainImages/btn_showcase_arw.png) no-repeat 0 -16px;
-    cursor: pointer;
-}
+    .jh .pageBtn>.pageBtnNext {
+        position: relative;
+        left: 47px;
+        text-indent: -9999px;
+        width: 17px;
+        height: 16px;
+        background: url(/mainImages/btn_showcase_arw.png) no-repeat 0 -16px;
+        cursor: pointer;
+    }
 
-.jh .btnAuto .btnAutoPlay {
-    position: absolute;
-    text-indent: -9999px;
-    width: 15px;
-    height: 17px;
-    background: url(/mainImages/btn_slide_play02.png) no-repeat;
-    vertical-align: top;
-    border: none;
-    cursor: pointer;
-}
+    .jh .btnAuto .btnAutoPlay {
+        position: absolute;
+        text-indent: -9999px;
+        width: 15px;
+        height: 17px;
+        background: url(/mainImages/btn_slide_play02.png) no-repeat;
+        vertical-align: top;
+        border: none;
+        cursor: pointer;
+    }
 
-.jh .btnAuto .btnAutoStop {
-    position: absolute;
-    text-indent: -9999px;
-    width: 15px;
-    height: 17px;
-    background: url(/mainImages/btn_slidem_stop02.png) no-repeat;
-    vertical-align: top;
-    border: none;
-    cursor: pointer;
-    display: none;
-}
-/*/지혜 css*/
-
+    .jh .btnAuto .btnAutoStop {
+        position: absolute;
+        text-indent: -9999px;
+        width: 15px;
+        height: 17px;
+        background: url(/mainImages/btn_slidem_stop02.png) no-repeat;
+        vertical-align: top;
+        border: none;
+        cursor: pointer;
+        display: none;
+    }
+    /*/지혜 css*/
 /*나연 css*/
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap');
 /* section2공통 */

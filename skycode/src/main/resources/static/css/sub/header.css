@@ -292,12 +292,6 @@ section>div {
     width: 150px;
 }
 
-.mainTab>li:hover> a{
-    transition: .5s;
-    color: #0065BA;
-
-}
-
 .on a{
     color: #0065BA;
 
