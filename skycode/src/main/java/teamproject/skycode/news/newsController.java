@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class newsController {
 
-    @GetMapping(value = "/faq")
+    @GetMapping(value = "/news/faq")
     public String newsFaq(){
         return "news/faq";
     }
 
-    @GetMapping(value = "/notion")
+    @GetMapping(value = "/news/notion")
     public String newsNotion(){
         return "news/notion";
     }
 
-    @GetMapping(value = "/notionSub")
+    @GetMapping(value = "/news/notionSub")
     public String newsNotionSub(){
         return "news/notionSub";
     }
