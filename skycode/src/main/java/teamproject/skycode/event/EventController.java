@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/event")
-public class eventController {
+public class EventController {
     @GetMapping(value = "/ongoing")
     public String ongoingEvent(){
         return "/event/eventongoing";
@@ -21,4 +21,7 @@ public class eventController {
     public String eventWinner(){
         return "/event/eventwinner";
     }
+
+    @GetMapping(value = "/sub")
+    public String eventSub(){ return "/event/eventSub";}
 }

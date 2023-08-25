@@ -11,17 +11,20 @@ public class newsController {
         return "news/faq";
     }
 
+
     @GetMapping(value = "/news/notion")
     public String newsNotion(){
         return "news/notion";
     }
+
 
     @GetMapping(value = "/news/notionSub")
     public String newsNotionSub(){
         return "news/notionSub";
     }
 
-    @GetMapping(value = "/inquiry")
+
+    @GetMapping(value = "/news/inquiry")
     public String newsInquiry(){
         return "news/inquiry";
     }
