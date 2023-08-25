@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
->
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
   <link th:href="@{/css/reset.css}" rel="stylesheet">
   <link th:href="@{/css/typo.css}" rel="stylesheet">
+<!--  <link th:href="@{/css/sub/header.css}" rel="stylesheet">-->
+<!--  <link th:href="@{/css/sub/footer.css}" rel="stylesheet">-->
+  <link th:href="@{/css/review/header.css}" rel="stylesheet">
+  <link th:href="@{/css/review/footer.css}" rel="stylesheet">
   <link th:href="@{/css/event/eventStyle.css}" rel="stylesheet">
-  <link th:href="@{/css/sub/header.css}" rel="stylesheet">
-  <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
 
 </head>
 <body>
 <header th:replace="~{fragments/sub/header::header}"></header>
-<section class="section">
 
+<section class="section">
   <div class="eventPage">
     <div class="eventPageTitle">
       <h2 class="eventTag">#진행중 이벤트</h2>
@@ -26,7 +27,7 @@
           <div class="eventInfo">
             <div class="eventUser">
               <a href="#">
-                <img src="../sub/images/searchUser.png" alt="" class="eventUserImg">
+                <img src="/subImages/adminImg.png" alt="" class="eventUserImg">
                 <div>
                   <p class="eventUserNickName">관리자</p>
                   <span>6시간 전</span>
@@ -34,7 +35,7 @@
               </a>
             </div>
             <div class="eventText">
-              <a href="eventpagesubSH.html">
+              <a href="sub">
                 <h2 class="eventTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
                 </h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
@@ -53,7 +54,7 @@
           <div class="eventInfo">
             <div class="eventUser">
               <a href="#">
-                <img src="../sub/images/searchUser.png" alt="" class="eventUserImg">
+                <img src="/subImages/adminImg.png" alt="" class="eventUserImg">
                 <div>
                   <p class="eventUserNickName">관리자</p>
                   <span>6시간 전</span>
@@ -61,7 +62,7 @@
               </a>
             </div>
             <div class="eventText">
-              <a href="#">
+              <a href="sub">
                 <h2 class="eventTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
                 </h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
@@ -80,7 +81,7 @@
           <div class="eventInfo">
             <div class="eventUser">
               <a href="#">
-                <img src="../sub/images/searchUser.png" alt="" class="eventUserImg">
+                <img src="/subImages/adminImg.png" alt="" class="eventUserImg">
                 <div>
                   <p class="eventUserNickName">관리자</p>
                   <span>6시간 전</span>
@@ -88,7 +89,7 @@
               </a>
             </div>
             <div class="eventText">
-              <a href="#">
+              <a href="sub">
                 <h2 class="eventTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
                 </h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
@@ -107,7 +108,7 @@
           <div class="eventInfo">
             <div class="eventUser">
               <a href="#">
-                <img src="../sub/images/searchUser.png" alt="" class="eventUserImg">
+                <img src="/subImages/adminImg.png" alt="" class="eventUserImg">
                 <div>
                   <p class="eventUserNickName">관리자</p>
                   <span>6시간 전</span>
@@ -115,7 +116,7 @@
               </a>
             </div>
             <div class="eventText">
-              <a href="#">
+              <a href="sub">
                 <h2 class="eventTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
                 </h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
@@ -134,7 +135,7 @@
           <div class="eventInfo">
             <div class="eventUser">
               <a href="#">
-                <img src="../sub/images/searchUser.png" alt="" class="eventUserImg">
+                <img src="/subImages/adminImg.png" alt="" class="eventUserImg">
                 <div>
                   <p class="eventUserNickName">관리자</p>
                   <span>6시간 전</span>
@@ -142,7 +143,7 @@
               </a>
             </div>
             <div class="eventText">
-              <a href="#">
+              <a href="sub">
                 <h2 class="eventTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
                 </h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
@@ -162,5 +163,11 @@
   </div>
 </section>
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<!--<script src="js/sub/header.js"></script>-->
+<!--<script src="js/sub/footer.js"></script>-->
+<script src="/js/review/subHeader.js"></script>
+<script src="/js/review/subFooter.js"></script>
 </body>
 </html>

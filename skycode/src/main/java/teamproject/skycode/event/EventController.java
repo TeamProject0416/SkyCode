@@ -21,4 +21,7 @@ public class EventController {
     public String eventWinner(){
         return "/event/eventwinner";
     }
+
+    @GetMapping(value = "/sub")
+    public String eventSub(){ return "/event/eventSub";}
 }
