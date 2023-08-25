@@ -79,4 +79,15 @@ section{
     background: #0065BA;
     border-radius: 10px;
 }
+.nyInquiryWarp .nyInquiryBox .nyInquiryUp{
+    text-align: end;
+    margin-right: 110px;
+}
+.nyInquiryWarp .nyInquiryBox .nyInquiryUp button{
+    border: none;
+    background: #0065BA;
+    border-radius: 10px;
+    width: 80px;
+    height: 30px;
+}
 
