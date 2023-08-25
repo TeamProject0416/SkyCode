@@ -8,7 +8,7 @@
     <link th:href="@{/css/typo.css}" rel="stylesheet">
     <link th:href="@{/css/sub/header.css}" rel="stylesheet">
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
-    <link th:href="@{/css/news/inquiryStyle.css}" rel="stylesheet">
+    <link th:href="@{/css/news/faq/faqUpStyle.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 
@@ -19,43 +19,41 @@
 <body>
 <header th:replace="~{fragments/sub/header::header}"></header>
 
-<!-- 1대1 문의 -->
 <section>
-    <div class="nyInquiryWarp">
-        <h2># 1:1 문의하기</h2>
-        <div class="nyInquiryBox">
-            <div class="nyInquiryInBox">
+    <div class="nyFaqUpWarp">
+        <h2>FAQ 답변 작성하기</h2>
+        <div class="nyFaqUpBox">
+            <div class="nyFaqUpInBox">
                 <span>문의 유형</span>
-                <div class="nySearch nySearch1">
-                    <a href="#" class="nyInquirySearchBtn">카테고리를 선택해주세요</a>
-                    <ul class="nyInquirySearchPik1">
+                <div class="nySearch">
+                    <a href="#" class="nyFaqUpSearchBtn">카테고리를 선택해주세요</a>
+                    <ul class="nyFaqUpSearchPik">
                         <li>비행기 상품</li>
                         <li>패키지상품</li>
                         <li>결제관련</li>
                         <li>회원가입/탈퇴</li>
                     </ul>
                 </div>
-                <div class="nySearch nySearch2">
-                    <a href="#" class="nyInquirySearchBtn"> 공개할까요?</a>
-                    <ul class="nyInquirySearchPik2">
-                        <li>누구나 볼수 있어요</li>
-                        <li>나만 볼래요</li>
-                    </ul>
-                </div>
             </div>
-            <div class="nyInquiryInBox">
-                <span>문의 내용</span>
-                <div class="nyInquiryContent">
+            <div class="nyFaqUpInBox">
+                <div class="nyFaqUpContent">
+                    <div>소지자들의 예상 질문</div>
+                    <input type="text" placeholder="궁금한 내용을 적어주세요">
+                </div>
+                <div class="nyFaqUpContent">
+                    <div>답변</div>
                     <input type="text" placeholder="궁금한 내용을 적어주세요">
                 </div>
             </div>
-            <div class="nyInquirySend">
+            <div class="nyFaqUpSend">
                 <button>파일 첨부하기</button>
+                <input type="text">
             </div>
-            <div class="nyInquiryUp">
+            <div class="nyFaqUpPost">
                 <button>업로드하기</button>
             </div>
         </div>
+
     </div>
 </section>
 
@@ -63,7 +61,7 @@
 
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
-<script src="/js/news/inquiry.js"></script>
+<script src="/js/news/faqUp.js"></script>
 
 </body>
 </html>

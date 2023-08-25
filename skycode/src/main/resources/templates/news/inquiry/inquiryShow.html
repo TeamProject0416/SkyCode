@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,34 +8,36 @@
     <link th:href="@{/css/typo.css}" rel="stylesheet">
     <link th:href="@{/css/sub/header.css}" rel="stylesheet">
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
-    <link th:href="@{/css/news/notionSubStyle.css}" rel="stylesheet">
+    <link th:href="@{/css/news/inquiry/inquiryShowStyle.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 </head>
+
 <body>
 <header th:replace="~{fragments/sub/header::header}"></header>
 
-<!-- 공지사항 -->
-<section class="nyNewsWrap">
-    <h2>공지사항</h2>
-    <div class="nyNewsSubContainer">
-        <div class="nyNewsTitle">
+<!-- 문의 -->
+<section class="nyInquiryShowWrap">
+    <h2>문의</h2>
+    <div class="nyInquiryShowSubContainer">
+        <div class="nyInquiryShowTitle">
             <span class="nyTitle">제목</span>
             <span class="nyTitleDate">날짜</span>
         </div>
-        <div class="nyNewsContent">
+        <div class="nyInquiryShowContent">
             <img src="http://placehold.it/320x100" />
-            <p>공지사항에 대한 정보</p>
+            <p>문의 내용</p>
         </div>
-        <div class="nyNewsSubPager">
-            <div><a href=""><i class="fa-solid fa-caret-up"></i> 다음글</a></div>
-            <div><a href=""><i class="fa-solid fa-caret-down"></i> 이전글</a></div>
+        <div class="nyInquiryShowSubPager">
+            <div><a href=""><i class="fa-solid fa-caret-up"></i> 다음문의</a></div>
+            <div><a href=""><i class="fa-solid fa-caret-down"></i> 이전문의</a></div>
         </div>
     </div>
-    <div class="nyNewsList">
-        <a th:href="@{notion}">목록보기</a>
+    <div class="nyInquiryShowList">
+        <a th:href="@{inquiryList}">목록보기</a>
     </div>
 </section>
 
@@ -42,5 +45,6 @@
 
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
+
 </body>
 </html>
