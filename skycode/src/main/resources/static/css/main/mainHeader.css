@@ -300,7 +300,7 @@ nav>.main>li {
 .jhuserBox2>ul>li>div {
     height: 36px;
     width: 100px;
-    background: url(../images/nextUserPage.png) no-repeat right center;
+    background: url(/mainImages/nextUserPage.png) no-repeat right center;
 }
 
 .jhuserBox3 {
