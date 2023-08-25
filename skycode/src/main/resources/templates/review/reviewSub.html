@@ -80,40 +80,37 @@
         <button type="submit">검색</button>
       </div>
 
-      <div class="searchRank">
-        <p>인기검색어</p>
+      <div class="createReview">
+        <a href="/newReview"><button type="submit">리뷰 작성하기</button></a>
       </div>
     </div>
     <!-- reviewAll -->
     <div class="reviewAllArea">
       <div class="reviewBoard">
-        <div class="reviewContents">
+        <div class="reviewContents" th:each="review : ${reviews}">
           <div class="reviewInfo">
             <div class="reviewUser">
               <a href="#">
                 <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
                 <div>
-                  <p class="reviewUserNickName">보라돌이</p>
+                  <p class="reviewUserNickName" th:text="${review.nickName}">보라돌이</p>
                   <span>6시간 전</span>
                 </div>
               </a>
             </div>
             <div class="userReviewText">
               <a href="#">
-                <h2 class="userReviewTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
-                </h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
-                  aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
-                  nemo
-                  nobis. Asperiores odit impedit minus accusamus expedita!</p>
-                <span>2022-03-03</span>
+                <h2 class="userReviewTitle" th:text="${review.reviewTitle}"></h2>
+                <p th:text="${review.body}"></p>
+                <span th:text="${#temporals.format(reviews.regTime, 'yyyy-MM-dd')}"></span>
               </a>
             </div>
             <div class="reviewImg">
               <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
             </div>
           </div>
-        </div>
+        </div> <!--/reviewContents-->
+
         <div class="reviewContents">
           <div class="reviewInfo">
             <div class="reviewUser">
