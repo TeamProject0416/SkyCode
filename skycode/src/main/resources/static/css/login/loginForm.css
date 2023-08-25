@@ -1,0 +1,227 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 10px;
+}
+
+p {
+    font-size: 1.3rem;
+    color: #333;
+}
+
+a {
+    letter-spacing: 2px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+input {
+    border-width: 0 0 1px;
+    background: none;
+    outline: none;
+    border-color: #999;
+}
+
+select {
+    outline: none;
+}
+
+.oej_container {
+    position: relative;
+    margin: 0 auto;
+    top: 140px;
+    height: 650px;
+    max-width: 1320px;
+    /* background: lightcoral; */
+}
+
+.oej {
+    position: relative;
+    height: 650px;
+    max-width: 1320px;
+}
+
+/* 회원가입 */
+.header_oej {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 70px;
+    margin: 0 auto;
+    font-size: 2.5rem;
+    color: #333;
+    /* border: 1px solid red; */
+}
+
+
+/* 이름 */
+
+.oej_name {
+    position: relative;
+    width: 400px;
+    height: 60px;
+    margin: 0 auto;
+    /* border: 1px solid violet; */
+}
+
+.oej_n {
+    width: 400px;
+    height: 30px;
+    padding-left: 5px;
+}
+
+/* 아이디 */
+
+.oej_id {
+    position: relative;
+    width: 400px;
+    height: 60px;
+    margin: 0 auto;
+    /* border: 1px solid slateblue; */
+
+}
+
+.oej_text {
+    width: 400px;
+    height: 30px;
+    padding-left: 5px;
+}
+
+
+/* 비밀번호 */
+
+.oej_pw {
+    position: relative;
+    width: 400px;
+    height: 60px;
+    margin: 0 auto;
+    /* border: 1px solid forestgreen; */
+}
+
+.oej_pass {
+    width: 400px;
+    height: 30px;
+    padding-left: 5px;
+}
+
+
+/* 비밀번호 확인창 */
+.oej_pwcheck {
+    position: relative;
+    width: 400px;
+    height: 60px;
+    margin: 0 auto;
+}
+
+.oej_pwchecked {
+    width: 400px;
+    height: 30px;
+    padding-left: 5px;
+}
+
+/* 생년월일 */
+.oej_birthday{
+    position: relative;
+    width: 400px;
+    height: 60px;
+    margin: 0 auto;
+}
+
+.oej_y {
+    height: 30px;
+    width: 200px;
+    padding-left: 5px;
+    font-size: 1.3rem;
+    color: #585757;
+    
+}
+
+
+/* 전화번호 */
+
+.oej_number {
+    /* border: 1px solid rgb(121, 41, 14); */
+    width: 400px;
+    height: 60px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.oej_phone {
+    width: 291px;
+    padding-left: 5px;
+    height: 30px;
+}
+
+
+/* 이메일 */
+
+
+.oej_emailid {
+    width: 400px;
+    height: 60px;
+    position: relative;
+    margin: 0 auto;
+    /* border: 1px solid; */
+}
+
+.oej_mail {
+    
+    width: 130px;
+    padding-left: 5px;
+    height: 30px;
+}
+
+.oej_mail2 {
+    
+    width: 130px;
+    padding-left: 5px;
+    height: 30px;
+}
+
+.oej_select {
+    margin-left: 10px;
+}
+
+/* 주소 */
+.oej_address {
+    width: 400px;
+    height: 60px;
+    position: relative;
+    margin: 0 auto;
+    
+}
+
+.oej_add {
+    width: 400px;
+    height: 30px;
+    padding-left: 5px;
+}
+
+
+/* 가입하기 */
+.oej_join {
+    width: 400px;
+    height: 40px;
+    position: relative;
+    top: 40px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    background-color: #003999;
+    color: #fff;
+}
+
+
