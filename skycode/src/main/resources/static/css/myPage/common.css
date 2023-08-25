@@ -1,12 +1,12 @@
 /* section */
 
-.pointSection {
+.myPageSection {
     position: relative;
     width: 100%;
     top: 100px;
 }
 
-.pointSection>div {
+.myPageSection>div {
     width: 1320px;
     margin: 0 auto;
 }

@@ -185,15 +185,14 @@ nav>.main>li {
     cursor: pointer;
 }
 
-.jhuserBox1>ul>li:first-of-type,
-.userCount {
+.jhuserBox1>ul>li:first-of-type>a {
     font-weight: 600;
     color: #0065BA;
     font-size: 2rem;
 }
 
-.jhuserBox1>ul>li:last-of-type,
-.jhuserBox2>ul>li {
+.jhuserBox1>ul>li:last-of-type>a,
+.jhuserBox2>ul>li>a {
     font-weight: 600;
     color: #666;
     font-size: 2rem;
@@ -209,7 +208,7 @@ nav>.main>li {
     width: 440px;
 }
 
-.jhuserBox2>ul>li {
+.jhuserBox2>ul>li>a {
     padding: 30px 0;
     width: 100%;
     display: flex;
@@ -219,7 +218,7 @@ nav>.main>li {
     cursor: pointer;
 }
 
-.jhuserBox2>ul>li>div {
+.jhuserBox2>ul>li>a>div {
     height: 36px;
     width: 100px;
     background: url(/subImages/nextUserPage.png) no-repeat right center;
