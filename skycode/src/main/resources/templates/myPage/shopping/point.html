@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/myPage/common.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <style>
+    /* 2-3 pointSection */
+    .pointView {
+        background: #f5f5f5;
+        border-radius: 10px;
+        text-align: center;
+        margin: 30px auto;
+        width: 800px;
+        padding: 20px;
+    }
+
+    .pointView>li:first-of-type {
+        font-size: 2.4rem;
+        font-weight: 600;
+    }
+
+    .pointView>li:nth-of-type(2) {
+        padding: 10px 0 20px;
+        font-size: 2.4rem;
+        font-weight: 600;
+        color: #0065BA;
+    }
+
+    .pointView>li:last-of-type {
+        color: #666;
+    }
+
+    .pointTitle {
+        margin: 0 auto;
+        width: 800px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #eee;
+        align-items: center;
+    }
+
+    .pointTitle>button {
+        border: none;
+        background-color: transparent;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .point {
+        margin: 0 auto;
+        width: 800px;
+        display: flex;
+        border-bottom: 1px solid #eee;
+        justify-content: space-between;
+        padding: 10px;
+        align-items: center;
+    }
+
+    .point>div {
+        display: flex;
+        align-items: center;
+    }
+
+    .point>p {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .point>div>p {
+        padding-right: 20px;
+        color: #aaa;
+    }
+
+    .point>div>div>div>span:first-of-type {
+        font-size: 1.3rem;
+        padding: 4px;
+        border-radius: 5px;
+        margin-right: 4px;
+    }
+
+    .point>div>div>div>span:last-of-type {
+        font-weight: 600;
+    }
+
+    .point>div>div>ul>li {
+        color: #666;
+    }
+    /* 적립 */
+    .pointUp>p {
+        color: #0065BA;
+    }
+
+    .pointUp>div>div>div>span:first-of-type {
+        color: #0065BA;
+        background: #daf1ff;
+    }
+
+    /* 감소 */
+    .pointDown>p {
+        color: #C4033E;
+    }
+
+    .pointDown>div>div>div>span:first-of-type {
+        color: #C4033E;
+        background: #ffe2eb;
+    }
+
+    </style>
+</head>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<section class="myPageSection">
+    <!-- section -->
+    <div class="tabBox">
+        <ul class="mainTab firstTab">
+            <li><a href="#">#프로필</a></li>
+            <li class="on"><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
+            <li><a href="#">#여행 도구</a></li>
+            <li><a href="#">#나의 리뷰</a></li>
+            <li><a href="#">#설정</a></li>
+        </ul>
+        <div class="subTab">
+            <!-- 탭2 -->
+            <div>
+                <div class="tabBox secondTab">
+                    <ul class="mainTab">
+                        <li><a href="/user_shopping/orderList">결제내역조회</a></li>
+                        <li><a href="#">장바구니</a></li>
+                        <li class="on"><a href="/user_shopping/point">포인트</a></li>
+                        <li><a href="/user_shopping/coupon">쿠폰</a></li>
+                        <li><a href="#">나의문의내역</a></li>
+                    </ul>
+                    <div class="subTab">
+                        <div>
+                            <ul class="pointView">
+                                <li>사용가능한 포인트</li>
+                                <li>0 p</li>
+                                <li>30일 이내 소멸 예정 포인트 <span>0p</span></li>
+                            </ul>
+                            <div class="pointTitle">
+                                <h2>#포인트 내역</h2>
+                                <button>포인트 사용 안내 ></button>
+                            </div>
+                            <ul class="pointList">
+                                <li class="point pointUp">
+                                    <div>
+                                        <p>2020.07.04</p>
+                                        <div>
+                                            <div>
+                                                <span>적립</span>
+                                                <span>신규가입</span>
+                                            </div>
+                                            <ul>
+                                                <li>· 유효기간: 2024.01.01까지</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <p> + 80 p</p>
+                                </li>
+                                <li class="point pointDown">
+                                    <div>
+                                        <p>2020.07.04</p>
+                                        <div>
+                                            <div>
+                                                <span>소멸</span>
+                                                <span>기간만료</span>
+                                            </div>
+                                            <ul>
+                                                <li>기간 만료</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <p> - 80 p</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+</body>
+</html>
