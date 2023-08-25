@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/myPage/common.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <style>
+
+    </style>
+</head>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<section class="orderListSection">
+    <!-- section -->
+    <div class="tabBox">
+        <ul class="mainTab firstTab">
+            <li><a href="#">#프로필</a></li>
+            <li class="on"><a href="#">#나의 쇼핑</a></li>
+            <li><a href="#">#여행 도구</a></li>
+            <li><a href="#">#나의 리뷰</a></li>
+            <li><a href="#">#설정</a></li>
+        </ul>
+        <div class="subTab">
+            <!-- 탭2 -->
+            <div>
+                <div class="tabBox secondTab">
+                    <ul class="mainTab">
+                        <li class="on"><a href="#">결제내역조회</a></li>
+                        <li><a href="#">장바구니</a></li>
+                        <li><a href="#">포인트</a></li>
+                        <li><a href="#">쿠폰</a></li>
+                        <li><a href="#">나의문의내역</a></li>
+                    </ul>
+                    <div class="subTab">
+                        <div>
+                            <ul class="orderInfo">
+                                <li><a href="#">쿠폰<span>3</span></a></li>
+                                <li><a href="#">포인트<span>0p</span></a></li>
+                                <li><a href="#">구매등급<span>Welcome</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+</body>
+</html>
