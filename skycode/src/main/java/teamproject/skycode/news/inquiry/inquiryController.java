@@ -1,7 +1,9 @@
 package teamproject.skycode.news.inquiry;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class inquiryController {
@@ -9,6 +11,11 @@ public class inquiryController {
     @GetMapping(value = "/news/inquiry")
     public String newsInquiry(){
         return "news/inquiry/inquiry";
+    }
+
+    @PostMapping(value = "/news/inquiry")
+    public String newInquiryPost() {
+        return null;
     }
 
     @GetMapping(value = "/news/inquiryList")
