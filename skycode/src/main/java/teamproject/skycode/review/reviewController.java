@@ -36,7 +36,6 @@ public class reviewController {
     @GetMapping(value = "/review/{id}")
     public String userReview(@PathVariable Long id, Model model) {
         Review reviewEntity = reviewRepository.findById(id).orElse(null);
-
         reviewEntity.setRegTime(LocalDateTime.now());
         model.addAttribute("reviews", reviewEntity);
         return "review/reviewSub";
