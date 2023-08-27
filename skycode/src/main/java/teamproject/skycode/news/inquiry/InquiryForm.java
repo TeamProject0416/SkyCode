@@ -1,5 +1,5 @@
 package teamproject.skycode.news.inquiry;
 
-public class CreateInquiryDto {
+public class InquiryForm {
 
 }
