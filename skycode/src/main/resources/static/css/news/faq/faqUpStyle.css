@@ -1,3 +1,4 @@
+@charset "utf-8";
 
 /* FAQ 답변 작성하기 */
 section{
@@ -20,9 +21,11 @@ section{
 }
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox{
     display: flex;
-    justify-content: space-evenly;
     padding-top: 30px;
     /* align-items: end; */
+}
+.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBoxInput{
+    justify-content: space-evenly;
 }
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox>span{
     font-size: 2rem;
@@ -34,9 +37,9 @@ section{
     padding: 10px;
 }
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch .nyFaqUpSearchBtn{
-    background: #eee;
-    padding: 10px;
-    border: 1px solid #0065BA;
+    background: #0065BA;
+    color: #fff;
+    padding: 8px;
     border-radius: 10px;
 }
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch ul {
@@ -64,17 +67,21 @@ section{
 
 }
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpSend button{
-    width: 300px;
-    padding: 15px;
+    width: 150px;
+    padding: 10px;
     margin-left: 289px;
     margin-top: 30px;
     border: none;
     background: #0065BA;
+    color: #fff;
     border-radius: 10px;
 }
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpSend input{
-    width: 300px;
-    height: 30px;
+    width: 350px;
+    height: 36px;
+    border: none;
+    border-bottom: 1px solid #333;
+    /* margin-left: 15px; */
 }
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpPost{
     text-align: end;
@@ -84,7 +91,9 @@ section{
     border: none;
     background: #0065BA;
     border-radius: 10px;
-    width: 80px;
-    height: 30px;
+    /* width: 80px; */
+    padding: 10px;
+    /* height: 30px; */
+    color: #fff;
 }
 

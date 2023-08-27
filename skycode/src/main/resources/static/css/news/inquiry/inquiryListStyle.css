@@ -1,10 +1,11 @@
-/* 1 : 1 문의 리스트 */
+/* 1대1 문의 리스트 */
+
 .nyInquiryWrap{
     position: relative;
     top: 150px;
     max-width: 1320px;
     margin: 0 auto;
-    padding: 0 60px;
+    padding: 0px 60px;
     font-size: 3.5rem;
 }
 
@@ -74,10 +75,14 @@
     text-align: end;
 }
 .nyInquiryWrap .nyInquiryContainer .nyInquiryGoText a{
-    background: #f0d7d7;
+    background: #0065BA;
+    color: #fff;
     padding: 10px;
-    border: 1px solid #333;
+    /* border: 1px solid #333; */
     border-radius: 10px;
     width: 100px;
     height: 30px;
+}
+.nyInquiryWrap .nyInquiryContainer .nyInquiryGoText a:hover{
+    padding: 15px;
 }
