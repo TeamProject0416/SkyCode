@@ -121,7 +121,6 @@ nav>.main>li {
     font-size: 3rem;
     left: 30px;
     top: 100px;
-    cursor: pointer;
 }
 
 .closeMenu {
@@ -135,6 +134,7 @@ nav>.main>li {
     left: 20px;
     top: 20px;
     background: url(/subImages/closeMenu.png) no-repeat;
+    cursor: pointer;
 }
 
 .cartMenu {
@@ -148,6 +148,7 @@ nav>.main>li {
     right: 70px;
     text-indent: -9999px;
     background: url(/subImages/Cart.png) no-repeat center;
+    cursor: pointer;
 }
 
 .alarmMenu {
@@ -161,6 +162,7 @@ nav>.main>li {
     right: 20px;
     text-indent: -9999px;
     background: url(/subImages/alarmMenu.png) no-repeat center;
+    cursor: pointer;
 }
 
 .userImg {
@@ -169,7 +171,6 @@ nav>.main>li {
     position: absolute;
     top: 100px;
     right: 50px;
-    cursor: pointer;
 }
 
 .jhuserBox1 {
@@ -179,20 +180,18 @@ nav>.main>li {
     left: 30px;
 }
 
-.jhuserBox1>ul {
+.jhuserBox1>a {
     margin-right: 36px;
     text-align: left;
-    cursor: pointer;
 }
 
-.jhuserBox1>ul>li:first-of-type>a {
+.jhuserBox1>a>ul>li:first-of-type {
     font-weight: 600;
     color: #0065BA;
     font-size: 2rem;
 }
 
-.jhuserBox1>ul>li:last-of-type>a,
-.jhuserBox2>ul>li>a {
+.jhuserBox1>a>ul>li:last-of-type, .jhuserBox2>ul>li>a {
     font-weight: 600;
     color: #666;
     font-size: 2rem;

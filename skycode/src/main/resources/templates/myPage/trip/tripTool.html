@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link th:href="@{/css/reset.css}" rel="stylesheet">
+  <link th:href="@{/css/typo.css}" rel="stylesheet">
+  <link th:href="@{/css/myPage/common.css}" rel="stylesheet">
+  <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+  <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+  <style>
+/* 3 - myTripTool */
+
+.tripTime, .tripWeather, .tripMoney{
+    width: 1000px;
+    margin: 30px auto;
+    height: 200px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tripTime{
+    display: flex;
+}
+
+.tripTime>div{
+    width: 500px;
+}
+  </style>
+</head>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<section class="myPageSection">
+  <!-- section -->
+  <div class="tabBox">
+    <ul class="mainTab firstTab">
+      <li><a href="/user">#프로필</a></li>
+      <li><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
+      <li class="on"><a href="/user_trip/tripTool">#여행 도구</a></li>
+      <li><a href="/user_review">#나의 리뷰</a></li>
+    </ul>
+    <div class="subTab">
+      <!-- 탭3 -->
+      <div>
+        <div class="tripTime">
+          <div>
+            <h2>시차는 2시간입니다 <span>∨</span></h2>
+            <div>서울</div>
+            <div>일본</div>
+          </div>
+          <div>번역</div>
+        </div>
+        <div class="tripWeather">날씨</div>
+        <div class="tripMoney">환율</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+</body>
+</html>
