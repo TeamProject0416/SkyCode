@@ -56,30 +56,44 @@
                 <div class="jhModalUserBg"></div>
                 <div class="jhUser">
                     <button class="closeMenu">X</button>
-                    <button class="jhicon cartMenu">장바구니</button>
-                    <button class="jhicon alarmMenu">내 알람</button>
+                    <a href="/user_shopping/cart"><button class="jhicon cartMenu">장바구니</button></a>
+                    <a href="#"><button class="jhicon alarmMenu">내 알람</button></a>
                     <h2>홍지혜</h2>
                     <img class="userImg" src="/subImages/UserImg.jpg" alt="userImg">
                     <div class="jhuserBox1">
-                        <ul>
-                            <li><a href="#">8</a></li>
-                            <li><a href="#">리뷰</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">좋아요</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">쿠폰</a></li>
-                        </ul>
+                        <a href="/user_review">
+                            <ul>
+                                <li>8</li>
+                                <li>리뷰</li>
+                            </ul>
+                        </a>
+                        <a href="/user/praise">
+                            <ul>
+                                <li>5</li>
+                                <li>좋아요</li>
+                            </ul>
+                        </a>
+                        <a href="/user_shopping/coupon">
+                            <ul>
+                                <li>1</li>
+                                <li>쿠폰</li>
+                            </ul>
+                        </a>
                     </div>
                     <div class="jhuserBox2">
                         <ul>
-                            <li><a href="user_shopping/orderList">예약<div></div></a></li>
-                            <li><a href="#">프로필<div></div></a></li>
-                            <li><a href="#">여행도구 <div></div></a></li>
-                            <li><a href="#">설정<div></div></a></li>
+                            <li><a href="/user_shopping/orderList">예약
+                                <div></div>
+                            </a></li>
+                            <li><a href="/user">프로필
+                                <div></div>
+                            </a></li>
+                            <li><a href="/user_trip/tripTool">여행도구
+                                <div></div>
+                            </a></li>
+                            <li><a href="/user/edit">설정
+                                <div></div>
+                            </a></li>
                         </ul>
                     </div>
                     <div class="jhuserBox3">

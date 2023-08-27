@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link th:href="@{/css/reset.css}" rel="stylesheet">
+  <link th:href="@{/css/typo.css}" rel="stylesheet">
+  <link th:href="@{/css/myPage/common.css}" rel="stylesheet">
+  <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+  <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+  <style>
+
+  </style>
+</head>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<section class="myPageSection">
+  <!-- section -->
+  <div class="tabBox">
+    <ul class="mainTab firstTab">
+      <li class="on"><a href="/user">#프로필</a></li>
+      <li><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
+      <li><a href="/user_trip/tripTool">#여행 도구</a></li>
+      <li><a href="/user_review">#나의 리뷰</a></li>
+    </ul>
+    <div class="subTab">
+      <!-- 탭2 -->
+      <div>
+        <div class="tabBox secondTab">
+          <ul class="mainTab">
+            <li><a href="/user">모두 보기</a></li>
+            <li><a href="/user/edit">회원정보수정</a></li>
+            <li class="on"><a href="/user/collections">스크랩북</a></li>
+            <li><a href="/user/praise">좋아요</a></li>
+            <li><a href="/user/edit_password">비밀번호 번경</a></li>
+          </ul>
+          <div class="subTab">
+            <div>
+              5-1
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+</body>
+</html>
