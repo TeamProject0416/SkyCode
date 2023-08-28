@@ -1,14 +1,34 @@
 package teamproject.skycode.login;
 
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
 public class MemberService {
 
-    public Long join(Member member){
-        validateDuplicateMember(member);
-        return member.getId();
-    }
+    private final MemberRepository memberRepository;
 
-    private void validateDuplicateMember(Member member) {
-        MemberRepository.findByName(member.getName());
-    }
+  public Member saveMember(Member member){
+      validateDuplicateMember(member);
+      return memberRepository.save(member);
+  }
+
+  private void validateDuplicateMember(Member member){
+      Member findmember = memberRepository.findByEmail(member.getEmail());
+      if (findmember != null) {
+          throw new IllegalStateException("이미 가입된 회원입니다.");
+          }
+      }
+
+
+
 
 }
+
+
+
+
