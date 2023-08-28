@@ -1,123 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인</title>
+    <title>Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-          rel="stylesheet">
     <link th:href="@{/css/reset.css}" rel="stylesheet">
     <link th:href="@{/css/typo.css}" rel="stylesheet">
     <link th:href="@{/css/login/login.css}" rel="stylesheet">
-    <link th:href="@{/css/review/header.css}" rel="stylesheet">
-    <link th:href="@{/css/review/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
 
 </head>
 
 <body>
 <header th:replace="~{fragments/sub/header::header}"></header>
-<!-- 헤더 -->
-<header class="jh">
-    <div class="header">
-        <div class="logo"><a href="../main/main.html">SkyCode</a></div>
-        <div class="navBg2"></div>
-        <div class="navBg1"></div>
-        <nav>
-            <ul class="main">
-                <li><a href="#">여행추천</a>
-                </li>
-                <li><a href="#">여행리뷰</a>
-                    <ul class="sub">
-                        <li><a href="#">국내 여행</a></li>
-                        <li><a href="#">해외 여행</a></li>
-                    </ul>
-                </li>
-
-                <li><a href="#">여행상품</a>
-                    <ul class="sub">
-                        <li><a href="#">비행기</a></li>
-                        <li><a href="#">패키지</a></li>
-                    </ul>
-                </li>
-
-                <li><a href="map_JH.html">지도</a>
-                </li>
-                <li><a href="#">이벤트</a>
-                    <ul class="sub">
-                        <li><a href="#">진행중 이벤트</a></li>
-                        <li><a href="#">종료된 이벤트</a></li>
-                        <li><a href="#">당첨자 발표</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">고객센터</a>
-                    <ul class="sub">
-                        <li><a href="#">공지사항</a></li>
-                        <li><a href="#">문의</a></li>
-                        <li><a href="#">Q&A</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        <div class="search_user">
-            <img class="jhicon cart" src="../subImages/Cart.png" alt="">
-            <img class="jhicon searchBtn" src="../subImages/alarmMenu.png" alt="">
-            <img class="jhicon userModal" src="../subImages/searchUser.png" alt="user">
-
-            <!-- user  -->
-            <div class="jhModalUser">
-                <div class="jhModalUserBg"></div>
-                <div class="jhUser">
-                    <button class="closeMenu">X</button>
-                    <button class="jhicon cartMenu">장바구니</button>
-                    <button class="jhicon alarmMenu">내 알람</button>
-                    <h2>홍지혜</h2>
-                    <img class="userImg" src="../subImages/UserImg.jpg" alt="userImg">
-                    <div class="jhuserBox1">
-                        <ul>
-                            <li>8</li>
-                            <li>내여행</li>
-                        </ul>
-                        <ul>
-                            <li>5</li>
-                            <li>리뷰</li>
-                        </ul>
-                        <ul>
-                            <li>1</li>
-                            <li>여행기</li>
-                        </ul>
-                    </div>
-                    <div class="jhuserBox2">
-                        <ul>
-                            <li>내 저장 <div><span class="userCount">71</span></div>
-                            </li>
-                            <li>내 예약<div></div>
-                            </li>
-                            <li>쿠폰함<div><span class="userCount">0</span>개</div>
-                            </li>
-                            <li>마일리지<div><span class="userCount">0</span>p</div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="jhuserBox3">
-                        <div></div>
-                        <ul>
-                            <li>공지사항</li>
-                            <li>오프라인 가이드</li>
-                            <li>일행초대</li>
-                            <li>고객센터</li>
-                        </ul>
-                        <img src="../subImages/banner123.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
 <!-- 로그인 -->
 <section class="oej_container">
     <div class="oej_header">
@@ -125,73 +21,47 @@
     </div>
     <form action=" " method="POST">
         <div class="oej_input-box">
-            <input class="oej_username" type="text" name="username" placeholder="ID">
+            <input class="oej_username" type="text" id="username" placeholder="ID">
             <label for="username"></label>
         </div>
 
         <div class="oej_input-box">
-            <input class="oej_password" type="password" name="password" placeholder="PASSWORD">
+            <input class="oej_password" type="password" id="password" placeholder="PASSWORD">
             <label for="password"></label>
         </div>
 
         <div class="oej_log1">
-            <input class="oej_log2"  type="submit" value="LOGIN">
+            <input class="oej_log2" type="submit" value="LOGIN">
         </div>
 
         <div class="oej_connect"><i class="fa-solid fa-unlock-keyhole">보안접속</i> </div>
 
-        <div class="oej_join">
-            <input class="oej_us" type="submit" value="JOIN US">
-        </div>
+
+        <input class="oej_us" type="submit" value="JOIN US">
 
         <div class="oej_search">
             <div class="oej_na">
-                <img src="../subImages/naver2.png" alt="">
-                <a href="#">네이버로 로그인</a></div>
+                <img src="images/naver2.png" alt="">
+                <a href="#">네이버 로그인</a>
+            </div>
+
+            <div class="oej_go">
+                <img src="images/구글.png" alt="">
+                <a href="#">구글 로그인</a>
+            </div>
+
             <div class="oej_ka">
-                <img src="../subImages/카카오.png" alt="">
-                <a href="#">카카오로 로그인</a></div>
+                <img src="images/카카오.png" alt="">
+                <a href="#">카카오 로그인</a>
+            </div>
         </div>
     </form>
 </section>
 
-
-<!-- 푸터 -->
-<footer class="nyFooterBox1">
-    <div class="bg">
-        <div class="nyFooterNav">
-            <ul class="nyFooterNavMain">
-                <li><a href="#">개인정보처리방침</a></li>
-                <li><a href="#">저작권정책</a></li>
-                <li><a href="#">이메일집단수집거부</a></li>
-                <li><a href="#">본인확인서비스</a></li>
-                <li><a href="#">오시는길</a></li>
-                <li></li>
-                <li>
-                    <div class="nyFamily">
-                        <div class="nyFamilyText">
-                            <i class="nyFamilyIcon" role="img"></i> GitHub
-                        </div>
-                        <ul>
-                            <li><a href="https://github.com/naxomis/javafs" target="_blank">김나연</a></li>
-                            <li><a href="https://github.com/moonsunho/javafs" target="_blank">문선호</a></li>
-                            <li><a href="https://github.com/wan0706/javafs" target="_blank">오은준</a></li>
-                            <li><a href="https://github.com/yoong0304/javafs" target="_blank">이재웅</a></li>
-                            <li><a href="https://github.com/HoneyJH/Javafs" target="_blank">홍지혜</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-            <div class="nyFooterTexts">
-                <!-- <p>서울특별시 강남구 삼성로 512 삼성동빌딩 10층 | 전화 1588-2539</p>
-                <p>Copyfight 2023 TRIPLE. All Rights Reserved.</p> -->
-                <p>SkyCode</p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
 </body>
 
 </html>
