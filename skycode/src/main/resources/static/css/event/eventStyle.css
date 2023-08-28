@@ -1,7 +1,9 @@
 
 .section {
+position:relative;
     width: 100%;
     height: 100%;
+    top: 150px;
 }
 
 /* eventPageTitle */
