@@ -3,16 +3,25 @@ package teamproject.skycode.login;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.GenericGenerator;
+
+import javax.management.relation.Role;
 
 import javax.persistence.*;
 
-@Entity
-@ToString
+
 @Getter
 @Setter
+@Entity
+
 @Table(name = "member")
-public class Member {
+@ToString
+public class Member extends BaseEntity{
+
+    @Id
+    @Column(name = "Member_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
 
     @Id
     // 밑 두개는 더미데이터때문에 에러날까봐 넣은거임
@@ -31,25 +40,29 @@ public class Member {
 
     private String address;
 
-    private String phone; // 핸드폰 번호
 
-    //id 의 getter setter
-    public Long getId() {
-        return id;
+    private String phone;
+
+    @Column(unique = true)
+    private String email;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+
+
+    public static Member createMember(MemberFormDto memberFormDto){
+        Member member = new Member();
+        member.setId(member.getId());
+        member.setName(memberFormDto.getName());
+        member.setEmail(memberFormDto.getEmail());
+        member.setAddress(memberFormDto.getAddress());
+        member.setBirthday(memberFormDto.getBirthday());
+//        String password = passwordEncoder.encode(memberFormDto.getPassword());
+        member.setPhone(memberFormDto.getPhone());
+        member.setRole(Role.ADMIN);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    // password 의 getter setter
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
 }
