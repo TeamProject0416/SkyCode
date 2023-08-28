@@ -138,8 +138,6 @@
             background: #fff;
             border: 1px solid #aaa;
             display: none;
-
-
         }
 
         .optionList li {
@@ -177,9 +175,17 @@
             height: 50px;
         }
 
-        .searchRank {
+        .createReview {
             width: 100px;
         }
+        .createReview a {
+            width: 100%;
+        }
+        .createReview a button {
+            width: 100px;
+            height: 50px;
+        }
+
 
         /* /reviewSearchArea */
 

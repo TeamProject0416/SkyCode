@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/news/faq/faqUpStyle.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<section>
+    <div class="nyFaqUpWarp">
+        <h2>FAQ 답변 작성하기</h2>
+        <div class="nyFaqUpBox">
+            <div class="nyFaqUpInBox">
+                <span>문의 유형</span>
+                <div class="nySearch">
+                    <a href="#" class="nyFaqUpSearchBtn">카테고리를 선택해주세요</a>
+                    <ul class="nyFaqUpSearchPik">
+                        <li>비행기 상품</li>
+                        <li>패키지상품</li>
+                        <li>결제관련</li>
+                        <li>회원가입/탈퇴</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="nyFaqUpInBox nyFaqUpInBoxInput">
+                <div class="nyFaqUpContent">
+                    <div>소비자들의 예상 질문</div>
+                    <input type="text" placeholder="소비자들의 예상 질문을 적어주세요">
+                </div>
+                <div class="nyFaqUpContent">
+                    <div>답변</div>
+                    <input type="text" placeholder="알맞은 답변을 적어주세요">
+                </div>
+            </div>
+            <div class="nyFaqUpSend">
+                <button>파일 첨부하기</button>
+                <input type="text">
+            </div>
+            <div class="nyFaqUpPost">
+                <button>업로드하기</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+<script src="/js/news/faqUp.js"></script>
+
+</body>
+</html>

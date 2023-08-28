@@ -5,12 +5,14 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.management.relation.Role;
+
 import javax.persistence.*;
 
 
 @Getter
 @Setter
 @Entity
+
 @Table(name = "member")
 @ToString
 public class Member extends BaseEntity{
@@ -20,13 +22,24 @@ public class Member extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String password;
+
+    @Id
+    // 밑 두개는 더미데이터때문에 에러날까봐 넣은거임
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    private Long id;
+
+    @Column(unique = true)
+    private String email;
 
     private String name;
+
+    private String password;
 
     private String birthday;
 
     private String address;
+
 
     private String phone;
 
@@ -49,6 +62,7 @@ public class Member extends BaseEntity{
         member.setPhone(memberFormDto.getPhone());
         member.setRole(Role.ADMIN);
     }
+
 
 
 }

@@ -14,10 +14,10 @@
                 <li>
                     <a href="#">여행추천</a>
                 </li>
-                <li><a href="#">여행리뷰</a>
+                <li><a href="/reviewSub">여행리뷰</a>
                     <ul class="sub">
-                        <li><a href="#">국내 여행</a></li>
-                        <li><a href="#">해외 여행</a></li>
+                        <li><a href="/reviewSub">국내 여행</a></li>
+                        <li><a href="/reviewSub">해외 여행</a></li>
                     </ul>
                 </li>
 
@@ -30,18 +30,18 @@
 
                 <li><a href="/map">지도</a>
                 </li>
-                <li><a href="#">이벤트</a>
+                <li><a href="/event/ongoing">이벤트</a>
                     <ul class="sub">
-                        <li><a href="#">진행중 이벤트</a></li>
-                        <li><a href="#">종료된 이벤트</a></li>
-                        <li><a href="#">당첨자 발표</a></li>
+                        <li><a href="/event/ongoing">진행중 이벤트</a></li>
+                        <li><a href="/event/end">종료된 이벤트</a></li>
+                        <li><a href="/event/winner">당첨자 발표</a></li>
                     </ul>
                 </li>
-                <li><a href="#">고객센터</a>
+                <li><a href="/news/notion">고객센터</a>
                     <ul class="sub">
-                        <li><a href="#">공지사항</a></li>
-                        <li><a href="#">문의</a></li>
-                        <li><a href="#">Q&A</a></li>
+                        <li><a href="/news/notion">공지사항</a></li>
+                        <li><a href="/news/inquiry">문의</a></li>
+                        <li><a href="/news/faq">Q&A</a></li>
                     </ul>
                 </li>
             </ul>
@@ -56,47 +56,53 @@
                 <div class="jhModalUserBg"></div>
                 <div class="jhUser">
                     <button class="closeMenu">X</button>
-                    <button class="jhicon cartMenu">장바구니</button>
-                    <button class="jhicon alarmMenu">내 알람</button>
+                    <a href="/user_shopping/cart"><button class="jhicon cartMenu">장바구니</button></a>
+                    <a href="#"><button class="jhicon alarmMenu">내 알람</button></a>
                     <h2>홍지혜</h2>
                     <img class="userImg" src="/subImages/UserImg.jpg" alt="userImg">
                     <div class="jhuserBox1">
-                        <ul>
-                            <li>8</li>
-                            <li>내여행</li>
-                        </ul>
-                        <ul>
-                            <li>5</li>
-                            <li>리뷰</li>
-                        </ul>
-                        <ul>
-                            <li>1</li>
-                            <li>여행기</li>
-                        </ul>
+                        <a href="/user_review">
+                            <ul>
+                                <li>8</li>
+                                <li>리뷰</li>
+                            </ul>
+                        </a>
+                        <a href="/user/praise">
+                            <ul>
+                                <li>5</li>
+                                <li>좋아요</li>
+                            </ul>
+                        </a>
+                        <a href="/user_shopping/coupon">
+                            <ul>
+                                <li>1</li>
+                                <li>쿠폰</li>
+                            </ul>
+                        </a>
                     </div>
                     <div class="jhuserBox2">
                         <ul>
-                            <li>내 저장
-                                <div><span class="userCount">71</span></div>
-                            </li>
-                            <li>내 예약
+                            <li><a href="/user_shopping/orderList">예약
                                 <div></div>
-                            </li>
-                            <li>쿠폰함
-                                <div><span class="userCount">0</span>개</div>
-                            </li>
-                            <li>마일리지
-                                <div><span class="userCount">0</span>p</div>
-                            </li>
+                            </a></li>
+                            <li><a href="/user">프로필
+                                <div></div>
+                            </a></li>
+                            <li><a href="/user_trip/tripTool">여행도구
+                                <div></div>
+                            </a></li>
+                            <li><a href="/user/edit">설정
+                                <div></div>
+                            </a></li>
                         </ul>
                     </div>
                     <div class="jhuserBox3">
                         <div></div>
                         <ul>
-                            <li>공지사항</li>
-                            <li>오프라인 가이드</li>
-                            <li>일행초대</li>
-                            <li>고객센터</li>
+                            <li><a href="#">이벤트</a></li>
+                            <li><a href="#">공지사항</a></li>
+                            <li><a href="#">고객센터</a></li>
+                            <li><a href="#">Q&A</a></li>
                         </ul>
                         <img src="/subImages/banner123.png" alt="">
                     </div>

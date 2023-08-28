@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/myPage/common.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <style>
+    /* 2-4 couponSection */
+
+    .couponinput {
+        text-align: center;
+        padding: 20px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .couponinput label {
+        font-size: 2rem;
+        vertical-align: middle;
+        margin-right: 10px;
+        font-weight: 600;
+    }
+
+    .couponinput input {
+        border-radius: 4px;
+        width: 500px;
+        height: 50px;
+        padding: 0 20px;
+        vertical-align: middle;
+        border: 1px solid #ddd;
+        margin-right: 10px;
+        outline: none;
+    }
+
+    .couponinput input::placeholder {
+        color: #bbb;
+    }
+
+    .couponinput button {
+        padding: 0 20px;
+        border-radius: 4px;
+        vertical-align: middle;
+        height: 50px;
+        border: none;
+        background: #0065BA;
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .couponBox {
+        display: flex;
+        flex-wrap: wrap;
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+    .couponBox>div {
+        position: relative;
+        width: 300px;
+        height: 200px;
+        margin: 32px 16px 0px;
+        border-radius: 10px;
+        transition: .3s;
+        cursor: pointer;
+        background: url(/subImages/coupon.png);
+    }
+
+    .couponTextBox {
+        width: 230px;
+        height: 200px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .couponBox>div:hover {
+        background: url(/subImages/coupon1.png), url(/subImages/coupon.png);
+    }
+
+    .couponBox>div>p {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-70%, -50%);
+        color: #fff;
+        font-size: 4rem;
+        font-weight: 600;
+    }
+
+    .couponBox>div:hover>p {
+        display: block;
+    }
+
+    .couponTextBox>li:first-of-type {
+        font-size: 1.8rem;
+        font-weight: 600;
+    }
+
+    .couponTextBox>li:last-of-type {
+        font-size: 1.3rem;
+        color: #ccc;
+    }
+    </style>
+</head>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<section class="myPageSection">
+    <!-- section -->
+    <div class="tabBox">
+        <ul class="mainTab firstTab">
+            <li><a href="/user">#프로필</a></li>
+            <li class="on"><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
+            <li><a href="/user_trip/tripTool">#여행 도구</a></li>
+            <li><a href="/user_review">#나의 리뷰</a></li>
+        </ul>
+        <div class="subTab">
+            <!-- 탭2 -->
+            <div>
+                <div class="tabBox secondTab">
+                    <ul class="mainTab">
+                        <li><a href="/user_shopping/orderList">결제내역조회</a></li>
+                        <li><a href="/user_shopping/cart">장바구니</a></li>
+                        <li><a href="/user_shopping/point">포인트</a></li>
+                        <li class="on"><a href="/user_shopping/coupon">쿠폰</a></li>
+                        <li><a href="/user_shopping/questions">나의문의내역</a></li>
+                    </ul>
+                    <div class="subTab">
+                        <div>
+                            <div class="couponinput">
+                                <label for="myPageCoupon">쿠폰 등록</label>
+                                <input type="text" id="myPageCoupon" placeholder="쿠폰코드를 입력해주세요">
+                                <button type="submit">등록</button>
+                            </div>
+                            <div class="couponBox">
+                                <div>
+                                    <p>쿠폰받기</p>
+                                    <ul class="couponTextBox">
+                                        <li>10% 할인</li>
+                                        <li>
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                        </li>
+                                        <li>
+                                            2023-08-23 ~ 2023-09-30
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p>쿠폰받기</p>
+                                    <ul class="couponTextBox">
+                                        <li>10% 할인</li>
+                                        <li>
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                        </li>
+                                        <li>
+                                            2023-08-23 ~ 2023-09-30
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p>쿠폰받기</p>
+                                    <ul class="couponTextBox">
+                                        <li>10% 할인</li>
+                                        <li>
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                        </li>
+                                        <li>
+                                            2023-08-23 ~ 2023-09-30
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+</body>
+</html>

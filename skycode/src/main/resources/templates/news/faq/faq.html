@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link th:href="@{/css/reset.css}" rel="stylesheet">
+  <link th:href="@{/css/typo.css}" rel="stylesheet">
+  <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+  <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+  <link th:href="@{/css/news/faq/faqStyle.css}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<!-- FAQ -->
+<section class="nyFaqWrap">
+  <div class="nyFaqBox">
+    <div class="nyFaqTitle">
+      <h2># 자주 묻는 질문</h2>
+      <div class="nySearch">
+        <input type="text" name="nyFaqSearch" placeholder="검색">
+        <button>검색</button>
+      </div>
+    </div>
+    <div class="nyFaqContainer">
+      <ul class="nyFaqNav">
+        <li>전체</li>
+        <li>비행기상품</li>
+        <li>패키지상품</li>
+        <li>회원가입/탈퇴</li>
+        <li>결제관련</li>
+      </ul>
+      <!-- <button class="btn-all-close">FAQ ALL Close</button> -->
+      <br>
+      <table class="nyFaqTable">
+        <thead>
+        <tr>
+          <th class="nyFaqTableNum">번호</th>
+          <th class="nyFaqTableText">제목</th>
+          <th>카테고리</th>
+          <th>날짜</th>
+          <th>조회수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="nyFaqTableNum">1</td>
+          <td>
+            <div class="nyPanelFaqContainer">
+              <p class="nyPanelFaqTitle">What is Lorem Ipsum?</p>
+              <div class="nyPanelFaqAnswer">
+                <p>Answer (1) ... ↓</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur.</p>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                  laborum.</p>
+              </div>
+            </div>
+          </td>
+          <td>비행기상품</td>
+          <td>2032.01.01</td>
+          <td>84</td>
+        </tr>
+        <tr>
+          <td class="nyFaqTableNum">2</td>
+          <td>
+            <div class="nyPanelFaqContainer">
+              <p class="nyPanelFaqTitle">Where does it come from?</p>
+              <div class="nyPanelFaqAnswer">
+                <p>Answer (2) ... ↓</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur.</p>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                  laborum.</p>
+              </div>
+            </div>
+          </td>
+          <td>회원가입/탈퇴</td>
+          <td>2032.02.02</td>
+          <td>114</td>
+        </tr>
+        <tr>
+          <td class="nyFaqTableNum">3</td>
+          <td>
+            <div class="nyPanelFaqContainer">
+              <p class="nyPanelFaqTitle">Why do we use it?</p>
+              <div class="nyPanelFaqAnswer">
+                <p>Answer (3) ... ↓</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur.</p>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                  laborum.</p>
+              </div>
+            </div>
+          </td>
+          <td>결제관련</td>
+          <td>2032.03.03</td>
+          <td>98</td>
+        </tr>
+        <tr>
+          <td class="nyFaqTableNum">4</td>
+          <td>
+            <div class="nyPanelFaqContainer">
+              <p class="nyPanelFaqTitle">Where can I get some?</p>
+              <div class="nyPanelFaqAnswer">
+                <p>Answer (4) ... ↓</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur.</p>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                  laborum.</p>
+              </div>
+            </div>
+          </td>
+          <td>비행기상품</td>
+          <td>2032.04.04</td>
+          <td>43</td>
+        </tr>
+        <tr>
+          <td class="nyFaqTableNum">5</td>
+          <td>
+            <div class="nyPanelFaqContainer">
+              <p class="nyPanelFaqTitle">The standard Lorem Ipsum passage, used since the 1500s</p>
+              <div class="nyPanelFaqAnswer">
+                <p>Answer (5) ... ↓</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur.</p>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                  laborum.</p>
+              </div>
+            </div>
+          </td>
+          <td>패키지상품</td>
+          <td>2032.05.05</td>
+          <td>90</td>
+        </tr>
+        <tr>
+          <td class="nyFaqTableNum">6</td>
+          <td>
+            <div class="nyPanelFaqContainer">
+              <p class="nyPanelFaqTitle">The standard Lorem Ipsum passage, used since the 1500s</p>
+              <div class="nyPanelFaqAnswer">
+                <p>Answer (5) ... ↓</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur.</p>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                  laborum.</p>
+              </div>
+            </div>
+          </td>
+          <td>패키지상품</td>
+          <td>2031.08.05</td>
+          <td>94</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nyFaqPeger">
+      <div class="nyFaqPegerBtn nyFaqClick"><a href="#">1</a></div>
+      <div class="nyFaqPegerBtn"><a href="#">2</a></div>
+    </div>
+  </div>
+</section>
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+<script src="/js/news/faq.js"></script>
+
+</body>
+</html>
