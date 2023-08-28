@@ -27,20 +27,16 @@
             <div class="nyInquiryInBox">
                 <span>문의 유형</span>
                 <div class="nySearch nySearch1">
-                    <a href="#" class="nyInquirySearchBtn">카테고리를 선택해주세요</a>
-                    <ul class="nyInquirySearchPik1">
-                        <li>비행기 상품</li>
-                        <li>패키지상품</li>
-                        <li>결제관련</li>
-                        <li>회원가입/탈퇴</li>
-                    </ul>
+                    <select name="" id="">
+                        <option value="">비행기 상품</option>
+                        <option value="">패키지 상품</option>
+                        <option value="">결제관련</option>
+                        <option value="">회원가입/탈퇴</option>
+                    </select>
                 </div>
-                <div class="nySearch nySearch2">
-                    <a href="#" class="nyInquirySearchBtn"> 공개할까요?</a>
-                    <ul class="nyInquirySearchPik2">
-                        <li>누구나 볼수 있어요</li>
-                        <li>나만 볼래요</li>
-                    </ul>
+                <div class="nySearch">
+                    <input type="checkbox" name="view" onclick="checkOnlyOne(this)" value="lock"> 나만보기
+                    <input type="checkbox" name="view" onclick="checkOnlyOne(this)" value="unlock"> 전체공개
                 </div>
             </div>
             <div class="nyInquiryInBox">
@@ -58,8 +54,8 @@
                 </div>
             </div>
             <div class="nyInquirySend">
-                <button>파일 첨부하기</button>
-                <input type="text">
+                <input class="uploadFile" value="첨부파일" placeholder="첨부파일">
+                <label><input type="file" class="file" accept="image/*"></label>
             </div>
             <div class="nyInquiryUp">
                 <button>업로드하기</button>
