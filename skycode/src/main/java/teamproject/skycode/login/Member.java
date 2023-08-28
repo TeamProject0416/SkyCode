@@ -13,7 +13,17 @@ public class Member {
 @Id
     private Long id;
 
+    private String name;
+
     private String password;
+
+    private String birthday;
+
+    private String address;
+
+    private String number;
+
+    private String email;
 
     //id 의 getter setter
     public Long getId(){
