@@ -1,3 +1,4 @@
+@charset "utf-8";
 
 /* 공지사항 올리기  */
 section{
@@ -35,12 +36,12 @@ section{
 }
 .nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch {
     width: 350px;
-    padding: 10px;
+    padding: 15px;
 }
 .nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch .nyNotionUpSearchBtn{
-    background: #eee;
     padding: 10px;
-    border: 1px solid #0065BA;
+    background: #0065BA;
+    color: #fff;
     border-radius: 10px;
 }
 .nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch ul {
@@ -78,21 +79,24 @@ section{
     margin-top: 30px;
     border: none;
     background: #0065BA;
+    color: #fff;
     border-radius: 10px;
 }
 .nyNotionUpWarp .nyNotionUpBox .nyNotionUpSend input{
-    width: 300px;
-    height: 30px;
+    width: 350px;
+    height: 36px;
+    border: none;
+    border-bottom: 1px solid #333;
+    /* margin-left: 15px; */
 }
 .nyNotionUpWarp .nyNotionUpBox .nyNotionUpPost{
     text-align: end;
-    margin-right: 110px;
 }
 .nyNotionUpWarp .nyNotionUpBox .nyNotionUpPost button{
     border: none;
     background: #0065BA;
+    color: #fff;
     border-radius: 10px;
-    width: 80px;
-    height: 30px;
+    padding: 10px;
 }
 
