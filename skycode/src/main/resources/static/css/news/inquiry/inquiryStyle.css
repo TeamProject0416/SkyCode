@@ -1,5 +1,5 @@
+@charset "utf-8";
 
-/* 1대1 문의 */
 section{
     position: relative;
     top: 150px;
@@ -21,7 +21,7 @@ section{
 .nyInquiryWarp .nyInquiryBox .nyInquiryInBox{
     display: flex;
     justify-content: space-evenly;
-    padding-top: 30px;
+    padding-top: 20px;
     /* align-items: end; */
 }
 .nyInquiryWarp .nyInquiryBox .nyInquiryInBox>span{
@@ -67,6 +67,13 @@ section{
 .nyInquiryWarp .nyInquiryBox .nyInquiryInBox .nyInquiryContent input{
     width: 805px;
     height: 300px;
+    border: 1px solid #555;
+    padding-left: 10px;
+
+}
+.nyInquiryWarp .nyInquiryBox .nyInquiryInBox .nyInquiryTitle input{
+    width: 805px;
+    height: 40px;
     border: 1px solid #555;
     padding-left: 10px;
 

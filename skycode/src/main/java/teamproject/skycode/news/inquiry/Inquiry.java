@@ -30,7 +30,8 @@ public class Inquiry {
     private String inquiryContent; // 1대1문의 내용
 
 //    @Column(nullable = false)
-//    private boolean inquiryLock; // 1대1문의 나만보기
+//    private Boolean inquiryLock; // 1대1문의 나만보기
+
 
     // private List<InquiryFile> inquiryFiles; // 1대1문의 파일
 
