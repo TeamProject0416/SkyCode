@@ -1,7 +1,6 @@
 package teamproject.skycode.login;
 
-public class MemberForm {
-
+public class MemberFormDto {
     private String name;
     public String getName(){return name;}
 
