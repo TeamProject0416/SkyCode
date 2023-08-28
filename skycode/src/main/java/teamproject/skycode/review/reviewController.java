@@ -39,5 +39,10 @@ public class reviewController {
         model.addAttribute("reviews", reviewEntity);
         return "review/reviewSub";
     }
+
+    @GetMapping(value = "/reviewShow")
+    public String reviewShow() {
+        return "review/reviewShow";
+    }
 }
 
