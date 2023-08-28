@@ -29,11 +29,11 @@ public class Inquiry {
     @Column(nullable = false)
     private String inquiryContent; // 1대1문의 내용
 
-    @Column(nullable = false)
-    private boolean inquiryLooking; // 1대1문의 나만보기
+//    @Column(nullable = false)
+//    private boolean inquiryLock; // 1대1문의 나만보기
 
-//    private List<InquiryFile> inquiryFiles; // 1대1문의 파일
+    // private List<InquiryFile> inquiryFiles; // 1대1문의 파일
 
-    private LocalDateTime regTime; // 1대1문의 올린 시간
+    private LocalDateTime regTime; // 1대1문의 등록 시간
 
 }
