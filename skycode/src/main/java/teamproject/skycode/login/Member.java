@@ -2,16 +2,26 @@ package teamproject.skycode.login;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@ToString
+@Getter
+@Setter
+@Table(name = "member")
 public class Member {
 
-@Id
+    @Id
+    // 밑 두개는 더미데이터때문에 에러날까봐 넣은거임
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
+
+    @Column(unique = true)
+    private String email;
 
     private String name;
 
@@ -21,12 +31,10 @@ public class Member {
 
     private String address;
 
-    private String number;
-
-    private String email;
+    private String number; // 핸드폰 번호
 
     //id 의 getter setter
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
@@ -36,11 +44,12 @@ public class Member {
 
     // password 의 getter setter
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         this.password = password;
     }
+
 }

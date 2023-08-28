@@ -1,15 +1,22 @@
 package teamproject.skycode.myPage;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import teamproject.skycode.login.Member;
+import teamproject.skycode.login.MemberForm;
+import teamproject.skycode.login.MemberRepository;
+import teamproject.skycode.login.MemberService;
+
+import javax.persistence.EntityNotFoundException;
 
 @Controller
+@RequiredArgsConstructor
 public class MyPageController {
 
-//    @Autowired
-//    private  Member member;
 
     @GetMapping(value = "user")
     public String user(){
@@ -17,16 +24,15 @@ public class MyPageController {
     }
 
     @GetMapping(value = "/user/edit")
-    public String userEdit(Model model){
-        // DB에서 내용을 가져오기
-//        Member member = member.findById(id);
-//        model.addAttribute("member",member);
+    public String userEdit(@PathVariable("userId") Long userId, Model model){
         return "myPage/users/edit";
     }
+
     @GetMapping(value = "user/collections")
     public String userCollections(){
         return "myPage/users/collections";
     }
+
     @GetMapping(value = "user/praise")
     public String userPraise(){
         return "myPage/users/praise";
@@ -69,6 +75,7 @@ public class MyPageController {
     public String userTripTool(){
         return "myPage/trip/tripTool";
     }
+
     @GetMapping(value = "/user_review")
     public String userReview(){
         return "myPage/review/review";
