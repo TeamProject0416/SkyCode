@@ -31,7 +31,7 @@ public class Member {
 
     private String address;
 
-    private String number; // 핸드폰 번호
+    private String phone; // 핸드폰 번호
 
     //id 의 getter setter
     public Long getId() {

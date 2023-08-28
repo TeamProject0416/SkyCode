@@ -1,17 +1,8 @@
 package teamproject.skycode.myPage;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import teamproject.skycode.login.Member;
-import teamproject.skycode.login.MemberForm;
-import teamproject.skycode.login.MemberRepository;
-import teamproject.skycode.login.MemberService;
-
-import javax.persistence.EntityNotFoundException;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,7 +15,7 @@ public class MyPageController {
     }
 
     @GetMapping(value = "/user/edit")
-    public String userEdit(@PathVariable("userId") Long userId, Model model){
+    public String userEdit(){
         return "myPage/users/edit";
     }
 
