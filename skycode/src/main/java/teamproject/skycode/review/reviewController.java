@@ -32,7 +32,6 @@ public class reviewController {
         Review saved = reviewRepository.save(review);
         return "redirect:/review/" + saved.getId();
     }
-
     @GetMapping(value = "/review/{id}")
     public String userReview(@PathVariable Long id, Model model) {
         Review reviewEntity = reviewRepository.findById(id).orElse(null);
