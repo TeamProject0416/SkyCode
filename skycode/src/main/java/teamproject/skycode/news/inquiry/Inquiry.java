@@ -23,6 +23,8 @@ public class Inquiry {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // 1대1문의 아이디
 
+
+
     @Column(nullable = false)
     private String inquiryTitle; // 1대1문의 제목
 
