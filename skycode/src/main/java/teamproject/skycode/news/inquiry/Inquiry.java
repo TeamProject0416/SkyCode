@@ -32,6 +32,7 @@ public class Inquiry {
 //    @Column(nullable = false)
 //    private Boolean inquiryLock; // 1대1문의 나만보기
 
+
     // private List<InquiryFile> inquiryFiles; // 1대1문의 파일
 
     private LocalDateTime regTime; // 1대1문의 등록 시간
