@@ -4,18 +4,34 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 @ToString
+@Entity
+@Table(name = "faq")
 public class Faq {
 
-    private Long faqId;
+    @Id
+    @Column(name = "faq_id")
+    private Long id;
 
+    @Column
     private String faqTitle;
 
+    @Column
     private String faqContent;
 
-    private List<FaqFile> faqFile;
+//    @Column
+//    private List<FaqFile> faqFile;
+
+    @Column
+    private LocalDateTime regTime; // 1대1문의 올린 시간
+
 }
