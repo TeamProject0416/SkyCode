@@ -12,10 +12,10 @@ public class LoginController {
             return "login/loginIn";
         }
 
-//        @GetMapping(value = "/login/loginForm")
-//        public String loginForm(){
-//            return "/login/loginForm";
-//        }
+        @GetMapping(value = "/login/loginForm")
+        public String loginForm(){
+            return "/login/loginForm";
+        }
 
     }
 
