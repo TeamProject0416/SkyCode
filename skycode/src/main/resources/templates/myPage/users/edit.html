@@ -1,54 +1,255 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <link th:href="@{/css/reset.css}" rel="stylesheet">
-  <link th:href="@{/css/typo.css}" rel="stylesheet">
-  <link th:href="@{/css/myPage/common.css}" rel="stylesheet">
-  <link th:href="@{/css/sub/header.css}" rel="stylesheet">
-  <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
-  <style>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/myPage/common.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <style>
+    /* 1-2 editSection */
+    .editSection {
+        width: 1000px;
+        padding: 50px 50px 20px 50px;
+        margin: 30px auto;
+        border: 1px solid #eee;
+        box-shadow: 0 1px 3px 0 #dbdbdb;
+        border-radius: 10px;
+    }
 
-  </style>
+    .editSection>div {
+        padding-bottom: 20px;
+    }
+
+    .editSection>div>span {
+        display: inline-block;
+        padding: 0 20px;
+        width: 130px;
+    }
+
+    .editHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .editHeader>a {
+        color: #ff4a4a;
+    }
+
+    .editHeader>a:hover {
+        text-decoration: underline;
+    }
+
+    .editGender>label {
+        padding-right: 10px;
+    }
+
+    [type="text"] {
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        padding: 6px 12px;
+    }
+
+    .editBrithday input {
+        width: 100px;
+        height: 30px;
+        padding: 6px 12px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+    .editBrithday select{
+        width: 100px;
+        height: 30px;
+        padding: 6px 12px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        vertical-align: middle;
+    }
+
+    [type="radio"] {
+        vertical-align: middle;
+        appearance: none;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        padding: 0;
+    }
+
+    [type="radio"]:checked {
+        border: 5px solid #0065BA;
+        transition: .1s;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .editImg .upload-name {
+        display: inline-block;
+        padding: 0 10px;
+        border-radius: 5px 0 0 5px;
+        vertical-align: middle;
+        height: 30px;
+        border: 1px solid #dddddd;
+        width: 200px;
+        color: #aaa;
+
+    }
+
+    .editImg label {
+        display: inline-block;
+        padding: 0 16px;
+        height: 30px;
+        border-radius: 0px 5px 5px 0;
+        color: #fff;
+        vertical-align: middle;
+        background-color: #0065BA;
+        cursor: pointer;
+        margin-left: -4px;
+    }
+
+    .editImg>div {
+        border: 1px solid #dddddd;
+        border-radius: 10px;
+        margin: 20px 20px 0 20px;
+        padding: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+    }
+
+    .editImg>div>img {
+        height: 200px;
+        width: 200px;
+        margin-right: 50px;
+        border-radius: 50%;
+    }
+
+    .editSection>button {
+        border: none;
+        color: #fff;
+        border-radius: 10px;
+        background-color: #0065BA;
+        padding: 10px 20px;
+        margin: 20px;
+        cursor: pointer;
+    }
+    </style>
 </head>
 
 <body>
 <header th:replace="~{fragments/sub/header::header}"></header>
 
 <section class="myPageSection">
-  <!-- section -->
-  <div class="tabBox">
-    <ul class="mainTab firstTab">
-      <li class="on"><a href="/user">#프로필</a></li>
-      <li><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
-      <li><a href="/user_trip/tripTool">#여행 도구</a></li>
-      <li><a href="/user_review">#나의 리뷰</a></li>
-    </ul>
-    <div class="subTab">
-      <!-- 탭2 -->
-      <div>
-        <div class="tabBox secondTab">
-          <ul class="mainTab">
-            <li><a href="/user">모두 보기</a></li>
-            <li class="on"><a href="/user/edit">회원정보수정</a></li>
-            <li><a href="/user/collections">스크랩북</a></li>
-            <li><a href="/user/praise">좋아요</a></li>
-            <li><a href="/user/edit_password">비밀번호 번경</a></li>
-          </ul>
-          <div class="subTab">
+    <!-- section -->
+    <div class="tabBox">
+        <ul class="mainTab firstTab">
+            <li class="on"><a href="/user">#프로필</a></li>
+            <li><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
+            <li><a href="/user_trip/tripTool">#여행 도구</a></li>
+            <li><a href="/user_review">#나의 리뷰</a></li>
+        </ul>
+        <div class="subTab">
+            <!-- 탭2 -->
             <div>
-              5-1
+                <div class="tabBox secondTab">
+                    <ul class="mainTab">
+                        <li><a href="/user">모두 보기</a></li>
+                        <li class="on"><a href="/user/edit">회원정보수정</a></li>
+                        <li><a href="/user/collections">스크랩북</a></li>
+                        <li><a href="/user/praise">좋아요</a></li>
+                        <li><a href="/user/edit_password">비밀번호 번경</a></li>
+                    </ul>
+                    <div class="subTab">
+                        <div class="editSection">
+                            <div class="editHeader">
+                                <h2>회원 정보 수정</h2>
+                                <a href="#">탈퇴하기</a>
+                            </div>
+                            <div class="editEmail">
+                                <span>이메일</span>
+                                <input type="text" placeholder="email">
+                            </div>
+                            <div class="editID">
+                                <span>닉네임</span>
+                                <input type="text" placeholder="ID">
+                            </div>
+                            <div class="editGender">
+                                <span>성별</span>
+                                <label>
+                                    <input type="radio" name="gender" value="male">
+                                    <span>남성</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="gender" value="female">
+                                    <span>여성</span>
+                                </label>
+                            </div>
+                            <div class="editBrithday">
+                                <span>생일</span>
+                                <input type="text" placeholder="년(4자)" maxlength='4'>
+                                <select>
+                                    <option>월</option>
+                                    <option value="01">1</option>
+                                    <option value="02">2</option>
+                                    <option value="03">3</option>
+                                    <option value="04">4</option>
+                                    <option value="05">5</option>
+                                    <option value="06">6</option>
+                                    <option value="07">7</option>
+                                    <option value="08">8</option>
+                                    <option value="09">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <input type="text" placeholder="일" maxlength='2'>
+                            </div>
+                            <div class="editImg">
+                                <span>프로필이미지</span>
+                                <div>
+                                    <img src="/subImages/UserImg.jpg" alt="">
+                                    <div>
+                                        <input class="upload-name" value="첨부파일" placeholder="첨부파일">
+                                        <label>파일 찾기<input type="file" class="file" accept="image/*"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button>회원 정보 수정</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+    $(".file").on('change', function () {
+        var fileName = $(".file").val();
+        $(".upload-name").val(fileName);
+        setImageFromFile(this, '.editImg img');
+    });
+
+    function setImageFromFile(input, expression) {
+        if (input.files && input.files[0])
+        {
+            var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(expression).attr('src', e.target.result);
+               }
+               reader.readAsDataURL(input.files[0]);
+         }
+    }
+
+</script>
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
 </body>
