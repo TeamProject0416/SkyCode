@@ -28,10 +28,4 @@ public class Faq {
     @Column
     private String faqContent;
 
-//    @Column
-//    private List<FaqFile> faqFile;
-
-    @Column
-    private LocalDateTime regTime; // 1대1문의 올린 시간
-
 }
