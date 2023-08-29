@@ -3,6 +3,7 @@ package teamproject.skycode.login;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.management.relation.Role;
 
@@ -15,12 +16,7 @@ import javax.persistence.*;
 
 @Table(name = "member")
 @ToString
-public class Member extends BaseEntity{
-
-    @Id
-    @Column(name = "Member_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Member {
 
 
     @Id
@@ -40,14 +36,10 @@ public class Member extends BaseEntity{
 
     private String address;
 
-
     private String phone;
 
-    @Column(unique = true)
-    private String email;
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
 
 
 
@@ -60,7 +52,8 @@ public class Member extends BaseEntity{
         member.setBirthday(memberFormDto.getBirthday());
 //        String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPhone(memberFormDto.getPhone());
-        member.setRole(Role.ADMIN);
+//        member.setRole(Role.ADMIN);
+        return member;
     }
 
 
