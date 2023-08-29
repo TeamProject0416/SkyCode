@@ -8,7 +8,4 @@ import java.util.List;
 
 public interface InquiryRepository extends JpaRepository<Inquiry, Long> {
 
-
-//    List<Inquiry> findByInquiryTitle(String inquiryTitle);
-
 }

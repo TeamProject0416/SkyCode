@@ -1,8 +1,6 @@
 package teamproject.skycode.news.faq;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +13,8 @@ import java.util.List;
 @Setter
 @ToString
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "faq")
 public class Faq {
 
@@ -23,9 +23,17 @@ public class Faq {
     private Long id;
 
     @Column
-    private String faqTitle;
+    private String faqType;
 
     @Column
-    private String faqContent;
+    private String faqQuestion;
+
+    @Column
+    private String faqAnswer;
+
+    @Column
+    private LocalDateTime regTime;
+
+
 
 }
