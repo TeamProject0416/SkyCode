@@ -32,13 +32,17 @@ public class reviewController {
         Review saved = reviewRepository.save(review);
         return "redirect:/review/" + saved.getId();
     }
-
     @GetMapping(value = "/review/{id}")
     public String userReview(@PathVariable Long id, Model model) {
         Review reviewEntity = reviewRepository.findById(id).orElse(null);
         reviewEntity.setRegTime(LocalDateTime.now());
         model.addAttribute("reviews", reviewEntity);
         return "review/reviewSub";
+    }
+
+    @GetMapping(value = "/reviewShow")
+    public String reviewShow() {
+        return "review/reviewShow";
     }
 }
 

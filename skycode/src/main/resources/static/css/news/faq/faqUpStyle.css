@@ -36,27 +36,17 @@ section{
     width: 350px;
     padding: 10px;
 }
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch .nyFaqUpSearchBtn{
+.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch select {
+    width: 150px;
+    border-radius: 20px;
+    border: none;
     background: #0065BA;
     color: #fff;
-    padding: 8px;
-    border-radius: 10px;
-}
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch ul {
-    display: none;
-    border: 1px solid #555;
-
-    /* transition: .3s; */
-}
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch ul.active {
-    display: block;
-}
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch li{
     padding: 10px;
-
 }
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch li:hover{
-    background: #ddd;
+.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch option {
+    /* height: 30px; */
+    background: #000;
 }
 
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nyFaqUpContent input{
@@ -66,34 +56,17 @@ section{
     padding-left: 10px;
 
 }
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpSend button{
-    width: 150px;
-    padding: 10px;
-    margin-left: 289px;
-    margin-top: 30px;
-    border: none;
-    background: #0065BA;
-    color: #fff;
-    border-radius: 10px;
-}
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpSend input{
-    width: 350px;
-    height: 36px;
-    border: none;
-    border-bottom: 1px solid #333;
-    /* margin-left: 15px; */
-}
+
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpPost{
     text-align: end;
-    margin-right: 110px;
 }
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpPost button{
     border: none;
     background: #0065BA;
     border-radius: 10px;
-    /* width: 80px; */
     padding: 10px;
-    /* height: 30px; */
+    margin-top: 30px;
+    margin-right: 65px;
     color: #fff;
 }
 
