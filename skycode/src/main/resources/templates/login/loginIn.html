@@ -22,12 +22,12 @@
     <form action=" " method="POST">
         <div class="oej_input-box">
             <input class="oej_username" type="text" id="username" placeholder="ID">
-            <label for="username"></label>
+            <label th:for="username"></label>
         </div>
 
         <div class="oej_input-box">
             <input class="oej_password" type="password" id="password" placeholder="PASSWORD">
-            <label for="password"></label>
+            <label th:for="password"></label>
         </div>
 
         <div class="oej_log1">
@@ -36,7 +36,7 @@
 
         <div class="oej_connect"><i class="fa-solid fa-unlock-keyhole">보안접속</i> </div>
 
-
+        <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
         <input class="oej_us" type="submit" value="JOIN US">
 
         <div class="oej_search">
