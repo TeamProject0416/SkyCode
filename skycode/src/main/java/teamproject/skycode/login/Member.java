@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
+
+
 import javax.management.relation.Role;
 
 import javax.persistence.*;
@@ -50,9 +52,7 @@ public class Member {
         member.setEmail(memberFormDto.getEmail());
         member.setAddress(memberFormDto.getAddress());
         member.setBirthday(memberFormDto.getBirthday());
-//        String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPhone(memberFormDto.getPhone());
-//        member.setRole(Role.ADMIN);
         return member;
     }
 

@@ -1,25 +1,62 @@
 package teamproject.skycode.login;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
+
 @Controller
+@RequiredArgsConstructor
 public class LoginController {
 
-        @GetMapping(value = "/login")
-        public String loginIn(){
-            return "login/loginIn";
-        }
+    private final MemberService memberService;
 
-        @GetMapping(value = "/login/loginForm")
-        public String loginForm(){
-            return "/login/loginForm";
-        }
 
+//    로그인창
+    @GetMapping(value = "/login")
+    public String loginIn() {
+        return "login/loginIn";
+    }
+
+
+//    회원가입
+    @GetMapping(value = "login/loginForm")
+    public String memberForm(Model model){
+        model.addAttribute("memberFormDto", new MemberFormDto());
+        return "/login/loginForm";
+    }
+
+    @PostMapping(value = "/loginForm")
+    public String memberForm2(@Valid MemberFormDto memberFormDto,
+                              BindingResult bindingResult, Model model ){
+        if(bindingResult.hasErrors()){
+            return "login/loginForm";
+        }
+        try {
+            Member member = Member.createMember(memberFormDto);
+            memberService.saveMember(member);
+        }catch(IllegalStateException e){
+            model.addAttribute("errorMessage",e.getMessage());
+            return "login/loginForm";
+        }
+        return "redirect:/";
 
     }
+
+// 로그인 창에서 오류창
+    @GetMapping(value = "/login/error")
+    public String loginError(Model model){
+        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해 주세요");
+        return "login/loginIn";
+    }
+}
+
+
 
 
 
