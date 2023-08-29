@@ -17,39 +17,37 @@
     <div class="eventPage">
         <div class="eventPageTitle">
             <h2 class="eventTag">#진행중 이벤트</h2>
-            <button><a href="/event/eventForm">이벤트 등록</a></button>
+            <button><a href="/event/new">이벤트 등록</a></button>
         </div>
         <div class="currentPage"><span class="active"><a href="#">진행중 이벤트</a></span><span><a
                 href="end">종료된 이벤트</a></span><span><a href="winner">당첨자 발표</a></span></div>
         <div class="eventMain">
             <div class="eventBoard">
-                <div class="eventContents">
-                    <div class="eventInfo">
-                        <div class="eventUser">
-                            <a href="#">
-                                <img src="/subImages/adminImg.png" alt="" class="eventUserImg">
-                                <div>
-                                    <p class="eventUserNickName">관리자</p>
-                                    <span>6시간 전</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="eventText">
-                            <a href="sub">
-                                <h2 class="eventTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
-                                </h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
-                                    aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
-                                    nemo
-                                    nobis. Asperiores odit impedit minus accusamus expedita!</p>
-                                <span>2022-03-03</span>
-                            </a>
-                        </div>
-                        <div class="thumbImg">
-                            <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
+                <th:block th:each="event, status: ${event.getContent()}">
+                    <div class="eventContents">
+                        <div class="eventInfo">
+                            <div class="eventUser">
+                                <a href="#">
+                                    <img src="/subImages/adminImg.png" alt="" class="eventUserImg">
+                                    <div>
+                                        <p class="eventUserNickName">관리자</p>
+                                        <span>6시간 전</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="eventText">
+                                <a href="sub">
+                                    <h2 class="eventTitle">[[${event.eventTitle}]]</h2>
+                                    <p>[[${event.content}]]</p>
+                                    <span>2022-03-03</span>
+                                </a>
+                            </div>
+                            <div class="thumbImg">
+                                <a th:href="'/item/' +${item.id}" ><img th:src="${event.imgUrl}" th:alt="${event.eventTitle}"></a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </th:block>
                 <div class="eventContents">
                     <div class="eventInfo">
                         <div class="eventUser">
