@@ -6,28 +6,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
 
 //@RequestMapping("/review")
 @Controller
-public class reviewController {
+public class ReviewController {
 
     @Autowired
     private ReviewRepository reviewRepository;
 
     @GetMapping(value = "/reviewSub")
-    public String reviewSub(){
+    public String reviewSub() {
         return "review/reviewSub";
     }
 
-    @GetMapping(value = "/newReview")
-    public String newReviewForm(){
-        return "review/newReview";
-    }
+
     @PostMapping(value = "/review/create")
-    public String createReview(ReviewForm form){
+    public String createReview(ReviewFormDto form) {
         Review review = form.toEntity();
         Review saved = reviewRepository.save(review);
         return "redirect:/review/" + saved.getId();
@@ -39,6 +35,13 @@ public class reviewController {
         reviewEntity.setRegTime(LocalDateTime.now());
         model.addAttribute("reviews", reviewEntity);
         return "review/reviewSub";
+    }
+
+
+    //    임시
+    @GetMapping(value = "/newReview")
+    public String newReviewForm() {
+        return "review/newReview";
     }
 
     @GetMapping(value = "/reviewShow")

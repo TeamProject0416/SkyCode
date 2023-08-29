@@ -7,11 +7,10 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@ToString
+@Table(name = "review")
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data   // Getter Setter ToString
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +23,6 @@ public class Review {
     private String body;    // 리뷰 내용
     @Column
     private LocalDateTime regTime;   // 작성시간
+
 
 }

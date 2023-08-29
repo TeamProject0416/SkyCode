@@ -3,12 +3,11 @@ package teamproject.skycode.review;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @ToString
-public class ReviewForm {
+public class ReviewFormDto {
     private Long id;
     private String reviewTitle;
     private String nickName;
