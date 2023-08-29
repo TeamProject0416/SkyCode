@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 * {
     margin: 0;
     padding: 0;
@@ -142,14 +144,23 @@ select {
 
 }
 
-.oej_num {
-    margin-right: 10px;
-}
-
 .oej_phone {
-    width: 383px;
+    width: 393px;
     padding-left: 5px;
     height: 30px;
+
+}
+
+.oej_num {
+
+    margin: 0 auto;
+    height: 20px;
+
+}
+
+.oej_phonenumber{
+    height: 30px;
+
 }
 
 
@@ -166,16 +177,19 @@ select {
     width: 180px;
     padding-left: 5px;
     height: 30px;
+    margin-left: -30px;
 }
 
 .oej_mail2 {
-
     width: 180px;
     padding-left: 5px;
     height: 30px;
 }
 
 .oej_select {
+  height: 20px;
+  /* justify-self: center; */
+   /* text-align: center; */
     margin-left: 10px;
     width: 110px;
 }
