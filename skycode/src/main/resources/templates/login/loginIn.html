@@ -12,8 +12,18 @@
 
 </head>
 
+<th:block layout:fragment="css">
+    <style>
+        .error {
+            color: #bd2130;
+        }
+    </style>
+</th:block>
+
 <body>
 <header th:replace="~{fragments/sub/header::header}"></header>
+
+<form role="form" method="post" id="loginForm">
 <!-- 로그인 -->
 <section class="oej_container">
     <div class="oej_header">
@@ -30,14 +40,16 @@
             <label th:for="password"></label>
         </div>
 
+
         <div class="oej_log1">
             <input class="oej_log2" type="submit" value="LOGIN">
+            <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
         </div>
 
         <div class="oej_connect"><i class="fa-solid fa-unlock-keyhole">보안접속</i> </div>
 
-        <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
-        <input class="oej_us" type="submit" value="JOIN US">
+        <a th:href="@{loginForm}"><input class="oej_us" type="submit"  value="JOIN US"></a>
+
 
         <div class="oej_search">
             <div class="oej_na">
@@ -62,6 +74,8 @@
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
-</body>
+
+
+</form></body>
 
 </html>
