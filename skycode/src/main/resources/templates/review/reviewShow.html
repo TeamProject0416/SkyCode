@@ -8,26 +8,82 @@
     <link th:href="@{/css/typo.css}" rel="stylesheet">
     <link th:href="@{/css/sub/header.css}" rel="stylesheet">
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/review/reviewShow.css}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
 <header th:replace="~{fragments/sub/header::header}"></header>
 
 
-<div>
+<div class="wrap">
+    <div class="container">
+        <div class="userReviewArea">
+            <div class="userReviewTop">
+                <div class="userInfo">
+                    <div class="userIcon">
+                        <i class="fa-solid fa-circle-user"></i>
+                    </div>
+                    <div class="userNE">
+                        <div class="userNickName">
+                            <h3>보라돌이</h3>
+                        </div>
+                        <div class="userEmail"><span>test1@naver.com</span></div>
+                    </div>
+                    <div class="newBtn">
+                        <a href="#">
+                            <button>새 글 작성하기</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
+            <div class="userReivewContent">
+                <div class="slideShow">
+                    <ul class="sliders">
+                        <li class="slider1">
+                            <img src="https://picsum.photos/600/300" alt="userReviewImg">
+                        </li>
+                        <li class="slider2">
+                            <img src="https://picsum.photos/600/700" alt="userReviewImg">
+                        </li>
+                        <li class="slider3">
+                            <img src="https://picsum.photos/600/400" alt="userReviewImg">
+                        </li>
+                    </ul>
+                    <div class="pnBtn rightBtn"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="pnBtn leftBtn"><i class="fa-solid fa-arrow-left"></i></div>
+                </div>
+                <div class="contentArea">
+                    <div class="contentTitleArea">
+                        <div class="title">
+                            <h2>테스트리뷰1</h2>
+                        </div>
+                        <div class="reviewDate"><span>2023-08-28</span></div>
+                        <div class="hashtag"><span>#집보내줘</span></div>
+                    </div> <!-- contentTitleArea 끝 -->
+                    <div class="mainContent">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur modi laudantium eum harum soluta magni incidunt corporis eius tempora itaque aut doloribus, omnis consectetur commodi architecto saepe voluptas quia vel nihil. Officia officiis eveniet aperiam, voluptates ut a omnis modi accusantium, ad qui inventore hic vel temporibus. Modi quasi ducimus ullam atque, ad natus rerum excepturi ab ipsa ipsam, minus impedit deserunt expedita dolorem omnis minima fugit cupiditate aut eum? Nisi asperiores, illo tempore quasi nobis magnam earum aspernatur cupiditate similique laborum provident itaque repudiandae! Excepturi non accusantium assumenda illum nulla atque sapiente, architecto adipisci vitae corporis sint fuga nostrum id at quaerat dolore. Sapiente, fugit! Natus, quas libero reiciendis tempora perferendis consequuntur sint repudiandae reprehenderit quo eius sit id inventore. Suscipit eveniet deserunt maiores? Minima similique quis perferendis molestiae veniam, consequatur velit nisi minus rerum odio et ullam asperiores recusandae ex nobis fuga animi! Neque, ducimus deleniti molestias consequatur vel hic earum voluptate id sunt laborum quia itaque culpa harum dolores asperiores voluptates corporis reprehenderit deserunt officia error velit. Maiores officia neque ea, quasi unde sed veritatis, aliquid praesentium itaque qui quo voluptates vitae perspiciatis ducimus similique cum accusantium laudantium, nam voluptate laboriosam natus. Corrupti suscipit recusandae cupiditate sunt.
+                    </div>
+                </div>
+            </div>
+            <div class="userReviewBt">
+                <div class="btns">
+                    <a href="/newReview"><button type="submit" class="editBtn">글 수정</button></a>
+                    <a href="/reviewSub"><button type="submit" class="deleteBtn">글 삭제</button></a>
+                    <a href="/reviewSub"><button type="submit" class="deleteBtn">목록</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-
-
-
-
-
 
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 
 
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="/js/review/subHeader.js"></script>
+<script src="/js/review/reviewShow.js"></script>
 <script src="/js/review/subFooter.js"></script>
 </body>
 </html>
