@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class InquiryController {
+public class Inquiry_Controller {
 
     @GetMapping(value = "/news/inquiry")
     public String newsInquiry(){
