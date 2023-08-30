@@ -1,19 +1,29 @@
 package teamproject.skycode.news.inquiry;
 
-import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
-
-@AllArgsConstructor
+@Getter
+@Setter
 @ToString
-public class InquiryForm {
 
-    private Long id;
-    private String nickName;
+public class InquiryForm {
+    private String type;
+    private boolean isPrivate;
     private String inquiryTitle;
     private String inquiryContent;
-    private LocalDateTime regTime; // 1대1문의 등록 시간
 
-    public Inquiry toEntity() {return new Inquiry(id, nickName, inquiryTitle, inquiryContent, regTime);}
+
+    public Inquiry toEntity() {
+        Inquiry inquiry = new Inquiry();
+        inquiry.setType(this.type);
+        inquiry.setIsPrivate(this.isPrivate);
+        inquiry.setInquiryTitle(this.inquiryTitle);
+        inquiry.setInquiryContent(this.inquiryContent);
+        // regTime은 @PrePersist 어노테이션으로 자동 설정될 것이므로 따로 설정하지 않음
+        return inquiry;
+    }
 }
+
+

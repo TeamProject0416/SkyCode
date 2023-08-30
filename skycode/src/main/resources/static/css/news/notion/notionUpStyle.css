@@ -36,31 +36,17 @@ section{
 }
 .nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch {
     width: 350px;
-    padding: 15px;
-}
-.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch .nyNotionUpSearchBtn{
     padding: 10px;
+}
+.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch select{
+    width: 150px;
+    border-radius: 20px;
+    border: none;
     background: #0065BA;
     color: #fff;
-    border-radius: 10px;
-}
-.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch ul {
-    display: none;
-    border: 1px solid #555;
-
-    /* transition: .3s; */
-}
-.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch ul.active {
-    display: block;
-}
-
-.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch li{
     padding: 10px;
+}
 
-}
-.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch li:hover{
-    background: #ddd;
-}
 .nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nyNotionUpContent .nyNotionTitle{
     width: 100%;
     padding: 10px;
