@@ -87,10 +87,11 @@
     <!-- reviewAll -->
     <div class="reviewAllArea">
       <div class="reviewBoard">
-        <div class="reviewContents" th:each="review : ${reviews}">
+        <th:block th:each="review : ${reviews}">
+        <div class="reviewContents">
           <div class="reviewInfo">
             <div class="reviewUser">
-              <a href="#">
+              <a th:href="@{/reviewShow/{id} (id=${review.id})}">
                 <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
                 <div>
                   <p class="reviewUserNickName" th:text="${review.nickName}">보라돌이</p>
@@ -99,18 +100,18 @@
               </a>
             </div>
             <div class="userReviewText">
-              <a href="#">
+              <a th:href="@{/reviewShow/{id} (id=${review.id})}">
                 <h2 class="userReviewTitle" th:text="${review.reviewTitle}"></h2>
                 <p th:text="${review.body}"></p>
-                <span th:text="${#temporals.format(reviews.regTime, 'yyyy-MM-dd')}"></span>
+<!--                <span th:text="${#temporals.format(reviews.regTime, 'yyyy-MM-dd')}"></span>-->
               </a>
             </div>
             <div class="reviewImg">
-              <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
+              <a th:href="@{/reviewShow/{id}/edit (id=${review.id})}"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
             </div>
           </div>
         </div> <!--/reviewContents-->
-
+        </th:block>
 <!--        <div class="reviewContents">-->
 <!--          <div class="reviewInfo">-->
 <!--            <div class="reviewUser">-->

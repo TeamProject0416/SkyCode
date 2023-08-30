@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Data   // Getter Setter ToString
 public class Review {
     @Id
+    @Column(name="review_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    // 리뷰 id
     @Column
@@ -21,8 +22,7 @@ public class Review {
     private String nickName;    // 작성자 닉네임
     @Column
     private String body;    // 리뷰 내용
-    @Column
-    private LocalDateTime regTime;   // 작성시간
 
+//    private LocalDateTime regTime;   // 작성시간
 
 }

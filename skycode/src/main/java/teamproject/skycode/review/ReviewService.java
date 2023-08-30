@@ -16,9 +16,9 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
 
-//    public List<Review> findReviews() {
-//        return reviewRepository.findAll();
-//    }
+    public List<Review> findReviews() {
+        return reviewRepository.findAll();
+    }
     public Review show(Long id) {
         return reviewRepository.findById(id).orElseThrow(NullPointerException::new);
     }
