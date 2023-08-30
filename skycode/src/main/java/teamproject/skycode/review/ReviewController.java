@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 //@RequestMapping("/review")
 @Controller
-public class R_eviewController {
+public class ReviewController {
 
     @Autowired
     private ReviewRepository reviewRepository;
