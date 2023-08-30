@@ -62,10 +62,12 @@
 <!--    </div>-->
 <!--</section>-->
 
-<section class="inquiry-form">
-    <div>
+<section id="inquiry-form">
+    <div th:class="nyInquiryWarp">
     <h2>문의하기</h2>
-    <form class="inquiry">
+    <form id="inquiry">
+        <div th:class="nyInquiryBox">
+            <div th:class="nyInquiryInBox">
         <label for="type">문의 유형:</label>
         <select id="type">
             <option value="airplane">비행기 상품</option>
@@ -73,15 +75,21 @@
             <option value="payment">결제관련</option>
             <option value="membership">회원가입/탈퇴</option>
         </select>
+            </div>
+            <div th:class="nyInquiryInBox">
         <label for="private">공개 여부:</label>
         <input type="checkbox" id="private" value="private"> 나만보기
-        <textarea class="title" placeholder="문의 제목" rows="1"></textarea>
-        <textarea class="content" placeholder="문의 내용" rows="5"></textarea>
-        <button class="submit">문의 등록</button>
+            </div>
+        </div>
+        <textarea id="title" th:class="nyInquiryTitle" placeholder="문의 제목" rows="1"></textarea>
+        <textarea id="content" th:class="nyInquiryContent" placeholder="문의 내용" rows="5"></textarea>
+        <div th:class="nyInquiryUp">
+        <button id="submit">문의 등록</button>
+        </div>
     </form>
     </div>
 </section>
-<section class="inquiries">
+<section id="inquiries">
     <h2>문의 목록</h2>
     <ul id="inquiry-list">
         <!-- 문의 목록이 여기에 동적으로 추가될 예정 -->
