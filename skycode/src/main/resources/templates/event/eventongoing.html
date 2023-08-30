@@ -23,7 +23,7 @@
                 href="end">종료된 이벤트</a></span><span><a href="winner">당첨자 발표</a></span></div>
         <div class="eventMain">
             <div class="eventBoard">
-                <th:block th:each="event, status: ${event.getContent()}">
+                <th:block th:each="event: ${event}">
                     <div class="eventContents">
                         <div class="eventInfo">
                             <div class="eventUser">
@@ -43,11 +43,12 @@
                                 </a>
                             </div>
                             <div class="thumbImg">
-                                <a th:href="'/item/' +${item.id}" ><img th:src="${event.imgUrl}" th:alt="${event.eventTitle}"></a>
+<!--                                <a th:href="'/item/' +${item.id}" ><img th:src="${event.imgUrl}" th:alt="${event.eventTitle}"></a>-->
                             </div>
                         </div>
                     </div>
                 </th:block>
+
                 <div class="eventContents">
                     <div class="eventInfo">
                         <div class="eventUser">
@@ -75,87 +76,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="eventContents">
-                    <div class="eventInfo">
-                        <div class="eventUser">
-                            <a href="#">
-                                <img src="/subImages/adminImg.png" alt="" class="eventUserImg">
-                                <div>
-                                    <p class="eventUserNickName">관리자</p>
-                                    <span>6시간 전</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="eventText">
-                            <a href="sub">
-                                <h2 class="eventTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
-                                </h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
-                                    aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
-                                    nemo
-                                    nobis. Asperiores odit impedit minus accusamus expedita!</p>
-                                <span>2022-03-03</span>
-                            </a>
-                        </div>
-                        <div class="thumbImg">
-                            <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="eventContents">
-                    <div class="eventInfo">
-                        <div class="eventUser">
-                            <a href="#">
-                                <img src="/subImages/adminImg.png" alt="" class="eventUserImg">
-                                <div>
-                                    <p class="eventUserNickName">관리자</p>
-                                    <span>6시간 전</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="eventText">
-                            <a href="sub">
-                                <h2 class="eventTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
-                                </h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
-                                    aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
-                                    nemo
-                                    nobis. Asperiores odit impedit minus accusamus expedita!</p>
-                                <span>2022-03-03</span>
-                            </a>
-                        </div>
-                        <div class="thumbImg">
-                            <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="eventContents">
-                    <div class="eventInfo">
-                        <div class="eventUser">
-                            <a href="#">
-                                <img src="/subImages/adminImg.png" alt="" class="eventUserImg">
-                                <div>
-                                    <p class="eventUserNickName">관리자</p>
-                                    <span>6시간 전</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="eventText">
-                            <a href="sub">
-                                <h2 class="eventTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
-                                </h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
-                                    aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
-                                    nemo
-                                    nobis. Asperiores odit impedit minus accusamus expedita!</p>
-                                <span>2022-03-03</span>
-                            </a>
-                        </div>
-                        <div class="thumbImg">
-                            <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>

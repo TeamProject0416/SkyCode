@@ -16,10 +16,8 @@ public class Event extends BaseEntity {
     @Column(name = "event_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // 이벤트 Id
-
     @Column(nullable = false, length = 50)
     private String eventTitle; // 이벤트 제목
-
     @Lob
     @Column(nullable = false)
     private String content; // 이벤트 내용

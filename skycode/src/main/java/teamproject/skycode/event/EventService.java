@@ -38,5 +38,9 @@ public class EventService {
         return event.getId();
     }
 
+    public List<Event> findEvent(){
+        return eventRepository.findAll();
+    }
+
 
 }

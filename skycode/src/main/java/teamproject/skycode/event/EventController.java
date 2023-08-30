@@ -24,6 +24,8 @@ public class EventController {
 
     @GetMapping(value = "/ongoing")
     public String ongoingEvent(Model model) {
+        List<Event> event = eventService.findEvent();
+        model.addAttribute("event", event);
         return "/event/eventongoing";
     }
 
@@ -60,7 +62,7 @@ public class EventController {
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
             return "event/eventForm";
         }
-        return "redirect:/";
+        return "redirect:/event/ongoing";
     }
 
 }

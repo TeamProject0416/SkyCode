@@ -25,7 +25,6 @@ public class EventFormDto {
 
     private List<EventImgDto> eventImgDtoList = new ArrayList<>();
     private List<Long> eventImgIds = new ArrayList<>();
-    //
 
     private static ModelMapper modelMapper = new ModelMapper();
 
