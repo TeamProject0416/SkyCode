@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/news")
-public class Faq_Controller {
+public class FaqController {
 
     private final FaqRepository faqRepository;
 
