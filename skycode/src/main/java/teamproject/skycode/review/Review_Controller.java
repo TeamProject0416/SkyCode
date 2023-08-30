@@ -1,10 +1,6 @@
 package teamproject.skycode.review;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,20 +9,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 //@RequestMapping("/review")
 @Controller
 @RequiredArgsConstructor
-public class ReviewController {
+public class Review_Controller {
     private final ReviewRepository reviewRepository;
     private final ReviewService reviewService;
 
     @GetMapping(value = "/reviewSub")
     public String reviewSub(Model model) {
-        List<Review> reviewEntityList = reviewRepository.findAll();
-        model.addAttribute("reviews", reviewEntityList);
+
         return "review/reviewSub";
+    }
+    @GetMapping(value = "/newReview")
+    public String newReview(Model model){
+        List<Review> reviewList = reviewRepository.findAll();
+        model.addAttribute("reviews", reviewList);
+        return "review/newReview";
     }
 
 
@@ -54,10 +54,10 @@ public class ReviewController {
 
 
     //    임시
-    @GetMapping(value = "/newReview")
-    public String newReviewForm() {
-        return "review/newReview";
-    }
+//    @GetMapping(value = "/newReview")
+//    public String newReviewForm() {
+//        return "review/newReview";
+//    }
 
     @GetMapping(value = "/reviewShow")
     public String reviewShow() {
