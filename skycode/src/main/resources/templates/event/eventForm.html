@@ -43,7 +43,7 @@
     <h2 class="newReview">리뷰 등록하기</h2>
     <hr>
     <div class="container">
-        <form class="formContainer" action="/event/create" enctype="multipart/form-data" method="post" th:object="${eventFormDto}">
+        <form class="formContainer" action="/event/new" enctype="multipart/form-data" method="post" th:object="${eventFormDto}">
             <input type="hidden" th:field="*{id}">
 
             <div class="nickNameArea">

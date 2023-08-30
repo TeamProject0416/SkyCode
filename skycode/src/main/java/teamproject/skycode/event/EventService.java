@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -38,9 +39,11 @@ public class EventService {
         return event.getId();
     }
 
-    public List<Event> findEvent(){
-        return eventRepository.findAll();
-    }
+//    public List<EventImg> findEventImg(){
+//        Long event_id = eventRepository.findById();
+//        return eventImgRepository.findById(event_id);
+//    }
+
 
 
 }

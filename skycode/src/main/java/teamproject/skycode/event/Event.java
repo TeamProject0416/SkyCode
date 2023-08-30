@@ -5,6 +5,7 @@ import teamproject.skycode.constant.EventStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Entity
@@ -24,6 +25,9 @@ public class Event extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus; // 이벤트 진행 상태
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<EventImg> eventImg;
 
     public void updateEvent(EventFormDto eventFormDto) {
         this.eventTitle = eventFormDto.getEventTitle();

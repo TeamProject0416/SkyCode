@@ -21,11 +21,12 @@ import java.util.Optional;
 public class EventController {
 
     private final EventService eventService;
+    private final EventRepository eventRepository;
 
     @GetMapping(value = "/ongoing")
     public String ongoingEvent(Model model) {
-        List<Event> event = eventService.findEvent();
-        model.addAttribute("event", event);
+        List<Event> events = eventRepository.findAll();
+        model.addAttribute("events", events);
         return "/event/eventongoing";
     }
 
@@ -53,11 +54,13 @@ public class EventController {
     @PostMapping(value = "/new")
     public String createReview(@Valid EventFormDto eventFormDto, BindingResult bindingResult,
                                Model model, @RequestParam("eventImgFile") List<MultipartFile> eventImgFileList) {
+
         if (bindingResult.hasErrors()) {
             return "event/eventForm";
         }
         try {
             eventService.saveEvent(eventFormDto, eventImgFileList);
+
         } catch (Exception e) {
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
             return "event/eventForm";
