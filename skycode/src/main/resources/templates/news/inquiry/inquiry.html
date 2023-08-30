@@ -65,11 +65,11 @@
 <section id="inquiry-form">
     <div th:class="nyInquiryWarp">
     <h2>문의하기</h2>
-    <form id="inquiry">
+    <form id="inquiry" th:action="@{/news/inquiry/create}" method="post" th:object="${inquiryForm}">
         <div th:class="nyInquiryBox">
             <div th:class="nyInquiryInBox">
-        <label for="type">문의 유형:</label>
-        <select id="type">
+        <label for="type">문의 유형: </label>
+        <select id="type" name="type" th:field="*{type}" >
             <option value="airplane">비행기 상품</option>
             <option value="package">패키지 상품</option>
             <option value="payment">결제관련</option>
@@ -77,23 +77,16 @@
         </select>
             </div>
             <div th:class="nyInquiryInBox">
-        <label for="private">공개 여부:</label>
-        <input type="checkbox" id="private" value="private"> 나만보기
+        <label for="private">공개 여부: </label>
+        <input type="checkbox" th:field="*{private}" id="private" name="isPrivate" value="private"> 나만보기
             </div>
         </div>
-        <textarea id="title" th:class="nyInquiryTitle" placeholder="문의 제목" rows="1"></textarea>
-        <textarea id="content" th:class="nyInquiryContent" placeholder="문의 내용" rows="5"></textarea>
-        <div th:class="nyInquiryUp">
+        <textarea id="title" th:class="nyInquiryTitle" th:field="*{inquiryTitle}" name="inquiryTitle" placeholder="문의 제목" rows="1"></textarea>
+        <textarea id="content" th:class="nyInquiryContent" th:field="*{inquiryContent}" name="inquiryContent" placeholder="문의 내용" rows="5"></textarea>
         <button id="submit">문의 등록</button>
-        </div>
+
     </form>
     </div>
-</section>
-<section id="inquiries">
-    <h2>문의 목록</h2>
-    <ul id="inquiry-list">
-        <!-- 문의 목록이 여기에 동적으로 추가될 예정 -->
-    </ul>
 </section>
 
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
