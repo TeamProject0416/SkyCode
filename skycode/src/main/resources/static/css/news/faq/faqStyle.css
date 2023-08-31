@@ -1,3 +1,4 @@
+@charset "utf-8";
 
 /* FAQ 전체 */
 .nyFaqWrap {
@@ -10,7 +11,6 @@
     width: 1320px;
     margin: 0 auto;
     padding: 0 60px;
-    /* border-top: 2px solid #4E240D; */
     align-items: center;
 }
 
@@ -27,7 +27,8 @@
     width: 200px;
     height: 30px;
     border: none;
-    background: #8ED3FF;
+    border-bottom: 1px solid #333;
+    /* background: #8ED3FF; */
 }
 
 .nyFaqWrap .nyFaqContainer .nyFaqNav{
@@ -36,6 +37,13 @@
     border-top: 3px solid #8ED3FF;
     border-bottom: 3px solid #8ED3FF;
     padding: 15px 0;
+
+}
+.nySearch button{
+    background: #0065BA;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
 
 }
 .nyFaqTable {
@@ -61,35 +69,36 @@
     /* margin-bottom: -16px; */
     text-align: center;
 
-  }
-  .nyPanelFaqTitle {
-    color: #00eaea;
+}
+.nyPanelFaqTitle {
+    color: #333;
+    font-weight: 700;
     cursor: pointer;
     text-align: center;
-  }
-  .nyPanelFaqAnswer {
+}
+.nyPanelFaqAnswer {
     height: 0;
     /* display: none; */
     overflow: hidden;
     transition: all 1s;
     background: #8ED3FF;
-  }
+}
 
-  /* 답변 보이게 */
-  .active {
+/* 답변 보이게 */
+.active {
     display: block;
     /* 높이를 정해줘야지만 transition이 적용됨 */
     height:150px;
 
-  }
+}
 
-  .nyFaqPeger{
+.nyFaqPeger{
     position: relative;
     top: 30px;
     display: flex;
     justify-content: center;
-  }
-  .nyFaqPeger .nyFaqPegerBtn{
+}
+.nyFaqPeger .nyFaqPegerBtn{
     width: 50px;
     height: 50px;
     line-height: 50px;
@@ -98,10 +107,10 @@
     background: none;
     border: 2px solid #e9b0b0;
     margin-right: 10px;
-  }
-  .nyFaqPeger .nyFaqPegerBtn.nyFaqClick{
+}
+.nyFaqPeger .nyFaqPegerBtn.nyFaqClick{
     background: #e9b0b0;
 
-  }
+}
 
 

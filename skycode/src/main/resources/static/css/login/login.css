@@ -1,5 +1,4 @@
 
-
 * {
     margin: 0;
     padding: 0;
@@ -15,12 +14,17 @@ p {
     font-size: 1.5rem;
     color: #333;
 }
+
+form {
+    max-width: 1320px;
+    height: 350px;
+}
 /* 헤더 */
 
 .oej_container {
     position: relative;
     margin: 0 auto;
-    top: 200px;
+    top: 140px;
     height: 460px;
     max-width: 1320px;
 }
@@ -31,15 +35,12 @@ p {
     position: relative;
     justify-content: center;
     align-items: center;
-    width: 500px;
+    width: 600px;
     height: 70px;
     margin: 0 auto;
     color: #333;
 }
 
-form {
-    overflow: hidden;
-}
 
 input{
 border-width: 0 0 1px;
@@ -54,7 +55,7 @@ border-color: #0065BA;
 .oej_input-box {
     position: relative;
     top: 0px;
-    width: 400px;
+    width: 500px;
     height: 60px;
     margin: 0 auto;
 }
@@ -62,7 +63,7 @@ border-color: #0065BA;
 .oej_username {
     position: absolute;
     display: flex;
-    width: 400px;
+    width: 500px;
     height: 40px;
     padding: 10px;
     margin-top: 10px;
@@ -73,7 +74,7 @@ border-color: #0065BA;
 .oej_password {
     position: absolute;
     display: flex;
-    width: 400px;
+    width: 500px;
     height: 40px;
     padding: 10px;
     margin-top: 10px;
@@ -84,54 +85,61 @@ border-color: #0065BA;
 /* 로그인 버튼 */
 
 
-.oej_log2 {
-    /* position: absolute; */
-    display: flex;
-    width: 400px;
+.oej_log1 {
+    width: 500px;
     height: 40px;
-    justify-content: center;
-    align-self: center;
+    position: relative;
+    top: 5px;
     margin: 0 auto;
-    border: 1px solid #0065BA;
-    background: #0065BA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 5px;
-    color: #fff;
+    outline: none;
     cursor: pointer;
+    background-color: #0065BA;
+    border: none;
+    color: #fff;
 }
 
 /* 보안접속 */
 .oej_connect {
+    position: relative;
+    display: flex;
+    left: 0px;
     margin: 0 auto;
-    top: 10px;
-    width: 400px;
-    height: 20px;
-    line-height: 20px;
+    top:10px;
+    padding-top: 5px;
+    width: 500px;
 }
 
 /* 회원가입 */
 
 
 .oej_us {
-    display: flex;
-    width: 400px;
+    width: 500px;
     height: 40px;
-    justify-content: center;
-    align-self: center;
+    position: relative;
+    top: 20px;
     margin: 0 auto;
-    border: 1px solid #0065BA;
-    background: #003999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 5px;
-    color: #fff;
+    outline: none;
     cursor: pointer;
+    background-color: #003999;
+    border: none;
+    color: #fff;
 }
 
 /* 찾기버튼 */
 .oej_search {
     position: relative;
     display: flex;
-    width: 400px;
+    width: 500px;
     height: 80px;
-    top: 10px;
+    top: 30px;
     margin: 0 auto;
     align-items: center;
 }
@@ -149,20 +157,30 @@ border-color: #0065BA;
 
 .oej_search div a {
     color: #333;
-    margin-right: 30px;
+    margin-right: 10px;
 }
-
 
 
 .oej_search div img {
     margin-top: 10px;
-    margin-right: 20px;
+    margin-right: 25px;
     width: 20px;
 }
+
 
 .oej_na{
     background-color: #28D111;
 }
+
+.oej_go{
+    border: 1px solid #dadada;
+}
+
+.oej_go > img{
+    margin-left: -15px;
+
+}
+
 
 .oej_ka {
     background-color: #FCE51E;

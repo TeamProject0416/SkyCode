@@ -1,3 +1,4 @@
+@charset "utf-8";
 
 /* FAQ 답변 작성하기 */
 section{
@@ -20,9 +21,11 @@ section{
 }
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox{
     display: flex;
-    justify-content: space-evenly;
     padding-top: 30px;
     /* align-items: end; */
+}
+.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBoxInput{
+    justify-content: space-evenly;
 }
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox>span{
     font-size: 2rem;
@@ -33,58 +36,38 @@ section{
     width: 350px;
     padding: 10px;
 }
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch .nyFaqUpSearchBtn{
-    background: #eee;
+.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch select {
+    width: 150px;
+    border-radius: 20px;
+    border: none;
+    background: #0065BA;
+    color: #fff;
     padding: 10px;
-    border: 1px solid #0065BA;
-    border-radius: 10px;
 }
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch ul {
-    display: none;
-    border: 1px solid #555;
-
-    /* transition: .3s; */
-}
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch ul.active {
-    display: block;
-}
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch li{
-    padding: 10px;
-
-}
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch li:hover{
-    background: #ddd;
+.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch option {
+    /* height: 30px; */
+    background: #fff;
+    color: #333;
 }
 
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nyFaqUpContent input{
+.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nyFaqUpContent textarea{
     width: 500px;
     height: 300px;
     border: 1px solid #555;
     padding-left: 10px;
 
 }
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpSend button{
-    width: 300px;
-    padding: 15px;
-    margin-left: 289px;
-    margin-top: 30px;
-    border: none;
-    background: #0065BA;
-    border-radius: 10px;
-}
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpSend input{
-    width: 300px;
-    height: 30px;
-}
+
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpPost{
     text-align: end;
-    margin-right: 110px;
 }
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpPost button{
     border: none;
     background: #0065BA;
     border-radius: 10px;
-    width: 80px;
-    height: 30px;
+    padding: 10px;
+    margin-top: 30px;
+    margin-right: 65px;
+    color: #fff;
 }
 

@@ -1,4 +1,13 @@
 $(function () {
+
+    // 화면 밖으로 마우스가 나갔을때
+    $(document).bind("mouseleave", function () {
+        $('.sub').stop().slideUp();
+        $('.navBg1').stop().animate({ height: 0 }, 400, function () {
+            $('.navBg2').css("height", "0");
+        });
+    })
+
     // 내비게이션바
     $('nav').mouseenter(function (e) {
         e.preventDefault // a태그 기본 이벤트 제거

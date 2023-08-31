@@ -1,3 +1,4 @@
+@charset "utf-8";
 
 /* 공지사항 올리기  */
 section{
@@ -37,29 +38,20 @@ section{
     width: 350px;
     padding: 10px;
 }
-.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch .nyNotionUpSearchBtn{
-    background: #eee;
+.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch select{
+    width: 150px;
+    border-radius: 20px;
+    border: none;
+    background: #0065BA;
+    color: #fff;
     padding: 10px;
-    border: 1px solid #0065BA;
-    border-radius: 10px;
 }
-.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch ul {
-    display: none;
-    border: 1px solid #555;
-
-    /* transition: .3s; */
-}
-.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch ul.active {
-    display: block;
+.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch option {
+    /* height: 30px; */
+    background: #fff;
+    color: #333;
 }
 
-.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch li{
-    padding: 10px;
-
-}
-.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch li:hover{
-    background: #ddd;
-}
 .nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nyNotionUpContent .nyNotionTitle{
     width: 100%;
     padding: 10px;
@@ -78,21 +70,24 @@ section{
     margin-top: 30px;
     border: none;
     background: #0065BA;
+    color: #fff;
     border-radius: 10px;
 }
 .nyNotionUpWarp .nyNotionUpBox .nyNotionUpSend input{
-    width: 300px;
-    height: 30px;
+    width: 350px;
+    height: 36px;
+    border: none;
+    border-bottom: 1px solid #333;
+    /* margin-left: 15px; */
 }
 .nyNotionUpWarp .nyNotionUpBox .nyNotionUpPost{
     text-align: end;
-    margin-right: 110px;
 }
 .nyNotionUpWarp .nyNotionUpBox .nyNotionUpPost button{
     border: none;
     background: #0065BA;
+    color: #fff;
     border-radius: 10px;
-    width: 80px;
-    height: 30px;
+    padding: 10px;
 }
 
