@@ -65,19 +65,22 @@ public class inquiryController {
     public String submitInquiry(@ModelAttribute InquiryForm inquiryForm) {
         // InquiryForm을 Inquiry 엔티티로 변환하여 저장
         System.out.println("1234");
-        Inquiry inquiry = inquiryForm.toEntity(); // InquiryForm에서 Inquiry 엔티티로 변환하는 메서드 필요
+         Inquiry inquiry = inquiryForm.toEntity(); // InquiryForm에서 Inquiry 엔티티로 변환하는 메서드 필요
+//        Inquiry savedInquiry = inquiryService.saveInquiry(inquiryForm);
         inquiryRepository.save(inquiry);
 
-        return "redirect:/news/inquiryList"; // 저장 후 다시 폼 페이지로 리다이렉트
+        return "redirect:/news/inquiry/inquiryList"; // 저장 후 다시 폼 페이지로 리다이렉트
     }
 
     @GetMapping("/inquiry/inquiryList")
     public String inquiryList(Model model) {
         List<Inquiry> inquiries = inquiryService.getAllInquiries();
-        System.out.println("4321");
+        System.out.println("4");
 
 // InquiryService에 해당 메소드 구현 필요
         model.addAttribute("inquiries", inquiries);
+        System.out.println("432");
+
         // 조회된 데이터가 없을 경우 예외 처리 등을 수행
         return "/news/inquiry/inquiryList"; // 혹은 다른 페이지로 이동
     }

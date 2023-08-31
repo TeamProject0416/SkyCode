@@ -46,7 +46,7 @@
                 <td><span th:text="${inquiry.id}">1</span></td>
                 <td><span th:text="${inquiry.type}">회원가입/탈퇴</span></td>
                     <td><a th:href="@{'/news/inquiry/show/' + ${inquiry.id}}"><span th:text="${inquiry.inquiryTitle}"></span></a></td>
-                <td><span th:text="${#dates.format(inquiry.regTime, 'yyyy.MM.dd')}">2023.08.25</span></td>
+                <td><span th:text="${#temporals.format(inquiry.regTime, 'yyyy.MM.dd')}">2023.08.25</span></td>
                 <td th:text="${inquiry.isPrivate ? '비공개' : '공개'}">공개</td>
             </tr>
 <!--            <tr>-->

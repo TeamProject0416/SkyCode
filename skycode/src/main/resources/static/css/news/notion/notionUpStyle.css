@@ -46,6 +46,11 @@ section{
     color: #fff;
     padding: 10px;
 }
+.nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nySearch option {
+    /* height: 30px; */
+    background: #fff;
+    color: #333;
+}
 
 .nyNotionUpWarp .nyNotionUpBox .nyNotionUpInBox .nyNotionUpContent .nyNotionTitle{
     width: 100%;
