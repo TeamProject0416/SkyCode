@@ -31,13 +31,12 @@
     </div>
     <div class="nyFaqContainer">
       <ul class="nyFaqNav">
-        <li>전체</li>
-        <li>비행기상품</li>
-        <li>패키지상품</li>
-        <li>회원가입/탈퇴</li>
-        <li>결제관련</li>
+        <li class="nyFaqTab active" data-category="all">전체</li>
+        <li class="nyFaqTab" data-category="비행기상품">비행기상품</li>
+        <li class="nyFaqTab" data-category="패키지상품">패키지상품</li>
+        <li class="nyFaqTab" data-category="회원가입/탈퇴">회원가입/탈퇴</li>
+        <li class="nyFaqTab" data-category="결제관련">결제관련</li>
       </ul>
-      <!-- <button class="btn-all-close">FAQ ALL Close</button> -->
       <br>
       <table class="nyFaqTable">
         <thead>
@@ -50,128 +49,24 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td class="nyFaqTableNum">1</td>
+        <tr th:each="faq : ${faqs}" th:data-category="${faq.type}">
+          <td class="nyFaqTableNum" th:text="${faq.id}">1</td>
           <td>
             <div class="nyPanelFaqContainer">
-              <p class="nyPanelFaqTitle">What is Lorem Ipsum?</p>
+              <p class="nyPanelFaqTitle" th:text="${faq.faqQuestion}">What is Lorem Ipsum?</p>
               <div class="nyPanelFaqAnswer">
                 <p>Answer (1) ... ↓</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur.</p>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                  laborum.</p>
+                <p th:text="${faq.faqAnswer}">...</p>
               </div>
             </div>
           </td>
-          <td>비행기상품</td>
-          <td>2032.01.01</td>
+          <td th:text="${faq.type}">비행기상품</td>
+          <td th:text="${#temporals.format(faq.regTime, 'yyyy.MM.dd')}">2032.01.01</td>
           <td>84</td>
-        </tr>
-        <tr>
-          <td class="nyFaqTableNum">2</td>
-          <td>
-            <div class="nyPanelFaqContainer">
-              <p class="nyPanelFaqTitle">Where does it come from?</p>
-              <div class="nyPanelFaqAnswer">
-                <p>Answer (2) ... ↓</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur.</p>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                  laborum.</p>
-              </div>
-            </div>
-          </td>
-          <td>회원가입/탈퇴</td>
-          <td>2032.02.02</td>
-          <td>114</td>
-        </tr>
-        <tr>
-          <td class="nyFaqTableNum">3</td>
-          <td>
-            <div class="nyPanelFaqContainer">
-              <p class="nyPanelFaqTitle">Why do we use it?</p>
-              <div class="nyPanelFaqAnswer">
-                <p>Answer (3) ... ↓</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur.</p>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                  laborum.</p>
-              </div>
-            </div>
-          </td>
-          <td>결제관련</td>
-          <td>2032.03.03</td>
-          <td>98</td>
-        </tr>
-        <tr>
-          <td class="nyFaqTableNum">4</td>
-          <td>
-            <div class="nyPanelFaqContainer">
-              <p class="nyPanelFaqTitle">Where can I get some?</p>
-              <div class="nyPanelFaqAnswer">
-                <p>Answer (4) ... ↓</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur.</p>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                  laborum.</p>
-              </div>
-            </div>
-          </td>
-          <td>비행기상품</td>
-          <td>2032.04.04</td>
-          <td>43</td>
-        </tr>
-        <tr>
-          <td class="nyFaqTableNum">5</td>
-          <td>
-            <div class="nyPanelFaqContainer">
-              <p class="nyPanelFaqTitle">The standard Lorem Ipsum passage, used since the 1500s</p>
-              <div class="nyPanelFaqAnswer">
-                <p>Answer (5) ... ↓</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur.</p>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                  laborum.</p>
-              </div>
-            </div>
-          </td>
-          <td>패키지상품</td>
-          <td>2032.05.05</td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <td class="nyFaqTableNum">6</td>
-          <td>
-            <div class="nyPanelFaqContainer">
-              <p class="nyPanelFaqTitle">The standard Lorem Ipsum passage, used since the 1500s</p>
-              <div class="nyPanelFaqAnswer">
-                <p>Answer (5) ... ↓</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur.</p>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                  laborum.</p>
-              </div>
-            </div>
-          </td>
-          <td>패키지상품</td>
-          <td>2031.08.05</td>
-          <td>94</td>
         </tr>
         </tbody>
       </table>
+    </div>
     </div>
     <div class="nyFaqPeger">
       <div class="nyFaqPegerBtn nyFaqClick"><a href="#">1</a></div>
@@ -184,6 +79,7 @@
 
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
+<script src="/js/news/faqTab.js"></script>
 <script src="/js/news/faq.js"></script>
 
 </body>

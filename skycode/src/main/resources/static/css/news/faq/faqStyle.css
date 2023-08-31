@@ -85,7 +85,7 @@
 }
 
 /* 답변 보이게 */
-.active {
+.activeTwo {
     display: block;
     /* 높이를 정해줘야지만 transition이 적용됨 */
     height:150px;

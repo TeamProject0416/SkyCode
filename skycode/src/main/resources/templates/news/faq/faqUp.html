@@ -14,6 +14,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+
 </head>
 
 <body>
@@ -22,33 +23,35 @@
 <section>
     <div class="nyFaqUpWarp">
         <h2>FAQ 답변 작성하기</h2>
+        <form id="inquiry" th:action="@{/news/faq/create}" method="post" th:object="${faqForm}">
         <div class="nyFaqUpBox">
             <div class="nyFaqUpInBox">
                 <span>문의 유형</span>
                 <div class="nySearch">
-                    <select name="" id="">
-                        <option value="">비행기 상품</option>
-                        <option value="">패키지 상품</option>
-                        <option value="">결제관련</option>
-                        <option value="">회원가입/탈퇴</option>
+                    <label for="type">문의 유형: </label>
+                    <select id="type" name="type" th:field="*{type}">
+                        <option value="비행기상품">비행기상품</option>
+                        <option value="패키지상품">패키지상품</option>
+                        <option value="결제관련">결제관련</option>
+                        <option value="회원가입/탈퇴">회원가입/탈퇴</option>
                     </select>
                 </div>
             </div>
             <div class="nyFaqUpInBox nyFaqUpInBoxInput">
                 <div class="nyFaqUpContent">
                     <div>소비자들의 예상 질문</div>
-                    <textarea type="text" placeholder="소비자들의 예상 질문을 적어주세요"></textarea>
+                    <textarea type="text" id="question" th:field="*{faqQuestion}" name="faqQuestion" placeholder="소비자들의 예상 질문을 적어주세요"></textarea>
                 </div>
                 <div class="nyFaqUpContent">
                     <div>답변</div>
-                    <textarea type="text" placeholder="알맞은 답변을 적어주세요"></textarea>
+                    <textarea type="text" id="answer" th:field="*{faqAnswer}" name="faqAnswer" placeholder="알맞은 답변을 적어주세요"></textarea>
                 </div>
             </div>
             <div class="nyFaqUpPost">
-                <button>업로드하기</button>
+                <button id="submit">업로드하기</button>
             </div>
         </div>
-
+        </form>
     </div>
 </section>
 
