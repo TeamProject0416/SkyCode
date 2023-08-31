@@ -29,6 +29,8 @@ public class Member {
 
     private String name;
 
+    private String userId;
+
     private String password;
 
     private String confirmPassword;
@@ -44,6 +46,7 @@ public class Member {
         Member member = new Member();
         member.setId(member.getId());
         member.setName(memberFormDto.getName());
+        member.setUserId(memberFormDto.getUserId());
         member.setEmail(memberFormDto.getEmail());
         member.setAddress(memberFormDto.getAddress());
         member.setBirthday(memberFormDto.getBirthday());

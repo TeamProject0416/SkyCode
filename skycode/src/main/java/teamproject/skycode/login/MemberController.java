@@ -1,6 +1,7 @@
 package teamproject.skycode.login;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +21,7 @@ public class MemberController {
 //    로그인창
     @GetMapping(value = "/login")
     public String loginIn() {
-        return "login/memberLoginForm";
+        return "/member/memberLoginForm";
     }
 
 
@@ -28,22 +29,25 @@ public class MemberController {
     @GetMapping(value = "/new")
     public String memberForm(Model model){
         model.addAttribute("memberFormDto", new MemberFormDto());
-        return "/login/memberForm";
+        System.out.println("1234");
+        return "/member/memberForm";
     }
 
-    @PostMapping(value = "/new")
+    @PostMapping(value = "/login/new")
     public String memberForm2(@Valid MemberFormDto memberFormDto,
                               BindingResult bindingResult, Model model ){
+        System.out.println("2345");
         if(bindingResult.hasErrors()){
-            return "login/memberForm";
+            return "/member/memberForm";
         }
         try {
             Member member = Member.createMember(memberFormDto);
             memberService.saveMember(member);
         }catch(IllegalStateException e){
             model.addAttribute("errorMessage",e.getMessage());
-            return "login/memberForm";
+            return "/member/memberForm";
         }
+        System.out.println("3456");
         return "redirect:/";
 
     }
@@ -53,7 +57,7 @@ public class MemberController {
     @GetMapping(value = "/login/error")
     public String loginError(Model model){
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해 주세요");
-        return "login/memberLoginForm";
+        return "/member/memberLoginForm";
     }
 }
 
