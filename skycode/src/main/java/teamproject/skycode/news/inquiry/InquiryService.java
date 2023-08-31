@@ -28,8 +28,6 @@ public class InquiryService {
     }
 
     public List<Inquiry> getAllInquiries() {
-
-
         return inquiryRepository.findAll();
     }
 
