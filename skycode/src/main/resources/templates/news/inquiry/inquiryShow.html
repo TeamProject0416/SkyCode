@@ -24,20 +24,17 @@
     <h2>문의</h2>
     <div class="nyInquiryShowSubContainer">
         <div class="nyInquiryShowTitle">
-            <span class="nyTitle">제목</span>
-            <span class="nyTitleDate">날짜</span>
+            <span class="nyTitle" th:text="${inquiry.inquiryTitle}">제목</span>
+            <span class="nyTitleDate" th:text="${inquiry.regTime}">날짜</span>
         </div>
         <div class="nyInquiryShowContent">
-            <img src="http://placehold.it/320x100" />
-            <p>문의 내용</p>
+            <!-- 문의 내용 이미지 등 출력 -->
+            <p th:text="${inquiry.inquiryContent}">문의 내용</p>
         </div>
-        <div class="nyInquiryShowSubPager">
-            <div><a href=""><i class="fa-solid fa-caret-up"></i> 다음문의</a></div>
-            <div><a href=""><i class="fa-solid fa-caret-down"></i> 이전문의</a></div>
-        </div>
+        <!-- 이전/다음 문의 버튼 등 -->
     </div>
     <div class="nyInquiryShowList">
-        <a th:href="@{inquiryList}">목록보기</a>
+        <a th:href="@{/inquiryList}">목록보기</a>
     </div>
 </section>
 

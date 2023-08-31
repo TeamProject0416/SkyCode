@@ -1,8 +1,6 @@
 package teamproject.skycode.news.notion;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +13,8 @@ import java.util.List;
 @Setter
 @ToString
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "notion")
 public class Notion {
 
@@ -27,9 +27,6 @@ public class Notion {
 
     @Column
     private String notionContent;
-
-//    @Column
-//    private List<NotionFile> notionFiles;
 
     @Column
     private LocalDateTime regTime; // 1대1문의 올린 시간

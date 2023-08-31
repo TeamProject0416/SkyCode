@@ -6,9 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 
-public interface InquiryRepository extends JpaRepository<Inquiry, Long> {
-
-
-//    List<Inquiry> findByInquiryTitle(String inquiryTitle);
+public interface InquiryRepository extends JpaRepository<Inquiry, Long > {
 
 }
