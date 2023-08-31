@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 //@RequestMapping(value = "/main")
-public class MainController {
+public class Main_Controller {
     @GetMapping(value = "/")
     public String skyCode() {
         return "main";
