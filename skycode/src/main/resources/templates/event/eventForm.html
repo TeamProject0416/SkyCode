@@ -69,22 +69,20 @@
             </div>
             <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="fieldError">Incorrect data</p>
 
-            <div th:if="${#lists.isEmpty(eventFormDto.eventImgDtoList)}">
-                <div class="form-group" th:each="num: ${#numbers.sequence(1,5)}">
+            <div>
+                <div class="form-group">
                     <div>
-                        <input type="file" class="custom-file-input" name="eventImgFile">
-                        <label class="custom-file-label" th:text="상품이미지 + ${num}"></label>
+                        <input type="file" class="custom-file-input" name="eventImgFile1">
+                        <label class="custom-file-label">이미지 선택</label>
                     </div>
                 </div>
             </div>
 
-            <div th:if="${not #lists.isEmpty(eventFormDto.eventImgDtoList)}">
-                <div class="form-group" th:each="eventImgDto, status: ${eventFormDto.eventImgDtoList}">
+            <div>
+                <div class="form-group">
                     <div>
-                        <input type="file" class="custom-file-input" name="eventImgFile">
-                        <input type="hidden" name="eventImgIds" th:value="${eventImgDto.id}">
-                        <label class="custom-file-label"
-                               th:text="${not #strings.isEmpty(eventImgDto.oriImgName)} ? ${eventImgDto.oriImgName} : '상품이미지' + ${status.index+1}"></label>
+                        <input type="file" class="custom-file-input" name="eventImgFile2">
+                        <label class="custom-file-label">이미지 선택</label>
                     </div>
                 </div>
             </div>

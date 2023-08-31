@@ -23,18 +23,28 @@ public class EventFormDto {
 
     private EventStatus eventStatus;
 
-    private List<EventImgDto> eventImgDtoList = new ArrayList<>();
-    private List<Long> eventImgIds = new ArrayList<>();
+    private String miniImgName; // 미니 이미지 파일명
+
+    private String miniOriImgName; // 미니 원본 이미지 파일명
+
+    private String miniImgUrl; // 미니 이미지 조회 경로
+
+    private String bigImgName; // 큰 이미지 파일명
+
+    private String bigOriImgName; // 큰 원본 이미지 파일명
+
+    private String bigImgUrl; // 큰 이미지 조회 경로
+
 
     private static ModelMapper modelMapper = new ModelMapper();
 
-    public Event createEvent() {
-        return modelMapper.map(this, Event.class);
+    public EventEntity createEvent() {
+        return modelMapper.map(this, EventEntity.class);
     } // EventFormDto 객체를 기반으로 새로운 Event 객체를 생성
     // this 는 EventFormDto 객체 자체를 나타냅니다
     // EventFormDto 객체의 필드값을 가지고 Event 객체를 생성
 
-    public static EventFormDto of(Event event) {
+    public static EventFormDto of(EventEntity event) {
         return modelMapper.map(event, EventFormDto.class);
     }
     // Item 객체에서 ItemFormDto 객체로 매핑

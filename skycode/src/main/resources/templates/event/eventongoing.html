@@ -39,11 +39,11 @@
                                 <a href="sub">
                                     <h2 class="eventTitle">[[${event.eventTitle}]]</h2>
                                     <p>[[${event.content}]]</p>
-                                    <span>2022-03-03</span>
+                                    <span>[[${event.time}]]</span>
                                 </a>
                             </div>
                             <div class="thumbImg">
-                                <a th:href="'/event/' +${event.id}" ><img th:src="${event.eventImg}" th:alt="${event.eventTitle}"></a>
+                                <a th:href="'/event/' + ${event.id}" ><img th:src="${event.miniImgUrl}" th:alt="${event.miniImgName}"></a>
                             </div>
                         </div>
                     </div>

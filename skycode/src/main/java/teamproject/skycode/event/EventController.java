@@ -1,19 +1,14 @@
 package teamproject.skycode.event;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/event")
@@ -22,10 +17,11 @@ public class EventController {
 
     private final EventService eventService;
     private final EventRepository eventRepository;
+//    private final EventFormDto eventFormDto;
 
     @GetMapping(value = "/ongoing")
     public String ongoingEvent(Model model) {
-        List<Event> events = eventRepository.findAll();
+        List<EventEntity> events = eventRepository.findAll();
         model.addAttribute("events", events);
         return "/event/eventongoing";
     }
@@ -52,14 +48,15 @@ public class EventController {
     }
 
     @PostMapping(value = "/new")
-    public String createReview(@Valid EventFormDto eventFormDto, BindingResult bindingResult,
-                               Model model, @RequestParam("eventImgFile") List<MultipartFile> eventImgFileList) {
-
+    public String createReview(@Valid EventFormDto eventFormDto, BindingResult bindingResult, Model model,
+                               @RequestParam("eventImgFile1") MultipartFile eventImgFile1,
+                               @RequestParam("eventImgFile2") MultipartFile eventImgFile2) {
+        System.out.println("err");
         if (bindingResult.hasErrors()) {
             return "event/eventForm";
         }
         try {
-            eventService.saveEvent(eventFormDto, eventImgFileList);
+            eventService.saveEvent(eventFormDto, eventImgFile1, eventImgFile2);
 
         } catch (Exception e) {
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
