@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -73,6 +74,19 @@ public class ReviewController {
         return "review/newReview";
     }
 
+    @GetMapping(value = "/admin/item/{itemId}")
+    public String itemDtl(@PathVariable("itemId") Long itemId, Model model) {
+        try {
+            ReviewFormDto reviewFormDto = reviewService.getItemDtl(itemId);
+            model.addAttribute("reviewFormDto", reviewFormDto);
+        } catch (EntityNotFoundException e) {
+            model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
+            model.addAttribute("reviewFormDto", new ReviewFormDto());
+            return "item/itemForm";
+
+        }
+        return "item/itemForm";
+    }
 
 }
 

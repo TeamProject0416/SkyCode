@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import teamproject.skycode.review.Review;
-import teamproject.skycode.review.ReviewForm;
+import teamproject.skycode.review.ReviewFormDto;
 
 @Controller
 @RequestMapping("/event")
