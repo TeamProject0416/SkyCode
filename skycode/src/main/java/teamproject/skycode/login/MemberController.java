@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
-public class LoginController {
+public class MemberController {
 
     private final MemberService memberService;
 
@@ -20,39 +20,40 @@ public class LoginController {
 //    로그인창
     @GetMapping(value = "/login")
     public String loginIn() {
-        return "login/loginIn";
+        return "login/memberLoginForm";
     }
 
 
-//    회원가입
-    @GetMapping(value = "login/loginForm")
+//    회원가입창
+    @GetMapping(value = "/new")
     public String memberForm(Model model){
         model.addAttribute("memberFormDto", new MemberFormDto());
-        return "/login/loginForm";
+        return "/login/memberForm";
     }
 
-    @PostMapping(value = "/loginForm")
+    @PostMapping(value = "/new")
     public String memberForm2(@Valid MemberFormDto memberFormDto,
                               BindingResult bindingResult, Model model ){
         if(bindingResult.hasErrors()){
-            return "login/loginForm";
+            return "login/memberForm";
         }
         try {
             Member member = Member.createMember(memberFormDto);
             memberService.saveMember(member);
         }catch(IllegalStateException e){
             model.addAttribute("errorMessage",e.getMessage());
-            return "login/loginForm";
+            return "login/memberForm";
         }
         return "redirect:/";
 
     }
 
+
 // 로그인 창에서 오류창
     @GetMapping(value = "/login/error")
     public String loginError(Model model){
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해 주세요");
-        return "login/loginIn";
+        return "login/memberLoginForm";
     }
 }
 
