@@ -22,14 +22,16 @@ public class ReviewImgService {
     private final ReviewImgRepository reviewImgRepository;
     private final FileService fileService;
 
-    public void saveItemImg(ReviewImg reviewImg, MultipartFile itemImgFile) throws Exception{
-        String oriImgName = itemImgFile.getOriginalFilename();
+    public void saveItemImg(ReviewImg reviewImg, MultipartFile reviewImgFile) throws Exception{
+        String oriImgName = reviewImgFile.getOriginalFilename();
         String imgName = "";
         String imgUrl = "";
         if(!StringUtils.isEmpty(oriImgName)){
             imgName = fileService.uploadFile(reviewImgLocation, oriImgName,
-                    itemImgFile.getBytes());
-            imgUrl = "/images/item/" + imgName;
+                    reviewImgFile.getBytes());
+//            imgUrl = "/images/item/" + imgName;
+            imgUrl = "/reviewImages/" + imgName;
+
         }
 
 //        상품 이미지 정보 저장
@@ -37,22 +39,24 @@ public class ReviewImgService {
         reviewImgRepository.save(reviewImg);
     }
 
-    public void updateItemImg(Long itemImgId, MultipartFile itemImgFile) throws Exception{
-        if(!itemImgFile.isEmpty()){
-            ReviewImg savedItemImg = reviewImgRepository.findById(itemImgId)
+    public void updateItemImg(Long reviewImgId, MultipartFile reviewImgFile) throws Exception{
+        if(!reviewImgFile.isEmpty()){
+            ReviewImg savedReviewImg = reviewImgRepository.findById(reviewImgId)
                     .orElseThrow(EntityNotFoundException::new);
 //            기존 이미지 정보를 가져오기
 
             //기존 이미지 파일 삭제
-            if(!StringUtils.isEmpty(savedItemImg.getImgName())) {
+            if(!StringUtils.isEmpty(savedReviewImg.getImgName())) {
                 fileService.deleteFile(reviewImgLocation+"/"+
-                        savedItemImg.getImgName());
+                        savedReviewImg.getImgName());
             }
 
-            String oriImgName = itemImgFile.getOriginalFilename();  // 새로운 이미지 파일의 원본 파일 이름을 가져온다.
-            String imgName = fileService.uploadFile(reviewImgLocation, oriImgName, itemImgFile.getBytes());
-            String imgUrl = "reviewImages/review/" + imgName;
-            savedItemImg.updateItemImg(oriImgName, imgName, imgUrl); // -> ItemImg 에 있는 updateItemImg() 메서드
+            String oriImgName = reviewImgFile.getOriginalFilename();  // 새로운 이미지 파일의 원본 파일 이름을 가져온다.
+            String imgName = fileService.uploadFile(reviewImgLocation, oriImgName, reviewImgFile.getBytes());
+//            String imgUrl = "reviewImages/review/" + imgName;
+            String imgUrl = "/reviewImages/" + imgName;
+
+            savedReviewImg.updateItemImg(oriImgName, imgName, imgUrl); // -> ItemImg 에 있는 updateItemImg() 메서드
 //            이미지 정보 엔티티의 필드를 업데이트 합니다.
         }
     }

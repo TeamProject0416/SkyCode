@@ -1,6 +1,9 @@
 package teamproject.skycode.review;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 //@RequestMapping("/review")
 @Controller
@@ -19,28 +23,40 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @GetMapping(value = "/reviewSub")
-    public String reviewSub(Model model) {
-        List<Review> reviewList = reviewService.findReviews();
+    public String main(ReviewSearchDto reviewSearchDto, Optional<Integer> page, Model model) {
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);   /* 페이지당 6개씩 출력 */
+        Page<MainReviewDto> reviewList = reviewService.getMainReviewPage(reviewSearchDto, pageable);
+
         model.addAttribute("reviews", reviewList);
-//        reviewEntity.setRegTime(LocalDateTime.now());
+        model.addAttribute("reviewSearchDto", reviewSearchDto);
+        model.addAttribute("maxPage", 5);
+
         return "review/reviewSub";
     }
 
+//    @GetMapping(value = "/reviewSub")
+//    public String reviewSub(Model model) {
+//
+//        List<Review> reviewList = reviewService.findReviews();
+//        model.addAttribute("reviews", reviewList);
+////        reviewEntity.setRegTime(LocalDateTime.now());
+//        return "review/reviewSub";
+//    }
+
     @PostMapping(value = "/review/create")
     public String reviewCreate(ReviewFormDto form) {
-//        Review review = new Review();
-//        review.setReviewTitle(form.getReviewTitle());
-//        review.setNickName(form.getNickName());
-//        review.setBody(form.getBody());
+
         Review review = form.toEntity();
         Review saved = reviewRepository.save(review);
         return "redirect:/reviewSub";
     }
 
-    @GetMapping(value = "/reviewShow/{id}")
-    public String reviewShow(@PathVariable Long id, Model model) {
-        Review reviewEntityShow = reviewRepository.findById(id).orElse(null);
-        model.addAttribute("reviewShow", reviewEntityShow);
+    @GetMapping(value = "/reviewShow/{reviewId}")
+    public String reviewShow(@PathVariable("reviewId") Long reviewId, Model model) {
+//        Review reviewEntityShow = reviewRepository.findById(id).orElse(null);
+//        model.addAttribute("reviewShow", reviewEntityShow);
+        ReviewFormDto reviewFormDto = reviewService.getItemDtl(reviewId);
+        model.addAttribute("reviewShow", reviewFormDto);
         return "review/reviewShow";
     }
 
@@ -70,23 +86,24 @@ public class ReviewController {
 
     //    임시
     @GetMapping(value = "/newReview")
-    public String newReviewForm() {
+    public String newReviewForm(Model model) {
+        model.addAttribute("reviewFormDto", new ReviewFormDto());
         return "review/newReview";
     }
 
-    @GetMapping(value = "/admin/item/{itemId}")
-    public String itemDtl(@PathVariable("itemId") Long itemId, Model model) {
-        try {
-            ReviewFormDto reviewFormDto = reviewService.getItemDtl(itemId);
-            model.addAttribute("reviewFormDto", reviewFormDto);
-        } catch (EntityNotFoundException e) {
-            model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
-            model.addAttribute("reviewFormDto", new ReviewFormDto());
-            return "item/itemForm";
-
-        }
-        return "item/itemForm";
-    }
+//    @GetMapping(value = "/admin/item/{itemId}")
+//    public String itemDtl(@PathVariable("itemId") Long itemId, Model model) {
+//        try {
+//            ReviewFormDto reviewFormDto = reviewService.getItemDtl(itemId);
+//            model.addAttribute("reviewFormDto", reviewFormDto);
+//        } catch (EntityNotFoundException e) {
+//            model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
+//            model.addAttribute("reviewFormDto", new ReviewFormDto());
+//            return "item/itemForm";
+//
+//        }
+//        return "item/itemForm";
+//    }
 
 }
 

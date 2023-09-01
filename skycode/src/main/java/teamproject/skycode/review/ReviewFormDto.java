@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@ToString
+//@ToString
 @Getter
 @Setter
 public class ReviewFormDto {
@@ -26,8 +26,8 @@ public class ReviewFormDto {
     }
 
 
-    private List<ReviewImgDto> itemImgDtoList = new ArrayList<>();
-    private List<Long> itemImgIds = new ArrayList<>();
+    private List<ReviewImgDto> reviewImgDtoList = new ArrayList<>();
+    private List<Long> reviewImgIds = new ArrayList<>();
 
     private static ModelMapper modelMapper = new ModelMapper();
 

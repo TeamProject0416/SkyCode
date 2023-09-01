@@ -2,6 +2,7 @@ package teamproject.skycode.review;
 
 
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,9 +10,12 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "review")
 @AllArgsConstructor
-@NoArgsConstructor
-@Data   // Getter Setter ToString
-public class Review {
+//@NoArgsConstructor
+//@Data   // Getter Setter ToString
+@Getter
+@Setter
+@ToString
+public class Review extends BaseEntity {
     @Id
     @Column(name="review_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

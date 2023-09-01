@@ -22,10 +22,10 @@
     <h2 class="newReview">리뷰 등록하기</h2>
     <hr>
     <div class="container">
-        <form class="formContainer" action="/review/create" method="post">
+        <form class="formContainer" action="/review/create" method="post" enctype="multipart/form-data">
             <div class="nickNameArea">
                 <label class="nickName">닉네임</label>
-                <input type="text" class="titleInput" name="nickName" placeholder="제목을 입력해주세요">
+                <input type="text" class="titleInput" name="nickName" placeholder="닉네임을 입력해주세요">
             </div>
             <div class="titleArea">
                 <label class="reviewTitle">제목</label>
@@ -37,7 +37,7 @@
             </div>
 
             <!-- 이미지 첨부 부분-->
-            <div th:if="${#lists.isEmpty(itemFormDto.itemImgDtoList)}">
+            <div th:if="${#lists.isEmpty(reviewFormDto.reviewImgDtoList)}">
                 <!--
                     itemFormDto.itemImgDtoList 가 비어있는지 검사합니다. 해당 리스트에 이미지 관련 정보가 없을 때 실행됩니다.
                     #lists.isEmpty 함수는 리스트가 비어있는지 여부를 확인하는 Thymeleaf 내장 함수입니다.
@@ -49,31 +49,31 @@
                         th:each 속성을 사용하여 각 숫자에 대해 반복 작업을 수행합니다.
                     -->
                     <div class="custom-file img-div">
-                        <input type="file" class="custom-file-input" name="itemImgFile">
+                        <input type="file" class="custom-file-input" name="reviewImgFile">
                         <label class="custom-file-label" th:text="상품이미지 + ${num}"></label>
                     </div>
                 </div>
             </div>
 
-            <div th:if="${not #lists.isEmpty(itemFormDto.itemImgDtoList)}">
+            <div th:if="${not #lists.isEmpty(reviewFormDto.reviewImgDtoList)}">
                 <!--
                     not 키워드를 사용하여 조건을 부정합니다.
-                    이미지 정보가 있는 경우, itemFormDto.itemImgDtoList 에 이미지 정보가 있을 때 실행됩니다.
+                    이미지 정보가 있는 경우, reviewFormDto.reviewImgDtoList 에 이미지 정보가 있을 때 실행됩니다.
                 -->
-                <div class="form-group" th:each="itemImgDto, status: ${itemFormDto.itemImgDtoList}">
+                <div class="form-group" th:each="reviewImgDto, status: ${reviewFormDto.reviewImgDtoList}">
                     <!--
-                        이미지 정보가 있는 경우, itemFormDto.itemImgDtoList 에 포함된 각 이미지 정보에 대해 반복 작업을 수행합니다.
+                        이미지 정보가 있는 경우, reviewFormDto.reviewImgDtoList 에 포함된 각 이미지 정보에 대해 반복 작업을 수행합니다.
                         status 객체를 사용하여 현재 반복 상태를 추적할 수 있습니다.
                     -->
                     <div class="custom-file img-div">
-                        <input type="file" class="custom-file-input" name="itemImgFile">
-                        <input type="hidden" name="itemImgIds" th:value="${itemImgDto.id}">
+                        <input type="file" class="custom-file-input" name="reviewImgFile">
+                        <input type="hidden" name="reviewImgIds" th:value="${reviewImgDto.id}">
                         <!--
                             이미지 ID를 input 요소의 value 속성으로 설정합니다.
                             이는 이미지 ID를 서버로 전달하기 위한 용도로 사용됩니다.
                         -->
                         <label class="custom-file-label"
-                               th:text="${not #strings.isEmpty(itemImgDto.oriImgName)} ? ${itemImgDto.oriImgName} : '상품이미지' + ${status.index+1}">
+                               th:text="${not #strings.isEmpty(reviewImgDto.oriImgName)} ? ${reviewImgDto.oriImgName} : '상품이미지' + ${status.index+1}">
 
                         </label>
                         <!--
