@@ -32,11 +32,11 @@
         <div class="nyNewsBody">
             <ul>
                 <li th:each="notion : ${notions}">
-                    <a th:href="@{notionSub}">
+                    <a th:href="@{'/news/notion/notionSub/' + ${notion.id}}">
                         <img src="http://placehold.it/320x100" />
                         <div class="nyNewsBodyText">
                             <div th:text="${notion.notionTitle}" class="nyNewTitle">한국관광 데이터랩 공모전 소문내기 이벤트</div>
-                            <p th:text="${notion.regTime}">2023.08.21</p>
+                            <p th:text="${#temporals.format(notion.regTime, 'yyyy.MM.dd')}">2023.08.21</p>
                         </div>
                     </a>
                 </li>

@@ -25,7 +25,8 @@
     <div class="nyInquiryShowSubContainer">
         <div class="nyInquiryShowTitle">
             <span class="nyTitle" th:text="${inquiry.inquiryTitle}">제목</span>
-            <span class="nyTitleDate" th:text="${inquiry.regTime}">날짜</span>
+            <span class="nyTitleDate" th:text="${#temporals.format(inquiry.regTime, 'yyyy.MM.dd')}">날짜</span>
+            <span class="nyTitleDate" th:text="${viewCount}">조회수</span>
         </div>
         <div class="nyInquiryShowContent">
             <!-- 문의 내용 이미지 등 출력 -->
@@ -34,7 +35,7 @@
         <!-- 이전/다음 문의 버튼 등 -->
     </div>
     <div class="nyInquiryShowList">
-        <a th:href="@{/inquiryList}">목록보기</a>
+        <a th:href="@{/news/inquiry/inquiryList}">목록보기</a>
     </div>
 </section>
 

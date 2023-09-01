@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import teamproject.skycode.news.inquiry.Inquiry;
+import teamproject.skycode.news.inquiry.InquiryForm;
 
 import java.util.List;
 
@@ -21,6 +21,9 @@ public class notionController {
 
     @Autowired
     private NotionService notionService;
+
+    @Autowired
+    private NotionViewCountService notionViewCountService;
 
     @GetMapping(value = "/notionUp")
     public String newsNotionUp(Model model){
@@ -45,10 +48,43 @@ public class notionController {
         return "/news/notion/notion";
     }
 
+    @PostMapping("/notion/notion")
+    public String submitInquiry(@ModelAttribute NotionForm notionForm, Model model) {
+        Notion savedNotion = notionService.saveNotion(notionForm); // Save or update inquiry
+        System.out.println("제발1");
+        if (savedNotion != null) {
+            Long id = savedNotion.getId(); // Get the id of the saved/updated inquiry
 
-    @GetMapping(value = "/notionSub")
-    public String newsNotionSub(){
-        return "news/notion/notionSub";
+            // Now, based on the id, determine the URL to redirect to
+            String redirectUrl = "redirect:/news/notion/notionSub" + id; // Adjust the URL pattern according to your mapping
+            System.out.println("제발2");
+
+            return redirectUrl;
+        }
+
+        // Handle error case if savedInquiry is null
+        // You can return an error view or redirect to an error page
+        return "error"; // Change to the appropriate view name
+
+    }
+
+
+    @GetMapping("/notion/notionSub/{id}")
+    public String showNotionById(@PathVariable Long id, Model model) {
+        Notion notion = notionService.getNotionById(id);
+
+        if (notion != null) {
+            NotionViewCount viewCount = notionViewCountService.notionViewCount(id);
+
+            model.addAttribute("notion", notion);
+            model.addAttribute("viewCount", viewCount.getCount());
+            System.out.println("좀");
+            return "news/notion/notionSub"; // Adjust the view name
+        }
+        System.out.println("제발");
+
+        // Handle case when inquiry is not found
+        return "error"; // Change to the appropriate view name
     }
 
 

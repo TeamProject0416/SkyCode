@@ -39,6 +39,11 @@
     padding: 15px 0;
 
 }
+
+.nyFaqWrap .nyFaqContainer .nyFaqNav .nyFaqTab {
+    cursor: pointer;
+}
+
 .nySearch button{
     background: #0065BA;
     border: none;

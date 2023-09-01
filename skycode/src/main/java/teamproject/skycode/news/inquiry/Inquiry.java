@@ -14,11 +14,12 @@ import java.util.List;
 @Setter
 @ToString
 @Entity
-//@AllArgsConstructor
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 //@Table(name = "inquiry")
 
-public class Inquiry {
+public class  Inquiry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +38,7 @@ public class Inquiry {
 
     @Column(nullable = false)
     private LocalDateTime regTime;  // 등록 시간
+
 
     // 생성자, getter, setter, toString 등의 메서드 생략
 
