@@ -6,29 +6,31 @@
     <title>Title</title>
     <link th:href="@{/css/reset.css}" rel="stylesheet">
     <link th:href="@{/css/typo.css}" rel="stylesheet">
-      <link th:href="@{/css/sub/header.css}" rel="stylesheet">
-      <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
     <link th:href="@{/css/event/eventSubStyle.css}" rel="stylesheet">
 </head>
 
-
 <body>
 <header th:replace="~{fragments/sub/header::header}"></header>
-    <section class="section">
-        <div class="eventSubPage">
-            <div>
-                <h2 class="eventSubTag">#이벤트</h2>
-            </div>
-            <div class="eventSubPageTitle">여행사진 투표하기!
-                Lorem ipsum dolor sit.
-            </div>
-            <span>2022.07.22</span>
-            <!-- <span>조회 수</span> -->
-            <div class="eventImg"><img src="https://dummyimage.com/940X1460/ccc/fff" alt=""></div>
-            <div class="getCoupon"><a href="#">쿠폰 받기!!</a></div>
+<section class="section">
+    <div class="eventSubPage">
+        <div>
+            <h2 class="eventSubTag">#이벤트</h2>
         </div>
-    </section>
-    <footer th:replace="~{fragments/sub/footer::footer}"></footer>
+        <div class="title">
+            <p class="eventSubPageTitle">
+                [[${eventFormDto.eventTitle}]]
+            </p>
+            <span>[[${eventFormDto.eventTime}]]</span>
+        </div>
+        <div class="eventImg">
+            <img th:src="${eventFormDto.bigImgUrl}" th:alt="${eventFormDto.bigImgName}">
+        </div>
+        <div class="getCoupon"><a href="#">쿠폰 받기!!</a></div>
+    </div>
+</section>
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>

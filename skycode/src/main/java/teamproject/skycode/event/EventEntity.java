@@ -18,7 +18,7 @@ public class EventEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // 이벤트 Id
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String eventTitle; // 이벤트 제목
 
     @Lob
@@ -40,7 +40,7 @@ public class EventEntity extends BaseEntity {
 
     private String bigImgUrl; // 큰 이미지 조회 경로
 
-    private String time;
+    private String eventTime; // // "yyyy-MM-dd"
 
     public void updateEventImg(String miniImgName, String miniOriImgName, String miniImgUrl,
                                String bigImgName, String bigOriImgName, String bigImgUrl) {

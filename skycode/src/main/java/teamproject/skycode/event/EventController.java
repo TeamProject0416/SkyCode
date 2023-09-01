@@ -6,9 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import teamproject.skycode.constant.EventStatus;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
+
+import static teamproject.skycode.constant.EventStatus.ONGOING;
 
 @Controller
 @RequestMapping("/event")
@@ -17,28 +21,36 @@ public class EventController {
 
     private final EventService eventService;
     private final EventRepository eventRepository;
-//    private final EventFormDto eventFormDto;
 
     @GetMapping(value = "/ongoing")
     public String ongoingEvent(Model model) {
-        List<EventEntity> events = eventRepository.findAll();
+        List<EventEntity> events = eventRepository.findByONGOING();
         model.addAttribute("events", events);
         return "/event/eventongoing";
     }
 
     @GetMapping(value = "/end")
-    public String endEvent() {
+    public String endEvent(Model model) {
+        List<EventEntity> events = eventRepository.findByEND();
+        model.addAttribute("events", events);
         return "/event/eventend";
     }
 
     @GetMapping(value = "/winner")
-    public String eventWinner() {
+    public String eventWinner(Model model) {
+        List<EventEntity> events = eventRepository.findByWINNER();
+        model.addAttribute("events", events);
         return "/event/eventwinner";
     }
 
-    @GetMapping(value = "/sub")
-    public String eventSub() {
-        return "/event/eventSub";
+    @GetMapping(value = "/{eventId}")
+    public String eventDtl(@PathVariable("eventId") Long eventId, Model model) {
+        System.out.println("-------------------------");
+        System.out.println(eventId);
+        System.out.println("-------------------------");
+        EventFormDto eventFormDto = eventService.getEventDtl(eventId);
+        model.addAttribute("eventFormDto", eventFormDto);
+        return "event/eventSub";
     }
 
     @GetMapping(value = "/new")
@@ -51,7 +63,6 @@ public class EventController {
     public String createReview(@Valid EventFormDto eventFormDto, BindingResult bindingResult, Model model,
                                @RequestParam("eventImgFile1") MultipartFile eventImgFile1,
                                @RequestParam("eventImgFile2") MultipartFile eventImgFile2) {
-        System.out.println("err");
         if (bindingResult.hasErrors()) {
             return "event/eventForm";
         }
@@ -64,5 +75,7 @@ public class EventController {
         }
         return "redirect:/event/ongoing";
     }
+
+
 
 }

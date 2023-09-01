@@ -35,6 +35,8 @@ public class EventFormDto {
 
     private String bigImgUrl; // 큰 이미지 조회 경로
 
+    private String eventTime; // // "yyyy-MM-dd"
+
 
     private static ModelMapper modelMapper = new ModelMapper();
 
@@ -47,5 +49,5 @@ public class EventFormDto {
     public static EventFormDto of(EventEntity event) {
         return modelMapper.map(event, EventFormDto.class);
     }
-    // Item 객체에서 ItemFormDto 객체로 매핑
+    // Event 객체에서 EventFormDto 객체로 매핑
 }
