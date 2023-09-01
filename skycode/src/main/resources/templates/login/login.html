@@ -21,6 +21,9 @@
 </th:block>
 
 <body>
+
+<!-- 로그인 -->
+
 <header th:replace="~{fragments/sub/header::header}"></header>
 
 
@@ -29,25 +32,26 @@
     <div class="oej_header">
         <p>LOGIN</p>
     </div>
-    <form  action="/new" method="POST">
+    <form action="/member/login" method="post">
         <div class="oej_input-box">
-            <input class="oej_username" type="text" id="username" placeholder="ID">
+            <input class="oej_username" type="text" id="username" name="memberEmail" placeholder="ID">
             <label th:for="username"></label>
         </div>
 
         <div class="oej_input-box">
-            <input class="oej_password" type="password" id="password" placeholder="PASSWORD">
+            <input class="oej_password" type="password" id="password"  name="memberPassword" placeholder="PASSWORD">
             <label th:for="password"></label>
         </div>
 
-        <button type="button" class="oej_log1" onClick="location.href='/'">LOGIN</button>
+        <input class="oej_log1" type="submit" value="LOGIN">
         <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
-
 
         <div class="oej_connect"><i class="fa-solid fa-unlock-keyhole">보안접속</i> </div>
 
 
-        <button type="button" class="oej_us" onClick="location.href='/new'">JOIN US</button>
+<!--        <button type="submit" class="oej_us" onClick="location.href='/member/save'">JOIN US</button>-->
+<!--        <button id="submit" class="oej_us" onclick="window.location.href='/member/save'">JOIN US</button>-->
+        <a href="/member/save"><button type="button" class="oej_us">JOIN US</button></a>
         <div class="oej_search">
             <div class="oej_na">
                 <img src="../subImages/naver2.png" alt="">
@@ -64,7 +68,7 @@
                 <a href="#">카카오 로그인</a>
             </div>
         </div>
-</form>
+    </form>
 </section>
 
 
