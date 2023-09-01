@@ -23,8 +23,22 @@
 <section class="nyInquiryWrap">
     <h2># 1 : 1 문의</h2>
     <div class="nyInquiryContainer">
+        <div class="nySearch">
+            <form th:action="@{/news/inquiry/search}" method="get">
+                <label for="search-type" hidden>유형</label>
+                <select name="search-type" id="search-type">
+                    <option value="title">제목</option>
+                    <option value="content">본문</option>
+                    <option value="id">ID</option>
+                    <!-- Add other options as needed -->
+                </select>
+                <label for="search-value" hidden></label>
+                <input id="search-value" type="search" name="search-value" placeholder="검색어...">
+                <button type="submit">검색</button>
+            </form>
+        </div>
         <div class="nyInquiryCheck">
-            <strong>총 <strong>522</strong>건</strong>
+            <strong>총 <strong th:text="${totalInquiryCount}">522</strong>건</strong>
             <div class="nyInquiryButton">
                 <button type="button">최신순</button>
                 <span>|</span>
@@ -45,24 +59,12 @@
             <tr th:each="inquiry : ${inquiries}">
                 <td><span th:text="${inquiry.id}">1</span></td>
                 <td><span th:text="${inquiry.type}">회원가입/탈퇴</span></td>
-                    <td><a th:href="@{'/news/inquiry/show/' + ${inquiry.id}}"><span th:text="${inquiry.inquiryTitle}"></span></a></td>
+                    <td><a th:href="@{'/news/inquiry/show/' + ${inquiry.id}}">
+                        <span th:text="${inquiry.inquiryTitle}"></span>
+                    </a></td>
                 <td><span th:text="${#temporals.format(inquiry.regTime, 'yyyy.MM.dd')}">2023.08.25</span></td>
                 <td th:text="${inquiry.isPrivate ? '비공개' : '공개'}">공개</td>
             </tr>
-<!--            <tr>-->
-<!--                <td>2</td>-->
-<!--                <td>회원가입/탈퇴</td>-->
-<!--                    <td><a th:href="@{inquiryShow}">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia sint temporibus esse dignissimos.</a></td>-->
-<!--                <td>2023.08.25</td>-->
-<!--                <td>공개</td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>3</td>-->
-<!--                <td>비행기상품</td>-->
-<!--                    <td><a th:href="@{inquiryShow}">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia sint temporibus esse dignissimos.</a></td>-->
-<!--                <td>2023.08.25</td>-->
-<!--                <td>비공개</td>-->
-<!--            </tr>-->
             </tbody>
         </table>
         <div class="nyInquiryPeger">
@@ -70,7 +72,7 @@
             <div class="nyInquiryPegerBtn"><a href="#">2</a></div>
         </div>
         <div class="nyInquiryGoText">
-            <a th:href="@{/news/inquiry}">목록보기</a>
+            <a th:href="@{/news/inquiry}">문의쓰기</a>
         </div>
     </div>
 </section>

@@ -16,6 +16,7 @@ public class NotionForm {
 
     public Notion toEntity(){
         Notion notion = new Notion();
+        notion.setId(this.id);
         notion.setType(this.type);
         notion.setNotionTitle(this.notionTitle);
         notion.setNotionContent(this.notionContent);
