@@ -17,6 +17,8 @@ public class MemberEntity {
     @Column(unique = true)  // unique 제약 조건 추가
     private String memberEmail;
 
+    private String memberId;
+
     @Column
     private String memberPassword;
 
