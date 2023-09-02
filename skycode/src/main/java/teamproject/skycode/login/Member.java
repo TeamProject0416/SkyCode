@@ -43,18 +43,18 @@ public class Member {
 
 
 
-    public static Member createMember(MemberFormDto memberFormDto){
-        Member member = new Member();
-        member.setId(member.getId());
-        member.setName(memberFormDto.getName());
-        member.setEmail(memberFormDto.getEmail());
-        member.setAddress(memberFormDto.getAddress());
-        member.setBirthday(memberFormDto.getBirthday());
-//        String password = passwordEncoder.encode(memberFormDto.getPassword());
-        member.setPhone(memberFormDto.getPhone());
-//        member.setRole(Role.ADMIN);
-        return member;
-    }
+//    public static Member createMember(MemberFormDto memberFormDto){
+//        Member member = new Member();
+//        member.setId(member.getId());
+//        member.setName(memberFormDto.getName());
+//        member.setEmail(memberFormDto.getEmail());
+//        member.setAddress(memberFormDto.getAddress());
+//        member.setBirthday(memberFormDto.getBirthday());
+////        String password = passwordEncoder.encode(memberFormDto.getPassword());
+//        member.setPhone(memberFormDto.getPhone());
+////        member.setRole(Role.ADMIN);
+//        return member;
+//    }
 
 
 

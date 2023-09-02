@@ -52,6 +52,18 @@ public class EventEntity extends BaseEntity {
         this.bigImgUrl = bigImgUrl;
     }
 
+    public void updateEvent(EventFormDto eventFormDto) {
+        this.eventTitle = eventFormDto.getEventTitle();
+        this.content = eventFormDto.getContent();
+        this.eventStatus = eventFormDto.getEventStatus();
+        this.miniImgName = eventFormDto.getMiniImgName();
+        this.miniOriImgName = eventFormDto.getMiniOriImgName();
+        this.miniImgUrl = eventFormDto.getMiniImgUrl();
+        this.bigImgName = eventFormDto.getBigImgName();
+        this.bigOriImgName = eventFormDto.getBigOriImgName();
+        this.bigImgUrl = eventFormDto.getBigImgUrl();
+    }
+
 
 
 

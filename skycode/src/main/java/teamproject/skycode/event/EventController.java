@@ -43,16 +43,6 @@ public class EventController {
         return "/event/eventwinner";
     }
 
-    @GetMapping(value = "/{eventId}")
-    public String eventDtl(@PathVariable("eventId") Long eventId, Model model) {
-        System.out.println("-------------------------");
-        System.out.println(eventId);
-        System.out.println("-------------------------");
-        EventFormDto eventFormDto = eventService.getEventDtl(eventId);
-        model.addAttribute("eventFormDto", eventFormDto);
-        return "event/eventSub";
-    }
-
     @GetMapping(value = "/new")
     public String newEventForm(Model model) {
         model.addAttribute("eventFormDto", new EventFormDto());
@@ -76,6 +66,25 @@ public class EventController {
         return "redirect:/event/ongoing";
     }
 
+    @GetMapping(value = "/{eventId}")
+    public String eventDtl(@PathVariable("eventId") Long eventId, Model model) {
+        EventFormDto eventFormDto = eventService.getEventDtl(eventId);
+        model.addAttribute("eventFormDto", eventFormDto);
+        return "event/eventSub";
+    }
 
+    @PostMapping(value = "/{eventId}")
+    public String eventUpdate(@Valid EventFormDto eventFormDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "event/eventForm";
+        }
+        try {
+            eventService.updateEvent(eventFormDto);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
+            return "event/eventForm";
+        }
+        return "redirect:/event/ongoing";
+    }
 
 }
