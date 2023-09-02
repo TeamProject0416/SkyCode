@@ -73,7 +73,14 @@ public class EventController {
         return "event/eventSub";
     }
 
-    @PostMapping(value = "/{eventId}")
+    @GetMapping(value = "/update")
+    public String eventUpdate(@PathVariable("eventId") Long eventId, Model model) {
+        EventFormDto eventFormDto = eventService.getEventDtl(eventId);
+        model.addAttribute("eventFormDto", eventFormDto);
+        return "event/eventSub";
+    }
+
+    @PostMapping(value = "/{eventId}/edit")
     public String eventUpdate(@Valid EventFormDto eventFormDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "event/eventForm";

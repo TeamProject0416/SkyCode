@@ -40,10 +40,10 @@
 
 <!--body-->
 <div class="wrap">
-    <h2 class="newReview">이벤트 등록하기</h2>
+    <h2 class="newReview">이벤트 수정하기</h2>
     <hr>
     <div class="container">
-        <form class="formContainer" action="/event/new" enctype="multipart/form-data" method="post"
+        <form class="formContainer" action="/event/update" enctype="multipart/form-data" method="post"
               th:object="${eventFormDto}">
             <input type="hidden" th:field="*{id}">
 
@@ -92,7 +92,7 @@
                 <button th:formaction="@{/event/new}" type="submit" class="btn createBtn">저장</button>
             </div>
             <div class="btnArea" th:unless="${#strings.isEmpty(eventFormDto.id)}">
-                <button th:formaction="@{'/event/' + ${eventFormDto.id} }" type="submit" class="btn createBtn">수정
+                <button th:formaction="@{'/event/' + ${eventFormDto.id}+ '/edit' }" type="submit" class="btn createBtn">수정
                 </button>
             </div>
 
