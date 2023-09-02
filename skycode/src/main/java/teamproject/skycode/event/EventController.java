@@ -46,7 +46,7 @@ public class EventController {
     @GetMapping(value = "/new")
     public String newEventForm(Model model) {
         model.addAttribute("eventFormDto", new EventFormDto());
-        return "event/eventForm";
+        return "event/eventNew";
     }
 
     @PostMapping(value = "/new")
@@ -54,14 +54,14 @@ public class EventController {
                                @RequestParam("eventImgFile1") MultipartFile eventImgFile1,
                                @RequestParam("eventImgFile2") MultipartFile eventImgFile2) {
         if (bindingResult.hasErrors()) {
-            return "event/eventForm";
+            return "event/eventNew";
         }
         try {
             eventService.saveEvent(eventFormDto, eventImgFile1, eventImgFile2);
 
         } catch (Exception e) {
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
-            return "event/eventForm";
+            return "event/eventNew";
         }
         return "redirect:/event/ongoing";
     }

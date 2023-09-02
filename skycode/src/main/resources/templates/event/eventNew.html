@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--User Style-->
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/review/newReview.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!--    <script>-->
+    <!--        $(document).ready(function(){-->
+    <!--            var errorMessage = [[${errorMessage}]];-->
+    <!--            if(errorMessage != null){-->
+    <!--                alert(errorMessage);-->
+    <!--            }-->
+    <!--            bindDomEvent();-->
+    <!--        });-->
+    <!--        function bindDomEvent(){-->
+    <!--            $(".custom-file-input").on("change", function() {-->
+    <!--                var fileName = $(this).val().split("\\").pop();  //이미지 파일명-->
+    <!--                var fileExt = fileName.substring(fileName.lastIndexOf(".")+1); // 확장자 추출-->
+    <!--                fileExt = fileExt.toLowerCase(); //소문자 변환-->
+
+    <!--                if(fileExt != "jpg" && fileExt != "jpeg" && fileExt != "gif" && fileExt != "png" && fileExt != "bmp"){-->
+    <!--                    alert("이미지 파일만 등록이 가능합니다.");-->
+    <!--                    return;-->
+    <!--                }-->
+    <!--                $(this).siblings(".custom-file-label").html(fileName);-->
+    <!--            });-->
+    <!--        }-->
+    <!--</script>-->
+</head>
+
+<body>
+<!--header-->
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<!--body-->
+<div class="wrap">
+    <h2 class="newReview">이벤트 등록하기</h2>
+    <hr>
+    <div class="container">
+        <form class="formContainer" action="/event/new" enctype="multipart/form-data" method="post"
+              th:object="${eventFormDto}">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="nickNameArea">
+                <label class="eventTitle">제목</label>
+                <input type="text" th:field="*{eventTitle}" class="titleInput" name="eventTitle"
+                       placeholder="제목을 입력해주세요">
+            </div>
+            <p th:if="${#fields.hasErrors('eventTitle')}" th:errors="*{eventTitle}" class="fieldError">Incorrect
+                data</p>
+
+            <div class="form-group">
+                <select th:field="*{eventStatus}" class="custom-select">
+                    <option value="ONGOING">진행중</option>
+                    <option value="END">종료</option>
+                    <option value="WINNER">당첨자</option>
+                </select>
+            </div>
+
+            <div class="contentArea">
+                <label class="content">내용</label>
+                <textarea class="contentTextArea" th:field="*{content}" rows="10" name="body"
+                          placeholder="내용을 입력해주세요"></textarea>
+            </div>
+            <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="fieldError">Incorrect data</p>
+
+            <div>
+                <div class="form-group">
+                    <div>
+                        <input type="file" class="custom-file-input" name="eventImgFile1">
+                        <label class="custom-file-label">썸네일 이미지 선택</label>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="form-group">
+                    <div>
+                        <input type="file" class="custom-file-input" name="eventImgFile2">
+                        <label class="custom-file-label">본문 이미지 선택</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btnArea" th:if="${#strings.isEmpty(eventFormDto.id)}">
+                <button th:formaction="@{/event/new}" type="submit" class="btn createBtn">저장</button>
+            </div>
+            <div class="btnArea" th:unless="${#strings.isEmpty(eventFormDto.id)}">
+                <button th:formaction="@{'/event/' + ${eventFormDto.id} }" type="submit" class="btn createBtn">수정
+                </button>
+            </div>
+
+        </form>
+        <a href="/event/ongoing">
+            <button type="submit" class="btn cancelBtn">취소</button>
+        </a>
+    </div>
+</div>
+
+
+<!--footer-->
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+
+<!--User Script-->
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/review/subHeader.js"></script>
+<script src="/js/review/reviewSub.js"></script>
+<script src="/js/review/subFooter.js"></script>
+</body>
+</html>
