@@ -73,23 +73,24 @@ public class EventController {
         return "event/eventSub";
     }
 
-    @GetMapping(value = "/update")
-    public String eventUpdate(@PathVariable("eventId") Long eventId, Model model) {
+    @GetMapping(value = "/{eventId}/edit")
+    public String eventEdit(@PathVariable("eventId") Long eventId, Model model) {
         EventFormDto eventFormDto = eventService.getEventDtl(eventId);
         model.addAttribute("eventFormDto", eventFormDto);
-        return "event/eventSub";
+        return "event/eventEdit";
     }
 
-    @PostMapping(value = "/{eventId}/edit")
-    public String eventUpdate(@Valid EventFormDto eventFormDto, BindingResult bindingResult, Model model) {
+    @PostMapping(value = "/update")
+    public String eventUpdate(@Valid EventFormDto eventFormDto, BindingResult bindingResult,
+                              Model model) {
         if (bindingResult.hasErrors()) {
-            return "event/eventForm";
+            return "event/eventEdit";
         }
         try {
             eventService.updateEvent(eventFormDto);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
-            return "event/eventForm";
+            return "event/eventEdit";
         }
         return "redirect:/event/ongoing";
     }

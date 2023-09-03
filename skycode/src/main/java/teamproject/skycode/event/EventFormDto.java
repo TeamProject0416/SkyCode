@@ -35,7 +35,7 @@ public class EventFormDto {
 
     private String bigImgUrl; // 큰 이미지 조회 경로
 
-    private String eventTime; // // "yyyy-MM-dd"
+    private String eventTime; // "yyyy-MM-dd"
 
 
     private static ModelMapper modelMapper = new ModelMapper();
