@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/login/login.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+
+</head>
+
+<th:block layout:fragment="css">
+    <style>
+        .error {
+            color: #bd2130;
+        }
+    </style>
+</th:block>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+
+<!-- 로그인 -->
+<section class="oej_container">
+    <div class="oej_header">
+        <p>LOGIN</p>
+    </div>
+    <form  action="/new" method="POST">
+        <div class="oej_input-box">
+            <input class="oej_username" type="text" id="username" placeholder="ID">
+            <label th:for="username"></label>
+        </div>
+
+        <div class="oej_input-box">
+            <input class="oej_password" type="password" id="password" placeholder="PASSWORD">
+            <label th:for="password"></label>
+        </div>
+
+        <button type="button" class="oej_log1" onClick="location.href='/'">LOGIN</button>
+        <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
+
+
+        <div class="oej_connect"><i class="fa-solid fa-unlock-keyhole">보안접속</i> </div>
+
+
+        <button type="button" class="oej_us" onClick="location.href='/new'">JOIN US</button>
+        <div class="oej_search">
+            <div class="oej_na">
+                <img src="../subImages/naver2.png" alt="">
+                <a href="#">네이버 로그인</a>
+            </div>
+
+            <div class="oej_go">
+                <img src="../subImages/구글.png" alt="">
+                <a href="#">구글 로그인</a>
+            </div>
+
+            <div class="oej_ka">
+                <img src="../subImages/카카오.png" alt="">
+                <a href="#">카카오 로그인</a>
+            </div>
+        </div>
+</form>
+</section>
+
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+
+
+</body>
+
+</html>

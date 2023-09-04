@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--User Style-->
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/reviewEntity/newReview.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+</head>
+
+<body>
+<!--header-->
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<!--body-->
+<div class="wrap">
+    <h2 class="newReview">리뷰 등록하기</h2>
+    <hr>
+    <div class="container">
+        <form class="formContainer" action="/event/create" method="post">
+            <div class="nickNameArea">
+                <label class="nickName">닉네임</label>
+                <input type="text" class="titleInput" name="nickName" placeholder="제목을 입력해주세요">
+            </div>
+            <div class="titleArea">
+                <label class="reviewTitle">제목</label>
+                <input type="text" class="titleInput" name="reviewTitle" placeholder="제목을 입력해주세요">
+            </div>
+            <div class="contentArea">
+                <label class="body">내용</label>
+                <textarea class="contentTextArea" rows="10" name="body" placeholder="내용을 입력해주세요"></textarea>
+            </div>
+            <div class="btnArea">
+                <button type="submit" class="btn createBtn">작성</button>
+            </div>
+        </form>
+        <a href="/reviewSub"><button type="submit" class="btn cancelBtn">취소</button></a>
+    </div>
+</div>
+
+
+<!--footer-->
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+
+<!--User Script-->
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/reviewEntity/subHeader.js"></script>
+<script src="/js/reviewEntity/reviewSub.js"></script>
+<script src="/js/reviewEntity/subFooter.js"></script>
+</body>
+</html>

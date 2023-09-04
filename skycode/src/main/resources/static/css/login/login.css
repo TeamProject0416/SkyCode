@@ -1,0 +1,188 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 10px;
+}
+
+p {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+form {
+    max-width: 1320px;
+    height: 350px;
+}
+/* 헤더 */
+
+.oej_container {
+    position: relative;
+    margin: 0 auto;
+    top: 140px;
+    height: 460px;
+    max-width: 1320px;
+}
+
+.oej_header {
+    position: absolute;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 70px;
+    margin: 0 auto;
+    color: #333;
+}
+
+
+input{
+border-width: 0 0 1px;
+background: none;
+outline: none;
+border-color: #0065BA;
+}
+
+
+/* 아이디/패스워드 */
+
+.oej_input-box {
+    position: relative;
+    top: 0px;
+    width: 500px;
+    height: 60px;
+    margin: 0 auto;
+}
+
+.oej_username {
+    position: absolute;
+    display: flex;
+    width: 500px;
+    height: 40px;
+    padding: 10px;
+    margin-top: 10px;
+    /* border-radius: 5px; */
+    /* border: 1px solid #0065BA; */
+}
+
+.oej_password {
+    position: absolute;
+    display: flex;
+    width: 500px;
+    height: 40px;
+    padding: 10px;
+    margin-top: 10px;
+    /* border-radius: 5px;
+    border: 1px solid  #0065BA; */
+}
+
+/* 로그인 버튼 */
+
+
+.oej_log1 {
+    width: 500px;
+    height: 40px;
+    position: relative;
+    top: 5px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    background-color: #0065BA;
+    border: none;
+    color: #fff;
+}
+
+/* 보안접속 */
+.oej_connect {
+    position: relative;
+    display: flex;
+    left: 0px;
+    margin: 0 auto;
+    top:10px;
+    padding-top: 5px;
+    width: 500px;
+}
+
+/* 회원가입 */
+
+
+.oej_us {
+    width: 500px;
+    height: 40px;
+    position: relative;
+    top: 20px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    background-color: #003999;
+    border: none;
+    color: #fff;
+}
+
+/* 찾기버튼 */
+.oej_search {
+    position: relative;
+    display: flex;
+    width: 500px;
+    height: 80px;
+    top: 30px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+
+.oej_search div {
+
+    width: 400px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.oej_search div a {
+    color: #333;
+    margin-right: 10px;
+}
+
+
+.oej_search div img {
+    margin-top: 10px;
+    margin-right: 25px;
+    width: 20px;
+}
+
+
+.oej_na{
+    background-color: #28D111;
+}
+
+.oej_go{
+    border: 1px solid #dadada;
+}
+
+.oej_go > img{
+    margin-left: -15px;
+
+}
+
+
+.oej_ka {
+    background-color: #FCE51E;
+}
+

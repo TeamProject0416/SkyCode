@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/news/inquiry/inquiryListStyle.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<!-- 1:1문의 -->
+<section class="nyInquiryWrap">
+    <h2># 1 : 1 문의</h2>
+    <div class="nyInquiryContainer">
+        <div class="nyInquiryCheck">
+            <strong>총 <strong>522</strong>건</strong>
+            <div class="nyInquiryButton">
+                <button type="button">최신순</button>
+                <span>|</span>
+                <button type="button">인기순</button>
+            </div>
+        </div>
+        <table class="nyInquiryList">
+            <thead>
+            <tr>
+                <th class="nyInquiryListNum">번호</th>
+                <th>카테고리</th>
+                <th class="nyInquiryListText">제목</th>
+                <th>날짜</th>
+                <th class="nyInquiryListNone"><i class="fa-solid fa-lock"></i></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="inquiry : ${inquiries}">
+                <td><span th:text="${inquiry.id}">1</span></td>
+                <td><span th:text="${inquiry.type}">회원가입/탈퇴</span></td>
+                    <td><a th:href="@{'/news/inquiry/show/' + ${inquiry.id}}"><span th:text="${inquiry.inquiryTitle}"></span></a></td>
+                <td><span th:text="${#temporals.format(inquiry.regTime, 'yyyy.MM.dd')}">2023.08.25</span></td>
+                <td th:text="${inquiry.isPrivate ? '비공개' : '공개'}">공개</td>
+            </tr>
+<!--            <tr>-->
+<!--                <td>2</td>-->
+<!--                <td>회원가입/탈퇴</td>-->
+<!--                    <td><a th:href="@{inquiryShow}">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia sint temporibus esse dignissimos.</a></td>-->
+<!--                <td>2023.08.25</td>-->
+<!--                <td>공개</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>3</td>-->
+<!--                <td>비행기상품</td>-->
+<!--                    <td><a th:href="@{inquiryShow}">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia sint temporibus esse dignissimos.</a></td>-->
+<!--                <td>2023.08.25</td>-->
+<!--                <td>비공개</td>-->
+<!--            </tr>-->
+            </tbody>
+        </table>
+        <div class="nyInquiryPeger">
+            <div class="nyInquiryPegerBtn nyInquiryClick"><a href="#">1</a></div>
+            <div class="nyInquiryPegerBtn"><a href="#">2</a></div>
+        </div>
+        <div class="nyInquiryGoText">
+            <a href="/nyInquiry.html">문의글쓰기</a>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+
+</body>
+</html>

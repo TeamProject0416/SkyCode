@@ -1,0 +1,130 @@
+
+.section {
+position:relative;
+    width: 100%;
+    height: 100%;
+    top: 80px;
+}
+
+/* eventPageTitle */
+
+.eventPage {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.eventPageTitle{
+    display : flex;
+    justify-content: space-between;
+}
+
+.eventPage .eventTag {
+    font-weight: 700;
+    font-size: 3rem;
+    padding: 50px 0 20px 15px;
+}
+
+.eventPageTitle>button{
+    width: 100px;
+    height: 45px;
+    border: none;
+    background-color: #0065BA;
+    border-radius: 5px;
+    margin: 70px 20px 10px 0;
+}
+
+.eventPageTitle>button>a{
+    display: block;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 45px;
+}
+
+.eventPage .currentPage {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 15px 0;
+    border-top: 1px solid #999;
+}
+.eventPage .currentPage span a{
+    padding: 0 20px 0 20px;
+    color: #ccc;
+    font-size: 2rem;
+}
+.eventPage .currentPage .active a{
+    color: #000;
+}
+.eventPage .currentPage span:not(:nth-of-type(3)){
+    border-right: 1px solid #ccc;
+}
+
+/* eventMain */
+.eventMain {
+    width: 100%;
+    /* background: lightgoldenrodyellow; */
+}
+
+/* 216 358 cards 1080 margin 30*/
+.eventContents:first-of-type {
+    border-top: 1px solid #e6e6e6;
+}
+
+.eventContents {
+    padding: 20px;
+    width: 100%;
+    height: 200px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.eventContents:hover{
+    background: #fafafa;
+}
+
+/* eventInfo */
+.eventInfo {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.eventInfo>div:not(.eventInfo>div:last-of-type) {
+    margin-right: 30px;
+}
+
+.eventUser {
+    position: relative;
+    width: 150px;
+    /* background: lightblue; */
+}
+
+.eventUser a {
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.eventUser a div span {
+    font-size: 0.8rem;
+}
+
+.eventUserImg {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+}
+
+.eventText {
+    width: 750px;
+    /* background: lightblue; */
+}
+
+.eventText a>span {
+    font-size: 1.2rem;
+}
+
+.thumbImg {
+    width: 240px;
+    height: 160px;
+}
