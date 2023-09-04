@@ -57,12 +57,14 @@ public class EventService {
         // 이미지 업로드 처리 및 파일명 생성
         String miniImgName = "";
         String miniOriImgName = eventImgFile1.getOriginalFilename();
+        System.out.println("eventImgFile1.getOriginalFilename(): " + eventImgFile1.getOriginalFilename());
         String miniImgUrl = "";
 
         if (miniOriImgName != null && !miniOriImgName.isEmpty()) {
             // 파일명 생성
             miniImgName = fileService.uploadFile(eventImgLocation + basePath, miniOriImgName,
                     eventImgFile1.getBytes());
+            System.out.println("miniImgName: " + miniImgName);
 
             // 파일 경로 생성
             miniImgUrl = "/img/event/" + miniImgName;
@@ -82,8 +84,8 @@ public class EventService {
         }
 
         // 상품 이미지 정보 저장
-        event.updateEventImg(miniOriImgName, miniImgName, miniImgUrl,
-                bigOriImgName, bigImgName, bigImgUrl);
+        event.updateEventImg(miniImgName, miniOriImgName, miniImgUrl,
+                bigImgName, bigOriImgName, bigImgUrl);
 
         // DB 시간 저장
         LocalDateTime now = LocalDateTime.now();
@@ -109,10 +111,53 @@ public class EventService {
         return eventFormDto;
     }
 
-    public Long updateEvent(EventFormDto eventFormDto) throws Exception {
+    public Long updateEvent(EventFormDto eventFormDto, MultipartFile eventImgFile1, MultipartFile eventImgFile2) throws Exception {
         // 상품 수정
         EventEntity event = eventRepository.findById(eventFormDto.getId())
                 .orElseThrow(EntityNotFoundException::new);
+
+        // 파일 경로 설정
+        String basePath = "/event";
+
+        // 이미지 업로드 처리 및 파일명 생성
+        String miniImgName = "";
+        String miniOriImgName = eventImgFile1.getOriginalFilename();
+        String miniImgUrl = "";
+
+        if (miniOriImgName != null && !miniOriImgName.isEmpty()) {
+            // 파일명 생성
+            miniImgName = fileService.uploadFile(eventImgLocation + basePath, miniOriImgName,
+                    eventImgFile1.getBytes());
+
+            // 파일 경로 생성
+            miniImgUrl = "/img/event/" + miniImgName;
+        }
+
+        String bigImgName = "";
+        String bigOriImgName = eventImgFile2.getOriginalFilename();
+        String bigImgUrl = "";
+
+        if (bigOriImgName != null && !bigOriImgName.isEmpty()) {
+            // 파일명 생성
+            bigImgName = fileService.uploadFile(eventImgLocation + basePath, bigOriImgName,
+                    eventImgFile2.getBytes());
+
+            // 파일 경로 생성
+            bigImgUrl = "/img/event/" + bigImgName;
+        }
+
+        // DB 시간 저장
+        LocalDateTime now = LocalDateTime.now();
+        event.setUpdateTime(now);
+
+        eventFormDto.setBigImgName(bigImgName);
+        eventFormDto.setBigOriImgName(bigOriImgName);
+        eventFormDto.setBigImgUrl(bigImgUrl);
+
+        eventFormDto.setMiniImgName(miniImgName);
+        eventFormDto.setMiniOriImgName(miniOriImgName);
+        eventFormDto.setMiniImgUrl(miniImgUrl);
+
         event.updateEvent(eventFormDto);
 
         return event.getId();

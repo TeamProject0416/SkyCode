@@ -46,7 +46,7 @@ public class EventController {
     @GetMapping(value = "/new")
     public String newEventForm(Model model) {
         model.addAttribute("eventFormDto", new EventFormDto());
-        return "event/eventNew";
+        return "event/eventForm";
     }
 
     @PostMapping(value = "/new")
@@ -54,14 +54,14 @@ public class EventController {
                                @RequestParam("eventImgFile1") MultipartFile eventImgFile1,
                                @RequestParam("eventImgFile2") MultipartFile eventImgFile2) {
         if (bindingResult.hasErrors()) {
-            return "event/eventNew";
+            return "event/eventForm";
         }
         try {
             eventService.saveEvent(eventFormDto, eventImgFile1, eventImgFile2);
 
         } catch (Exception e) {
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
-            return "event/eventNew";
+            return "event/eventForm";
         }
         return "redirect:/event/ongoing";
     }
@@ -77,20 +77,22 @@ public class EventController {
     public String eventEdit(@PathVariable("eventId") Long eventId, Model model) {
         EventFormDto eventFormDto = eventService.getEventDtl(eventId);
         model.addAttribute("eventFormDto", eventFormDto);
-        return "event/eventEdit";
+        return "event/eventForm";
     }
 
     @PostMapping(value = "/update")
     public String eventUpdate(@Valid EventFormDto eventFormDto, BindingResult bindingResult,
+                              @RequestParam("eventImgFile1") MultipartFile eventImgFile1,
+                              @RequestParam("eventImgFile2") MultipartFile eventImgFile2,
                               Model model) {
         if (bindingResult.hasErrors()) {
-            return "event/eventEdit";
+            return "event/eventForm";
         }
         try {
-            eventService.updateEvent(eventFormDto);
+            eventService.updateEvent(eventFormDto,eventImgFile1,eventImgFile2);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
-            return "event/eventEdit";
+            return "event/eventForm";
         }
         return "redirect:/event/ongoing";
     }

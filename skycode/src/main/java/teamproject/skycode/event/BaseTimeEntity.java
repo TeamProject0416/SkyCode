@@ -21,11 +21,11 @@ import java.time.LocalDateTime;
 @Setter
 public abstract class BaseTimeEntity {
     @CreatedDate
-//    엔티티 생성될때 해당 필드에 자동으로 생성일 저장
+    //엔티티 생성될때 해당 필드에 자동으로 생성일 저장
     @Column(updatable = false)
     private LocalDateTime regTime;
 
     @LastModifiedDate
-//    jpa 의 auditing 기능으로, 엔티티가 수정될 때 해당 필드에 자동으로 수정일을 넣어줌
+    //jpa 의 auditing 기능으로, 엔티티가 수정될 때 해당 필드에 자동으로 수정일을 넣어줌
     private LocalDateTime updateTime;
 }

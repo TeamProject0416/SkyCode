@@ -1,6 +1,7 @@
 package teamproject.skycode.event;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.constant.EventStatus;
 
 import javax.persistence.*;
@@ -40,7 +41,7 @@ public class EventEntity extends BaseEntity {
 
     private String bigImgUrl; // 큰 이미지 조회 경로
 
-    private String eventTime; // // "yyyy-MM-dd"
+    private String eventTime; // "yyyy-MM-dd"
 
     public void updateEventImg(String miniImgName, String miniOriImgName, String miniImgUrl,
                                String bigImgName, String bigOriImgName, String bigImgUrl) {
@@ -56,9 +57,11 @@ public class EventEntity extends BaseEntity {
         this.eventTitle = eventFormDto.getEventTitle();
         this.content = eventFormDto.getContent();
         this.eventStatus = eventFormDto.getEventStatus();
+
         this.miniImgName = eventFormDto.getMiniImgName();
         this.miniOriImgName = eventFormDto.getMiniOriImgName();
         this.miniImgUrl = eventFormDto.getMiniImgUrl();
+
         this.bigImgName = eventFormDto.getBigImgName();
         this.bigOriImgName = eventFormDto.getBigOriImgName();
         this.bigImgUrl = eventFormDto.getBigImgUrl();

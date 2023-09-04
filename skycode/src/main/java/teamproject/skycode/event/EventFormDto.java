@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.modelmapper.ModelMapper;
+import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.constant.EventStatus;
 
 import javax.validation.constraints.NotBlank;
@@ -23,20 +24,15 @@ public class EventFormDto {
 
     private EventStatus eventStatus;
 
+    private String eventTime; // "yyyy-MM-dd"
+
     private String miniImgName; // 미니 이미지 파일명
-
     private String miniOriImgName; // 미니 원본 이미지 파일명
-
     private String miniImgUrl; // 미니 이미지 조회 경로
 
     private String bigImgName; // 큰 이미지 파일명
-
     private String bigOriImgName; // 큰 원본 이미지 파일명
-
     private String bigImgUrl; // 큰 이미지 조회 경로
-
-    private String eventTime; // "yyyy-MM-dd"
-
 
     private static ModelMapper modelMapper = new ModelMapper();
 

@@ -13,11 +13,33 @@
     margin: 0 auto;
 }
 
+.eventPageTitle{
+    display : flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #bbb;
+}
+
 .eventSubPage .eventSubTag {
     font-weight: 700;
     font-size: 3rem;
     padding: 50px 0 20px 15px;
-    border-bottom: 1px solid #999;
+}
+
+.eventPageTitle>button{
+    width: 100px;
+    height: 45px;
+    border: none;
+    background-color: #0065BA;
+    border-radius: 5px;
+    margin: 70px 20px 10px 0;
+}
+
+.eventPageTitle>button>a{
+    display: block;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 45px;
 }
 
 /* eventSubMain */
@@ -33,7 +55,7 @@
     font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
-    padding: 30px 0 0 0;
+    padding: 50px 0 0 0;
     letter-spacing: 3px;
 }
 
@@ -49,7 +71,7 @@
 .getCoupon a {
     display: inline-block;
     width: 100%;
-    background: #98e9b9;
+    background: #0065BA;
     text-align: center;
     font-size: 2.4rem;
     font-weight: bold;

@@ -8,30 +8,7 @@
     <link th:href="@{/css/typo.css}" rel="stylesheet">
     <link th:href="@{/css/sub/header.css}" rel="stylesheet">
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/review/newReview.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <!--    <script>-->
-    <!--        $(document).ready(function(){-->
-    <!--            var errorMessage = [[${errorMessage}]];-->
-    <!--            if(errorMessage != null){-->
-    <!--                alert(errorMessage);-->
-    <!--            }-->
-    <!--            bindDomEvent();-->
-    <!--        });-->
-    <!--        function bindDomEvent(){-->
-    <!--            $(".custom-file-input").on("change", function() {-->
-    <!--                var fileName = $(this).val().split("\\").pop();  //이미지 파일명-->
-    <!--                var fileExt = fileName.substring(fileName.lastIndexOf(".")+1); // 확장자 추출-->
-    <!--                fileExt = fileExt.toLowerCase(); //소문자 변환-->
-
-    <!--                if(fileExt != "jpg" && fileExt != "jpeg" && fileExt != "gif" && fileExt != "png" && fileExt != "bmp"){-->
-    <!--                    alert("이미지 파일만 등록이 가능합니다.");-->
-    <!--                    return;-->
-    <!--                }-->
-    <!--                $(this).siblings(".custom-file-label").html(fileName);-->
-    <!--            });-->
-    <!--        }-->
-    <!--</script>-->
 </head>
 
 <body>
@@ -40,26 +17,25 @@
 
 <!--body-->
 <div class="wrap">
-    <h2 class="newReview">이벤트 등록하기</h2>
+    <h2 class="newReview">쿠폰 등록하기</h2>
     <hr>
     <div class="container">
         <form class="formContainer" action="/event/new" enctype="multipart/form-data" method="post"
               th:object="${eventFormDto}">
             <input type="hidden" th:field="*{id}">
 
-            <div class="nickNameArea">
-                <label class="eventTitle">제목</label>
-                <input type="text" th:field="*{eventTitle}" class="titleInput" name="eventTitle"
-                       placeholder="제목을 입력해주세요">
+            <div>
+                <label class="eventTitle">쿠폰명</label>
+                <input type="text" th:field="*{couponName}" name="eventTitle"
+                       placeholder="이름을 입력해주세요">
             </div>
-            <p th:if="${#fields.hasErrors('eventTitle')}" th:errors="*{eventTitle}" class="fieldError">Incorrect
+            <p th:if="${#fields.hasErrors('eventTitle')}" th:errors="*{couponName}" class="fieldError">Incorrect
                 data</p>
 
             <div class="form-group">
-                <select th:field="*{eventStatus}" class="custom-select">
+                <select th:field="*{couponStatus}" class="custom-select">
                     <option value="ONGOING">진행중</option>
                     <option value="END">종료</option>
-                    <option value="WINNER">당첨자</option>
                 </select>
             </div>
 
@@ -92,7 +68,7 @@
                 <button th:formaction="@{/event/new}" type="submit" class="btn createBtn">저장</button>
             </div>
             <div class="btnArea" th:unless="${#strings.isEmpty(eventFormDto.id)}">
-                <button th:formaction="@{'/event/' + ${eventFormDto.id} }" type="submit" class="btn createBtn">수정
+                <button th:formaction="@{/event/update}" type="submit" class="btn createBtn">수정
                 </button>
             </div>
 
