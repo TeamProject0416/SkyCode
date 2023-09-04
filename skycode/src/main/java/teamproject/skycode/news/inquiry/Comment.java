@@ -23,5 +23,7 @@ public class Comment {
     // 게시글 ID (댓글이 어떤 게시글에 속하는지 식별)
     private Long postId;
 
+
+
     // 생성자, getter, setter, 기타 메서드
 }
