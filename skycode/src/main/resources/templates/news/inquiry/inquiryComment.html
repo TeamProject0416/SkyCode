@@ -48,16 +48,6 @@
             <button id="submit">댓글 작성</button>
         </div>
     </form>
-    <div class="comment-list">
-        <h3>댓글 목록</h3>
-        <ul>
-            <li th:each="comment : ${comments}">
-                <span th:text="${comment.content}"></span>
-                <span th:text="${comment.createdAt}"></span>
-            </li>
-        </ul>
-    </div>
-
 
 </section>
 

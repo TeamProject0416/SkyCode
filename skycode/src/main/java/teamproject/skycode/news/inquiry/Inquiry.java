@@ -39,6 +39,8 @@ public class  Inquiry {
     @Column(nullable = false)
     private LocalDateTime regTime;  // 등록 시간
 
+    private int viewCount; // Add viewCount field
+
 
     // 생성자, getter, setter, toString 등의 메서드 생략
 

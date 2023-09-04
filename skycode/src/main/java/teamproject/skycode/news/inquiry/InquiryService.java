@@ -53,9 +53,17 @@ public class InquiryService {
         return inquiryRepository.count();
     }
 
-    public List<Inquiry> searchInquiries(String searchType, String searchValue) {
-        return inquiryRepository.findByTypeAndInquiryTitleContaining(searchType, searchValue);
+
+    public List<Inquiry> findByInquiryTitleContaining(String searchValue) {
+        return inquiryRepository.findByInquiryTitleContaining(searchValue);
     }
 
+    public List<Inquiry> findByInquiryContentContaining(String searchValue) {
+        return inquiryRepository.findByInquiryContentContaining(searchValue);
+    }
+
+    public List<Inquiry> findByIdContaining(String searchValue) {
+        return inquiryRepository.findByIdContaining(searchValue);
+    }
 
 }

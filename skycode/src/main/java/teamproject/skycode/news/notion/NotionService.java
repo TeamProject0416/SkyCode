@@ -47,6 +47,12 @@ public class NotionService {
         return notionRepository.findById(id).orElse(null);
     }
 
+    // 공지글 총갯수 표시
+    public long getTotalNotionCount() {
+        return notionRepository.count();
+    }
 
-
+    public void createNotion(Notion newNotion) {
+        notionRepository.save(newNotion);
+    }
 }

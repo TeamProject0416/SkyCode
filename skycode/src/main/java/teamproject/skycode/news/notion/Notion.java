@@ -37,5 +37,16 @@ public class Notion {
         regTime = LocalDateTime.now();
     }
 
+    private String fileName;
+
+    private byte[] imageData; // Byte array to store image data
+
+    // Constructors, getters, and setters
+
+
+    // Getter and setter for imageData
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
+    }
 
 }

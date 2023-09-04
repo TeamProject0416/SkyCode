@@ -26,7 +26,7 @@
             <span class="nyTitleDate" th:text="${viewCount}">조회수</span>
         </div>
         <div class="nyNewsContent">
-            <img src="http://placehold.it/320x100" />
+            <img src="${'/images/' + notion.fileName}" alt=""/>
             <p th:text="${notion.notionContent}">공지사항에 대한 정보</p>
         </div>
         <div class="nyNewsSubPager">
