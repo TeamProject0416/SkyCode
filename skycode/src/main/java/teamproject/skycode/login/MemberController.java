@@ -22,7 +22,7 @@ public class MemberController {
     //회원 가입 페이지 출력 요청
     @GetMapping("/member/save")
     public String saveForm() {
-        return "login/save";
+        return "member/save";
     }
 
 
@@ -32,13 +32,13 @@ public class MemberController {
         System.out.println("memberDTO = " + memberDTO);
         memberService.save(memberDTO);
         System.out.println("출력해줘");
-        return "login/login";
+        return "member/login";
 //        return "redirect:/";
     }
 
     @GetMapping("/member/login")
     public String loginForm() {
-        return "login/login";
+        return "member/login";
     }
 
 
@@ -56,19 +56,19 @@ public class MemberController {
         } else {
             // login 실패
             System.out.println("로그인실패");
-            return "login/login";
+            return "member/login";
 
         }
     }
 
 
     // 회원 목록 출력하기
-    @GetMapping("/member/")
+    @GetMapping("/member/list")
     public String findAll(Model model) {
         List<MemberDTO> memberDTOList = memberService.findAll();
         // 어떠한 html 로 가져갈 데이터가 있다면 model 사용
         model.addAttribute("memberList", memberDTOList);
-        return "login/list";
+        return "member/list";
         //리턴은 html 만들면 이름 바꾸기
     }
 
@@ -77,7 +77,7 @@ public class MemberController {
     public String findById(@PathVariable Long id, Model model) {
         MemberDTO memberDTO = memberService.findById(id);
         model.addAttribute("member", memberDTO);
-        return "detail";
+        return "member/detail";
         //리턴 html 만들면 이름 바꾸기
     }
 
@@ -88,7 +88,7 @@ public class MemberController {
         String myEmail = (String) session.getAttribute("loginEmail");
         MemberDTO memberDTO = memberService.updateForm(myEmail);
         model.addAttribute("updateMember", memberDTO);
-        return "login/update";
+        return "member/update";
     }
 
     @PostMapping("/member/update")
@@ -125,7 +125,7 @@ public class MemberController {
     @GetMapping(value = "/login/error")
     public String loginError(Model model) {
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
-        return "login/login";
+        return "member/login";
     }
 
 
