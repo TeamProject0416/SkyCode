@@ -1,83 +1,122 @@
 package teamproject.skycode.login;
 
 
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-
-@Service
-@Transactional
 @RequiredArgsConstructor
+@Service
 public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public Member saveMember(Member member) {
-        validateDuplicateMember(member);
-        return memberRepository.save(member);
+    public void save(MemberDTO memberDTO) {
+        // 1. dot -> entity 변환
+        // 2. repository 의 save 메서드 호출
+        MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
+        memberRepository.save(memberEntity);
+        //repository 의 save 메서드 호출 (조건. entity 객체를 넘겨줘야 함)
     }
 
-    private void validateDuplicateMember(Member member) {
-        Member findmember = memberRepository.findByEmail(member.getEmail());
-        if (findmember != null) {
-            throw new IllegalStateException("이미 가입된 회원입니다.");
+
+    public MemberDTO login(MemberDTO memberDTO) {
+        // 1.회원이 입력한 이메일로 DB에서 조회를 함
+        // 2.DB에서 조회한 비밀번호와 사용자가 입력한 비밀번호가 일치하는지 판단
+
+      Optional<MemberEntity> byMemberEmail = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
+        if(byMemberEmail.isPresent()) {
+            // 조회 결과가 있다(해당 이메일을 가진 회원 정보가 있다)
+            MemberEntity memberEntity = byMemberEmail.get();
+            if(memberEntity.getMemberPassword().equals(memberDTO.getMemberPassword())){
+                // 비밀 번호 일치
+                //entity -> dto 변환 후 리턴
+                MemberDTO dto = MemberDTO.toMemberDTO(memberEntity);
+                return dto;
+            }else {
+                // 비밀 번호 불일치(로그인 실패
+                return null;
+            }
+
+        } else {
+            //조회 결과가 없다(해당 이메일을 가진 회원이 없다)
+            return null;
         }
     }
+
+    // 회원 출력
+    public List<MemberDTO> findAll() {
+        List<MemberEntity> memberEntityList = memberRepository.findAll();
+        List<MemberDTO> memberDTOList = new ArrayList<>();
+        for (MemberEntity memberEntity : memberEntityList) {
+            memberDTOList.add(MemberDTO.toMemberDTO(memberEntity));
+//            MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
+//            memberDTOList.add(memberDTO);
+        }
+        return memberDTOList;
+    }
+
+    public MemberDTO findById(Long id) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
+        if (optionalMemberEntity.isPresent()) {
+//            MemberEntity memberEntity = optionalMemberEntity.get();
+//            MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
+//            return memberDTO;
+            return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+        } else {
+            return null;
+        }
+
+    }
+
+    public MemberDTO updateForm(String myEmail) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(myEmail);
+        if(optionalMemberEntity.isPresent()){
+            return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+        }else {
+            return null;
+        }
+    }
+
+    public void update(MemberDTO memberDTO) {
+        memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
+
+    }
+
+//    회원 삭제
+
+    public void deleteById(Long id) {
+        memberRepository.deleteById(id);
+    }
+
+
+    // 아이디 중복 체크
+    public String emailCheck(String memberEmail) {
+        Optional<MemberEntity> byMemberEmail = memberRepository.findByMemberEmail(memberEmail);
+        if (byMemberEmail.isPresent()) {
+            // 조회 결과가 있다 -> 사용할 수 없다.
+            return null;
+        } else {
+            // 조회 결과가 없다 -> 사용할 수 있다.
+            return "ok";
+        }
+    }
+
+
 }
 
 
 
-//    public boolean checkLoginIdDuplicate(String id){
-//        return memberRepository.existsByLonginId(id);
-//    }
 
-/**
- * 회원가입 기능 1
- * 화면에서 JoinRequest(loginId, password, nickname)을 입력받아 User로 변환 후 저장
- * loginId, nickname 중복 체크는 Controller에서 진행 => 에러 메세지 출력을 위해
- */
 
-/**
- *  로그인 기능
- *  화면에서 LoginRequest(loginId, password)을 입력받아 loginId와 password가 일치하면 User return
- *  loginId가 존재하지 않거나 password가 일치하지 않으면 null return
- */
 
-//    public Member login(MemberRequest req) {
-//        Optional<Member> optionalMember = memberRepository.findByLoginId(req.getLoginId());
-//
-//        // loginId와 일치하는 User가 없으면 null return
-//        if(optionalMember.isEmpty()) {
-//            return null;
-//        }
-//
-//        Member member = optionalMember.get();
-//
-//        // 찾아온 User의 password와 입력된 password가 다르면 null return
-//        if(!member.getPassword().equals(req.getPassword())) {
-//            return null;
-//        }
-//
-//        return member;
-//    }
 
-/**
- * loginId(String)를 입력받아 User을 return 해주는 기능
- * 인증, 인가 시 사용
- * loginId가 null이거나(로그인 X) userId로 찾아온 User가 없으면 null return
- * loginId로 찾아온 User가 존재하면 User return
- */
-//    public Member getLoginUserByLoginId(String loginId) {
-//        if(loginId == null) return null;
-//
-//        Optional<Member> optionalMember = memberRepository.findByLoginId(loginId);
-//        if(optionalMember.isEmpty()) return null;
-//
-//        return optionalMember.get();
-//    }
-//}
+
+
+
+
 

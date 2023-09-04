@@ -41,4 +41,5 @@ public class EventController {
         Event saved = eventRepository.save(event);
         return "redirect:/event/eventongoing";
     }
+
 }
