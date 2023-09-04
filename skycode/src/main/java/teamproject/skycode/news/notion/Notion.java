@@ -2,10 +2,7 @@ package teamproject.skycode.news.notion;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,22 +10,32 @@ import java.util.List;
 @Setter
 @ToString
 @Entity
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "notion")
+//@Table(name = "notion")
 public class Notion {
 
     @Id
-    @Column(name = "notion_id")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;    // 공지글 id
+
+    @Column(nullable = false)
+    private String type;    // 공지글 종류
+
+    @Column(nullable = false)
+    private String notionTitle;     // 공지글 제목
+
+    @Column(nullable = false)
+    private String notionContent;   // 공지글 내용
 
     @Column
-    private String notionTitle;
+    private LocalDateTime regTime; // 공지사항 올린 시간
 
-    @Column
-    private String notionContent;
+    // 생성 시간을 현재 시간으로 설정
+    @PrePersist
+    protected void onCreate() {
+        regTime = LocalDateTime.now();
+    }
 
-    @Column
-    private LocalDateTime regTime; // 1대1문의 올린 시간
 
 }

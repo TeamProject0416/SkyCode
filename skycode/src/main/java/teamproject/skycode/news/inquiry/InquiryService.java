@@ -23,14 +23,39 @@ public class InquiryService {
 
     @Transactional
     public Inquiry saveInquiry(InquiryForm inquiryForm) {
-        Inquiry inquiry = inquiryForm.toEntity();
-        return inquiryRepository.save(inquiry);
+        if (inquiryForm.getId() != null) {
+            // Existing inquiry, fetch it first
+            Inquiry existingInquiry = getInquiryById(inquiryForm.getId());
+            if (existingInquiry != null) {
+                // Update existing inquiry with form data
+                existingInquiry.setType(inquiryForm.getType());
+                existingInquiry.setIsPrivate(inquiryForm.isPrivate());
+                existingInquiry.setInquiryTitle(inquiryForm.getInquiryTitle());
+                existingInquiry.setInquiryContent(inquiryForm.getInquiryContent());
+                return inquiryRepository.save(existingInquiry);
+            }
+        }
+
+        // New inquiry, create a new entity
+        Inquiry newInquiry = inquiryForm.toEntity();
+        return inquiryRepository.save(newInquiry);
     }
 
     public List<Inquiry> getAllInquiries() {
-
-
         return inquiryRepository.findAll();
     }
+
+    public Inquiry getInquiryById(Long id) {
+        return inquiryRepository.findById(id).orElse(null);
+    }
+
+    public long getTotalInquiryCount() {
+        return inquiryRepository.count();
+    }
+
+    public List<Inquiry> searchInquiries(String searchType, String searchValue) {
+        return inquiryRepository.findByTypeAndInquiryTitleContaining(searchType, searchValue);
+    }
+
 
 }

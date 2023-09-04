@@ -2,10 +2,7 @@ package teamproject.skycode.news.faq;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,15 +12,15 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "faq")
+//@Table(name = "faq")
 public class Faq {
 
     @Id
-    @Column(name = "faq_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String faqType;
+    private String type;
 
     @Column
     private String faqQuestion;
@@ -34,6 +31,7 @@ public class Faq {
     @Column
     private LocalDateTime regTime;
 
-
+    @PrePersist
+    protected void onCreate(){ regTime = LocalDateTime.now(); }
 
 }

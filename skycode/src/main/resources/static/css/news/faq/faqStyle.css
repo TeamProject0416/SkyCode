@@ -39,6 +39,11 @@
     padding: 15px 0;
 
 }
+
+.nyFaqWrap .nyFaqContainer .nyFaqNav .nyFaqTab {
+    cursor: pointer;
+}
+
 .nySearch button{
     background: #0065BA;
     border: none;
@@ -85,7 +90,7 @@
 }
 
 /* 답변 보이게 */
-.active {
+.activeTwo {
     display: block;
     /* 높이를 정해줘야지만 transition이 적용됨 */
     height:150px;
