@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,6 +18,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 //@Table(name = "inquiry")
 
 public class  Inquiry {
@@ -54,6 +56,9 @@ public class  Inquiry {
     public void setIsPrivate(boolean isPrivate) {
         this.isPrivate = isPrivate;
     }
+
+    @OneToMany(mappedBy = "reviewEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Comment> commentEntityList = new ArrayList<>();
 
 
 }

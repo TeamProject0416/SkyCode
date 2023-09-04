@@ -27,6 +27,10 @@ public class CommentDTO {
 
     }
 
+    public Long getInquiryId() {
+        
+    }
+
 // 게터, 세터, toString 등 필요한 메서드를 추가합니다.
 
 // 나머지 메서드와 게터, 세터 등은 생략하였습니다. 실제 필요한 대로 추가해주세요.
