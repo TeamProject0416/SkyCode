@@ -61,3 +61,16 @@
     font-size: 1.8rem;
     color: #787878;
 }
+
+.nyNewsContainer .nyNotionGoText{
+    text-align: end;
+}
+.nyNewsContainer  .nyNotionGoText a{
+    background: #0065BA;
+    color: #fff;
+    padding: 10px;
+    /* border: 1px solid #333; */
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+}
