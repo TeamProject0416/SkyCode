@@ -139,34 +139,6 @@ public class inquiryController {
         }
     }
 
-    @PostMapping("/submitComment")
-    public String submitComment(CommentForm commentForm) {
-        // Inquiry를 조회하는 예시: 여기서는 Inquiry ID를 가져오는 방법으로 findById() 메서드를 사용합니다.
-        Long id = commentForm.getPostId();
-        InquiryForm inquiryForm = new InquiryForm();
-        Long yourInquiryId = 1L;
-        inquiryForm.setId(yourInquiryId); // yourInquiryId는 실제 Inquiry의 ID 값
-        Long inquiryId = inquiryForm.getId();
-
-        if (id != null) {
-            Inquiry inquiry = inquiryRepository.findById(id).orElse(null);
-            if (inquiry != null) {
-                // inquiry를 사용하여 필요한 작업을 수행합니다.
-                String commentText = commentForm.getComment();
-                System.out.println("댓글 보내기");
-            } else {
-                // ID에 해당하는 Inquiry가 없는 경우에 대한 처리를 수행합니다.
-            }
-        } else {
-            // ID가 없는 경우에 대한 처리를 수행합니다.
-        }
-        System.out.println("이거다");
-        System.out.println(inquiryId);
-
-        // 처리 후, 리다이렉트 또는 다른 화면으로 이동합니다.
-        return "redirect:/news/inquiry/show/" + inquiryId;
-    }
-
 
 //    @GetMapping("/news/inquiry/search")
 //    public String searchInquiries(@RequestParam("search-type") String searchType,

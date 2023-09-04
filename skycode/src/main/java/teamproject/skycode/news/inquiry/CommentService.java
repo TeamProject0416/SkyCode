@@ -1,17 +1,30 @@
 package teamproject.skycode.news.inquiry;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
+@Getter
+@Setter
 public class CommentService {
+    private final CommentRepository commentRepository;
 
-    public void submitComment(CommentForm commentForm) {
-        // yourInquiryId를 설정
+    @Autowired
+    public CommentService(CommentRepository commentRepository) {
+        this.commentRepository = commentRepository;
+    }
 
+    // 게시글 ID에 해당하는 댓글 목록 조회
+    public List<Comment> findByPostId(Long postId) {
+        return commentRepository.findByPostId(postId);
+    }
 
-        Long yourInquiryId = 1L; // 실제로 사용 중인 Inquiry의 ID를 여기에 할당
-
-        // 이하 로직에서 yourInquiryId를 사용하여 Inquiry 조회 및 작업 수행
-        // ...
+    // 댓글 작성
+    public Comment createComment(Comment comment) {
+        return commentRepository.save(comment);
     }
 }

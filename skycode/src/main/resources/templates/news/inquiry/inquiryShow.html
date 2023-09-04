@@ -53,7 +53,7 @@
         <ul>
             <li th:each="comment : ${comments}">
                 <span th:text="${comment.content}"></span>
-                <span th:text="${comment.createdAt}"></span>
+                <span th:text="${#temporals.format(comment.createdAt, 'yyyy.MM.dd')}"></span>
             </li>
         </ul>
     </div>
