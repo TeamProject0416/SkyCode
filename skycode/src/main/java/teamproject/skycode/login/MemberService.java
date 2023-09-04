@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -18,11 +18,11 @@ public class MemberService {
     public void save(MemberDTO memberDTO) {
         // 1. dot -> entity 변환
         // 2. repository 의 save 메서드 호출
-         MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
-         memberRepository.save(memberEntity);
+        MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
+        memberRepository.save(memberEntity);
         //repository 의 save 메서드 호출 (조건. entity 객체를 넘겨줘야 함)
-
     }
+
 
     public MemberDTO login(MemberDTO memberDTO) {
         // 1.회원이 입력한 이메일로 DB에서 조회를 함
@@ -43,7 +43,7 @@ public class MemberService {
             }
 
         } else {
-            //조회 결과가 없다(해당 이메일을 가진 회원이 없다
+            //조회 결과가 없다(해당 이메일을 가진 회원이 없다)
             return null;
         }
     }
@@ -52,7 +52,7 @@ public class MemberService {
     public List<MemberDTO> findAll() {
         List<MemberEntity> memberEntityList = memberRepository.findAll();
         List<MemberDTO> memberDTOList = new ArrayList<>();
-        for (MemberEntity memberEntity: memberEntityList) {
+        for (MemberEntity memberEntity : memberEntityList) {
             memberDTOList.add(MemberDTO.toMemberDTO(memberEntity));
 //            MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
 //            memberDTOList.add(memberDTO);
@@ -62,7 +62,7 @@ public class MemberService {
 
     public MemberDTO findById(Long id) {
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
-        if(optionalMemberEntity.isPresent()){
+        if (optionalMemberEntity.isPresent()) {
 //            MemberEntity memberEntity = optionalMemberEntity.get();
 //            MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
 //            return memberDTO;
@@ -89,25 +89,25 @@ public class MemberService {
 
 //    회원 삭제
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         memberRepository.deleteById(id);
     }
 
 
-//    이메일 중복 체크
+    // 아이디 중복 체크
     public String emailCheck(String memberEmail) {
-      Optional<MemberEntity> byMemberEmail = memberRepository.findByMemberEmail(memberEmail);
-      if (byMemberEmail.isPresent()) {
-          // 조회 결과가 있다 -> 사용할 수 없다.
-          return null;
-      } else {
-          // 조회 결과가 없다 -> 사용할 수 있다.
-          return "ok";
-      }
+        Optional<MemberEntity> byMemberEmail = memberRepository.findByMemberEmail(memberEmail);
+        if (byMemberEmail.isPresent()) {
+            // 조회 결과가 있다 -> 사용할 수 없다.
+            return null;
+        } else {
+            // 조회 결과가 없다 -> 사용할 수 있다.
+            return "ok";
+        }
     }
+
+
 }
-
-
 
 
 

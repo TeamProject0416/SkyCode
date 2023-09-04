@@ -34,7 +34,8 @@
     </div>
     <form action="/member/login" method="post">
         <div class="oej_input-box">
-            <input class="oej_username" type="text" id="username" name="memberEmail" placeholder="ID">
+<!--            <input class="oej_username" type="text" id="username" name="memberEmail" placeholder="ID">-->
+            <input class="oej_username" type="text" id="username" name="memberId" placeholder="ID">
             <label th:for="username"></label>
         </div>
 
@@ -43,8 +44,8 @@
             <label th:for="password"></label>
         </div>
 
+        <input th:value="${loginErr}" type="text" id="loginRslt" hidden="true"/>
         <input class="oej_log1" type="submit" value="LOGIN">
-        <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
 
         <div class="oej_connect"><i class="fa-solid fa-unlock-keyhole">보안접속</i> </div>
 
@@ -77,6 +78,15 @@
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
 
+$(document).ready(function () {
+
+if($("#loginRslt").val() == "NE"){
+alert("없는 이메일");
+}else if($("#loginRslt").val() == "PE"){
+alert("틀린 비밀번호");
+}
+
+});
 
 </body>
 
