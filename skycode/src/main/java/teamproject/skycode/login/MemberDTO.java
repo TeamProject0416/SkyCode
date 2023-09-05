@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @NoArgsConstructor
@@ -19,11 +20,12 @@ public class MemberDTO {
     @NotBlank(message = "아이디를 입력해 주세요.")
     private String memberId;
 
+
     @NotBlank(message ="메일을 입력해 주세요.")
     private String memberEmail;
 
-    @NotBlank(message ="비밀번호를 입력해 주세요.")
-    @Length(min=8, max=16, message = "비밀번호는 8자 이상, 16자 이하로 입력해주세요")
+//    @NotBlank(message ="비밀번호를 입력해 주세요.")
+    @Length(min=4, max=16, message = "비밀번호는 8자 이상, 16자 이하로 입력해 주세요.")
     private String memberPassword;
 
     @NotBlank(message ="비밀번호를 다시 한 번 입력해 주세요.")
@@ -32,11 +34,13 @@ public class MemberDTO {
     @NotBlank(message ="이름을 입력해 주세요.")
     private String memberName;
 
+    @NotBlank(message = "주소를 입력해 주세요.")
     private String memberAddress;
 
-    @NotBlank(message ="휴대전화를 입력해 주세요.")
+    @NotNull(message ="휴대전화를 입력해 주세요.")
     private String memberPhone;
 
+    @NotNull(message ="생일을 입력해 주세요.")
     private String memberBirthday;
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity){
@@ -45,13 +49,25 @@ public class MemberDTO {
         memberDTO.setMemberId(memberEntity.getMemberId());
         memberDTO.setMemberEmail(memberEntity.getMemberEmail());
         memberDTO.setMemberPassword(memberEntity.getMemberPassword());
-        memberDTO.setMemberPasswordCheck(memberDTO.getMemberPasswordCheck());
+        memberDTO.setMemberPasswordCheck(memberEntity.getMemberPasswordCheck());
         memberDTO.setMemberName(memberEntity.getMemberName());
         memberDTO.setMemberAddress(memberEntity.getMemberAddress());
-        memberDTO.setMemberPhone(memberDTO.getMemberPhone());
-        memberDTO.setMemberBirthday(memberDTO.getMemberBirthday());
+        memberDTO.setMemberPhone(memberEntity.getMemberPhone());
+        memberDTO.setMemberBirthday(memberEntity.getMemberBirthday());
         return memberDTO;
     }
 
 
+//    public MemberEntity toEntity() {
+//        MemberEntity memberEntity = new MemberEntity();
+//        memberEntity.setId(this.id);
+//        memberEntity.setMemberName(this.memberName);
+//        memberEntity.setMemberPassword(this.memberPassword);
+//        memberEntity.setMemberId(this.memberId);
+//        memberEntity.setMemberPhone(this.memberPhone);
+//        memberEntity.setMemberBirthday(this.memberBirthday);
+//        memberEntity.setMemberAddress(this.memberAddress);
+//        memberEntity.setMemberEmail(this.memberEmail);
+//        return memberEntity;
+//    }
 }
