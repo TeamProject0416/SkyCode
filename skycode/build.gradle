@@ -36,6 +36,8 @@ dependencies {
 /* validation */
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4' // 원하는 ModelMapper 버전으로 변경 가능
+
 
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'

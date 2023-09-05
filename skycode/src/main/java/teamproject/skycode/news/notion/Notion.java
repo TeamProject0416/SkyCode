@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -42,7 +43,10 @@ public class Notion {
         this.regTime = registrationTime;
     }
 
-    private int viewCount;
+    @Column(name = "view_count", nullable = false, columnDefinition = "int default 0")
+    private int countView;
+
+
 
     // 생성 시간을 현재 시간으로 설정
     @PrePersist
@@ -50,16 +54,6 @@ public class Notion {
         regTime = LocalDateTime.now();
     }
 
-//    private String fileName;
-//
-//    private byte[] imageData; // Byte array to store image data
 
-    // Constructors, getters, and setters
-
-
-    // Getter and setter for imageData
-//    public void setImageData(byte[] imageData) {
-//        this.imageData = imageData;
-//    }
 
 }

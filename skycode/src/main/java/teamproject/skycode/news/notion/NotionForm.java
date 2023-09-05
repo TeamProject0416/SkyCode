@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -13,6 +14,7 @@ public class NotionForm {
     private String type;
     private String notionTitle;
     private String notionContent;
+
 //    private LocalDateTime regTime; // 1대1문의 올린 시간
 //    private String fileName;
 //    private MultipartFile filce;

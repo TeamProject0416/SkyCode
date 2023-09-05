@@ -61,7 +61,7 @@ public class NotionService {
         return notionRepository.findAllOrderNotionByRegistrationTimeDesc();
     }
     public List<Notion> getAllNotionsSortedByPopularity() {
-        return notionRepository.findAllByOrderByViewCountDesc();
+        return notionRepository.findAllByOrderByCountViewDesc();
     }
 
 }

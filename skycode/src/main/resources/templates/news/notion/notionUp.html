@@ -18,10 +18,10 @@
 <body>
 <header th:replace="~{fragments/sub/header::header}"></header>
 
-    <section>
-        <div class="nyNotionUpWarp">
-            <h2>공지사항 작성하기</h2>
-            <form id="notion" th:action="@{/news/notionUp/create}" method="post" th:object="${notionForm}">
+<section>
+    <div class="nyNotionUpWarp">
+        <h2>공지사항 작성하기</h2>
+        <form id="notion" th:action="@{/news/notionUp/create}" method="post" th:object="${notionForm}" enctype="multipart/form-data">
             <div class="nyNotionUpBox">
                 <div class="nyNotionUpInBox">
                     <div class="nySearch">
@@ -51,11 +51,11 @@
                     <label for="file">첨부 파일: </label>
                     <input id="file" type="file" name="file" class="fileUpload" accept=".jpg, .jpeg, .png, .pdf">
                 </div>
-                <button id="submit">공지사항 등록</button>
+                <button id="submit" type="submit">공지사항 등록</button>
             </div>
-            </form>
-            </div>
-    </section>
+        </form>
+    </div>
+</section>
 
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 

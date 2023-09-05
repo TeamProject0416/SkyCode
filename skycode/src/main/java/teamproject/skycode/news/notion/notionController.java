@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.news.inquiry.InquiryRepository;
 
 import java.util.List;
@@ -30,6 +32,7 @@ public class notionController {
     @Autowired
     private NotionViewCountRepository notionViewCountRepository;
 
+
     @Autowired
     public void NotionController(NotionRepository notionRepository) {
         this.notionRepository = notionRepository;
@@ -43,7 +46,7 @@ public class notionController {
         return "news/notion/notionUp";
     }
 
-    // 공지사항 등록시 전송하는
+
     @PostMapping(value = "notionUp/create")
     public String createNotion(@ModelAttribute NotionForm form){
         Notion notion = form.toEntity();
@@ -51,6 +54,15 @@ public class notionController {
         notionRepository.save(notion);
         return "redirect:/news/notion/notion";
     }
+
+    // 공지사항 등록시 전송하는
+//    @PostMapping(value = "notionUp/create")
+//    public String createNotion(@ModelAttribute NotionForm form){
+//        Notion notion = form.toEntity();
+//        System.out.println("1234");
+//        notionRepository.save(notion);
+//        return "redirect:/news/notion/notion";
+//    }
 
     // 공지사항 리스트 출력
     @GetMapping("/notion/notion")
@@ -101,11 +113,11 @@ public class notionController {
 
         if (notion != null) {
 //            NotionViewCount viewCount = notionViewCountService.incrementViewCount(id);
-            notion.setViewCount(notion.getViewCount() + 1); // Increment the view count
+            notion.setCountView(notion.getCountView() + 1); // Increment the view count
             notionRepository.save(notion);
 
             model.addAttribute("notion", notion);
-            model.addAttribute("viewCount", notion.getViewCount());
+            model.addAttribute("viewCount", notion.getCountView());
             System.out.println("좀");
             return "news/notion/notionSub"; // Adjust the view name
         }
