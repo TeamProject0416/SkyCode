@@ -62,10 +62,10 @@
     color: #787878;
 }
 
-.nyNewsContainer .nyNotionGoText{
+.nyNotionGoText{
     text-align: end;
 }
-.nyNewsContainer  .nyNotionGoText a{
+.nyNotionGoText a{
     background: #0065BA;
     color: #fff;
     padding: 10px;

@@ -6,8 +6,11 @@ import org.apache.catalina.User;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -18,7 +21,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 //@Table(name = "inquiry")
 
 public class  Inquiry {
@@ -38,11 +41,21 @@ public class  Inquiry {
     @Column(nullable = false)
     private String inquiryContent;  // 문의글 내용
 
-    @Column(nullable = false)
+    @CreationTimestamp
+    @Column(name = "reg_time")
     private LocalDateTime regTime;  // 등록 시간
 
-    private int viewCount; // Add viewCount field
 
+    public LocalDateTime getRegistrationTime() {
+        return regTime;
+    }
+
+    public void setRegistrationTime(LocalDateTime registrationTime) {
+        this.regTime = registrationTime;
+    }
+
+
+    private int viewCount; // Add viewCount field
 
     // 생성자, getter, setter, toString 등의 메서드 생략
 
@@ -53,12 +66,18 @@ public class  Inquiry {
     }
 
     // 공개여부
-    public void setIsPrivate(boolean isPrivate) {
+//    public boolean isPrivate() {
+//        return isPrivate;
+//    }
+
+    // 공개여부
+    public void setPrivate(boolean isPrivate) {
         this.isPrivate = isPrivate;
     }
 
-    @OneToMany(mappedBy = "reviewEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Comment> commentEntityList = new ArrayList<>();
+    public void setIsPrivate(boolean isPrivate) {
+        this.isPrivate = isPrivate;
+    }
 
 
 }

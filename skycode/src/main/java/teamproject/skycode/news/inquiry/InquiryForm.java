@@ -3,6 +3,10 @@ package teamproject.skycode.news.inquiry;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.persistence.PrePersist;
 
@@ -29,6 +33,8 @@ public class InquiryForm {
         // regTime은 @PrePersist 어노테이션으로 자동 설정될 것이므로 따로 설정하지 않음
         return inquiry;
     }
+
+
 }
 
 

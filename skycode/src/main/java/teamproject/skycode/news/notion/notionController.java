@@ -5,17 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import teamproject.skycode.news.inquiry.InquiryRepository;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("/news")
@@ -32,41 +27,55 @@ public class notionController {
     @Autowired
     private NotionViewCountService notionViewCountService;
 
-//    private final NotionFileService notionFileService;
-//
-//    @Autowired
-//    public notionController(NotionService notionService, NotionFileService notionFileService) {
-//        this.notionService = notionService;
-//        this.notionFileService = notionFileService;
-//    }
+    @Autowired
+    private NotionViewCountRepository notionViewCountRepository;
 
+    @Autowired
+    public void NotionController(NotionRepository notionRepository) {
+        this.notionRepository = notionRepository;
+    }
+
+
+    // 공지사항 등록 화면
     @GetMapping(value = "/notionUp")
     public String newsNotionUp(Model model){
         model.addAttribute("notionForm", new NotionForm());
         return "news/notion/notionUp";
     }
+
+    // 공지사항 등록시 전송하는
     @PostMapping(value = "notionUp/create")
-    public String createNotion(NotionForm form){
+    public String createNotion(@ModelAttribute NotionForm form){
         Notion notion = form.toEntity();
         System.out.println("1234");
         notionRepository.save(notion);
         return "redirect:/news/notion/notion";
     }
 
+    // 공지사항 리스트 출력
     @GetMapping("/notion/notion")
-    public String notionList(Model model){
-        List<Notion> notions = notionService.getAllNotions();
+    public String notionList(Model model, @RequestParam(required = false) String sortBy){
+        List<Notion> notions = notionRepository.findAllOrderNotionByRegistrationTimeDesc();
+
         long totalNotionCount = notionService.getTotalNotionCount();
-        System.out.println("1");
+        model.addAttribute("totalNotionCount", totalNotionCount);
+        if ("popularity".equals(sortBy)) {
+            notions = notionService.getAllNotionsSortedByPopularity();
+            System.out.println("될까");
+        } else {
+            // 날짜 내림차순으로 정렬
+            // Default to sorting by date (most recent first)
+            notions = notionService.getAllNotionsSortedByDate();
+        }
+        System.out.println("된다");
 
         model.addAttribute("notions", notions);
-        model.addAttribute("totalNotionCount", totalNotionCount);
 
         return "/news/notion/notion";
     }
 
     @PostMapping("/notion/notion")
-    public String submitInquiry(@ModelAttribute NotionForm notionForm, Model model) {
+    public String submitNotion(@ModelAttribute NotionForm notionForm, Model model) {
         Notion savedNotion = notionService.saveNotion(notionForm); // Save or update inquiry
         System.out.println("제발1");
         if (savedNotion != null) {
@@ -91,10 +100,12 @@ public class notionController {
         Notion notion = notionService.getNotionById(id);
 
         if (notion != null) {
-            NotionViewCount viewCount = notionViewCountService.notionViewCount(id);
+//            NotionViewCount viewCount = notionViewCountService.incrementViewCount(id);
+            notion.setViewCount(notion.getViewCount() + 1); // Increment the view count
+            notionRepository.save(notion);
 
             model.addAttribute("notion", notion);
-            model.addAttribute("viewCount", viewCount.getCount());
+            model.addAttribute("viewCount", notion.getViewCount());
             System.out.println("좀");
             return "news/notion/notionSub"; // Adjust the view name
         }
@@ -104,80 +115,5 @@ public class notionController {
         return "error"; // Change to the appropriate view name
     }
 
-    // Handle file upload
-//    @PostMapping("/uploadFile")
-//    public String uploadFile(@RequestParam("file") MultipartFile file) {
-//        NotionFile notionFile = new NotionFile(file);
-//        notionFile.setFile(file);
-//        String fileName = notionFileService.storeFile(notionFile);
-//        System.out.println("이것은 이미지 업로드");
-//        return "File uploaded successfully: " + fileName;
-//    }
-//
-//    // Implement other controller methods for your Notion entity
-//    // ...
-//
-//    // Example method for saving Notion entity with uploaded file
-//    @PostMapping("/createFile")
-//    public String createNotionFile(@ModelAttribute NotionForm notionForm) {
-//        try {
-//            // Save the uploaded file and get the saved file name
-//            String uploadedFileName = saveUploadedFile(notionForm.getFile());
-//
-//            // Create a new Notion entity and set its properties
-//            Notion newNotion = new Notion();
-//            newNotion.setType(notionForm.getType());
-//            newNotion.setNotionTitle(notionForm.getNotionTitle());
-//            newNotion.setNotionContent(notionForm.getNotionContent());
-//            newNotion.setFileName(uploadedFileName);
-//            System.out.println("이것은 이미지");
-//
-//            // Call the service method to save the Notion entity
-//            notionService.createNotion(newNotion);
-//
-//            return "Notion created successfully";
-//        } catch (IOException e) {
-//            // Handle the exception (e.g., log the error or show an error message to the user)
-//            return "Error creating Notion: " + e.getMessage();
-//        }
-//    }
-//
-//
-//
-//
-//
-//
-//
-//    // Method to save the uploaded file and return the file name
-//    private String saveUploadedFile(MultipartFile file) throws IOException {
-//        if (!file.isEmpty()) {
-//            // Get the original file name
-//            String originalFileName = file.getOriginalFilename();
-//
-//
-//
-//// Generate a unique file name (e.g., UUID)
-//            String uniqueFileName = UUID.randomUUID().toString() + "_" + originalFileName;
-//
-//            // Specify the directory where you want to save the file
-//            Path uploadPath = Paths.get("upload-directory"); // Replace with your actual directory path
-//
-//            // Create the directory if it doesn't exist
-//            if (!Files.exists(uploadPath)) {
-//                Files.createDirectories(uploadPath);
-//            }
-//
-//            // Save the file to the server
-//            try (InputStream inputStream = file.getInputStream()) {
-//                Files.copy(inputStream, uploadPath.resolve(uniqueFileName), StandardCopyOption.REPLACE_EXISTING);
-//            }
-//
-//            // Return the saved file name
-//            return uniqueFileName;
-//        }
-//
-//        return null; // Return null if no file was uploaded
-//    }
-//
 
 }

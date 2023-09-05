@@ -10,11 +10,20 @@ import java.util.List;
 
 @EnableJpaRepositories
 public interface InquiryRepository extends JpaRepository<Inquiry, Long > {
+
+    @Query("SELECT i FROM Inquiry i ORDER BY i.regTime DESC")
+    List<Inquiry> findAllOrderByRegistrationTimeDesc();
+
+    List<Inquiry> findAllByOrderByViewCountDesc();
+
     List<Inquiry> findByInquiryTitleContaining(String searchValue);
 
     List<Inquiry> findByInquiryContentContaining(String searchValue);
 
     List<Inquiry> findByIdContaining(String searchValue);
+
+
+
 
 //    List<Inquiry> findByUserNicknameContaining(String searchValue);
 

@@ -55,4 +55,13 @@ public class NotionService {
     public void createNotion(Notion newNotion) {
         notionRepository.save(newNotion);
     }
+
+
+    public List<Notion> getAllNotionsSortedByDate() {
+        return notionRepository.findAllOrderNotionByRegistrationTimeDesc();
+    }
+    public List<Notion> getAllNotionsSortedByPopularity() {
+        return notionRepository.findAllByOrderByViewCountDesc();
+    }
+
 }

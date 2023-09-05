@@ -15,20 +15,18 @@ public class NotionViewCountService {
     }
 
     @Transactional
-    public NotionViewCount notionViewCount(Long notionId){
+    public NotionViewCount incrementViewCount(Long notionId){
 
         NotionViewCount notionViewCount = notionViewCountRepository.findByNotionId(notionId);
 
-        if(notionViewCount == null){
+        if (notionViewCount == null) {
             notionViewCount = new NotionViewCount();
             notionViewCount.setNotionId(notionId);
-            notionViewCount.setCount(1L);
+            notionViewCount.setCountView(1L);
         } else {
-            notionViewCount.setCount(notionViewCount.getCount() + 1);
+            notionViewCount.setCountView(notionViewCount.getCountView() + 1);
         }
         return notionViewCountRepository.save(notionViewCount);
     }
 
-
 }
-

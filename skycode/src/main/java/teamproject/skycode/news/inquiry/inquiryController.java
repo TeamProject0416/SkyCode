@@ -1,10 +1,12 @@
 package teamproject.skycode.news.inquiry;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,6 +21,8 @@ public class inquiryController {
     @Autowired
     private InquiryViewCountRepository inquiryViewCountRepository;
 
+
+
     @Autowired
     private InquiryService inquiryService;
 
@@ -30,39 +34,50 @@ public class inquiryController {
         this.inquiryRepository = inquiryRepository;
     }
 
+    // 1 대 1 문의폼 화면 출력
     @GetMapping("/inquiry")
     public String showInquiryForm(Model model) {
         model.addAttribute("inquiryForm", new InquiryForm());
-        return "news/inquiry/inquiry";
+        return "/news/inquiry/inquiry";
     }
 
+    // 1 대 1 문의 등록시 전송하는 것
     @PostMapping("/inquiry/create")
     public String submitInquiry(@ModelAttribute InquiryForm inquiryForm) {
         // InquiryForm을 Inquiry 엔티티로 변환하여 저장
-         Inquiry inquiry = inquiryForm.toEntity(); // InquiryForm에서 Inquiry 엔티티로 변환하는 메서드 필요
-//        Inquiry savedInquiry = inquiryService.saveInquiry(inquiryForm);
+        Inquiry inquiry = inquiryForm.toEntity(); // InquiryForm에서 Inquiry 엔티티로 변환하는 메서드 필요
         inquiryRepository.save(inquiry);
-
-        return "redirect:/news/inquiry/inquiryList"; // 저장 후 다시 폼 페이지로 리다이렉트
+        return "redirect:/news/inquiry/inquiryList"; // 저장 후 등록 날짜 오름차순으로 정렬된 목록 페이지로 리다이렉트
     }
 
+    // 1 대 1 문의 리스트 화면 출력
     @GetMapping("/inquiry/inquiryList")
-    public String inquiryList(Model model) {
-        List<Inquiry> inquiries = inquiryService.getAllInquiries();
+    public String getInquiries(Model model, @RequestParam(required = false) String sortBy) {
+        // 리스트들의 등록시간 호출
+        List<Inquiry> inquiries = inquiryRepository.findAllOrderByRegistrationTimeDesc();
+
+        // 조회수
         long totalInquiryCount = inquiryService.getTotalInquiryCount();
+        model.addAttribute("totalInquiryCount", totalInquiryCount);
+        // popularity = 조회수 순으로 정렬
+        if ("popularity".equals(sortBy)) {
+            inquiries = inquiryService.getAllInquiriesSortedByPopularity();
+            System.out.println("될까");
+        } else {
+            // 날짜 내림차순으로 정렬
+            // Default to sorting by date (most recent first)
+            inquiries = inquiryService.getAllInquiriesSortedByDate();
+        }
+        System.out.println("된다");
 
         model.addAttribute("inquiries", inquiries);
-        model.addAttribute("totalInquiryCount", totalInquiryCount);
-
-        System.out.println("4");
-        System.out.println("432");
-
-        // 조회된 데이터가 없을 경우 예외 처리 등을 수행
+//        return "inquiry-list"; // This should match your Thymeleaf template name
         return "news/inquiry/inquiryList"; // 혹은 다른 페이지로 이동
+
     }
 
 
-
+    // 1 대 1 문의 서브페이지 화면으로 보내기
     @PostMapping("inquiry/inquiryShow")
     public String submitInquiry(@ModelAttribute InquiryForm inquiryForm, Model model) {
         Inquiry savedInquiry = inquiryService.saveInquiry(inquiryForm); // Save or update inquiry
@@ -87,38 +102,8 @@ public class inquiryController {
 
     }
 
-//    @GetMapping("/inquiry/show/{id}")
-//    public String showInquiryById(@PathVariable Long id, Model model) {
-//        Inquiry inquiry = inquiryService.getInquiryById(id);
-//
-//        if (inquiry != null) {
-//            model.addAttribute("inquiry", inquiry);
-//            System.out.println("좀");
-//            return "news/inquiry/inquiryShow"; // Adjust the view name
-//        }
-//        System.out.println("제발");
-//
-//        // Handle case when inquiry is not found
-//        return "error"; // Change to the appropriate view name
-//    }
 
-//    @GetMapping("/inquiry/show/{id}")
-//    public String showInquiryById(@PathVariable Long id, Model model) {
-//        Inquiry inquiry = inquiryService.getInquiryById(id);
-//
-//        if (inquiry != null) {
-//            InquiryViewCount viewCount = inquiryViewCountService.incrementViewCount(id);
-//
-//            model.addAttribute("inquiry", inquiry);
-//            model.addAttribute("viewCount", viewCount.getCount());
-//
-//            return "news/inquiry/inquiryShow"; // Adjust the view name
-//        }else {
-//            // Handle case when inquiry is not found
-//            return "error"; // Change to the appropriate view name
-//        }
-//    }
-
+    // 1 대 1 문의 서브페이지 화면 출력
     @GetMapping("/inquiry/show/{id}")
     public String showInquiryById(@PathVariable Long id, Model model) {
         Inquiry inquiry = inquiryService.getInquiryById(id);
@@ -139,17 +124,7 @@ public class inquiryController {
         }
     }
 
-
-//    @GetMapping("/news/inquiry/search")
-//    public String searchInquiries(@RequestParam("search-type") String searchType,
-//                                  @RequestParam("search-value") String searchValue,
-//                                  Model model) {
-//        List<Inquiry> searchResults = inquiryService.searchInquiries(searchType, searchValue);
-//        model.addAttribute("inquiries", searchResults);
-//        System.out.println("대박");
-//        return "news/inquiry/inquiryList"; // This should be the name of your Thymeleaf template
-//    }
-
+    // 검색하기
     @GetMapping("/inquiry/search")
     public String searchInquiries(
             @RequestParam("search-type") String searchType,
@@ -178,7 +153,55 @@ public class inquiryController {
         return "news/inquiry/searchResults";
     }
 
+    // 문의글 삭제
+    @PostMapping("/inquiry/delete")
+    public String deleteInquiry(@RequestParam Long inquiryId) {
+        inquiryService.deleteInquiry(inquiryId);
+        System.out.println("삭제");
+        return "redirect:/news/inquiry/inquiryList"; // 삭제 후 이동할 페이지를 지정합니다.
+    }
 
+    // 1 대 1 문의글 수정 페이지 출력
+    @GetMapping("/inquiry/edit/{inquiryId}")
+    public String showEditForm(@PathVariable Long inquiryId, Model model) {
+        // inquiryId를 사용하여 해당 문의 내용을 불러오는 로직을 추가
+        Inquiry inquiry = inquiryService.findById(inquiryId);
+
+        // 조회한 문의 내용을 폼 객체에 매핑
+        InquiryForm inquiryForm = new InquiryForm();
+        inquiryForm.setId(inquiry.getId());
+        inquiryForm.setType(inquiry.getType());
+        inquiryForm.setPrivate(inquiry.isPrivate());
+        inquiryForm.setInquiryTitle(inquiry.getInquiryTitle());
+        inquiryForm.setInquiryContent(inquiry.getInquiryContent());
+
+        model.addAttribute("inquiryForm", inquiryForm);
+        System.out.println("수정중");
+
+        return "news/inquiry/edit";
+    }
+
+    // 1 대 1 문의글 수정 보내기
+    @PostMapping("/inquiry/edit")
+    public String editInquiry(@ModelAttribute("inquiryForm") InquiryForm inquiryForm) {
+        // 폼 데이터를 기반으로 수정된 내용을 저장하는 로직을 구현합니다.
+        // InquiryForm을 Inquiry 엔티티로 변환하고 엔티티를 저장하는 방식으로 구현할 수 있습니다.
+        Inquiry inquiry = new Inquiry();
+        inquiry.setId(inquiryForm.getId());
+        inquiry.setType(inquiryForm.getType());
+        inquiry.setPrivate(inquiryForm.isPrivate());
+        inquiry.setInquiryTitle(inquiryForm.getInquiryTitle());
+        inquiry.setInquiryContent(inquiryForm.getInquiryContent());
+        System.out.println("수정완료");
+        System.out.println(inquiryForm.isPrivate());
+
+        inquiry.setRegTime(LocalDateTime.now()); // Current timestamp
+
+        inquiryService.editInquiry(inquiry);
+
+        // 수정된 상세 페이지로 리다이렉트
+        return "redirect:/news/inquiry/show/" + inquiry.getId();
+    }
 
 
 }

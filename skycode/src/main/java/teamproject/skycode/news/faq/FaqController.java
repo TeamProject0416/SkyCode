@@ -34,7 +34,7 @@ public class FaqController {
     public String createFaq(@ModelAttribute FaqForm faqForm){
         Faq faq = faqForm.toEntity();
         faqRepository.save(faq);
-        return "redirect:/news/faq/faq";
+        return "news/faq/faq";
     }
 
     @GetMapping(value = "/faq/faq")
