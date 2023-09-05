@@ -25,16 +25,23 @@
     padding: 50px 0 20px 15px;
 }
 
-.eventPageTitle>button{
+.eventPageTitle>div>button{
     width: 100px;
     height: 45px;
     border: none;
-    background-color: #0065BA;
     border-radius: 5px;
     margin: 70px 20px 10px 0;
 }
 
-.eventPageTitle>button>a{
+.eventPageTitle>div>button:nth-of-type(1){
+    background-color: #0065BA;
+}
+
+.eventPageTitle>div>button:nth-of-type(2){
+    background-color: #C4033E;
+}
+
+.eventPageTitle>div>button>a{
     display: block;
     color: #fff;
     font-size: 1.5rem;

@@ -17,7 +17,10 @@
     <div class="eventSubPage">
         <div class="eventPageTitle">
             <h2 class="eventSubTag">#이벤트</h2>
-            <button><a th:href="'/event/' + ${eventFormDto.id} + '/edit'">수정</a></button>
+            <div>
+                <button><a th:href="'/event/' + ${eventFormDto.id} + '/edit'">수정</a></button>
+                <button><a th:href="'/event/' + ${eventFormDto.id} + '/delete'">삭제</a></button>
+            </div>
         </div>
         <div class="title">
             <p class="eventSubPageTitle">

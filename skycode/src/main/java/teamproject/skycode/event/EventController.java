@@ -1,6 +1,8 @@
 package teamproject.skycode.event;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +12,8 @@ import teamproject.skycode.constant.EventStatus;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 import static teamproject.skycode.constant.EventStatus.ONGOING;
@@ -94,6 +98,15 @@ public class EventController {
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
             return "event/eventForm";
         }
+        return "redirect:/event/ongoing";
+    }
+
+    @GetMapping("/{eventId}/delete")
+    public String deleteEvent(@PathVariable("eventId") Long eventId) {
+        // 이벤트 삭제 로직을 구현
+        eventService.deleteEvent(eventId);
+
+        // 삭제 후 리다이렉션할 URL을 반환
         return "redirect:/event/ongoing";
     }
 

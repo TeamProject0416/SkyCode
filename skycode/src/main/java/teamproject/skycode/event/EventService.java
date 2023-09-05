@@ -57,14 +57,12 @@ public class EventService {
         // 이미지 업로드 처리 및 파일명 생성
         String miniImgName = "";
         String miniOriImgName = eventImgFile1.getOriginalFilename();
-        System.out.println("eventImgFile1.getOriginalFilename(): " + eventImgFile1.getOriginalFilename());
         String miniImgUrl = "";
 
         if (miniOriImgName != null && !miniOriImgName.isEmpty()) {
             // 파일명 생성
             miniImgName = fileService.uploadFile(eventImgLocation + basePath, miniOriImgName,
                     eventImgFile1.getBytes());
-            System.out.println("miniImgName: " + miniImgName);
 
             // 파일 경로 생성
             miniImgUrl = "/img/event/" + miniImgName;
@@ -103,11 +101,11 @@ public class EventService {
 
     @Transactional(readOnly = true)
     public EventFormDto getEventDtl(Long eventId) {
+        // 해당 id의 상품 정보를 데이터 베이스에서 가져옴, 없으면 예외처리
         EventEntity event = eventRepository.findById(eventId)
                 .orElseThrow(EntityNotFoundException::new);
-        // 해당 id의 상품 정보를 데이터 베이스에서 가져옴, 없으면 예외처리
-        EventFormDto eventFormDto = EventFormDto.of(event);
         // 상품 정보를 eventFormDto 로 변환합니다
+        EventFormDto eventFormDto = EventFormDto.of(event);
         return eventFormDto;
     }
 
@@ -120,11 +118,24 @@ public class EventService {
         String basePath = "/event";
 
         // 이미지 업로드 처리 및 파일명 생성
-        String miniImgName = "";
-        String miniOriImgName = eventImgFile1.getOriginalFilename();
-        String miniImgUrl = "";
+        String miniImgName = event.getMiniImgName();
+        String miniOriImgName = event.getMiniOriImgName();
+        String miniImgUrl = event.getMiniImgUrl();
 
-        if (miniOriImgName != null && !miniOriImgName.isEmpty()) {
+        if (eventImgFile1 != null && !eventImgFile1.isEmpty()) {
+
+            // 수정 전 파일 삭제하기
+            String filePath = eventImgLocation + basePath + "/" + miniImgName;
+            File fileToDelete = new File(filePath);
+            if (fileToDelete.delete()) {
+                System.out.println("파일이 성공적으로 삭제되었습니다.");
+            } else {
+                System.err.println("파일 삭제 중 오류가 발생했습니다.");
+            }
+
+            // 파일명 가져오기
+            miniOriImgName = eventImgFile1.getOriginalFilename();
+
             // 파일명 생성
             miniImgName = fileService.uploadFile(eventImgLocation + basePath, miniOriImgName,
                     eventImgFile1.getBytes());
@@ -133,35 +144,83 @@ public class EventService {
             miniImgUrl = "/img/event/" + miniImgName;
         }
 
-        String bigImgName = "";
-        String bigOriImgName = eventImgFile2.getOriginalFilename();
-        String bigImgUrl = "";
+        // 이미지 업로드 처리 및 파일명 생성
+        String bigImgName = event.getBigImgName();
+        String bigOriImgName = event.getBigOriImgName();
+        String bigImgUrl = event.getBigImgUrl();
 
-        if (bigOriImgName != null && !bigOriImgName.isEmpty()) {
+        if (eventImgFile2 != null && !eventImgFile2.isEmpty()) {
+
+            // 수정 전 파일 삭제하기
+            String filePath = eventImgLocation + basePath + "/" + bigImgName;
+            File fileToDelete = new File(filePath);
+            if (fileToDelete.delete()) {
+                System.out.println("파일이 성공적으로 삭제되었습니다.");
+            } else {
+                System.err.println("파일 삭제 중 오류가 발생했습니다.");
+            }
+
+            // 파일명 가져오기
+            bigOriImgName = eventImgFile2.getOriginalFilename();
+
             // 파일명 생성
             bigImgName = fileService.uploadFile(eventImgLocation + basePath, bigOriImgName,
                     eventImgFile2.getBytes());
 
             // 파일 경로 생성
             bigImgUrl = "/img/event/" + bigImgName;
+
         }
 
         // DB 시간 저장
         LocalDateTime now = LocalDateTime.now();
         event.setUpdateTime(now);
 
-        eventFormDto.setBigImgName(bigImgName);
-        eventFormDto.setBigOriImgName(bigOriImgName);
-        eventFormDto.setBigImgUrl(bigImgUrl);
-
         eventFormDto.setMiniImgName(miniImgName);
         eventFormDto.setMiniOriImgName(miniOriImgName);
         eventFormDto.setMiniImgUrl(miniImgUrl);
+
+        eventFormDto.setBigImgName(bigImgName);
+        eventFormDto.setBigOriImgName(bigOriImgName);
+        eventFormDto.setBigImgUrl(bigImgUrl);
 
         event.updateEvent(eventFormDto);
 
         return event.getId();
     }
 
+    // 이벤트 삭제
+    public void deleteEvent(Long eventId) {
+        EventEntity event = eventRepository.findById(eventId)
+                .orElseThrow(EntityNotFoundException::new);
+
+        // 파일 경로 설정
+        String basePath = "/event";
+
+        // 파일 삭제하기
+        if (!event.getMiniImgName().isEmpty()) {
+            String filePath = eventImgLocation + basePath + "/" + event.getMiniImgName();
+            System.out.println("filePath : " + filePath);
+            File fileToDelete = new File(filePath);
+            if (fileToDelete.delete()) {
+                System.out.println("파일이 성공적으로 삭제되었습니다.");
+            } else {
+                System.err.println("파일 삭제 중 오류가 발생했습니다.");
+            }
+        }
+
+        if (!event.getBigImgName().isEmpty()) {
+            String filePath = eventImgLocation + basePath + "/" + event.getBigImgName();
+            File fileToDelete = new File(filePath);
+            if (fileToDelete.delete()) {
+                System.out.println("파일이 성공적으로 삭제되었습니다.");
+            } else {
+                System.err.println("파일 삭제 중 오류가 발생했습니다.");
+            }
+        }
+
+        // 데이터 삭제
+        eventRepository.delete(event);
+    }
 
 }
