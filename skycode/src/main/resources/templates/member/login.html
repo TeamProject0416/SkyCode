@@ -12,13 +12,13 @@
 
 </head>
 
-<th:block layout:fragment="css">
-    <style>
-        .error {
-            color: #bd2130;
-        }
-    </style>
-</th:block>
+<!--<th:block layout:fragment="css">-->
+<!--    <style>-->
+<!--        .error {-->
+<!--            color: #bd2130;-->
+<!--        }-->
+<!--    </style>-->
+<!--</th:block>-->
 
 <body>
 
@@ -45,7 +45,7 @@
             <label th:for="password"></label>
         </div>
 
-        <input th:value="${loginErr}" type="text" id="loginRslt" hidden="true"/>
+<!--        <input th:value="${loginErr}" type="text" id="loginRslt" hidden="true"/>-->
         <input class="oej_log1" type="submit" value="LOGIN">
 
        <!-- <input th:value="${loginErr}" type="text" id="loginRslt" hidden="true"/>
@@ -59,6 +59,7 @@
 <!--        <button type="submit" class="oej_us" onClick="location.href='/member/save'">JOIN US</button>-->
 <!--        <button id="submit" class="oej_us" onclick="window.location.href='/member/save'">JOIN US</button>-->
         <a href="/member/save"><button type="button" class="oej_us">JOIN US</button></a>
+
         <div class="oej_search">
             <div class="oej_na">
                 <img src="../subImages/naver2.png" alt="">
