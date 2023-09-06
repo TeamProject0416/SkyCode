@@ -21,10 +21,24 @@
 
 <!-- 1:1문의 -->
 <section class="nyInquiryWrap">
+<!--    &lt;!&ndash; Display search results &ndash;&gt;-->
+<!--    <div class="search-results">-->
+<!--        <h2>Search Results</h2>-->
+<!--        <ul>-->
+<!--            <li th:each="result : ${searchResults}">-->
+<!--                &lt;!&ndash; Display search result details here &ndash;&gt;-->
+<!--                <a th:href="@{/news/inquiry/show/{id}(id=${result.id})}">-->
+<!--                    <span th:text="${result.id}"></span>-->
+<!--                    <span th:text="${result.inquiryTitle}"></span>-->
+<!--                    <span th:text="${result.inquiryContent}"></span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
     <h2># 1 : 1 문의</h2>
-    <div class="nyInquiryContainer">
+    <div class="nyInquiryContainer search-results">
         <div class="nySearch">
-            <form th:action="@{/news/inquiry/search}">
+            <form th:action="@{/news/inquiry/search}" method="get">
                 <label for="search-type" hidden>유형</label>
                 <select name="search-type" id="search-type">
                     <option value="title">제목</option>
@@ -34,15 +48,15 @@
                 </select>
                 <label for="search-value" hidden></label>
                 <input id="search-value" type="search" name="search-value" placeholder="검색어...">
-                <button id="submit">검색</button>
+                <button type="submit">검색</button>
             </form>
         </div>
         <div class="nyInquiryCheck">
             <strong>총 <strong th:text="${totalInquiryCount}">522</strong>건</strong>
             <div class="nyInquiryButton">
-                <a th:href="@{/news/inquiry/inquiryList}" class="sort-button">최신순</a>
+                <button type="button">최신순</button>
                 <span>|</span>
-                <a th:href="@{/news/inquiry/inquiryList?sortBy=popularity}" class="sort-button">인기순</a>
+                <button type="button">인기순</button>
             </div>
         </div>
         <table class="nyInquiryList">
@@ -57,22 +71,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="inquiry : ${inquiries}">
-                <td><span th:text="${inquiry.id}">1</span></td>
-                <td><span th:text="${inquiry.type}">회원가입/탈퇴</span></td>
-                    <td><a th:href="@{'/news/inquiry/show/' + ${inquiry.id}}">
-                        <span th:text="${inquiry.inquiryTitle}"></span>
-                    </a></td>
-                <td><span th:text="${inquiry.viewCount}">조회수</span></td>
-                <td><span th:text="${#temporals.format(inquiry.regTime, 'yyyy.MM.dd')}">2023.08.25</span></td>
-                <td th:text="${inquiry.isPrivate ? '비공개' : '공개'}">공개</td>
+            <!-- Display search result details here -->
+            <tr th:each="result : ${searchResults}">
+                    <td><span th:text="${result.id}"></span></td>
+                    <td><span th:text="${result.type}">회원가입/탈퇴</span></td>
+                    <td><a th:href="@{/news/inquiry/show/{id}(id=${result.id})}"><span th:text="${result.inquiryTitle}"></span></a></td>
+                    <td><span th:text="${result.viewCount}">조회수</span></td>
+                    <td><span th:text="${#temporals.format(result.regTime, 'yyyy.MM.dd')}"></span></td>
+                    <td th:text="${result.isPrivate ? '비공개' : '공개'}">공개</td>
             </tr>
             </tbody>
         </table>
         <div class="nyInquiryPeger">
-            <div class="nyInquiryPegerBtn" th:each="i : ${#numbers.sequence(0, inquiries.totalPages - 1)}">
-                <a th:href="@{/news/inquiry/inquiryList(page=${i})}" th:text="${i + 1}"></a>
-            </div>
+            <div class="nyInquiryPegerBtn nyInquiryClick"><a href="#">1</a></div>
+            <div class="nyInquiryPegerBtn"><a href="#">2</a></div>
         </div>
         <div class="nyInquiryGoText">
             <a th:href="@{/news/inquiry}">문의쓰기</a>
@@ -84,7 +96,6 @@
 
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
-
 
 </body>
 </html>

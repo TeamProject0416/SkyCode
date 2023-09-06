@@ -24,10 +24,6 @@
   <div class="nyFaqBox">
     <div class="nyFaqTitle">
       <h2># 자주 묻는 질문</h2>
-      <div class="nySearch">
-        <input type="text" name="nyFaqSearch" placeholder="검색">
-        <button>검색</button>
-      </div>
     </div>
     <div class="nyFaqContainer">
       <ul class="nyFaqNav">
@@ -45,7 +41,6 @@
           <th class="nyFaqTableText">제목</th>
           <th>카테고리</th>
           <th>날짜</th>
-          <th>조회수</th>
         </tr>
         </thead>
         <tbody>
@@ -62,17 +57,18 @@
           </td>
           <td th:text="${faq.type}">비행기상품</td>
           <td th:text="${#temporals.format(faq.regTime, 'yyyy.MM.dd')}">2032.01.01</td>
-          <td>84</td>
         </tr>
         </tbody>
       </table>
+    </div>
+    <div class="nyFaqGoText">
+      <a th:href="@{/news/faqUp}">자주 묻는 질문 올리기</a>
     </div>
     </div>
     <div class="nyFaqPeger">
       <div class="nyFaqPegerBtn nyFaqClick"><a href="#">1</a></div>
       <div class="nyFaqPegerBtn"><a href="#">2</a></div>
     </div>
-  </div>
 </section>
 
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>

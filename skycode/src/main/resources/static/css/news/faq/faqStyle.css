@@ -96,6 +96,18 @@
     height:150px;
 
 }
+.nyFaqBox .nyFaqGoText{
+    text-align: end;
+}
+.nyFaqBox .nyFaqGoText a{
+    background: #0065BA;
+    color: #fff;
+    padding: 10px;
+    /* border: 1px solid #333; */
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+}
 
 .nyFaqPeger{
     position: relative;
@@ -117,5 +129,6 @@
     background: #e9b0b0;
 
 }
+
 
 

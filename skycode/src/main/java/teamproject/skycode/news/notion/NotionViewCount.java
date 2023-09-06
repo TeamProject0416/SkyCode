@@ -1,11 +1,18 @@
 package teamproject.skycode.news.notion;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Getter
+@Setter
+@ToString
 public class NotionViewCount {
 
     @Id
@@ -14,21 +21,7 @@ public class NotionViewCount {
 
     private Long notionId;
 
-    private Long count;
+    private Long countView;
 
-    public Long getNotionId() {
-        return notionId;
-    }
 
-    public void setNotionId(Long inquiryId) {
-        this.notionId = inquiryId;
-    }
-
-    public Long getCount() {
-        return count;
-    }
-
-    public void setCount(Long count) {
-        this.count = count;
-    }
 }

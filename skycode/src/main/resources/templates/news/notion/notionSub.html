@@ -26,12 +26,20 @@
             <span class="nyTitleDate" th:text="${viewCount}">조회수</span>
         </div>
         <div class="nyNewsContent">
-            <img src="http://placehold.it/320x100" />
+            <img src="${'/images/' + notion.fileName}" alt=""/>
             <p th:text="${notion.notionContent}">공지사항에 대한 정보</p>
         </div>
-        <div class="nyNewsSubPager">
-            <div><a href=""><i class="fa-solid fa-caret-up"></i> 다음글</a></div>
-            <div><a href=""><i class="fa-solid fa-caret-down"></i> 이전글</a></div>
+<!--        <div class="nyNewsSubPager">-->
+<!--            <div><a href=""><i class="fa-solid fa-caret-up"></i> 다음글</a></div>-->
+<!--            <div><a href=""><i class="fa-solid fa-caret-down"></i> 이전글</a></div>-->
+<!--        </div>-->
+        <div class="nyInquiryButtons">
+            <form th:action="@{/news/notion/delete}" method="post">
+                <input type="hidden" name="notionId" th:value="${notion.id}" />
+                <button type="submit">삭제</button>
+            </form>
+            <!-- 수정 버튼 -->
+            <a th:href="@{'/news/notion/edit/' + ${notion.id}}">수정</a>
         </div>
     </div>
     <div class="nyNewsList">
