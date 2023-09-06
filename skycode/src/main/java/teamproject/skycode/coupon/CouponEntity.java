@@ -49,4 +49,15 @@ public class CouponEntity extends BaseEntity {
         this.couponNum = this.couponNum == 0 ? null : this.couponNum - 1;
     }
 
+    public void updateEvent(CouponFormDto couponFormDto) {
+        this.couponName = couponFormDto.getCouponName();
+        this.couponNum = couponFormDto.getCouponNum();
+        this.couponPrice = couponFormDto.getMaxPrice();
+        this.couponRatio = couponFormDto.getCouponRatio();
+        this.couponStatus = couponFormDto.getCouponStatus();
+        this.maxPrice = couponFormDto.getMaxPrice();
+        this.useMinPrice = couponFormDto.getUseMinPrice();
+        this.couponStart = couponFormDto.getCouponStart();
+        this.couponEnd = couponFormDto.getCouponEnd();
+    }
 }

@@ -32,4 +32,8 @@ public class CouponFormDto {
         return modelMapper.map(this, CouponEntity.class);
     }
 
+    public static CouponFormDto of(CouponEntity coupon) {
+        return modelMapper.map(coupon, CouponFormDto.class);
+    }
+
 }

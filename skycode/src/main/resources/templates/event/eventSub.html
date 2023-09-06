@@ -19,7 +19,14 @@
             <h2 class="eventSubTag">#이벤트</h2>
             <div>
                 <button><a th:href="'/event/' + ${eventFormDto.id} + '/edit'">수정</a></button>
-                <button><a th:href="'/event/' + ${eventFormDto.id} + '/delete'">삭제</a></button>
+                <button class="deleteBtn"><a>삭제</a></button>
+            </div>
+            <div class="deleteModal modal">
+                <div class="modal-content">
+                    <p>이벤트를 삭제하시겠습니까?</p>
+                    <button class="confirmDelete"><a th:href="'/event/' + ${eventFormDto.id} + '/delete'">삭제</a></button>
+                    <button class="cancelDelete">취소</button>
+                </div>
             </div>
         </div>
         <div class="title">
@@ -36,6 +43,30 @@
 </section>
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    function openModal() {
+        $(".deleteModal").css("display", "block");
+    }
+
+    function closeModal() {
+        $(".deleteModal").css("display", "none");
+    }
+
+    $(".deleteBtn").click(function() {
+        openModal(); // 모달 열기
+    });
+
+    // 삭제 확인 버튼 클릭 시 처리
+    $(".confirmDelete").click(function() {
+        console.log("삭제되었습니다.");
+        closeModal(); // 모달 닫기
+    });
+
+    // 취소 버튼 클릭 시 모달 닫기
+        $(".cancelDelete").click(function() {
+        closeModal(); // 모달 닫기
+    });
+</script>
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
 
