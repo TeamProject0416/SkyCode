@@ -1,6 +1,5 @@
 package teamproject.skycode.coupon;
 
-import teamproject.skycode.login.Member;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
