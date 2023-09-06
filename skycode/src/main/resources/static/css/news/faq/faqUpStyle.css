@@ -46,11 +46,10 @@ section{
 }
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nySearch option {
     /* height: 30px; */
-    background: #fff;
-    color: #333;
+    background: #000;
 }
 
-.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nyFaqUpContent textarea{
+.nyFaqUpWarp .nyFaqUpBox .nyFaqUpInBox .nyFaqUpContent input{
     width: 500px;
     height: 300px;
     border: 1px solid #555;

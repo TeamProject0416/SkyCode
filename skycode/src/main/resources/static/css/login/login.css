@@ -85,52 +85,55 @@ border-color: #0065BA;
 /* 로그인 버튼 */
 
 
-.oej_log1 {
-    width: 500px;
-    height: 40px;
-    position: relative;
-    top: 5px;
-    margin: 0 auto;
+.oej_log2 {
+    /* position: relative; */
     display: flex;
+    width: 500px;
+    height: 50px;
+    top:20px;
     justify-content: center;
-    align-items: center;
+    align-self: center;
+    margin: 0 auto;
+    border: 1px solid #0065BA;
+    background: #0065BA;
     border-radius: 5px;
-    outline: none;
-    cursor: pointer;
-    background-color: #0065BA;
-    border: none;
     color: #fff;
+    cursor: pointer;
 }
 
 /* 보안접속 */
 .oej_connect {
-    position: relative;
-    display: flex;
-    left: 0px;
     margin: 0 auto;
-    top:10px;
     padding-top: 5px;
     width: 500px;
+
 }
 
 /* 회원가입 */
 
+.oej_join {
+    position: relative;
+    display: flex;
+    width: 500px;
+    height: 50px;
+
+}
+
 
 .oej_us {
-    width: 500px;
-    height: 40px;
     position: relative;
-    top: 20px;
-    margin: 0 auto;
     display: flex;
+    width: 500px;
+    height: 50px;
+    top:20px;
     justify-content: center;
-    align-items: center;
+    align-self: center;
+    margin: 0 auto;
+    background: #003999;
+
     border-radius: 5px;
-    outline: none;
-    cursor: pointer;
-    background-color: #003999;
-    border: none;
     color: #fff;
+    cursor: pointer;
 }
 
 /* 찾기버튼 */

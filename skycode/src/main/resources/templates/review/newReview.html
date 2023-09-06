@@ -9,6 +9,7 @@
     <link th:href="@{/css/sub/header.css}" rel="stylesheet">
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/review/newReview.css}">
+    <link rel="stylesheet" th:href="@{/css/event/eventForm.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 </head>
@@ -22,20 +23,53 @@
     <h2 class="newReview">리뷰 등록하기</h2>
     <hr>
     <div class="container">
-        <form class="formContainer" action="/review/create" method="post" enctype="multipart/form-data">
+        <form class="formContainer" action="/review/create" method="post"
+              enctype="multipart/form-data" th:object="${reviewFormDto}">
+            <input type="hidden" th:field="*{id}">
             <div class="nickNameArea">
                 <label class="nickName">닉네임</label>
-                <input type="text" class="titleInput" name="nickName" placeholder="닉네임을 입력해주세요">
+                <input type="text" class="titleInput" name="nickName"
+                       placeholder="닉네임을 입력해주세요" th:field="*{nickName}">
             </div>
+            <p th:if="${#fields.hasErrors('nickName')}" th:errors="*{nickName}" class="fieldError">Incorrect data</p>
+
             <div class="titleArea">
                 <label class="reviewTitle">제목</label>
-                <input type="text" class="titleInput" name="reviewTitle" placeholder="제목을 입력해주세요">
+                <input type="text" class="titleInput" name="reviewTitle"
+                       placeholder="제목을 입력해주세요" th:field="*{reviewTitle}">
             </div>
+            <p th:if="${#fields.hasErrors('reviewTitle')}" th:errors="*{reviewTitle}" class="fieldError">Incorrect data</p>
+
             <div class="contentArea">
                 <label class="contents">내용</label>
-                <textarea class="contentTextArea" rows="10" name="contents" placeholder="내용을 입력해주세요"></textarea>
+                <textarea class="contentTextArea" rows="10" name="contents"
+                          placeholder="내용을 입력해주세요" th:field="*{contents}"></textarea>
             </div>
-            <input type="file" name="reviewFile" multiple="multiple">
+            <p th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}" class="fieldError">Incorrect data</p>
+            <div>
+                <div class="editImg">
+                    <div>
+                        <div>
+                            <input class="upload-name1"
+                                   th:placeholder=" *{id} != null ? *{miniOriImgName} : '첨부파일'">
+                            <label>썸네일 이미지 선택<input type="file" class="file1" name="reviewImgFile1"
+                                                    accept="image/*"></label>
+                        </div>
+                        <img class="reviewImgFile1" th:src=" *{id} != null ? *{miniImgUrl} : '/subImages/miniImg.png'"
+                             th:alt="*{id} != null ? *{miniImgName} : '썸네일 이미지' ">
+                    </div>
+                    <div>
+                        <div>
+                            <input class="upload-name2"
+                                   th:placeholder=" *{id} != null ? *{bigOriImgName} : '첨부파일' ">
+                            <label>본문 이미지 선택<input type="file" class="file2" name="reviewImgFile2"
+                                                   accept="image/*"></label>
+                        </div>
+                        <img class="reviewImgFile2" th:src=" *{id} != null ? *{bigImgUrl} : '/subImages/bigImg.png' "
+                             th:alt=" *{id} != null ? *{bigImgName} : '본문 이미지' ">
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -54,6 +88,31 @@
 
 <!--User Script-->
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+    // 사진 변경
+    $(".file1").on('change', function () {
+        var fileName = $(".file1").val();
+        $(".upload-name1").val(fileName);
+        setImageFromFile(this, '.reviewImgFile1');
+    });
+
+    $(".file2").on('change', function () {
+        var fileName = $(".file2").val();
+        $(".upload-name2").val(fileName);
+        setImageFromFile(this, '.reviewImgFile2');
+    });
+
+    function setImageFromFile(input, expression) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $(expression).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    };
+</script>
 <script src="/js/sub/header.js"></script>
 <script src="/js/review/reviewSub.js"></script>
 <script src="/js/sub/footer.js"></script>

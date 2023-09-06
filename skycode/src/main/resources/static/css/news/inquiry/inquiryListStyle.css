@@ -84,5 +84,5 @@
     height: 30px;
 }
 .nyInquiryWrap .nyInquiryContainer .nyInquiryGoText a:hover{
-    font-size: 1.8rem;
+    padding: 15px;
 }

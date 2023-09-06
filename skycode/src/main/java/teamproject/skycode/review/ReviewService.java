@@ -2,12 +2,21 @@ package teamproject.skycode.review;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import teamproject.skycode.event.EventEntity;
+import teamproject.skycode.event.EventFormDto;
+import teamproject.skycode.event.FileService;
 
+import javax.persistence.EntityNotFoundException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,94 +26,265 @@ import java.util.Optional;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final ReviewFileRepository reviewFileRepository;
+    private final FileService fileService;
 
-    public void save(ReviewDto reviewDto) throws IOException {
-        // 파일 첨부에 따라 로직 분리
-        if (reviewDto.getReviewFile().isEmpty()) {
-            // 첨부 파일 없음.
-            ReviewEntity reviewEntity = ReviewEntity.toSaveEntity(reviewDto);
-            reviewRepository.save(reviewEntity);
-        } else {
-            // 첨부 파일 있음.
-            MultipartFile reviewFile = reviewDto.getReviewFile(); // 1.DTO에 담긴 파일을 꺼냄
-            String originalFilename = reviewFile.getOriginalFilename(); // 2. 파일의 이름 가져옴
-            String storedFileName = "/review_img/" + System.currentTimeMillis() + "_" + originalFilename; // 3.서버 저장용 이름을 만듦, 내사진.jpg => 839798375892_내사진.jpg
-            //String savePath = "J:/SkyCodeProject" + storedFileName; // 4.저장 경로 설정,  J:/SkyCodeProject/review_img/9802398403948_내사진.jpg (win)
+//    public List<ReviewDto> findAll() {
+//        List<ReviewEntity> reviewEntityList = reviewRepository.findAll();
+//        List<ReviewDto> reviewDtoList = new ArrayList<>();
+//        for (ReviewEntity reviewEntity: reviewEntityList) {
+//            reviewDtoList.add(ReviewDto.toReviewDto(reviewEntity));
+//        }
+//
+//        return reviewDtoList;
+//    }
 
-
-            String savePath = "C:/Users/GR805/Desktop/skycode/src/main/resources/static/review_img" + storedFileName; // 4.저장 경로 설정,  J:/SkyCodeProject/review_img/9802398403948_내사진.jpg (win)
-            //String savePath = "C:\\Users\\GR805\\Desktop\\skycode\\src\\main\\resources\\static\\review_img" + storedFileName; // 4.저장 경로 설정,  J:/SkyCodeProject/review_img/9802398403948_내사진.jpg (win)
-
-            ${pageContext.request.contextPath}
-[출처] [Spring] 경로 설정(상대경로/절대경로)|작성자 총아
+    @Value("${reviewImgLocation}")
+    private String reviewImgLocation;
 
 
+    public Long saveReview(ReviewDto reviewDto, MultipartFile reviewImgFile1, MultipartFile reviewImgFile2) throws Exception {
+        // 상품 등록
+        ReviewEntity review = reviewDto.createReview();
 
-//            String savePath = "/Users/사용자이름/springboot_img/" + storedFileName; // J:/SkyCodeProject/img/9802398403948_내사진.jpg (mac)
-            System.out.println("originalFilename = " + originalFilename);
-//            originalFilename = 청바지23.jpg
-            System.out.println("storedFileName = " + storedFileName);
-//            storedFileName = /review_img/1693918660230_청바지23.jpg
-            System.out.println("savePath = " + savePath);
-//            savePath = J:/SkyCodeProject//review_img/1693918286761_청바지23.jpg -> "J:/SkyCodeProject/"
-//            savePath = J:/SkyCodeProject/review_img/1693918554895_청바지23.jpg -> "J:/SkyCodeProject"
+        // 폴더 없을시 폴더 생성
+        Path directoryPath = Paths.get("/SkyCodeProject/img/review");
 
-            reviewFile.transferTo(new File(savePath)); // 5. 해당 경로에 파일 저장
-            ReviewEntity reviewEntity = ReviewEntity.toSaveFileEntity(reviewDto);
-            Long savedId = reviewRepository.save(reviewEntity).getId(); // 6. review_table에 해당 데이터 save 처리
-            ReviewEntity review = reviewRepository.findById(savedId).get();
+        try {
+            // 디렉토리 생성
+            Files.createDirectories(directoryPath);
+            System.out.println(directoryPath + " 디렉토리가 생성되었습니다.");
 
-            ReviewFileEntity reviewFileEntity = ReviewFileEntity.toReviewFileEntity(review, originalFilename, storedFileName);
-            reviewFileRepository.save(reviewFileEntity); // 7. review_file_table에 해당 데이터 save 처리
+        } catch (IOException e) {
+            System.out.println(directoryPath + " 디렉토리 생성이 실패하였습니다.");
+            e.printStackTrace();
         }
+
+        // 파일 경로 설정
+        String basePath = "/review";
+
+        // 이미지 업로드 처리 및 파일명 생성
+        String miniImgName = "";
+        String miniOriImgName = reviewImgFile1.getOriginalFilename();
+        String miniImgUrl = "";
+
+        if (miniOriImgName != null && !miniOriImgName.isEmpty()) {
+            // 파일명 생성
+            miniImgName = fileService.uploadFile(reviewImgLocation + basePath, miniOriImgName,
+                    reviewImgFile1.getBytes());
+
+            // 파일 경로 생성
+            miniImgUrl = "/img/review/" + miniImgName;
+        }
+
+        String bigImgName = "";
+        String bigOriImgName = reviewImgFile2.getOriginalFilename();
+        String bigImgUrl = "";
+//        List<String> bigImgNameList = new ArrayList<>();
+//        List<String> bigOriImgNameList = new ArrayList<>();
+//        List<String> bigImgUrlList = new ArrayList<>();
+//        List<MultipartFile> reviewImgFiles = new ArrayList<>();
+
+        if (bigOriImgName != null && !bigOriImgName.isEmpty()) {
+            // 파일명 생성
+            bigImgName = fileService.uploadFile(reviewImgLocation + basePath, bigOriImgName,
+                    reviewImgFile2.getBytes());
+
+            // 파일 경로 생성
+            bigImgUrl = "/img/review/" + bigImgName;
+        }
+//        list
+//        for (MultipartFile reviewImgFile : reviewImgFiles) {
+//            if (reviewImgFile != null && !reviewImgFile.isEmpty()) {
+//                String bigOriImgName = reviewImgFile.getOriginalFilename();
+//                String bigImgName = fileService.uploadFile(reviewImgLocation + basePath, bigOriImgName,
+//                        reviewImgFile.getBytes());
+//                String bigImgUrl = "/img/review/" + bigImgName;
+//
+//                bigImgNameList.add(bigImgName);
+//                bigOriImgNameList.add(bigOriImgName);
+//                bigImgUrlList.add(bigImgUrl);
+//            }
+//        }
+
+        // 상품 이미지 정보 저장
+        review.updateReviewImg(miniImgName, miniOriImgName, miniImgUrl,
+                bigImgName, bigOriImgName, bigImgUrl);
+//        list
+//        review.updateReviewImg(miniImgName, miniOriImgName, miniImgUrl,
+//                bigImgNameList, bigOriImgNameList, bigImgUrlList);
+
+        // DB 시간 저장
+        LocalDateTime now = LocalDateTime.now();
+        review.setRegTime(now);
+        review.setUpdateTime(now);
+
+        // 게시글 시간 저장 - 날짜까지만
+        String formattedDate = now.toLocalDate().toString(); // "yyyy-MM-dd"
+        review.setReviewTime(formattedDate);
+
+        // 이벤트 저장
+        reviewRepository.save(review);
+        return review.getId();
     }
 
-    @Transactional
-    public List<ReviewDto> findReviews() {
-        List<ReviewEntity> reviewEntityList = reviewRepository.findAll();
-        List<ReviewDto> reviewDtoList = new ArrayList<>();
-        for (ReviewEntity reviewEntity: reviewEntityList) {
-            reviewDtoList.add(ReviewDto.toReviewDto(reviewEntity));
+    @Transactional(readOnly = true)
+    public ReviewDto getReviewDtl(Long reviewId) {
+        // 해당 id의 상품 정보를 데이터 베이스에서 가져옴, 없으면 예외처리
+        ReviewEntity review = reviewRepository.findById(reviewId)
+                .orElseThrow(EntityNotFoundException::new);
+        // 상품 정보를 eventFormDto 로 변환합니다
+        ReviewDto reviewDto = ReviewDto.of(review);
+        return reviewDto;
+    }
+
+    public Long updateReview(ReviewDto reviewDto, MultipartFile reviewImgFile1, MultipartFile reviewImgFile2) throws Exception {
+        // 상품 수정
+        ReviewEntity review = reviewRepository.findById(reviewDto.getId())
+                .orElseThrow(EntityNotFoundException::new);
+
+        // 파일 경로 설정
+        String basePath = "/review";
+
+        // 이미지 업로드 처리 및 파일명 생성
+        String miniImgName = review.getMiniImgName();
+        String miniOriImgName = review.getMiniOriImgName();
+        String miniImgUrl = review.getMiniImgUrl();
+
+        if (reviewImgFile1 != null && !reviewImgFile1.isEmpty()) {
+
+            // 수정 전 파일 삭제하기
+            String filePath = reviewImgLocation + basePath + "/" + miniImgName;
+            File fileToDelete = new File(filePath);
+            if (fileToDelete.delete()) {
+                System.out.println("파일이 성공적으로 삭제되었습니다.");
+            } else {
+                System.err.println("파일 삭제 중 오류가 발생했습니다.");
+            }
+
+            // 파일명 가져오기
+            miniOriImgName = reviewImgFile1.getOriginalFilename();
+
+            // 파일명 생성
+            miniImgName = fileService.uploadFile(reviewImgLocation + basePath, miniOriImgName,
+                    reviewImgFile1.getBytes());
+
+            // 파일 경로 생성
+            miniImgUrl = "/img/review/" + miniImgName;
         }
 
-        return reviewDtoList;
+        // 이미지 업로드 처리 및 파일명 생성
+        String bigImgName = review.getBigImgName();
+        String bigOriImgName = review.getBigOriImgName();
+        String bigImgUrl = review.getBigImgUrl();
+//        List<String> newBigImgNameList = new ArrayList<>();
+//        List<String> newBigOriImgNameList = new ArrayList<>();
+//        List<String> newBigImgUrlList = new ArrayList<>();
+//        List<MultipartFile> reviewImgFiles = new ArrayList<>();
+
+        if (reviewImgFile2 != null && !reviewImgFile2.isEmpty()) {
+
+            // 수정 전 파일 삭제하기
+            String filePath = reviewImgLocation + basePath + "/" + bigImgName;
+            File fileToDelete = new File(filePath);
+            if (fileToDelete.delete()) {
+                System.out.println("파일이 성공적으로 삭제되었습니다.");
+            } else {
+                System.err.println("파일 삭제 중 오류가 발생했습니다.");
+            }
+
+            // 파일명 가져오기
+            bigOriImgName = reviewImgFile2.getOriginalFilename();
+
+            // 파일명 생성
+            bigImgName = fileService.uploadFile(reviewImgLocation + basePath, bigOriImgName,
+                    reviewImgFile2.getBytes());
+
+            // 파일 경로 생성
+            bigImgUrl = "/img/review/" + bigImgName;
+
+        }
+//        list
+//        for (MultipartFile reviewImgFile : reviewImgFiles) {
+//            if (reviewImgFile != null && !reviewImgFile.isEmpty()) {
+//                String newBigOriImgName = reviewImgFile.getOriginalFilename();
+//                String newBigImgName = fileService.uploadFile(reviewImgLocation + basePath, newBigOriImgName,
+//                        reviewImgFile.getBytes());
+//                String newBigImgUrl = "/img/review/" + newBigImgName;
+//
+//                newBigImgNameList.add(newBigImgName);
+//                newBigOriImgNameList.add(newBigOriImgName);
+//                newBigImgUrlList.add(newBigImgUrl);
+//            }
+//        }
+//
+//        // 기존 이미지 파일 삭제
+//        if (!review.getBigImgNameList().isEmpty()) {
+//            for (String oldBigImgName : review.getBigImgNameList()) {
+//                String filePath = reviewImgLocation + basePath + "/" + oldBigImgName;
+//                File fileToDelete = new File(filePath);
+//                if (fileToDelete.delete()) {
+//                    System.out.println("파일이 성공적으로 삭제되었습니다.");
+//                } else {
+//                    System.err.println("파일 삭제 중 오류가 발생했습니다.");
+//                }
+//            }
+//        }
+
+        // DB 시간 저장
+        LocalDateTime now = LocalDateTime.now();
+        review.setUpdateTime(now);
+
+        reviewDto.setMiniImgName(miniImgName);
+        reviewDto.setMiniOriImgName(miniOriImgName);
+        reviewDto.setMiniImgUrl(miniImgUrl);
+
+        reviewDto.setBigImgName(bigImgName);
+        reviewDto.setBigOriImgName(bigOriImgName);
+        reviewDto.setBigImgUrl(bigImgUrl);
+//        list
+//        reviewDto.setBigImgNameList(newBigImgNameList);
+//        reviewDto.setBigOriImgNameList(newBigOriImgNameList);
+//        reviewDto.setBigImgUrlList(newBigImgUrlList);
+
+        review.updateReview(reviewDto);
+
+        return review.getId();
     }
     @Transactional
     public void updateHits(Long id) {
         reviewRepository.updateHits(id);
     }
+    // 이벤트 삭제
+    public void deleteReview(Long reviewId) {
+        ReviewEntity review = reviewRepository.findById(reviewId)
+                .orElseThrow(EntityNotFoundException::new);
 
-    @Transactional
-    public ReviewDto findById(Long id) {
-        Optional<ReviewEntity> optionalReviewEntity = reviewRepository.findById(id);
-        if (optionalReviewEntity.isPresent()) {
-            ReviewEntity boardEntity = optionalReviewEntity.get();
-            ReviewDto reviewDto = ReviewDto.toReviewDto(boardEntity);
-            System.out.println("reviewId = " + reviewDto.getId());
-            return reviewDto;
-        } else {
-            return null;
+        // 파일 경로 설정
+        String basePath = "/review";
+
+        // 파일 삭제하기
+        if (!review.getMiniImgName().isEmpty()) {
+            String filePath = reviewImgLocation + basePath + "/" + review.getMiniImgName();
+            System.out.println("filePath : " + filePath);
+            File fileToDelete = new File(filePath);
+            if (fileToDelete.delete()) {
+                System.out.println("파일이 성공적으로 삭제되었습니다.");
+            } else {
+                System.err.println("파일 삭제 중 오류가 발생했습니다.");
+            }
         }
+
+        if (!review.getBigImgName().isEmpty()) {
+            String filePath = reviewImgLocation + basePath + "/" + review.getBigImgName();
+            File fileToDelete = new File(filePath);
+            if (fileToDelete.delete()) {
+                System.out.println("파일이 성공적으로 삭제되었습니다.");
+            } else {
+                System.err.println("파일 삭제 중 오류가 발생했습니다.");
+            }
+        }
+
+        // 데이터 삭제
+        reviewRepository.delete(review);
     }
-
-    public ReviewDto update(ReviewDto reviewDto) {
-        ReviewEntity reviewEntity = ReviewEntity.toUpdateEntity(reviewDto);
-        reviewRepository.save(reviewEntity);
-        return findById(reviewDto.getId());
-    }
-
-
-//    public ReviewEntity show(Long id) {
-//        return reviewRepository.findById(id).orElseThrow(NullPointerException::new);
-//    }
-
-
-
-//    public Long saveItem(ReviewDto reviewDto, List<MultipartFile> reviewImgFileList) throws Exception {
-////        상품 등록
-//        ReviewEntity reviewEntity = reviewDto.createItem();
-//        reviewRepository.save(reviewEntity);
-//    }
-
 }

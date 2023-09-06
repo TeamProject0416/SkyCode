@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @MappedSuperclass // 다른엔티티 클래스에서 상속 받아사용할 수 있습니다.
 @EntityListeners(value = {AuditingEntityListener.class}) //생성일과 수정일 자동관리
 @Getter
-
 public abstract class BaseEntity {
     @CreatedDate // 엔티티가 생성될때 해당 필드에 자동으로 생성일 저장
     @Column(updatable = false)
@@ -23,4 +22,5 @@ public abstract class BaseEntity {
     @UpdateTimestamp
     @Column(insertable = false)
     private LocalDateTime updatedTime;
+
 }

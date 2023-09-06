@@ -103,18 +103,13 @@
               <a th:href="@{/review/{id} (id=${review.id})}">
                 <h2 class="userReviewTitle" th:text="${review.reviewTitle}"></h2>
                 <p th:text="${review.contents}"></p>
-                <span th:text="${#temporals.format(review.reviewCreatedTime, 'yyyy-MM-dd')}"></span>
+<!--                <span th:text="${#temporals.format(review.reviewCreatedTime, 'yyyy-MM-dd')}"></span>-->
+                <span th:text="${review.reviewTime}"></span>
               </a>
             </div>
-            <div class="reviewImg" th:if="${review.fileAttached == 1}">
-<!--              <a th:href="@{/reviewShow/{id}/edit (id=${review.id})}"><img th:src="${review.imgUrl}" alt=""></a>-->
-<!--                  <img th:src="@{|/review_img/${review.storedFileName}|}">-->
-<!--                  <img th:src="${review.storedFileName}">-->
-<!--                  <img th:src="@{/review_img/} + ${review.storedFileName}">-->
-              <img th:src="${review.storedFileName}" alt="이미지">
-
-
-              <span th:text="${review.storedFileName}"></span>  <!--확인용-->
+            <div class="reviewImg">
+              <a th:href="'/review/' + ${review.id}"><img th:src="${review.miniImgUrl}"
+                                                        th:alt="${review.miniImgName}"></a>
 
               <!--다중 업로드 할 시 코드-->
 <!--              <th:block th:each="fileName: ${review.storedFileName}">-->

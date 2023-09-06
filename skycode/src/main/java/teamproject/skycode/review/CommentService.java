@@ -34,7 +34,7 @@ public class CommentService {
             CommentDTO commentDTO = CommentDTO.toCommentDTO(commentEntity, reviewId);
             commentDTOList.add(commentDTO);
         }
-        System.out.println("Time111 = " + reviewEntity.getCreatedTime());
+
         return commentDTOList;
     }
 

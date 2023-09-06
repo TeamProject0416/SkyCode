@@ -5,11 +5,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import teamproject.skycode.event.EventFormDto;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 //@RequestMapping("/review")
 @Controller
@@ -22,15 +28,24 @@ public class ReviewController {
 
     @GetMapping(value = "/newReview")
     public String newReviewForm(Model model) {
-//        model.addAttribute("reviewFormDto", new ReviewDto());
+        model.addAttribute("reviewFormDto", new ReviewDto());
         return "review/newReview";
     }
 
     //  리뷰 생성 (Post)
     @PostMapping(value = "/create")
-    public String reviewCreate(ReviewDto reviewDto) throws IOException {
-        reviewService.save(reviewDto);
-        System.out.println("createTime = " + reviewDto.getReviewCreatedTime());
+    public String createReview(@Valid ReviewDto reviewDto, BindingResult bindingResult, Model model,
+                               @RequestParam("reviewImgFile1") MultipartFile reviewImgFile1,
+                               @RequestParam("reviewImgFile2") MultipartFile reviewImgFile2) {
+        if (bindingResult.hasErrors()) {
+            return "review/newReview";
+        }
+        try {
+            reviewService.saveReview(reviewDto, reviewImgFile1, reviewImgFile2);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
+            return "review/newReview";
+        }
         return "redirect:/review/reviewSub";
     }
 
@@ -38,76 +53,72 @@ public class ReviewController {
 //    리뷰 리스트 보기
     @GetMapping(value = "/reviewSub")
     public String reviewSub(Model model) {
-        List<ReviewDto> reviewDtoList = reviewService.findReviews();
-
-        // 리뷰 리스트를 순회하면서 storedFileName 값을 출력
-        for (ReviewDto reviewDto : reviewDtoList) {
-            String storedFileName = reviewDto.getStoredFileName();
-            System.out.println("Stored File Name: " + storedFileName);
-        }
-        // Stored File Name: /review_img/1693917474345_청바지23.jpg 저장은 잘 되지만 경로에 뭐가 더 붙어야 될까..?
-
-        model.addAttribute("reviews", reviewDtoList);
+//        List<ReviewDto> reviewDtoList = reviewService.findAll();
+        List<ReviewEntity> reviewEntityList = reviewRepository.findByAllEntity();
+        model.addAttribute("reviews", reviewEntityList);
         return "review/reviewSub";
     }
 
-//    게시글 디테일 보여주기
-    @GetMapping(value = "/{id}")
-    public String findById(@PathVariable Long id, Model model) {
+//    리뷰 디테일 보여주기
+    @GetMapping(value = "/{reviewId}")
+    public String reviewDetail(@PathVariable("reviewId") Long reviewId, Model model) {
         /*
             해당 게시글의 조회수를 하나 올리고
             게시글 데이터를 가져와서 reviewShow.html에 출력
         */
-        reviewService.updateHits(id);
-        ReviewDto reviewDto = reviewService.findById(id);
+        reviewService.updateHits(reviewId);
 
-        List<CommentDTO> commentDTOList = commentService.findAll(id);
+        ReviewDto reviewDto = reviewService.getReviewDtl(reviewId);
+
+        List<CommentDTO> commentDTOList = commentService.findAll(reviewId);
 
         model.addAttribute("commentList", commentDTOList);
-        model.addAttribute("review", reviewDto);
+//        model.addAttribute("review", reviewDto);
 //        model.addAttribute("page", pageable.getPageNumber());
 
-        model.addAttribute("reviewShow", reviewDto);
+        model.addAttribute("reviewDto", reviewDto);
 
         return "review/reviewShow";
     }
-//    @GetMapping(value = "/reviewShow/{reviewId}")
-//    public String reviewShow(@PathVariable("reviewId") Long reviewId, Model model) {
-////        Review reviewEntityShow = reviewRepository.findById(id).orElse(null);
-////        model.addAttribute("reviewShow", reviewEntityShow);
-//        ReviewDto reviewDto = reviewService.getItemDtl(reviewId);
-//        model.addAttribute("reviewShow", reviewDto);
-//        return "review/reviewShow";
-//    }
 
 
-    //    게시글 수정하기
-    @GetMapping(value = "/{id}/edit")
-    public String reviewEdit(@PathVariable Long id, Model model) {
-//        ReviewEntity reviewEntityEdit = reviewRepository.findById(id).orElse(null);
-//        model.addAttribute("reviewEdit", reviewEntityEdit);
-        ReviewDto reviewDto = reviewService.findById(id);
-        model.addAttribute("reviewEdit", reviewDto);
-        return "review/editReview";
+
+    //    리뷰 수정하기
+    @GetMapping(value = "/{reviewId}/edit")
+    public String reviewEdit(@PathVariable("reviewId") Long reviewId, Model model) {
+        ReviewDto reviewDto = reviewService.getReviewDtl(reviewId);
+        model.addAttribute("reviewFormDto", reviewDto);
+        return "review/newReview";
     }
 
 
 
-//    게시글 업데이트
+//    리뷰 업데이트
     @PostMapping(value = "/update")
-    public String update(@ModelAttribute ReviewDto reviewDto, Model model) {
-//        ReviewEntity reviewEntity = form.toEntity();
-//        ReviewEntity target = reviewRepository.findById(reviewEntity.getId()).orElse(null);
-//
-////        2-2. 기존 데이터가 있다면, 값을 갱신
-//        if(target != null) {
-//            reviewRepository.save(reviewEntity);
-//        }
-//        return "redirect:/reviewShow/" + reviewEntity.getId();
+    public String reviewUpdate(@Valid ReviewDto reviewDto, BindingResult bindingResult,
+                         @RequestParam("eventImgFile1") MultipartFile reviewImgFile1,
+                         @RequestParam("eventImgFile2") MultipartFile reviewImgFile2,
+                         Model model) {
+        if (bindingResult.hasErrors()) {
+            return "review/newReview";
+        }
+        try {
+            reviewService.updateReview(reviewDto,reviewImgFile1,reviewImgFile2);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
+            return "review/newReview";
+        }
+        return "redirect:/review/reviewSub";
+    }
 
-        ReviewDto review = reviewService.update(reviewDto);
-        model.addAttribute("reviewShow", review);
-        return "redirect:/review/" + review.getId();
+//    리뷰 삭제
+    @GetMapping("/{reviewId}/delete")
+    public String deleteEvent(@PathVariable("reviewId") Long reviewId) {
+        // 리뷰 삭제 로직을 구현
+        reviewService.deleteReview(reviewId);
+
+        // 삭제 후 리다이렉션할 URL을 반환
+        return "redirect:/review/reviewSub";
     }
 
 
