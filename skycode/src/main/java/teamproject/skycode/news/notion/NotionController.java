@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @RequestMapping("/news")
 @RequiredArgsConstructor
 
-public class notionControllerdfgdfg {
+public class NotionController {
 
     @Autowired
     private NotionRepository notionRepository;
