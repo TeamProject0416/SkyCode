@@ -4,12 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.modelmapper.ModelMapper;
-import org.springframework.web.multipart.MultipartFile;
-import teamproject.skycode.constant.EventStatus;
 
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter

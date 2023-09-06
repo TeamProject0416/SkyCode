@@ -1,12 +1,8 @@
 package teamproject.skycode.event;
 
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
-import teamproject.skycode.constant.EventStatus;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Entity

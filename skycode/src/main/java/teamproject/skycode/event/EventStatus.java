@@ -1,4 +1,4 @@
-package teamproject.skycode.constant;
+package teamproject.skycode.event;
 
 public enum EventStatus {
     ONGOING, END, WINNER

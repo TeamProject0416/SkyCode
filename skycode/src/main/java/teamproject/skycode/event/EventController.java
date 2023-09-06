@@ -1,22 +1,14 @@
 package teamproject.skycode.event;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import teamproject.skycode.constant.EventStatus;
 
-import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
-
-import static teamproject.skycode.constant.EventStatus.ONGOING;
 
 @Controller
 @RequestMapping("/event")
