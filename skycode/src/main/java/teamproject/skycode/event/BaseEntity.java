@@ -1,14 +1,16 @@
-package teamproject.skycode.login;
-
+package teamproject.skycode.event;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import java.time.LocalDateTime;
 
 @EntityListeners(value = {AuditingEntityListener.class})
 @MappedSuperclass
@@ -17,8 +19,9 @@ public abstract class BaseEntity extends BaseTimeEntity {
 
     @CreatedBy
     @Column(updatable = false)
-    private String createdBy;
+    private String createdBy; // 생성자 정보를 저장
 
     @LastModifiedBy
-    private String modifiedBy;
+    private String modifiedBy; // 수정자 정보를 저장
+
 }
