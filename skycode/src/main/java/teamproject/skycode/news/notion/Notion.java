@@ -4,6 +4,9 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -25,11 +28,21 @@ public class Notion {
     @Column(nullable = false)
     private String type;    // 공지글 종류
 
+//    @Column
+//    @NotBlank(message = "Notion title is required")
+//    private String notionTitle;     // 공지글 제목
+//
+////    @NotNull(message = "Notion content is required")
+////    private String notionContent;   // 공지글 내용
+//    @NotBlank(message = "Notion content is required")
+//    private String notionContent;
     @Column(nullable = false)
-    private String notionTitle;     // 공지글 제목
+    @NotBlank(message = "Notion title is required")
+    private String notionTitle;
 
-    @Column(nullable = false)
-    private String notionContent;   // 공지글 내용
+//    @NotBlank(message = "Notion content is required")
+    @Size(min = 0)
+    private String notionContent;
 
     @CreationTimestamp
     @Column(name = "reg_time")

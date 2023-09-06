@@ -1,25 +1,27 @@
 package teamproject.skycode.news.notion;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zaxxer.hikari.HikariConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.servlet.ModelAndView;
+import javax.validation.Valid;
 import java.util.List;
-
 import java.time.LocalDateTime;
-
 
 @Controller
 @RequestMapping("/news")
 @RequiredArgsConstructor
 
-public class notionControllerdfgdfg {
+public class NotionController {
 
     @Autowired
     private NotionRepository notionRepository;
@@ -30,9 +32,12 @@ public class notionControllerdfgdfg {
     @Autowired
     private NotionViewCountService notionViewCountService;
 
-
     @Autowired
     private NotionViewCountRepository notionViewCountRepository;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+    private HikariConfig validator;
 
 
     @Autowired
@@ -41,24 +46,97 @@ public class notionControllerdfgdfg {
     }
 
 
-    // 공지사항 등록 화면
 
+//    public ResponseEntity<String> createNotion(@RequestBody Notion notion) {
+//        // Convert Notion to NotionForm
+//        NotionForm notionForm = notionMapper.toForm(notion);
+//
+//        // Call the service method
+//        notionService.saveNotion(notionForm);
+//
+//        // ...
+//    }
+
+
+
+    // 공지사항 등록 화면
     @GetMapping(value = "/notionUp")
     public String newsNotionUp(Model model){
         model.addAttribute("notionForm", new NotionForm());
+        System.out.println("등록화면");
         return "news/notion/notionUp";
     }
 
+    @PostMapping("/notion/notionUp")
+    public ModelAndView createNotion(@Valid NotionForm notionForm, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+        System.out.println("왜!!!");
+        if (bindingResult.hasErrors()) {
+            Notion notionEntity = notionForm.toEntity();
+            Notion savedNotion = notionService.saveNotion(notionEntity);
+            System.out.println("왜 안돼");
+            modelAndView.setViewName("news/notion/notionUp");
+            modelAndView.addObject("notion", savedNotion);
+        } else {
+            System.out.println("이유가 뭐야");
+            modelAndView.setViewName("redirect:/news/notion/notion");
+        }
 
-
-    @PostMapping(value = "notionUp/create")
-    public String createNotion(@ModelAttribute NotionForm form){
-
-        Notion notion = form.toEntity();
-        System.out.println("1234");
-        notionRepository.save(notion);
-        return "redirect:/news/notion/notion";
+        return modelAndView;
     }
+
+
+
+//    @PostMapping(value = "notionUp/create")
+//    public String createNotion(@ModelAttribute NotionForm form){
+//        Notion notion = form.toEntity();
+//        System.out.println("1234");
+//        notionRepository.save(notion);
+//        return "redirect:/news/notion/notion";
+//@PostMapping(value = "notionUp/create")
+//public String createNotion(@ModelAttribute NotionForm form, Model model) {
+//    // Check if the required fields are empty
+//    if (form.getNotionTitle() == null || form.getNotionContent() == null) {
+//
+//        model.addAttribute("errorMessage", "Please fill in the form completely.");
+//        System.out.println("오류가 떠야함");
+//        return "news/notion/notionUp"; // Replace with the actual template name
+//    }
+//
+//    Notion notion = form.toEntity();
+//    System.out.println("1234");
+//    notionRepository.save(notion);
+//    return "redirect:/news/notion/notion";
+//}
+//    @PostMapping(value = "notionUp/create")
+//    public String createNotion(@ModelAttribute @Valid NotionForm form, BindingResult result, Model model) {
+//        if (result.hasErrors()) {
+//            model.addAttribute("errorMessage", "Please fill in the form completely.");
+//            System.out.println("오류가 떠야함");
+//            return "news/notion/notionUp"; // Replace with the actual template name
+//        }
+//
+//        Notion notion = form.toEntity();
+//        System.out.println("1234");
+//        notionRepository.save(notion);
+//        return "redirect:/news/notion/notion";
+//    }
+//@PostMapping("/news/notion/create")
+//public ModelAndView createNotion(@Valid NotionForm notionForm, BindingResult bindingResult) {
+//    ModelAndView modelAndView = new ModelAndView();
+//
+//    if (bindingResult.hasErrors()) {
+//        modelAndView.setViewName("redirect:/news/notion/notion");
+//    } else {
+//        Notion notionEntity = notionForm.toEntity(); // Convert NotionForm to Notion
+//        Notion savedNotion = notionService.saveNotion(notionForm);
+//        modelAndView.setViewName("news/notion/notionUp");
+//        modelAndView.addObject("notion");
+//    }
+//
+//    return modelAndView;
+//}
+
 
 
     // 공지사항 등록시 전송하는
@@ -72,35 +150,37 @@ public class notionControllerdfgdfg {
 
     // 공지사항 리스트 출력
     @GetMapping("/notion/notion")
-    public String notionList(Model model, @RequestParam(defaultValue = "0") int page, String sortBy){
+    public String notionList(
+            Model model,
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false) String sortBy
+    ){
         int pageSize = 4;
-        Page<Notion> notionPage = notionRepository.findAll(PageRequest.of(page, pageSize));
+        Pageable pageable;
 
-        List<Notion> notions = notionRepository.findAllOrderNotionByRegistrationTimeDesc();
+
+        if ("popularity".equals(sortBy)) {
+            pageable = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.DESC, "countView"));
+        } else {
+            pageable = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.DESC, "regTime"));
+        }
+
+        Page<Notion> notionPage = notionRepository.findAll(pageable);
+        List<Notion> notions = notionPage.getContent();
 
         long totalNotionCount = notionService.getTotalNotionCount();
         model.addAttribute("totalNotionCount", totalNotionCount);
-        if ("popularity".equals(sortBy)) {
-            notions = notionService.getAllNotionsSortedByPopularity();
-            System.out.println("될까");
-        } else {
-            // 날짜 내림차순으로 정렬
-            // Default to sorting by date (most recent first)
-            notions = notionService.getAllNotionsSortedByDate();
-        }
+
         System.out.println("된다");
 
         model.addAttribute("notions", notions);
         model.addAttribute("notions", notionPage);
-
-
 
         return "/news/notion/notion";
     }
 
     @PostMapping("/notion/notion")
     public String submitNotion(@ModelAttribute NotionForm notionForm, Model model) {
-
         Notion savedNotion = notionService.saveNotion(notionForm); // Save or update inquiry
         System.out.println("제발1");
         if (savedNotion != null) {
@@ -125,14 +205,12 @@ public class notionControllerdfgdfg {
         Notion notion = notionService.getNotionById(id);
 
         if (notion != null) {
-
 //            NotionViewCount viewCount = notionViewCountService.incrementViewCount(id);
             notion.setCountView(notion.getCountView() + 1); // Increment the view count
             notionRepository.save(notion);
 
             model.addAttribute("notion", notion);
             model.addAttribute("viewCount", notion.getCountView());
-
             System.out.println("좀");
             return "news/notion/notionSub"; // Adjust the view name
         }
@@ -141,7 +219,6 @@ public class notionControllerdfgdfg {
         // Handle case when inquiry is not found
         return "error"; // Change to the appropriate view name
     }
-
 
     @PostMapping("/notion/delete")
     public String deleteNotion(@RequestParam Long notionId){

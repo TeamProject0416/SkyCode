@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import teamproject.skycode.news.inquiry.Inquiry;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -24,6 +23,21 @@ public class NotionService {
 
     @Transactional
     public Notion saveNotion(NotionForm notionForm){
+//        if (notionForm.getId() != null) {
+//            // Existing notion, fetch it first
+//            Notion existingNotion = getNotionById(notionForm.getId());
+//            if (existingNotion != null) {
+//                // Update existing notion with form data
+//                existingNotion.setType(notionForm.getType());
+//                existingNotion.setNotionTitle(notionForm.getNotionTitle());
+//                existingNotion.setNotionContent(notionForm.getNotionContent());
+//                return notionRepository.save(existingNotion);
+//            }
+//        }
+        if (notionForm.getType() == null || notionForm.getNotionTitle() == null || notionForm.getNotionContent() == null) {
+            throw new IllegalArgumentException("Notion data cannot contain null values.");
+        }
+
         if (notionForm.getId() != null) {
             // Existing notion, fetch it first
             Notion existingNotion = getNotionById(notionForm.getId());
@@ -86,5 +100,9 @@ public class NotionService {
 
     public void editNotion(Notion notion) {
         notionRepository.save(notion);
+    }
+
+    public Notion saveNotion(Notion notionEntity) {
+        return notionRepository.save(notionEntity);
     }
 }

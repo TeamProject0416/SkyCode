@@ -21,8 +21,7 @@
 <section>
     <div class="nyNotionUpWarp">
         <h2>공지사항 작성하기</h2>
-<!--        <form id="notion" th:action="@{/news/notionUp/create}" method="post" th:object="${notionForm}" enctype="multipart/form-data">-->
-        <form id="notion" th:action="@{/news/notionUp/create}" method="post" th:object="${notionForm}" enctype="multipart/form-data">
+        <form id="notion" th:action="@{/news/notion/notionUp}" method="post" th:object="${notionForm}" enctype="multipart/form-data">
             <div class="nyNotionUpBox">
                 <div class="nyNotionUpInBox">
                     <div class="nySearch">
@@ -39,11 +38,13 @@
                     <div class="nyNotionUpContent">
                         <div>공지 제목</div>
                         <input id="title" class="nyNotionTitle" th:field="*{notionTitle}" type="text"
-                               name="notionTitle" placeholder="공지 제목을 적어주세요"/>
+                               name="notionTitle" placeholder="공지 제목을 적어주세요" required/>
+                               <span th:if="${#fields.hasErrors('notionTitle')}" th:errors="*{notionTitle}"></span>
                         <div class="nyNotionUpContent">
                             <div>공지 내용</div>
                             <textarea id="content" class="nyNotionText" th:field="*{notionContent}" type="text"
-                                      name="notionContent" placeholder="공지 내용을 적어주세요"></textarea>
+                                      name="notionContent" placeholder="공지 내용을 적어주세요" required></textarea>
+                            <span th:if="${#fields.hasErrors('notionContent')}" th:errors="*{notionContent}"></span>
                         </div>
                     </div>
                 </div>

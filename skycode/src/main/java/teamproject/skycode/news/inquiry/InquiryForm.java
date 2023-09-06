@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.persistence.PrePersist;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -18,8 +19,12 @@ public class InquiryForm {
     private Long id;
     private String type;
     private boolean isPrivate;
-    private String inquiryTitle;
+//    private String inquiryTitle
+    @NotBlank(message = "1 대 1 문의의 내용은 필수 입력값 입니다")
     private String inquiryContent;
+
+    @NotBlank(message = "1 대 1 문의의 제목은 필수 입력값 입니다")
+    private String inquiryTitle;
 
 
     public Inquiry toEntity() {

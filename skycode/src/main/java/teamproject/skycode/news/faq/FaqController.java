@@ -30,10 +30,11 @@ public class FaqController {
         return "news/faq/faqUp";
     }
 
-    @PostMapping(value = "/faq/create")
+    @PostMapping(value = "/faq/faqUp")
     public String createFaq(@ModelAttribute FaqForm faqForm){
         Faq faq = faqForm.toEntity();
         faqRepository.save(faq);
+        System.out.println("faq보내기");
         return "news/faq/faq";
     }
 
