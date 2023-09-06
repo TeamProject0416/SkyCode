@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import teamproject.skycode.news.inquiry.Inquiry;
-import teamproject.skycode.news.inquiry.InquiryForm;
 
 import java.util.List;
 
@@ -14,7 +12,7 @@ import java.util.List;
 @RequestMapping("/news")
 @RequiredArgsConstructor
 
-public class notionController {
+public class NotionController {
 
     @Autowired
     private NotionRepository notionRepository;
