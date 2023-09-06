@@ -3,6 +3,7 @@ package teamproject.skycode.event;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.modelmapper.ModelMapper;
 
 import javax.validation.constraints.NotBlank;
 
