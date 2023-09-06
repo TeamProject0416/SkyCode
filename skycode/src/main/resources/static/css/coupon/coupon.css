@@ -39,6 +39,26 @@
     line-height: 45px;
 }
 
+.currentPage {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 15px 0;
+    border-top: 1px solid #999;
+}
+
+.couponPage .currentPage span a{
+    padding: 0 20px 0 20px;
+    color: #ccc;
+    font-size: 2rem;
+}
+
+.couponPage .currentPage .active a{
+    color: #000;
+}
+
+.couponPage .currentPage span:first-of-type{
+    border-right: 1px solid #ccc;
+}
 
 /* couponMain */
 /* 216 358 cards 1080 margin 30*/

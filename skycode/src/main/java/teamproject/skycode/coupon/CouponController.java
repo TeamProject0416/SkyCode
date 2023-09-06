@@ -17,11 +17,18 @@ public class CouponController {
     private final CouponService couponService;
     private final CouponRepository couponRepository;
 
-    @GetMapping(value = "/list") // 쿠폰 목록 보이기
+    @GetMapping(value = "/list") // 진행중인 쿠폰 목록 보이기
     public String couponList(Model model) {
-        List<CouponEntity> coupons = couponRepository.findAll();
+        List<CouponEntity> coupons = couponRepository.findByONGOING();
         model.addAttribute("coupons", coupons);
         return "coupon/couponList";
+    }
+
+    @GetMapping(value = "/end") // 종료된 쿠폰 목록 보이기
+    public String couponEnd(Model model) {
+        List<CouponEntity> coupons = couponRepository.findByEND();
+        model.addAttribute("coupons", coupons);
+        return "coupon/couponEnd";
     }
 
     @GetMapping(value = "/new") // 쿠폰 만들기
@@ -39,8 +46,6 @@ public class CouponController {
         try {
             couponService.saveCoupon(couponFormDto);
         } catch (Exception e) {
-            e.toString();
-            e.printStackTrace(); // 예외 정보를 콘솔에 출력
 
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
             return "coupon/couponForm";
