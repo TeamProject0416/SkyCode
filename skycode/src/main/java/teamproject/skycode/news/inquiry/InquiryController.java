@@ -16,7 +16,6 @@ import java.util.Optional;
 @RequestMapping("/news")
 public class inquiryController {
 
-
     @Autowired
     private InquiryRepository inquiryRepository;
 
