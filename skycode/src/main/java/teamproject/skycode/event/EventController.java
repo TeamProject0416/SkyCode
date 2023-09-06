@@ -18,34 +18,34 @@ public class EventController {
     private final EventService eventService;
     private final EventRepository eventRepository;
 
-    @GetMapping(value = "/ongoing")
+    @GetMapping(value = "/ongoing") // 진행 페이지
     public String ongoingEvent(Model model) {
         List<EventEntity> events = eventRepository.findByONGOING();
         model.addAttribute("events", events);
         return "/event/eventongoing";
     }
 
-    @GetMapping(value = "/end")
+    @GetMapping(value = "/end") // 종료 페이지
     public String endEvent(Model model) {
         List<EventEntity> events = eventRepository.findByEND();
         model.addAttribute("events", events);
         return "/event/eventend";
     }
 
-    @GetMapping(value = "/winner")
+    @GetMapping(value = "/winner") // 당첨자 페이지
     public String eventWinner(Model model) {
         List<EventEntity> events = eventRepository.findByWINNER();
         model.addAttribute("events", events);
         return "/event/eventwinner";
     }
 
-    @GetMapping(value = "/new")
+    @GetMapping(value = "/new") // 이벤트 등록
     public String newEventForm(Model model) {
         model.addAttribute("eventFormDto", new EventFormDto());
         return "event/eventForm";
     }
 
-    @PostMapping(value = "/new")
+    @PostMapping(value = "/new") // 이벤트 등록
     public String createReview(@Valid EventFormDto eventFormDto, BindingResult bindingResult, Model model,
                                @RequestParam("eventImgFile1") MultipartFile eventImgFile1,
                                @RequestParam("eventImgFile2") MultipartFile eventImgFile2) {
@@ -62,21 +62,21 @@ public class EventController {
         return "redirect:/event/ongoing";
     }
 
-    @GetMapping(value = "/{eventId}")
+    @GetMapping(value = "/{eventId}") // 이벤트 상세페이지
     public String eventDtl(@PathVariable("eventId") Long eventId, Model model) {
         EventFormDto eventFormDto = eventService.getEventDtl(eventId);
         model.addAttribute("eventFormDto", eventFormDto);
         return "event/eventSub";
     }
 
-    @GetMapping(value = "/{eventId}/edit")
+    @GetMapping(value = "/{eventId}/edit") // 이벤트 수정폼
     public String eventEdit(@PathVariable("eventId") Long eventId, Model model) {
         EventFormDto eventFormDto = eventService.getEventDtl(eventId);
         model.addAttribute("eventFormDto", eventFormDto);
         return "event/eventForm";
     }
 
-    @PostMapping(value = "/update")
+    @PostMapping(value = "/update") // 이벤트 수정
     public String eventUpdate(@Valid EventFormDto eventFormDto, BindingResult bindingResult,
                               @RequestParam("eventImgFile1") MultipartFile eventImgFile1,
                               @RequestParam("eventImgFile2") MultipartFile eventImgFile2,
@@ -93,7 +93,7 @@ public class EventController {
         return "redirect:/event/ongoing";
     }
 
-    @GetMapping("/{eventId}/delete")
+    @GetMapping("/{eventId}/delete") // 이벤트 삭제
     public String deleteEvent(@PathVariable("eventId") Long eventId) {
         // 이벤트 삭제 로직을 구현
         eventService.deleteEvent(eventId);

@@ -27,7 +27,7 @@
             <div>
                 <label class="couponName">쿠폰명</label>
                 <input type="text" th:field="*{couponName}" name="couponName"
-                       placeholder="이름을 입력해주세요">
+                       placeholder="쿠폰 이름을 입력해주세요">
             </div>
             <p th:if="${#fields.hasErrors('couponName')}" th:errors="*{couponName}" class="fieldError">Incorrect
                 data</p>
@@ -40,26 +40,32 @@
             </div>
 
             <div>
+                <label class="couponPrice">쿠폰 수량</label>
+                <input type="number" th:field="*{couponNum}" name="couponNum"
+                       placeholder="ex) 1000(장)">
+            </div>
+
+            <div>
                 <label class="couponPrice">할인 금액(원)</label>
-                <input type="text" th:field="*{couponPrice}" name="couponPrice"
+                <input type="number" th:field="*{couponPrice}" name="couponPrice"
                        placeholder="ex) 1000(원)">
             </div>
 
             <div>
                 <label class="couponRatio">할인 비율(%)</label>
-                <input type="text" th:field="*{couponRatio}" name="couponRatio"
-                       placeholder="ex) 10%">
+                <input type="number" th:field="*{couponRatio}" name="couponRatio"
+                       placeholder="ex) 10%" max="100">
             </div>
 
             <div>
                 <label class="maxPrice">최대 할인 금액(원)</label>
-                <input type="text" th:field="*{maxPrice}" name="maxPrice"
+                <input type="number" th:field="*{maxPrice}" name="maxPrice"
                        placeholder="ex) 1000(원)">
             </div>
 
             <div>
                 <label class="useMinPrice">최소 사용 금액(원)</label>
-                <input type="text" th:field="*{useMinPrice}" name="useMinPrice"
+                <input type="number" th:field="*{useMinPrice}" name="useMinPrice"
                        placeholder="ex) 10000(원)">
             </div>
 
