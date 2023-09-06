@@ -2,7 +2,6 @@
     position: relative;
     top: 100px;
     width: 1200px;
-    height: 900px;
     margin: 0 auto;
 }
 
@@ -41,6 +40,21 @@ input {
     border: 1px solid #ddd;
 }
 
+.formContainer>div{
+    padding: 8px 0;
+}
+
+.pack{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.pack>div{
+width: 48%;
+}
+
+
 /* btn */
 .btnArea {
     width: 100%;
@@ -66,5 +80,5 @@ input {
 .cancelBtn {
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: 8px;
 }
