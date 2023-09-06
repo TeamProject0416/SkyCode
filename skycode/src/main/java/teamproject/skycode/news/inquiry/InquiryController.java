@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/news")
-public class inquiryControllerdfdf {
+public class InquiryController {
 
 
     @Autowired
