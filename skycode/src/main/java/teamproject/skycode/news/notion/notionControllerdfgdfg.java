@@ -2,23 +2,20 @@ package teamproject.skycode.news.notion;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import teamproject.skycode.news.inquiry.InquiryRepository;
 
 import java.util.List;
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
 
 @Controller
 @RequestMapping("/news")
 @RequiredArgsConstructor
 
-public class notionController {
+public class notionControllerdfgdfg {
 
     @Autowired
     private NotionRepository notionRepository;
@@ -66,7 +63,10 @@ public class notionController {
 
     // 공지사항 리스트 출력
     @GetMapping("/notion/notion")
-    public String notionList(Model model, @RequestParam(required = false) String sortBy){
+    public String notionList(Model model, @RequestParam(defaultValue = "0") int page, String sortBy){
+        int pageSize = 4;
+        Page<Notion> notionPage = notionRepository.findAll(PageRequest.of(page, pageSize));
+
         List<Notion> notions = notionRepository.findAllOrderNotionByRegistrationTimeDesc();
 
         long totalNotionCount = notionService.getTotalNotionCount();
@@ -82,6 +82,8 @@ public class notionController {
         System.out.println("된다");
 
         model.addAttribute("notions", notions);
+        model.addAttribute("notions", notionPage);
+
 
         return "/news/notion/notion";
     }
@@ -127,5 +129,45 @@ public class notionController {
         return "error"; // Change to the appropriate view name
     }
 
+    @PostMapping("/notion/delete")
+    public String deleteNotion(@RequestParam Long notionId){
+        notionService.deleteNotion(notionId);
+        System.out.println("삭제");
+        return "redirect:/news/notion/notion";
+    }
+
+    @GetMapping("/notion/edit/{notionId}")
+    public String showEditForm(@PathVariable Long notionId, Model model){
+
+        Notion notion = notionService.findById(notionId);
+
+        NotionForm notionForm = new NotionForm();
+        notionForm.setId(notion.getId());
+        notionForm.setType(notion.getType());
+        notionForm.setNotionTitle(notion.getNotionTitle());
+        notionForm.setNotionContent(notion.getNotionContent());
+
+        model.addAttribute("notionForm", notionForm);
+        System.out.println("수정중");
+
+        return "news/notion/notionEdit";
+    }
+
+    @PostMapping("/notionUp/edit")
+    public String editNotion(@ModelAttribute("notionForm") NotionForm notionForm){
+
+        Notion existingNotion = notionService.findById(notionForm.getId());
+
+        // 기존 Notion의 필드를 업데이트합니다.
+        existingNotion.setType(notionForm.getType());
+        existingNotion.setNotionTitle(notionForm.getNotionTitle());
+        existingNotion.setNotionContent(notionForm.getNotionContent());
+        existingNotion.setRegTime(LocalDateTime.now());
+
+        // 수정된 Notion을 저장합니다.
+        notionService.editNotion(existingNotion);
+
+        return "redirect:/news/notion/notionSub/" + existingNotion.getId();
+    }
 
 }

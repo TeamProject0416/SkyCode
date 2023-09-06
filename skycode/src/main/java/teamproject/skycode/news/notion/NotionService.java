@@ -1,6 +1,7 @@
 package teamproject.skycode.news.notion;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import teamproject.skycode.news.inquiry.Inquiry;
@@ -64,4 +65,26 @@ public class NotionService {
         return notionRepository.findAllByOrderByCountViewDesc();
     }
 
+    @Transactional
+    public void deleteNotion(Long notionId) {
+        try {
+            Notion notion = notionRepository.findById(notionId).orElse(null);
+            if (notion != null){
+                notionRepository.delete(notion);
+            } else {
+                throw new EmptyResultDataAccessException("문의글을 찾을 수 없습니다", 1);
+            }
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Transactional
+    public Notion findById(Long id) {
+        return notionRepository.findById(id).orElse(null);
+    }
+
+    public void editNotion(Notion notion) {
+        notionRepository.save(notion);
+    }
 }

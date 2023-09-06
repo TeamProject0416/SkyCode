@@ -70,8 +70,9 @@
             </tbody>
         </table>
         <div class="nyInquiryPeger">
-            <div class="nyInquiryPegerBtn nyInquiryClick"><a href="#">1</a></div>
-            <div class="nyInquiryPegerBtn"><a href="#">2</a></div>
+            <div class="nyInquiryPegerBtn" th:each="i : ${#numbers.sequence(0, inquiries.totalPages - 1)}">
+                <a th:href="@{/news/inquiry/inquiryList(page=${i})}" th:text="${i + 1}"></a>
+            </div>
         </div>
         <div class="nyInquiryGoText">
             <a th:href="@{/news/inquiry}">문의쓰기</a>

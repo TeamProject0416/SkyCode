@@ -22,9 +22,10 @@
     <div class="nyNotionUpWarp">
         <h2>공지사항 작성하기</h2>
 <!--        <form id="notion" th:action="@{/news/notionUp/create}" method="post" th:object="${notionForm}" enctype="multipart/form-data">-->
-        <form id="notion" th:action="@{/news/notionUp/create}" method="post" th:object="${notionForm}" enctype="multipart/form-data">
+        <form id="notion" th:action="@{/news/notionUp/edit}" method="post" th:object="${notionForm}"  enctype="multipart/form-data">
             <div class="nyNotionUpBox">
                 <div class="nyNotionUpInBox">
+                    <input type="hidden" th:field="*{id}" />
                     <div class="nySearch">
                         <label for="type">카테코리: </label>
                         <select id="type" name="type" th:field="*{type}">
@@ -52,7 +53,7 @@
                     <label for="file">첨부 파일: </label>
                     <input id="file" type="file" name="file" class="fileUpload" accept=".jpg, .jpeg, .png, .pdf">
                 </div>
-                <button id="submit" type="submit">공지사항 등록</button>
+                <button id="submit" type="submit">공지사항 수정</button>
             </div>
         </form>
     </div>

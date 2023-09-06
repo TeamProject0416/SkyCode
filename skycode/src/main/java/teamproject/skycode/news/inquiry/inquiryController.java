@@ -1,10 +1,13 @@
 package teamproject.skycode.news.inquiry;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import teamproject.skycode.news.notion.Notion;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -52,7 +55,9 @@ public class inquiryController {
 
     // 1 대 1 문의 리스트 화면 출력
     @GetMapping("/inquiry/inquiryList")
-    public String getInquiries(Model model, @RequestParam(required = false) String sortBy) {
+    public String getInquiries(Model model, @RequestParam(defaultValue = "0") int page, String sortBy) {
+        int pageSize = 10;
+        Page<Inquiry> inquiryPage = inquiryRepository.findAll(PageRequest.of(page, pageSize));
         // 리스트들의 등록시간 호출
         List<Inquiry> inquiries = inquiryRepository.findAllOrderByRegistrationTimeDesc();
 
@@ -71,6 +76,8 @@ public class inquiryController {
         System.out.println("된다");
 
         model.addAttribute("inquiries", inquiries);
+        // 페이지 노출문의글 제한
+        model.addAttribute("inquiries", inquiryPage);
 //        return "inquiry-list"; // This should match your Thymeleaf template name
         return "news/inquiry/inquiryList"; // 혹은 다른 페이지로 이동
 
