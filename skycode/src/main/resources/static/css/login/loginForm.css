@@ -63,7 +63,7 @@ select {
     width: 500px;
     height: 90px;
     margin: 0 auto;
-
+    border: 1px solid lightblue;
 }
 
 .oej_n {
@@ -126,32 +126,35 @@ select {
     position: relative;
     margin: 0 auto;
     padding-top: -25px;
+    border: 1px solid lightsalmon;
 }
 
 
 .oej_num {
     margin: 0 auto;
-    height: 20px;
+    height: 20px;  
     margin-top: 15px;
-
+    background: hotpink;
 }
 
 .oej_phone {
     width: 500px;
     padding-left: 5px;
     height: 35px;
-
+    background: lawngreen;
+    
 }
 
 
 .oej_phonenumber{
     display: flex;
-
+    /* height: 35px; */
+    background: lavenderblush;
 }
 
 /* 생년월일 */
 .oej_birthday{
-
+   
     position: relative;
     width: 500px;
     height: 90px;
@@ -174,6 +177,7 @@ select {
     position: relative;
     margin: 0 auto;
     padding-top: 15px;
+    border: 1px solid rebeccapurple;
 }
 
 .oej_em {
@@ -181,19 +185,22 @@ select {
     top: 0px;
     left: -8px;
     margin-left: 10px;
-
+    /* border: 1px solid lawngreen */
 }
-
 
 
 .oej_mail {
-    width: 375px;
+    width: 180px;
     padding-left: 5px;
     height: 35px;
-
+    /* margin-left: -30px; */
 }
 
-
+.oej_mail2 {
+    width: 180px;
+    padding-left: 5px;
+    height: 35px;
+}
 
 .oej_select {
   height: 20px;
@@ -208,7 +215,7 @@ select {
     height: 90px;
     position: relative;
     margin: 0 auto;
-
+    
 }
 
 .oej_add {
@@ -235,5 +242,3 @@ select {
     border: none;
     color: #fff;
 }
-
-

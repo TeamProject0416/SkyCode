@@ -1,18 +1,14 @@
 package teamproject.skycode.news.inquiry;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.time.LocalDateTime;
 import java.util.Collections;
-
 import java.util.List;
 
 @Controller
@@ -26,12 +22,13 @@ public class inquiryControllerdfdf {
     @Autowired
     private InquiryViewCountRepository inquiryViewCountRepository;
 
+
+
     @Autowired
     private InquiryService inquiryService;
 
     @Autowired
     private InquiryViewCountService inquiryViewCountService;
-
 
     @Autowired
     public void InquiryController(InquiryRepository inquiryRepository) {
@@ -92,14 +89,11 @@ public class inquiryControllerdfdf {
         System.out.println("제발1");
         if (savedInquiry != null) {
             Long id = savedInquiry.getId(); // Get the id of the saved/updated inquiry
-
             InquiryViewCount viewCount = inquiryViewCountService.incrementViewCount(id);
-
 
             // Now, based on the id, determine the URL to redirect to
             String redirectUrl = "redirect:/news/inquiry/show/" + id; // Adjust the URL pattern according to your mapping
             System.out.println("제발2");
-
 
             model.addAttribute("viewCount", viewCount.getCount());
 
@@ -114,14 +108,12 @@ public class inquiryControllerdfdf {
     }
 
 
-
     // 1 대 1 문의 서브페이지 화면 출력
     @GetMapping("/inquiry/show/{id}")
     public String showInquiryById(@PathVariable Long id, Model model) {
         Inquiry inquiry = inquiryService.getInquiryById(id);
 
         if (inquiry != null) {
-
             // Increment view count and save
             inquiry.setViewCount(inquiry.getViewCount() + 1); // Increment the view count
             inquiryRepository.save(inquiry); // Save the updated inquiry
@@ -215,6 +207,7 @@ public class inquiryControllerdfdf {
         // 수정된 상세 페이지로 리다이렉트
         return "redirect:/news/inquiry/show/" + inquiry.getId();
     }
+
 
 }
 

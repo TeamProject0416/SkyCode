@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link th:href="@{/css/reset.css}" rel="stylesheet">
+  <link th:href="@{/css/typo.css}" rel="stylesheet">
+  <link th:href="@{/css/login/loginForm.css}" rel="stylesheet">
+  <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+  <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+
+
+
+
+</head>
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+
+<section class="oej_container">
+  <form action="/login/new" role="form" method="post" th:object="${memberFormDto}">
+    <div class="oej">
+      <div class="header_oej">회원가입</div>
+
+      <div class="oej_name">
+        <label th:for="name">이름</label>
+        <input class="oej_n" th:field="*{name}" type="text" placeholder="예) 홍길동">
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Incorrect data</p>
+      </div>
+
+      <div class="oej_id">
+        <label th:for="userId">아이디</label>
+        <input class="oej_text" type="text" placeholder="예) skycode">
+        <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="fieldError">Incorrect data</p>
+      </div>
+
+      <div class="oej_pw">
+        <label th:for="password">비밀번호</label>
+        <input class="oej_pass" type="password" placeholder="비밀번호는 8자 이상, 16자 이하로 입력해주세요">
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect data
+        </p>
+      </div>
+
+      <div class="oej_pwcheck">
+        <label th:for="confirmPassword">*비밀번호확인</label>
+        <input class="oej_pwchecked" type="confirmPassword" placeholder="비밀번호를 다시 입력해 주세요">
+        <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="fieldError">Incorrect data
+        </p>
+      </div>
+
+      <div class="oej_number">
+        <label th:for="phone" class="oej_ber">전화번호</label>
+        <div class="oej_phonenumber">
+          <select class="oej_num">
+            <option value="">대한민국 +82</option>
+          </select>
+          <input class="oej_phone" type="tel" placeholder="예) 010-1234-5678">
+        </div>
+        <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="fieldError">Incorrect data</p>
+      </div>
+
+      <div class="oej_birthday">
+        <label th:for="birthday"> 생년월일</label>
+        <input class="oej_y" type="date" value="xxx" min="yyy" max="zzz">
+        <p th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" class="fieldError">Incorrect data
+        </p>
+      </div>
+
+      <!-- 이메일 -->
+      <div class="oej_emailid">
+
+        <label th:for="email" class="oej_em">이메일</label>
+        <input class="oej_mail" type="tel" placeholder="" maxlength="18" /> @
+        <input class="oej_mail2" type="tel" placeholder="" maxlength="18">
+        <select class="oej_select" title="이메일 도메인 주소 선택" onclick="setEmailDomain(this.value);return false;">
+          <option value="">-선택-</option>
+          <option value="">-직접입력하기-</option>
+          <option value="naver.com">naver.com</option>
+          <option value="google.com">google.com</option>
+          <option value="hanmail.net">hanmail.net</option>
+          <option value="nate.com">nate.com</option>
+          <option value="kakao.com">kakao.com</option>
+          <option value="kakao.com">gmail.com</option>
+        </select>
+        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect data</p>
+      </div>
+
+
+      <div class="oej_address">
+        <label th:for="address">주소</label>
+        <input class="oej_add" type="text" placeholder="상세한 주소를 입력해 주세요">
+        <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="fieldError">Incorrect data</p>
+      </div>
+
+      <!-- 회원 가입 버튼 -->
+      <!-- 로그인 -->
+<!--      <button type="button" class="oej_join" onClick="location.href='/'">JOIN US</button>-->
+      <button id="submit" class="oej_join">JOIN US</button>
+
+    </div>
+  </form>
+</section>
+
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script th:inline="javascript">
+        $(document).ready(function(){
+            var errorMessage = [[${errorMessage}]];
+            if(errorMessage != null){
+                alert(errorMessage);
+            }
+        });
+
+    </script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+</body>
+
+</html>

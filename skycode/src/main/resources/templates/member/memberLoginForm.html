@@ -21,9 +21,6 @@
 </th:block>
 
 <body>
-
-<!-- 로그인 -->
-
 <header th:replace="~{fragments/sub/header::header}"></header>
 
 
@@ -32,27 +29,25 @@
     <div class="oej_header">
         <p>LOGIN</p>
     </div>
-    <form action="/member/login" method="post">
+    <form  action="/new" method="POST">
         <div class="oej_input-box">
-<!--            <input class="oej_username" type="text" id="username" name="memberEmail" placeholder="ID">-->
-            <input class="oej_username" type="text" id="username" name="memberId" placeholder="ID">
+            <input class="oej_username" type="text" id="username" placeholder="ID">
             <label th:for="username"></label>
         </div>
 
         <div class="oej_input-box">
-            <input class="oej_password" type="password" id="password"  name="memberPassword" placeholder="PASSWORD">
+            <input class="oej_password" type="password" id="password" placeholder="PASSWORD">
             <label th:for="password"></label>
         </div>
 
-        <input th:value="${loginErr}" type="text" id="loginRslt" hidden="true"/>
-        <input class="oej_log1" type="submit" value="LOGIN">
+        <button type="button" class="oej_log1" onClick="location.href='/'">LOGIN</button>
+        <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
+
 
         <div class="oej_connect"><i class="fa-solid fa-unlock-keyhole">보안접속</i> </div>
 
 
-<!--        <button type="submit" class="oej_us" onClick="location.href='/member/save'">JOIN US</button>-->
-<!--        <button id="submit" class="oej_us" onclick="window.location.href='/member/save'">JOIN US</button>-->
-        <a href="/member/save"><button type="button" class="oej_us">JOIN US</button></a>
+        <button type="button" class="oej_us" onClick="location.href='/new'">JOIN US</button>
         <div class="oej_search">
             <div class="oej_na">
                 <img src="../subImages/naver2.png" alt="">
@@ -69,7 +64,7 @@
                 <a href="#">카카오 로그인</a>
             </div>
         </div>
-    </form>
+</form>
 </section>
 
 
@@ -78,15 +73,6 @@
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
 
-$(document).ready(function () {
-
-if($("#loginRslt").val() == "NE"){
-alert("없는 이메일");
-}else if($("#loginRslt").val() == "PE"){
-alert("틀린 비밀번호");
-}
-
-});
 
 </body>
 
