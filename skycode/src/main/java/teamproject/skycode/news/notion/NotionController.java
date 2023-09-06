@@ -2,14 +2,18 @@ package teamproject.skycode.news.notion;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 import java.time.LocalDateTime;
+
 
 @Controller
 @RequestMapping("/news")
@@ -26,6 +30,7 @@ public class NotionController {
     @Autowired
     private NotionViewCountService notionViewCountService;
 
+
     @Autowired
     private NotionViewCountRepository notionViewCountRepository;
 
@@ -37,6 +42,7 @@ public class NotionController {
 
 
     // 공지사항 등록 화면
+
     @GetMapping(value = "/notionUp")
     public String newsNotionUp(Model model){
         model.addAttribute("notionForm", new NotionForm());
@@ -44,13 +50,16 @@ public class NotionController {
     }
 
 
+
     @PostMapping(value = "notionUp/create")
     public String createNotion(@ModelAttribute NotionForm form){
+
         Notion notion = form.toEntity();
         System.out.println("1234");
         notionRepository.save(notion);
         return "redirect:/news/notion/notion";
     }
+
 
     // 공지사항 등록시 전송하는
 //    @PostMapping(value = "notionUp/create")
@@ -85,11 +94,13 @@ public class NotionController {
         model.addAttribute("notions", notionPage);
 
 
+
         return "/news/notion/notion";
     }
 
     @PostMapping("/notion/notion")
     public String submitNotion(@ModelAttribute NotionForm notionForm, Model model) {
+
         Notion savedNotion = notionService.saveNotion(notionForm); // Save or update inquiry
         System.out.println("제발1");
         if (savedNotion != null) {
@@ -114,12 +125,14 @@ public class NotionController {
         Notion notion = notionService.getNotionById(id);
 
         if (notion != null) {
+
 //            NotionViewCount viewCount = notionViewCountService.incrementViewCount(id);
             notion.setCountView(notion.getCountView() + 1); // Increment the view count
             notionRepository.save(notion);
 
             model.addAttribute("notion", notion);
             model.addAttribute("viewCount", notion.getCountView());
+
             System.out.println("좀");
             return "news/notion/notionSub"; // Adjust the view name
         }
@@ -128,6 +141,7 @@ public class NotionController {
         // Handle case when inquiry is not found
         return "error"; // Change to the appropriate view name
     }
+
 
     @PostMapping("/notion/delete")
     public String deleteNotion(@RequestParam Long notionId){
