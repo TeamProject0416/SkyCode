@@ -37,7 +37,7 @@ public class MemberDTO {
     @NotBlank(message = "주소를 입력해 주세요.")
     private String memberAddress;
 
-    @NotBlank(message ="휴대전화를 입력해 주세요.")
+    @NotNull(message ="휴대전화를 입력해 주세요.")
     private String memberPhone;
 
     @NotBlank(message ="생일을 입력해 주세요.")

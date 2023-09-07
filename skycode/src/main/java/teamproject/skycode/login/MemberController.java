@@ -5,7 +5,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -192,6 +194,7 @@ public class MemberController {
 //        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
 //        return "member/login";
 //    }
+
 
 
 
