@@ -9,14 +9,14 @@
   <link th:href="@{/css/sub/header.css}" rel="stylesheet">
   <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
 
-
   <th:block layout:fragment="css">
     <style>
-        .fieldError {
-            color: #bd2130;
-        }
+      .fieldError {
+        color: #bd2130;
+      }
     </style>
   </th:block>
+
 </head>
 <body>
 
@@ -24,34 +24,35 @@
 
   <section class="oej_container">
     <!--action속성 form에 작성한 데이터를 어디로 보낼지 지정-->
-    <form action="/member/save" method="post">
+    <form th:action="@{/member/save}" method="post" name="addjoin" th:object="${memberDTO}">
       <div class="oej">
         <div class="header_oej">회원가입</div>
 
         <div class="oej_name">
           <label th:for="memberName">이름</label>
-          <input class="oej_n" type="text" name="memberName" placeholder="예) 홍길동">
-<!--          <p th:if="${#fields.hasErrors('memberName')}" th:errors="*{memberName}" class="fieldError">Incorrect data</p>-->
+          <input class="oej_n" id="memberName" type="text" th:field="*{memberName}" name="memberName" placeholder="예) 홍길동">
+          <p th:if="${#fields.hasErrors('memberName')}" th:errors="*{memberName}" class="fieldError">Incorrect data</p>
         </div>
 
+<!--        id="memberId"-->
         <div class="oej_id">
           <label th:for="memberId">아이디</label>
-          <input class="oej_text" type="text" name="memberId" id="memberId" onkeyup="emailCheck()"  placeholder="예) skycode">
+          <input class="oej_text" type="text" th:field="*{memberId}" name="memberId" onkeyup="emailCheck()"  placeholder="예) skycode">
           <p id="check-result"></p>
-<!--          <p th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}" class="fieldError">Incorrect data</p>-->
+          <p th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}" class="fieldError">Incorrect data</p>
         </div>
 
         <div class="oej_pw">
           <label th:for="memberPassword">비밀번호</label>
-          <input class="oej_pass" type="password" name="memberPassword"  placeholder="비밀번호는 8자 이상, 16자 이하로 입력해주세요">
-<!--          <p th:if="${#fields.hasErrors('memberPassword')}" th:errors="*{memberPassword}" class="fieldError">Incorrect data-->
+          <input class="oej_pass" type="password" th:field="*{memberPassword}" id="pw" name="memberPassword"  placeholder="비밀번호는 4자 이상, 8자 이하로 입력해주세요">
+          <p th:if="${#fields.hasErrors('memberPassword')}" th:errors="*{memberPassword}" class="fieldError">Incorrect data
           </p>
         </div>
 
         <div class="oej_pwcheck">
           <label th:for="memberPasswordCheck">*비밀번호확인</label>
-          <input class="oej_pwchecked" type="password" name="memberPasswordCheck" placeholder="비밀번호를 다시 입력해 주세요">
-<!--          <p th:if="${#fields.hasErrors('memberPasswordCheck')}" th:errors="*{memberPasswordCheck}" class="fieldError">Incorrect data-->
+          <input class="oej_pwchecked" type="password" th:field="*{memberPasswordCheck}" id="pc" name="memberPasswordCheck" placeholder="비밀번호를 다시 입력해 주세요">
+          <p th:if="${#fields.hasErrors('memberPasswordCheck')}" th:errors="*{memberPasswordCheck}" class="fieldError">Incorrect data
           </p>
         </div>
 
@@ -61,24 +62,24 @@
             <select class="oej_num">
               <option value="">대한민국 +82</option>
             </select>
-            <input class="oej_phone" type="tel" name="memberPhone" placeholder="예) 010-1234-5678">
+            <input class="oej_phone" type="tel" th:field="*{memberPhone}" name="memberPhone" placeholder="예) 010-1234-5678">
           </div>
-<!--          <p th:if="${#fields.hasErrors('memberPhone')}" th:errors="*{memberPhone}" class="fieldError">Incorrect data</p>-->
+          <p th:if="${#fields.hasErrors('memberPhone')}" th:errors="*{memberPhone}" class="fieldError">Incorrect data</p>
         </div>
 
-<!--        <div class="oej_birthday">-->
-<!--          <label th:for="memberBirthday"> 생년월일</label>-->
-<!--          <input class="oej_y" name="memberBirthday" type="date" value="xxx" min="yyy" max="zzz">-->
-<!--&lt;!&ndash;          <p th:if="${#fields.hasErrors('memberBirthday')}" th:errors="*{memberBirthday}" class="fieldError">Incorrect data&ndash;&gt;-->
-<!--          </p>-->
-<!--        </div>-->
+        <div class="oej_birthday">
+          <label th:for="memberBirthday"> 생년월일</label>
+          <input class="oej_y" name="memberBirthday" th:field="*{memberBirthday}" type="date" value="xxx" min="yyy" max="zzz">
+          <p th:if="${#fields.hasErrors('memberBirthday')}" th:errors="*{memberBirthday}" class="fieldError">Incorrect data
+          </p>
+        </div>
 
         <!-- 이메일 -->
-<!--        <div class="oej_emailid">-->
+        <div class="oej_emailid">
 
-<!--          <label th:for="memberEmail" class="oej_em">이메일</label>-->
-<!--          <input class="oej_mail" type="tel" placeholder="" maxlength="18" /> @-->
-<!--          <input class="oej_mail2" type="tel" placeholder="" maxlength="18">-->
+          <label th:for="memberEmail" class="oej_em">이메일</label>
+          <input class="oej_mail" th:field="*{memberEmail}" id="email" type="email" placeholder="예) skycode@hanmail.net" />
+          <!-- <input class="oej_mail2" type="tel" placeholder="" maxlength="18"> -->
 <!--          <select class="oej_select" title="이메일 도메인 주소 선택" onclick="setEmailDomain(this.value);return false;">-->
 <!--            <option value="">-선택-</option>-->
 <!--            <option value="">-직접입력하기-</option>-->
@@ -89,23 +90,21 @@
 <!--            <option value="kakao.com">kakao.com</option>-->
 <!--            <option value="kakao.com">gmail.com</option>-->
 <!--          </select>-->
-<!--&lt;!&ndash;          <p th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}" class="fieldError">Incorrect data</p>&ndash;&gt;-->
-<!--        </div>-->
+          <p th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}" class="fieldError">Incorrect data</p>
+        </div>
 
 
         <div class="oej_address">
           <label th:for="memberAddress">주소</label>
-          <input class="oej_add" type="text" name="memberAddress" placeholder="상세한 주소를 입력해 주세요">
-<!--          <p th:if="${#fields.hasErrors('memberAddress')}" th:errors="*{memberAddress}" class="fieldError">Incorrect data</p>-->
+          <input class="oej_add" type="text" th:field="*{memberAddress}" name="memberAddress" placeholder="상세한 주소를 입력해 주세요">
+          <p th:if="${#fields.hasErrors('memberAddress')}" th:errors="*{memberAddress}" class="fieldError">Incorrect data</p>
         </div>
 
 <!--        &lt;!&ndash; 회원 가입 버튼 &ndash;&gt;-->
 <!--        &lt;!&ndash; 로그인 &ndash;&gt;-->
 <!--&lt;!&ndash;        <button type="submit" class="oej_join" onClick="location.href='main'">JOIN US</button>&ndash;&gt;-->
-<!--        <button id="submit" class="oej_join" >JOIN US</button>-->
-                  <input type="submit"  class="oej_join" value="LOGIN">
-
-
+        <button id="submit" class="oej_join">JOIN US</button>
+<!--                  <button id="submit"  class="oej_join" value="LOGIN">-->
 
       </div>
     </form>
@@ -113,14 +112,24 @@
 
 
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script th:inline="javascript">
-  $(document).ready(function(){
-            var errorMessage = [[${errorMessage}]];
-            if(errorMessage != null){
-                alert(errorMessage);
-            }
-        });
+ $(document).ready(function () {
+    $("#submit").click(function () {
+        var password = $("#pw").val(); // 비밀번호 입력란 값 가져오기
+        var confirmPassword = $("#pc").val(); // 비밀번호 확인 입력란 값 가져오기
+
+        // 비밀번호와 비밀번호 확인이 다를 경우
+        if (password !== confirmPassword) {
+            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            $("#pw").val(""); // 비밀번호 입력란을 공백으로 설정
+            $("#pc").val(""); // 비밀번호 확인 입력란을 공백으로 설정
+            return false; // 폼 제출을 중지합니다.
+        }
+    });
+});
+
 
     </script>
 <script src="/js/sub/header.js"></script>

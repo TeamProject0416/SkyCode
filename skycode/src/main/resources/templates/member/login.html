@@ -12,14 +12,6 @@
 
 </head>
 
-<th:block layout:fragment="css">
-    <style>
-        .error {
-            color: #bd2130;
-        }
-    </style>
-</th:block>
-
 <body>
 
 <!-- 로그인 -->
@@ -32,7 +24,8 @@
     <div class="oej_header">
         <p>LOGIN</p>
     </div>
-    <form action="/member/login" method="post">
+    <form th:action="@{/member/logins}" method="post" th:object="${memberDTO}">
+<!--    <form action="/member/login" method="post">-->
         <div class="oej_input-box">
 <!--            <input class="oej_username" type="text" id="username" name="memberEmail" placeholder="ID">-->
             <input class="oej_username" type="text" id="username" name="memberId" placeholder="ID">
@@ -44,8 +37,16 @@
             <label th:for="password"></label>
         </div>
 
-        <input th:value="${loginErr}" type="text" id="loginRslt" hidden="true"/>
-        <input class="oej_log1" type="submit" value="LOGIN">
+
+<!--        <input th:value="${loginErr}" type="text" id="loginRslt" hidden="true"/>-->
+<!--        <input class="oej_log1" type="submit" value="LOGIN">-->
+
+<!--        <input th:value="${loginErr}" type="text" id="loginRslt" hidden="true"/>-->
+        <p th:if="${loginErrorMsg}" class="oej_error"  th:text="${loginErrorMsg}"></p>
+<!--        <p id="passwordMismatchError" class="error" style="display: none;">비밀번호가 일치하지 않습니다.</p>-->
+        <button class="oej_log1" type="submit" value="LOGIN">로그인</button>
+<!--        <input class="oej_log1" type="submit" value="LOGIN">-->
+
 
         <div class="oej_connect"><i class="fa-solid fa-unlock-keyhole">보안접속</i> </div>
 
@@ -66,7 +67,8 @@
 
             <div class="oej_ka">
                 <img src="../subImages/카카오.png" alt="">
-                <a href="#">카카오 로그인</a>
+                <a href="https://kauth.kakao.com/oauth/authorize?client_id=KEY&redirect_uri=http://localhost:8000/api/v1/oauth2/kakao&response_type=code">카카오 로그인</a>
+            </div>
             </div>
         </div>
     </form>
@@ -78,15 +80,12 @@
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
 
-$(document).ready(function () {
 
-if($("#loginRslt").val() == "NE"){
-alert("없는 이메일");
-}else if($("#loginRslt").val() == "PE"){
-alert("틀린 비밀번호");
-}
 
-});
+
+
+
+
 
 </body>
 
