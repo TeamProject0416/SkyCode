@@ -1,0 +1,63 @@
+/* 공지사항 메인 */
+
+.nyNewsWrap{
+    position: relative;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 60px;
+    top: 150px;
+    font-size: 3.5rem;
+}
+.nyNewsWrap h2{
+    font-weight: 700;
+}
+
+.nyNewsContainer {
+    /* background: #c5ffe9; */
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    /* padding: 20px; */
+}
+.nyNewsContainer .nyNewsCheck {
+    font-size: 2rem;
+    font-weight: 700;
+}
+.nyNewsContainer .nyNewsCheck{
+    display: flex;
+    height: 110px;
+    justify-content: space-between;
+    line-height: 50px;
+    padding: 30px 0;
+    /* font-size: 2.5rem; */
+
+}
+
+.nyNewsButton button{
+    border: none;
+    background: none;
+    font-size: 2rem;
+    font-weight: 700;
+
+
+}
+.nyNewsBody ul li {
+    padding: 20px 10px;
+    border-top: 1px solid #33333342;
+}
+.nyNewsBody ul li a {
+    display: flex;
+
+}
+.nyNewsBody img {
+    width: 350px;
+    height: 200px;
+}
+.nyNewsBody .nyNewsBodyText{
+    padding-top: 50px;
+    margin-left: 20px;
+    font-size: 2.4rem;
+}
+.nyNewsBody .nyNewsBodyText p{
+    font-size: 1.8rem;
+    color: #787878;
+}
