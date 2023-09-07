@@ -8,6 +8,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -47,15 +51,22 @@ public class Notion {
 
     private String fileName; // 업로드된 파일의 이름
 
-
-    @Column(name = "base64image", columnDefinition = "TEXT")
+    @Column(length = 10000) // 충분한 길이로 조정
     private String base64Image;
+
 
     // Getter와 Setter를 추가하세요
     public String getBase64Image() {
         return base64Image;
     }
 
+    private String saveImage(MultipartFile file) throws IOException {
+        String uploadDir = "/SkyCodeProject/notionImg/"; // 이미지를 저장할 경로
+        String fileName = file.getOriginalFilename();
+        Path filePath = Paths.get(uploadDir + fileName);
+        Files.write(filePath, file.getBytes());
+        return fileName;
+    }
     public void setBase64Image(String base64Image) {
         this.base64Image = base64Image;
     }

@@ -41,8 +41,12 @@
 <!--                        <img th:src="${notion.base64Image}" alt="이미지">-->
 <!--                        <img th:src="@{'/notionImg/' + ${notion.fileName}}" alt="Notion Image">-->
 <!--                        <img th:src="@{'C:/SkyCodeProject/notionImg/' + ${notion.fileName}}" alt="Notion Image" width="100" height="100">-->
-                        <img th:src="@{${notion.filePath}}" alt="Notion Image" width="100" height="100">
-<!--                        <img src="../../../../../../../notionImg/pj3.png" alt="">-->
+<!--                        <img th:src="@{${notion.filePath}}" alt="Notion Image" width="100" height="100">-->
+<!--                        <img th:src="@{'data:image/png;base64,' + ${notion.base64Image}}" alt="이미지">-->
+<!--                        <img th:if="${notion.base64Image}" th:src="@{'data:image/png;base64,' + ${notion.base64Image}}" alt="이미지">-->
+                        <img th:src="'data:image/png;base64,' + ${notion.base64Image}" width="100" height="100"/>
+                        </td>
+                        <!--                        <img src="../../../../../../../notionImg/pj3.png" alt="">-->
 
                         <!--                                                <img th:src="@{'data:image/png;base64,' + ${notion.base64Image}}" alt="이미지">-->
                         <!--                        <img th:src="@{'data:image/png;base64,' + ${notion.fileName}}" alt="이미지">-->
