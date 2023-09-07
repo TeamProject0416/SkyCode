@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -105,4 +107,9 @@ public class NotionService {
     public Notion saveNotion(Notion notionEntity) {
         return notionRepository.save(notionEntity);
     }
+    public Notion save(Notion notion) {
+        return notionRepository.save(notion);
+    }
+
+
 }

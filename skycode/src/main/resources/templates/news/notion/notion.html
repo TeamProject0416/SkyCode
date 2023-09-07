@@ -33,11 +33,18 @@
             <ul>
                 <li th:each="notion : ${notions}">
                     <a th:href="@{'/news/notion/notionSub/' + ${notion.id}}">
-                        <img src="http://placehold.it/320x100" />
-                        <div class="nyNewsBodyText">
+<!--                        <img src="http://placehold.it/320x100" />-->
+<!--                        <div>첨부된 파일 경로: <span th:text="${notionForm.filePath}"></span></div>-->
+<!--                        <img th:src="@{'/notion/getFile/' + ${notion.fileName}}" alt="Notion Image">-->
+<!--                        <img th:src="@{/notion/getFile/{fileName}(fileName=${notion.filePath})}" alt="이미지">-->
+                        <img th:src="@{'C:/SkyCodeProject/notionImg/' + ${notion.fileName}}" alt="이미지">
+<!--                        <img th:src="${notion.filePath}" alt="이미지">-->
+<!--                            <img th:src="@{${notion.filePath}}" alt="Notion Image" width="100" height="100" />-->
+                            <div class="nyNewsBodyText">
                             <td><span class="nyTitleDate" th:text="${viewCount}">조회수</span></td>
                             <div th:text="${notion.notionTitle}" class="nyNewTitle">한국관광 데이터랩 공모전 소문내기 이벤트</div>
                             <p th:text="${#temporals.format(notion.regTime, 'yyyy.MM.dd')}">2023.08.21</p>
+                            <div th:text="${notion.countView}"></div>
                         </div>
                     </a>
                 </li>

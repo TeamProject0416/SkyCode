@@ -2,6 +2,7 @@ package teamproject.skycode.news.notion;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -10,6 +11,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -28,14 +30,6 @@ public class Notion {
     @Column(nullable = false)
     private String type;    // 공지글 종류
 
-//    @Column
-//    @NotBlank(message = "Notion title is required")
-//    private String notionTitle;     // 공지글 제목
-//
-////    @NotNull(message = "Notion content is required")
-////    private String notionContent;   // 공지글 내용
-//    @NotBlank(message = "Notion content is required")
-//    private String notionContent;
     @Column(nullable = false)
     @NotBlank(message = "Notion title is required")
     private String notionTitle;
@@ -47,6 +41,11 @@ public class Notion {
     @CreationTimestamp
     @Column(name = "reg_time")
     private LocalDateTime regTime; // 공지사항 올린 시간
+
+    @Column(name = "file_path")
+    private String filePath; // 업로드된 파일의 경로
+
+    private String fileName; // 업로드된 파일의 이름
 
     public LocalDateTime getRegistrationTime() {
         return regTime;

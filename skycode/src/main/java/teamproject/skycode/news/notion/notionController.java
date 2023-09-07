@@ -10,10 +10,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.validation.Valid;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.time.LocalDateTime;
 
@@ -68,22 +76,69 @@ public class NotionController {
     }
 
     @PostMapping("/notion/notionUp")
-    public ModelAndView createNotion(@Valid NotionForm notionForm, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
-        System.out.println("왜!!!");
+    public String handleNotionUpForm(@ModelAttribute("notionForm") @Valid NotionForm notionForm,
+                                     BindingResult bindingResult,
+                                     RedirectAttributes redirectAttributes,
+                                     @RequestParam("file") MultipartFile file) {
+
+        String uploadDir = "C:/SkyCodeProject/notionImg/";
+
         if (bindingResult.hasErrors()) {
-            Notion notionEntity = notionForm.toEntity();
-            Notion savedNotion = notionService.saveNotion(notionEntity);
-            System.out.println("왜 안돼");
-            modelAndView.setViewName("news/notion/notionUp");
-            modelAndView.addObject("notion", savedNotion);
-        } else {
-            System.out.println("이유가 뭐야");
-            modelAndView.setViewName("redirect:/news/notion/notion");
+            return "news/notion/notionUp";
         }
 
-        return modelAndView;
+        try {
+            if (!file.isEmpty()) {
+                String originalFilename = file.getOriginalFilename(); // 파일 이름 가져오기
+                if(originalFilename != null && !originalFilename.isEmpty()) { // 파일 이름이 null 또는 빈 문자열인지 확인
+                    String fileName = originalFilename;
+                    Path filePath = Paths.get(uploadDir + fileName);
+                    Files.createDirectories(filePath.getParent()); // 디렉토리가 없으면 생성
+                    Files.write(filePath, file.getBytes());
+
+                    notionForm.setFilePath("notionImg/" + fileName);
+                    notionForm.setFileName(fileName); // 파일 이름 설정
+                    System.out.println("notionImg/" + fileName);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Notion notion = Notion.builder()
+                .type(notionForm.getType())
+                .notionTitle(notionForm.getNotionTitle())
+                .notionContent(notionForm.getNotionContent())
+                .filePath(notionForm.getFilePath())
+                .fileName(notionForm.getFileName()) // 파일 이름 설정
+                .build();
+
+        notionService.save(notion);
+        System.out.println(notion);
+
+        redirectAttributes.addFlashAttribute("successMessage", "공지사항이 등록되었습니다.");
+        return "redirect:/news/notion/notion";
     }
+
+
+//  최종 사진 안되면 이거 사용하기
+//    @PostMapping("/notion/notionUp")
+//    public ModelAndView createNotion(@Valid NotionForm notionForm, BindingResult bindingResult) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        System.out.println("왜!!!");
+//        if (bindingResult.hasErrors()) {
+//            Notion notionEntity = notionForm.toEntity();
+//            Notion savedNotion = notionService.saveNotion(notionEntity);
+//            System.out.println("왜 안돼");
+//            modelAndView.setViewName("news/notion/notionUp");
+//            modelAndView.addObject("notion", savedNotion);
+//        } else {
+//            System.out.println("이유가 뭐야");
+//            modelAndView.setViewName("redirect:/news/notion/notion");
+//        }
+//
+//        return modelAndView;
+//    }
 
 
 
@@ -171,7 +226,14 @@ public class NotionController {
         long totalNotionCount = notionService.getTotalNotionCount();
         model.addAttribute("totalNotionCount", totalNotionCount);
 
+        String uploadDir = "C:/SkyCodeProject/notionImg/";
         System.out.println("된다");
+        for (Notion notion : notions) {
+            // 예시로 파일 경로를 어떻게 생성할지에 대한 로직을 추가합니다.
+            String filePath = uploadDir + notion.getFileName(); // 예시 경로입니다. 실제로 사용하는 경로로 바꿔주세요.
+            notion.setFilePath(filePath);
+            System.out.println(filePath);
+        }
 
         model.addAttribute("notions", notions);
         model.addAttribute("notions", notionPage);
@@ -198,6 +260,7 @@ public class NotionController {
         return "error"; // Change to the appropriate view name
 
     }
+
 
 
     @GetMapping("/notion/notionSub/{id}")
