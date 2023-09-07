@@ -105,4 +105,7 @@ public class InquiryService {
     public Inquiry saveInquiry(Inquiry inquiryEntity) {
         return inquiryRepository.save(inquiryEntity);
     }
+
+    public void save(Inquiry inquiry) {
+    }
 }

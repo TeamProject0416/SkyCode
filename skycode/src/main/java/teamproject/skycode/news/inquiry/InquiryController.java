@@ -67,10 +67,13 @@ public class InquiryController {
             Inquiry savedInquiry = inquiryService.saveInquiry(inquiryEntity);
 
             modelAndView.setViewName("redirect:/news/inquiry/inquiryList");
+            modelAndView.addObject("successMessage", "문의가 등록되었습니다.");
+
         }
 
         return modelAndView;
     }
+
 
 //    @PostMapping("/inquiry/create")
 //    public String submitInquiry(@ModelAttribute InquiryForm inquiryForm) {
@@ -267,6 +270,25 @@ public class InquiryController {
         // 수정된 상세 페이지로 리다이렉트
         return "redirect:/news/inquiry/show/" + inquiry.getId();
     }
+
+    // 문의 답변 작성
+    @PostMapping("/inquiry/respond")
+    public String respondToInquiry(@RequestParam Long inquiryId, @RequestParam String responseContent) {
+        // inquiryId를 사용하여 해당 문의를 찾아서 답변을 등록하고, responseContent를 저장합니다.
+        Inquiry inquiry = inquiryService.findById(inquiryId);
+
+        if (inquiry != null) {
+            inquiry.setResponseContent(responseContent);
+            inquiryService.save(inquiry);
+
+            // 성공적으로 등록되었다면 답변 내용을 반환합니다.
+            return "redirect:/news/inquiry/show/" + inquiry.getId();
+        }
+
+        // 실패했을 경우 null을 반환하거나 에러 메시지를 반환할 수 있습니다.
+        return "답변 등록에 실패했습니다.";
+    }
+
 
 
 }

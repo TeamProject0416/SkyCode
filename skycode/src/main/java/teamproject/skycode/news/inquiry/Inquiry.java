@@ -84,5 +84,9 @@ public class  Inquiry {
         this.isPrivate = isPrivate;
     }
 
+    private String responseContent; // 답변 내용
 
+    public void setResponseContent(String responseContent) {
+        this.responseContent = responseContent;
+    }
 }
