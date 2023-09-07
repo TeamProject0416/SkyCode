@@ -10,12 +10,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import teamproject.skycode.news.notion.ImageToBase64;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -29,7 +29,7 @@ import java.time.LocalDateTime;
 @RequestMapping("/news")
 @RequiredArgsConstructor
 
-public class NotionController {
+public class notionController {
 
     @Autowired
     private NotionRepository notionRepository;
@@ -74,6 +74,89 @@ public class NotionController {
         System.out.println("등록화면");
         return "news/notion/notionUp";
     }
+//
+//    @PostMapping("/notion/notionUp")
+//    public String handleNotionUpForm(@ModelAttribute("notionForm") @Valid NotionForm notionForm,
+//                                     BindingResult bindingResult,
+//                                     RedirectAttributes redirectAttributes,
+//                                     @RequestParam("file") MultipartFile file) {
+//
+//        // 코드는 이전에 제공한 것과 동일합니다.
+//
+//        // 이미지를 Base64로 변환하여 모델에 추가
+//        try {
+//            String base64Image = ImageToBase64.convertToBase64(uploadDir + fileName);
+//            notionForm.setBase64Image(base64Image);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Notion notion = Notion.builder()
+//                .type(notionForm.getType())
+//                .notionTitle(notionForm.getNotionTitle())
+//                .notionContent(notionForm.getNotionContent())
+//                .filePath(notionForm.getFilePath())
+//                .fileName(notionForm.getFileName())
+//                .base64Image(notionForm.getBase64Image())
+//                .build();
+//
+//        notionService.save(notion);
+//
+//        redirectAttributes.addFlashAttribute("successMessage", "공지사항이 등록되었습니다.");
+//        return "redirect:/news/notion/notion";
+//    }
+
+//    아거 아님
+//    @PostMapping("/notion/notionUp")
+//    public String handleNotionUpForm(@ModelAttribute("notionForm") @Valid NotionForm notionForm,
+//                                     BindingResult bindingResult,
+//                                     RedirectAttributes redirectAttributes,
+//                                     @RequestParam("file") MultipartFile file) {
+//
+//        String uploadDir = "C:/SkyCodeProject/notionImg/";
+//
+//        if (bindingResult.hasErrors()) {
+//            return "news/notion/notionUp";
+//        }
+//
+//        try {
+//            if (!file.isEmpty()) {
+//                String originalFilename = file.getOriginalFilename();
+//                if(originalFilename != null && !originalFilename.isEmpty()) {
+//                    String fileName = originalFilename;
+//                    Path filePath = Paths.get(uploadDir + fileName);
+//                    Files.createDirectories(filePath.getParent());
+//                    Files.write(filePath, file.getBytes());
+//
+//                    notionForm.setFilePath("notionImg/" + fileName);
+//                    notionForm.setFileName(fileName);
+//
+//                    String base64Image = ImageToBase64.convertToBase64(uploadDir + fileName);
+//                    notionForm.setBase64Image(base64Image);
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Notion notion = Notion.builder()
+//                .type(notionForm.getType())
+//                .notionTitle(notionForm.getNotionTitle())
+//                .notionContent(notionForm.getNotionContent())
+//                .filePath(notionForm.getFilePath())
+//                .fileName(notionForm.getFileName())
+//                .base64Image(notionForm.getBase64Image())
+//                .build();
+//
+//        notionService.save(notion);
+//
+//        redirectAttributes.addFlashAttribute("successMessage", "공지사항이 등록되었습니다.");
+//        return "redirect:/news/notion/notion";
+//    }
+
+
+
+
 
     @PostMapping("/notion/notionUp")
     public String handleNotionUpForm(@ModelAttribute("notionForm") @Valid NotionForm notionForm,
@@ -81,7 +164,7 @@ public class NotionController {
                                      RedirectAttributes redirectAttributes,
                                      @RequestParam("file") MultipartFile file) {
 
-        String uploadDir = "C:/SkyCodeProject/notionImg/";
+        String uploadDir = "/SkyCodeProject/notionImg/";
 
         if (bindingResult.hasErrors()) {
             return "news/notion/notionUp";
@@ -99,6 +182,10 @@ public class NotionController {
                     notionForm.setFilePath("notionImg/" + fileName);
                     notionForm.setFileName(fileName); // 파일 이름 설정
                     System.out.println("notionImg/" + fileName);
+
+                    // 이미지 업로드
+                    String imagePath = saveImage(file);
+                    notionForm.setImagePath(imagePath);
                 }
             }
         } catch (IOException e) {
@@ -119,6 +206,15 @@ public class NotionController {
         redirectAttributes.addFlashAttribute("successMessage", "공지사항이 등록되었습니다.");
         return "redirect:/news/notion/notion";
     }
+
+    private String saveImage(MultipartFile file) throws IOException {
+        String uploadDir = "C:/uploads/"; // 이미지를 저장할 경로
+        String fileName = file.getOriginalFilename();
+        Path filePath = Paths.get(uploadDir + fileName);
+        Files.write(filePath, file.getBytes());
+        return fileName;
+    }
+
 
 
 //  최종 사진 안되면 이거 사용하기

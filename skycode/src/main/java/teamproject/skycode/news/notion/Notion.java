@@ -47,6 +47,19 @@ public class Notion {
 
     private String fileName; // 업로드된 파일의 이름
 
+
+    @Column(name = "base64image", columnDefinition = "TEXT")
+    private String base64Image;
+
+    // Getter와 Setter를 추가하세요
+    public String getBase64Image() {
+        return base64Image;
+    }
+
+    public void setBase64Image(String base64Image) {
+        this.base64Image = base64Image;
+    }
+
     public LocalDateTime getRegistrationTime() {
         return regTime;
     }

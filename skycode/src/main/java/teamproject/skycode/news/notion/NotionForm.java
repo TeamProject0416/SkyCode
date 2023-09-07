@@ -27,23 +27,26 @@ public class NotionForm {
         notion.setType(this.type);
         notion.setNotionTitle(this.notionTitle);
         notion.setNotionContent(this.notionContent);
-        notion.setFilePath(this.filePath);
-        notion.setFileName(this.fileName);
         return notion;
     }
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
+        private String base64Image;
 
 
 
-//    public void setFileName(String uploadedFileName) {
-//        this.fileName = uploadedFileName;
-//    }
-//
-//    public MultipartFile getFile() {
-//        return filce;
-//    }
+    private String imagePath;
+
+    // 기존의 메서드들...
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
 }
