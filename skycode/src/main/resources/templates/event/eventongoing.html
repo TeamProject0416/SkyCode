@@ -20,9 +20,9 @@
             <button><a href="/event/new">이벤트 등록</a></button>
         </div>
         <div class="currentPage">
-            <span class="active"><a href="ongoing">진행중 이벤트</a></span>
-            <span><a href="end">종료된 이벤트</a></span>
-            <span><a href="winner">당첨자 발표</a></span></div>
+            <span class="active"><a href="/event/ongoing">진행중 이벤트</a></span>
+            <span><a href="/event/end">종료된 이벤트</a></span>
+            <span><a href="/event/winner">당첨자 발표</a></span></div>
         <div class="eventMain">
             <div class="eventBoard">
                 <th:block th:each="event: ${events}">
@@ -42,12 +42,40 @@
                                 </a>
                             </div>
                             <div class="thumbImg">
-                                <a th:href="'/event/' + ${event.id}"><img th:src="${event.miniImgUrl}"
-                                                                          th:alt="${event.miniImgName}"></a>
+                                <a th:href="'/event/' + ${event.id}">
+                                    <img th:src="${event.miniImgUrl}" th:alt="${event.miniImgName}">
+                                </a>
                             </div>
                         </div>
                     </div>
                 </th:block>
+                <div th:with="start=${(events.number div maxPage) * maxPage + 1},
+                end=(${(events.totalPages == 0) ? 1 : (start + (maxPage - 1) < events.totalPages ? start + (maxPage - 1) : events.totalPages)})">
+                    <ul class="pagination">
+
+                        <li th:classappend="${events.first}?'disabled'">
+                            <a th:if="${events.hasPrevious}"
+                               th:onclick="'javascript:page(' + ${events.number - 1} + ')'" aria-label='Previous'
+                               class="page-link">
+                                <span aria-hidden='true'>Previous</span>
+                            </a>
+                        </li>
+
+                        <li th:each="page: ${#numbers.sequence(start, end)}"
+                            th:classappend="${events.number == page-1}?'active':''">
+                            <a class="pages" th:if="${events.number != page-1}"
+                               th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text">[[${page}]]</a>
+                            <a class="pages" th:if="${events.number == page-1}">[[${page}]]</a>
+                        </li>
+
+                        <li th:classappend="${events.last}?'disabled'">
+                            <a th:if="${events.hasNext}" th:onclick="'javascript:page(' + ${events.number + 1} + ')'"
+                               aria-label='Next'>
+                                <span aria-hidden='true'>Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -55,10 +83,13 @@
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script src="/js/sub/header.js"></script>
-<script src="/js/sub/footer.js"></script>
 <script>
+    function page(page) {
+        location.href = '/event/ongoing/' + page;
+    }
 
 </script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
 </body>
 </html>

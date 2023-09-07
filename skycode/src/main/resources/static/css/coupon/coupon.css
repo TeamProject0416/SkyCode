@@ -106,7 +106,9 @@
     font-size: 1.5rem;
     font-weight: 600;
     line-height: 45px;
+    cursor: pointer;
 }
+
 .couponTitle>p{
     color: #aaa;
 }
@@ -172,4 +174,8 @@
 .cancelDelete:hover{
     background-color: #0065BA;
     color: #fff;
+}
+
+button,button>a{
+    cursor: pointer;
 }

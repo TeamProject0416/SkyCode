@@ -1,5 +1,7 @@
 package teamproject.skycode.event;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,12 +15,6 @@ public interface EventRepository extends JpaRepository<EventEntity, Long>{
         List<EventEntity> findByONGOING();
         // 이벤트 상태가 진행중인 것만 가져오기
 
-        @Query("SELECT e FROM EventEntity e WHERE e.eventStatus = 'END' ORDER BY e.regTime DESC")
-        List<EventEntity> findByEND();
-        // 이벤트 상태가 종료된 것만 가져오기
-
-        @Query("SELECT e FROM EventEntity e WHERE e.eventStatus = 'WINNER' ORDER BY e.regTime DESC")
-        List<EventEntity> findByWINNER();
-        // 이벤트 상태가 당첨자인 것만 가져오기
-
+        Page<EventEntity> findByEventStatusOrderByRegTimeDesc(EventStatus eventStatus, Pageable pageable);
+        // 이벤트 상태에 따라 페이징하여 가져오기
 }

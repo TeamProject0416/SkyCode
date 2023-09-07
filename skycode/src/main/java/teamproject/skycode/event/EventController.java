@@ -1,6 +1,9 @@
 package teamproject.skycode.event;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/event")
@@ -16,26 +20,45 @@ import java.util.List;
 public class EventController {
 
     private final EventService eventService;
-    private final EventRepository eventRepository;
 
-    @GetMapping(value = "/ongoing") // 진행 페이지
-    public String ongoingEvent(Model model) {
-        List<EventEntity> events = eventRepository.findByONGOING();
-        model.addAttribute("events", events);
+    @GetMapping(value = {"/ongoing", "/ongoing/{page}"}) // 진행 페이지
+    public String ongoingEvent(@PathVariable(name = "page", required = false) Integer page, Model model) {
+        int pageSize = 3; // 페이지당 표시할 이벤트 수
+        Pageable pageable = PageRequest.of(page != null ? page : 0, pageSize);
+
+        // EventStatus.ONGOING 값을 사용하여 데이터 조회
+        Page<EventEntity> eventPage = eventService.getEventPage(EventStatus.ONGOING, pageable);
+
+        model.addAttribute("events", eventPage); // Page 객체를 그대로 넘김
+        model.addAttribute("maxPage", 5); // 페이지당 표시할 최대 페이지 수
+
         return "/event/eventongoing";
     }
 
-    @GetMapping(value = "/end") // 종료 페이지
-    public String endEvent(Model model) {
-        List<EventEntity> events = eventRepository.findByEND();
-        model.addAttribute("events", events);
+    @GetMapping(value = {"/end","/end/{page}"}) // 종료 페이지
+    public String endEvent(@PathVariable(name = "page", required = false) Integer page,Model model) {
+        int pageSize = 3; // 페이지당 표시할 이벤트 수
+        Pageable pageable = PageRequest.of(page != null ? page : 0, pageSize);
+
+        // EventStatus.ONGOING 값을 사용하여 데이터 조회
+        Page<EventEntity> eventPage = eventService.getEventPage(EventStatus.END, pageable);
+
+        model.addAttribute("events", eventPage); // Page 객체를 그대로 넘김
+        model.addAttribute("maxPage", 5); // 페이지당 표시할 최대 페이지 수
         return "/event/eventend";
     }
 
-    @GetMapping(value = "/winner") // 당첨자 페이지
-    public String eventWinner(Model model) {
-        List<EventEntity> events = eventRepository.findByWINNER();
-        model.addAttribute("events", events);
+    @GetMapping(value = {"/winner", "/winner/{page}"}) // 당첨자 페이지
+    public String eventWinner(@PathVariable(name = "page", required = false) Integer page,Model model) {
+        int pageSize = 3; // 페이지당 표시할 이벤트 수
+        Pageable pageable = PageRequest.of(page != null ? page : 0, pageSize);
+
+        // EventStatus.ONGOING 값을 사용하여 데이터 조회
+        Page<EventEntity> eventPage = eventService.getEventPage(EventStatus.WINNER, pageable);
+
+        model.addAttribute("events", eventPage); // Page 객체를 그대로 넘김
+        model.addAttribute("maxPage", 5); // 페이지당 표시할 최대 페이지 수
+
         return "/event/eventwinner";
     }
 
