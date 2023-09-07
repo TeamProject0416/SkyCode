@@ -159,87 +159,13 @@ public class notionController {
 
 // Assuming you have imported java.util.zip.GZIPOutputStream
 
-    @PostMapping("/notion/notionUp")
-    public String handleNotionUpForm(@ModelAttribute("notionForm") @Valid NotionForm notionForm,
-                                     BindingResult bindingResult,
-                                     RedirectAttributes redirectAttributes,
-                                     @RequestParam("file") MultipartFile file) {
-
-        String uploadDir = "C:/SkyCodeProject/notionImg/";
-
-        if (bindingResult.hasErrors()) {
-            return "news/notion/notionUp";
-        }
-
-        try {
-            if (!file.isEmpty()) {
-                String originalFilename = file.getOriginalFilename();
-                if (originalFilename != null && !originalFilename.isEmpty()) {
-                    String fileName = originalFilename;
-                    Path filePath = Paths.get(uploadDir + fileName);
-                    Files.createDirectories(filePath.getParent());
-                    Files.write(filePath, file.getBytes());
-
-                    notionForm.setFilePath("notionImg/" + fileName);
-                    notionForm.setFileName(fileName);
-
-                    // 이미지를 Base64로 변환하여 모델에 추가
-                    String base64Image = ImageToBase64.convertToBase64(uploadDir + fileName);
-                    notionForm.setBase64Image(base64Image);
-                    byte[] imageBytes = Base64.getDecoder().decode(base64Image);
-
-
-                    // 이미지를 바이트 배열로 변환
-                    try {
-//                        System.out.println("Base64 Image Before Compression: " + base64Image);
-                        // 이미지 압축
-                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                        try (GZIPOutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream)) {
-                            gzipOutputStream.write(imageBytes);
-                        }
-                        byte[] compressedImageBytes = byteArrayOutputStream.toByteArray();
-
-                        // 압축된 이미지를 다시 Base64로 변환하여 모델에 설정
-                        String compressedBase64Image = Base64.getEncoder().encodeToString(compressedImageBytes);
-                        notionForm.setBase64Image(compressedBase64Image);
-                        System.out.println("Base64 Image After Compression: " + compressedBase64Image);
-                    } catch (IllegalArgumentException e) {
-                        System.err.println("Base64 디코딩 중 오류 발생: " + e.getMessage());
-                        e.printStackTrace();
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Notion notion = Notion.builder()
-                .type(notionForm.getType())
-                .notionTitle(notionForm.getNotionTitle())
-                .notionContent(notionForm.getNotionContent())
-                .filePath(notionForm.getFilePath())
-                .fileName(notionForm.getFileName())
-                .base64Image(notionForm.getBase64Image())
-                .build();
-
-        notionService.save(notion);
-
-        redirectAttributes.addFlashAttribute("successMessage", "공지사항이 등록되었습니다.");
-        return "redirect:/news/notion/notion";
-    }
-
-
-
-
-
-
 //    @PostMapping("/notion/notionUp")
 //    public String handleNotionUpForm(@ModelAttribute("notionForm") @Valid NotionForm notionForm,
 //                                     BindingResult bindingResult,
 //                                     RedirectAttributes redirectAttributes,
 //                                     @RequestParam("file") MultipartFile file) {
 //
-//        String uploadDir = "/SkyCodeProject/notionImg/";
+//        String uploadDir = "C:/SkyCodeProject/notionImg/";
 //
 //        if (bindingResult.hasErrors()) {
 //            return "news/notion/notionUp";
@@ -247,20 +173,40 @@ public class notionController {
 //
 //        try {
 //            if (!file.isEmpty()) {
-//                String originalFilename = file.getOriginalFilename(); // 파일 이름 가져오기
-//                if(originalFilename != null && !originalFilename.isEmpty()) { // 파일 이름이 null 또는 빈 문자열인지 확인
+//                String originalFilename = file.getOriginalFilename();
+//                if (originalFilename != null && !originalFilename.isEmpty()) {
 //                    String fileName = originalFilename;
 //                    Path filePath = Paths.get(uploadDir + fileName);
-//                    Files.createDirectories(filePath.getParent()); // 디렉토리가 없으면 생성
+//                    Files.createDirectories(filePath.getParent());
 //                    Files.write(filePath, file.getBytes());
 //
 //                    notionForm.setFilePath("notionImg/" + fileName);
-//                    notionForm.setFileName(fileName); // 파일 이름 설정
-//                    System.out.println("notionImg/" + fileName);
+//                    notionForm.setFileName(fileName);
 //
-//                    // 이미지 업로드
-//                    String imagePath = saveImage(file);
-//                    notionForm.setImagePath(imagePath);
+//                    // 이미지를 Base64로 변환하여 모델에 추가
+//                    String base64Image = ImageToBase64.convertToBase64(uploadDir + fileName);
+//                    notionForm.setBase64Image(base64Image);
+//                    byte[] imageBytes = Base64.getDecoder().decode(base64Image);
+//
+//
+//                    // 이미지를 바이트 배열로 변환
+//                    try {
+////                        System.out.println("Base64 Image Before Compression: " + base64Image);
+//                        // 이미지 압축
+//                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//                        try (GZIPOutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream)) {
+//                            gzipOutputStream.write(imageBytes);
+//                        }
+//                        byte[] compressedImageBytes = byteArrayOutputStream.toByteArray();
+//
+//                        // 압축된 이미지를 다시 Base64로 변환하여 모델에 설정
+//                        String compressedBase64Image = Base64.getEncoder().encodeToString(compressedImageBytes);
+//                        notionForm.setBase64Image(compressedBase64Image);
+//                        System.out.println("Base64 Image After Compression: " + compressedBase64Image);
+//                    } catch (IllegalArgumentException e) {
+//                        System.err.println("Base64 디코딩 중 오류 발생: " + e.getMessage());
+//                        e.printStackTrace();
+//                    }
 //                }
 //            }
 //        } catch (IOException e) {
@@ -272,23 +218,77 @@ public class notionController {
 //                .notionTitle(notionForm.getNotionTitle())
 //                .notionContent(notionForm.getNotionContent())
 //                .filePath(notionForm.getFilePath())
-//                .fileName(notionForm.getFileName()) // 파일 이름 설정
+//                .fileName(notionForm.getFileName())
+//                .base64Image(notionForm.getBase64Image())
 //                .build();
 //
 //        notionService.save(notion);
-//        System.out.println(notion);
 //
 //        redirectAttributes.addFlashAttribute("successMessage", "공지사항이 등록되었습니다.");
 //        return "redirect:/news/notion/notion";
 //    }
-//
-//    private String saveImage(MultipartFile file) throws IOException {
-//        String uploadDir = "C:/SkyCodeProject/notionImg/"; // 이미지를 저장할 경로
-//        String fileName = file.getOriginalFilename();
-//        Path filePath = Paths.get(uploadDir + fileName);
-//        Files.write(filePath, file.getBytes());
-//        return fileName;
-//    }
+
+
+
+
+
+
+    @PostMapping("/notion/notionUp")
+    public String handleNotionUpForm(@ModelAttribute("notionForm") @Valid NotionForm notionForm,
+                                     BindingResult bindingResult,
+                                     RedirectAttributes redirectAttributes,
+                                     @RequestParam("file") MultipartFile file) {
+
+        String uploadDir = "/SkyCodeProject/notionImg/";
+
+        if (bindingResult.hasErrors()) {
+            return "news/notion/notionUp";
+        }
+
+        try {
+            if (!file.isEmpty()) {
+                String originalFilename = file.getOriginalFilename(); // 파일 이름 가져오기
+                if(originalFilename != null && !originalFilename.isEmpty()) { // 파일 이름이 null 또는 빈 문자열인지 확인
+                    String fileName = originalFilename;
+                    Path filePath = Paths.get(uploadDir + fileName);
+                    Files.createDirectories(filePath.getParent()); // 디렉토리가 없으면 생성
+                    Files.write(filePath, file.getBytes());
+
+                    notionForm.setFilePath("notionImg/" + fileName);
+                    notionForm.setFileName(fileName); // 파일 이름 설정
+                    System.out.println("notionImg/" + fileName);
+
+                    // 이미지 업로드
+                    String imagePath = saveImage(file);
+                    notionForm.setImagePath(imagePath);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Notion notion = Notion.builder()
+                .type(notionForm.getType())
+                .notionTitle(notionForm.getNotionTitle())
+                .notionContent(notionForm.getNotionContent())
+                .filePath(notionForm.getFilePath())
+                .fileName(notionForm.getFileName()) // 파일 이름 설정
+                .build();
+
+        notionService.save(notion);
+        System.out.println(notion);
+
+        redirectAttributes.addFlashAttribute("successMessage", "공지사항이 등록되었습니다.");
+        return "redirect:/news/notion/notion";
+    }
+
+    private String saveImage(MultipartFile file) throws IOException {
+        String uploadDir = "/notionImg/"; // 이미지를 저장할 경로
+        String fileName = file.getOriginalFilename();
+        Path filePath = Paths.get(uploadDir + fileName);
+        Files.write(filePath, file.getBytes());
+        return fileName;
+    }
 
 
 
