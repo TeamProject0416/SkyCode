@@ -19,10 +19,13 @@
     border-bottom: 1px solid #bbb;
 }
 
-.eventSubPage .eventSubTag {
+.eventSubTag {
+    padding: 50px 0 20px 15px;
+}
+
+.eventSubTag>a{
     font-weight: 700;
     font-size: 3rem;
-    padding: 50px 0 20px 15px;
 }
 
 .eventPageTitle>div>button{
@@ -124,9 +127,9 @@
 }
 
 .confirmDelete>a{
+    display: block;
     font-size : 1.5rem;
-    height: 45px;
-    width: 100px;
+    line-height: 45px;
 }
 
 .confirmDelete:hover{
@@ -140,4 +143,8 @@
 .cancelDelete:hover{
     background-color: #0065BA;
     color: #fff;
+}
+
+button,button>a{
+    cursor: pointer;
 }

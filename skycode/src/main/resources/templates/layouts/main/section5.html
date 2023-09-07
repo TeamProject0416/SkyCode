@@ -14,30 +14,18 @@
     <!-- contents -->
     <div class="carousel">
         <ul class="bxSlider">
-            <li><a href="#"><img src="mainImages/carousel_img1.png"/>
-                <h3>이벤트 이미지1</h3>
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, nulla?</span>
-            </a></li>
-            <li><a href="#"><img src="mainImages/carousel_img2.png"/>
-                <h3>이벤트 이미지2</h3>
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, nulla?</span>
-            </a></li>
-            <li><a href="#"><img src="mainImages/carousel_img3.png"/>
-                <h3>이벤트 이미지3</h3>
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, nulla?</span>
-            </a></li>
-            <li><a href="#"><img src="mainImages/carousel_img4.png"/>
-                <h3>이벤트 이미지4</h3>
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, nulla?</span>
-            </a></li>
-            <li><a href="#"><img src="mainImages/carousel_img5.png"/>
-                <h3>이벤트 이미지5</h3>
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, nulla?</span>
-            </a></li>
-            <li><a href="#"><img src="mainImages/carousel_img6.png"/>
-                <h3>이벤트 이미지6</h3>
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, nulla?</span>
-            </a></li>
+            <th:block th:each="event, eventStat : ${events}">
+                <li>
+                    <a th:href="'/event/' + ${event.id}">
+                        <img th:src="${event.miniImgUrl}" th:alt="${event.eventTitle}" />
+                        <h3 th:text="${event.eventTitle}"></h3>
+                    </a>
+                </li>
+                <!-- 최신 5개 이벤트만 표시하도록 반복문을 종료합니다. -->
+                <th:if test="${eventStat.count >= 7}">
+                    <th:block th:remove="all"></th:block>
+                </th:if>
+            </th:block>
         </ul>
         <!-- prev/next -->
         <div class="carousel_btn">
