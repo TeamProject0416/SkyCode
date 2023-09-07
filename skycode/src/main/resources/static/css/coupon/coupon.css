@@ -157,8 +157,8 @@
 
 .confirmDelete>a{
     font-size : 1.5rem;
-    height: 45px;
-    width: 100px;
+    display: block;
+    line-height: 45px;
 }
 
 .confirmDelete:hover{
