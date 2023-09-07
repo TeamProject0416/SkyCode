@@ -3,6 +3,8 @@ package teamproject.skycode.event;
 import jdk.jfr.Event;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -221,6 +223,11 @@ public class EventService {
 
         // 데이터 삭제
         eventRepository.delete(event);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<EventEntity> getEventPage(EventStatus eventStatus, Pageable pageable) {
+        return eventRepository.findByEventStatusOrderByRegTimeDesc(eventStatus, pageable);
     }
 
 }

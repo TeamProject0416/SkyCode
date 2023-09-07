@@ -2,7 +2,6 @@
 .section {
 position:relative;
     width: 100%;
-    height: 100%;
     top: 80px;
 }
 
@@ -61,7 +60,6 @@ position:relative;
 /* eventMain */
 .eventMain {
     width: 100%;
-    /* background: lightgoldenrodyellow; */
 }
 
 /* 216 358 cards 1080 margin 30*/
@@ -146,4 +144,36 @@ position:relative;
     width: 240px;
     height: 160px;
     object-fit: cover;
+}
+
+/*pagination*/
+
+.pagination{
+    display:flex;
+    justify-content: center;
+    height: 150px;
+    align-items: center;
+}
+
+.pagination>li:first-of-type>a,
+.pagination>li:last-of-type>a{
+    display: block;
+    width: 80px;
+    line-height: 30px;
+    font-size: 1.3rem;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+    background-color: #0065BA;
+}
+
+.pages{
+    line-height: 30px;
+    padding: 0 10px;
+    color: #666;
+    font-weight: 600;
+}
+
+li.active > .pages {
+    color: #0065BA;
 }
