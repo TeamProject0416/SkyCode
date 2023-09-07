@@ -1,7 +1,9 @@
 package teamproject.skycode.review;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.event.EventFormDto;
 
 import javax.validation.Valid;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
 
-//@RequestMapping("/review")
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("review")
@@ -50,14 +47,37 @@ public class ReviewController {
     }
 
 
-//    리뷰 리스트 보기
+//    리뷰 리스트 보기 기존 코드
+//    @GetMapping(value = "/reviewSub")
+//    public String reviewSub(Model model) {
+////        List<ReviewDto> reviewDtoList = reviewService.findAll();
+//        List<ReviewEntity> reviewEntityList = reviewRepository.findByAllEntity();
+//        model.addAttribute("reviews", reviewEntityList);
+//        return "review/reviewSub";
+//    }
+
+//    0907 페이징 하기 위한 수정 코드
+//    @GetMapping(value = "/reviewSub")
+//    public String reviewSub(@PageableDefault(size=5,sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Model model) {
+//        Page<ReviewEntity> page = reviewService.pageList(pageable);
+//        model.addAttribute("paging", page);
+//
+////        long reviewCount = reviewService.calculateTotalPages();
+////        model.addAttribute("paging", reviewService.pageList(pageable));
+////        model.addAttribute("totalPages", reviewCount);
+//        return "review/reviewSub";
+//    }
     @GetMapping(value = "/reviewSub")
-    public String reviewSub(Model model) {
-//        List<ReviewDto> reviewDtoList = reviewService.findAll();
-        List<ReviewEntity> reviewEntityList = reviewRepository.findByAllEntity();
-        model.addAttribute("reviews", reviewEntityList);
+    public String reviewSub(@RequestParam(value="page", defaultValue="0") int page, Model model) {
+        Page<ReviewEntity> paging = this.reviewService.getList(page);
+        List<ReviewEntity> bestReviews = reviewService.getTop3BestReviews();
+
+        model.addAttribute("bestReviews", bestReviews);
+        model.addAttribute("paging", paging);
+        model.addAttribute("maxPage", 5);
         return "review/reviewSub";
     }
+
 
 //    리뷰 디테일 보여주기
     @GetMapping(value = "/{reviewId}")
@@ -122,6 +142,15 @@ public class ReviewController {
     }
 
 
+    // 리뷰 검색
+    @GetMapping("/search")
+    public String searchReviews(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+        if (keyword != null && !keyword.isEmpty()) {
+            List<ReviewEntity> searchResults = reviewService.searchReviews(keyword);
+            model.addAttribute("searchResults", searchResults);
+        }
+        return "review/reviewSub"; // 검색 결과를 보여줄 뷰 페이지로 이동
+    }
 
 
 

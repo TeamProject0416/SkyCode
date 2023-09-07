@@ -17,6 +17,7 @@ public class CommentDTO {
     private LocalDateTime commentCreatedTime;
 
     public static CommentDTO toCommentDTO(CommentEntity commentEntity, Long reviewId) {
+
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setId(commentEntity.getId());
         commentDTO.setCommentWriter(commentEntity.getCommentWriter());
@@ -25,4 +26,14 @@ public class CommentDTO {
         commentDTO.setReviewId(reviewId);
         return commentDTO;
     }
+//public static CommentDTO createCommentDto(CommentEntity comment) {
+//
+//    return new CommentDTO(
+//            comment.getId(),
+//            comment.getReviewEntity().getId(),
+//            comment.getCommentWriter(),
+//            comment.getCommentContents()
+//    );
+//}
+
 }

@@ -34,8 +34,24 @@ public class CommentService {
             CommentDTO commentDTO = CommentDTO.toCommentDTO(commentEntity, reviewId);
             commentDTOList.add(commentDTO);
         }
-
         return commentDTOList;
     }
+
+
+
+
+//    public CommentDTO delete(Long id) {
+////        댓글 조회 및 예외 발생
+//        CommentEntity target = commentRepository.findById(id)
+//                .orElseThrow(() -> new IllegalArgumentException("댓글 삭제 실패"));
+//
+////        댓글 삭제
+//        commentRepository.delete(target);
+//
+////        삭제 댓글을 DTO 로 반환
+//        return CommentDTO
+//                .toCommentDTO(target);
+//
+//    }
 
 }

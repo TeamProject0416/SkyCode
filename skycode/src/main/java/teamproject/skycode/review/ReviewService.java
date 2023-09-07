@@ -3,6 +3,10 @@ package teamproject.skycode.review;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -287,4 +292,43 @@ public class ReviewService {
         // 데이터 삭제
         reviewRepository.delete(review);
     }
+
+    /* Paging */
+    @Transactional(readOnly = true)
+    public Page<ReviewEntity> pageList(Pageable pageable) {
+        return reviewRepository.findAll(pageable);
+    }
+    public Page<ReviewEntity> getList(int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
+        return this.reviewRepository.findAll(pageable);
+    }
+
+//    public List<ReviewEntity> getTop3BestReviews() {
+//        // 조회수가 가장 높은 상위 3개 리뷰를 가져옵니다.
+//        return reviewRepository.findTop3ByOrderByReviewHitsDesc();
+//    }
+    public List<ReviewEntity> getTop3BestReviews() {
+        List<ReviewEntity> bestReviews = reviewRepository.findAllByOrderByReviewHitsDesc(); // 모든 리뷰를 조회수 내림차순으로 가져옵니다.
+
+        // 리스트를 조회수 내림차순, ID 오름차순으로 정렬합니다.
+        bestReviews.sort(Comparator.comparing(ReviewEntity::getReviewHits).reversed().thenComparing(ReviewEntity::getId));
+
+        // 상위 3개 리뷰를 선택합니다.
+        int topCount = Math.min(3, bestReviews.size());
+        return bestReviews.subList(0, topCount);
+    }
+
+
+    public List<ReviewEntity> searchReviews(String keyword) {
+        // 검색어를 이용하여 리뷰를 검색하고 결과를 반환합니다.
+        return reviewRepository.findByReviewTitleContainingOrContentsContaining(keyword, keyword);
+    }
+
+    public List<ReviewEntity> getAllReviews() {
+        // 모든 리뷰를 가져옵니다.
+        return reviewRepository.findAll();
+    }
+
 }

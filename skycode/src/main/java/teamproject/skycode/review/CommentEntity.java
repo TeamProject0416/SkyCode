@@ -15,7 +15,7 @@ public class CommentEntity extends BaseEntity {
     private Long id;
     @Column(length = 20, nullable = false)
     private String commentWriter;
-    @Column
+    @Column(length = 100)
     private String commentContents;
 
     /* Review : Comment = 1 : N*/

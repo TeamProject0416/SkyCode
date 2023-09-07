@@ -44,8 +44,8 @@
                         <li class="slider1">
                             <img th:src="${reviewDto.bigImgUrl}" th:alt="${reviewDto.bigImgName}">
                         </li>
-<!--                        <li class="slider1">-->
-<!--                            <img src="https://picsum.photos/600/300" alt="userReviewImg">-->
+<!--                        <li class="slider2">-->
+<!--                            <img th:src="${reviewDto.bigImgUrl}" th:alt="${reviewDto.bigImgName}">-->
 <!--                        </li>-->
 <!--                        <li class="slider2">-->
 <!--                            <img src="https://picsum.photos/600/700" alt="userReviewImg">-->
@@ -76,7 +76,7 @@
             <div class="userReviewBt">
                 <div class="btns">
                     <a th:href="@{/review/{id}/edit (id=${reviewDto.id})}"><button type="submit" class="editBtn">글 수정</button></a>
-                    <a href="/review/reviewSub"><button type="submit" class="deleteBtn">글 삭제</button></a>
+                    <a th:href="@{/review/{id}/delete (id=${reviewDto.id})}"><button type="submit" class="deleteBtn">글 삭제</button></a>
                     <a href="/review/reviewSub"><button type="submit" class="deleteBtn">목록</button></a>
                 </div>
             </div>
@@ -90,6 +90,7 @@
     </div>
 
     <!-- 댓글 출력 부분 -->
+    <div id="error-message" style="color: red;"></div>
     <div id="comment-list">
         <table>
             <tr>
@@ -101,6 +102,7 @@
                 <td th:text="${comment.commentWriter}"></td>
                 <td th:text="${comment.commentContents}"></td>
                 <td th:text="${comment.commentCreatedTime}"></td>
+                <td></td>
             </tr>
         </table>
     </div>
@@ -155,7 +157,10 @@
                document.getElementById('commentContents').value = '';
            },
            error: function (err) {
-               console.log("요청실패", err);
+               // console.log("요청실패", err);
+               alert("댓글 등록에 실패했습니다.");
+               let errorMessageElement = document.getElementById('error-message');
+               errorMessageElement.textContent = "댓글 저장에 실패했습니다. 다시 시도하세요.";
            }
         });
     }
