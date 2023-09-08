@@ -1,4 +1,4 @@
-package teamproject.skycode.event;
+package teamproject.skycode.common;
 
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;

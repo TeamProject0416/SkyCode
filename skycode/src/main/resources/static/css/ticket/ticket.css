@@ -1,0 +1,181 @@
+.section {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 80px;
+}
+
+/* couponPageTitle */
+.couponPage {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.couponPageTitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.couponPage .couponTag {
+    font-weight: 700;
+    font-size: 3rem;
+    padding: 50px 0 20px 15px;
+}
+
+.couponPageTitle>button {
+    width: 100px;
+    height: 45px;
+    border: none;
+    background-color: #0065BA;
+    border-radius: 5px;
+    margin: 70px 20px 10px 0;
+}
+
+.couponPageTitle>button>a {
+    display: block;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 45px;
+}
+
+.currentPage {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 15px 0;
+    border-top: 1px solid #999;
+}
+
+.couponPage .currentPage span a{
+    padding: 0 20px 0 20px;
+    color: #ccc;
+    font-size: 2rem;
+}
+
+.couponPage .currentPage .active a{
+    color: #000;
+}
+
+.couponPage .currentPage span:first-of-type{
+    border-right: 1px solid #ccc;
+}
+
+/* couponMain */
+/* 216 358 cards 1080 margin 30*/
+.couponContents:first-of-type {
+    border-top: 1px solid #e6e6e6;
+}
+
+.couponContents {
+    padding: 0 20px;
+    width: 100%;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.couponContents:hover {
+    background: #fafafa;
+}
+
+.couponTitle , .couponInfo {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 20px;
+    align-items: end;
+    z-index: 999;
+}
+
+.couponInfo>div>button {
+    width: 100px;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.couponInfo>div>button:nth-of-type(1) {
+    background-color: #0065BA;
+}
+
+.couponInfo>div>button:nth-of-type(2) {
+    background-color: #C4033E;
+}
+
+.couponInfo>div>button>a {
+    display: block;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 45px;
+    cursor: pointer;
+}
+
+.couponTitle>p{
+    color: #aaa;
+}
+
+.couponInfo>div>p {
+    font-weight: 600;
+}
+
+.couponInfo>div>p>span{
+    font-weight: 400;
+}
+
+/* modal */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.modal-content {
+    background-color: white;
+    width: 300px;
+    top: 50%;
+    left: 50%;
+    margin: 300px auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    transform: translate(-50% -50%);
+}
+
+.confirmDelete, .cancelDelete {
+    margin : 10px;
+    width: 100px;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+    transition: .3s;
+    font-size : 1.5rem;
+}
+
+.confirmDelete>a{
+    font-size : 1.5rem;
+    display: block;
+    line-height: 45px;
+}
+
+.confirmDelete:hover{
+    background-color: #C4033E;
+}
+
+.confirmDelete:hover>a{
+    color: #fff;
+}
+
+.cancelDelete:hover{
+    background-color: #0065BA;
+    color: #fff;
+}
+
+button,button>a{
+    cursor: pointer;
+}

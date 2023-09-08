@@ -1,4 +1,4 @@
-package teamproject.skycode.event;
+package teamproject.skycode.common;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;

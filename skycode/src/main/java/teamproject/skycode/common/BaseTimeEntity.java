@@ -1,4 +1,4 @@
-package teamproject.skycode.event;
+package teamproject.skycode.common;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
