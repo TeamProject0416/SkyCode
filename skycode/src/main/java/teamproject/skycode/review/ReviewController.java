@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.event.EventFormDto;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -142,18 +143,39 @@ public class ReviewController {
     }
 
 
-    // 리뷰 검색
-    @GetMapping("/search")
-    public String searchReviews(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
-        if (keyword != null && !keyword.isEmpty()) {
-            List<ReviewEntity> searchResults = reviewService.searchReviews(keyword);
-            model.addAttribute("searchResults", searchResults);
+    @PostMapping("/search")
+    public String searchReviews(
+            /*@RequestParam(value = "page", defaultValue = "0") int page,*/
+            @RequestParam("search-type") String searchType,
+            @RequestParam("search-value") String searchValue,
+            Model model
+    ) {
+        List<ReviewEntity> searchResults;
+
+        // 검색 유형이 "reviewTitle" 또는 "contents"일 때만 검색을 수행하도록 변경
+        if ("reviewTitle".equals(searchType) || "contents".equals(searchType)) {
+            try {
+                if ("reviewTitle".equals(searchType)) {
+                    // 검색 유형이 "reviewTitle"인 경우 제목으로 검색
+                    searchResults = reviewService.searchReviews(searchType,searchValue);
+                    System.out.println("service=" + searchResults);
+                } else {
+                    // 검색 유형이 "contents"인 경우 내용으로 검색
+                    searchResults = reviewService.searchReviews(searchType, searchValue);
+                }
+//                Page<ReviewEntity> paging = this.reviewService.getList(page);
+                model.addAttribute("searchResults", searchResults);
+//                model.addAttribute("paging", paging);
+//                model.addAttribute("maxPage", 5);
+                return "review/reviewSearch";
+            } catch (IllegalArgumentException ex) {
+                // 예외 발생 시 리다이렉트 및 예외 메시지 전달
+                return "redirect:/reviewSub?error=" + ex.getMessage();
+            }
+        } else {
+            // 검색 유형이 잘못된 경우 리다이렉트 및 오류 메시지 전달
+            return "redirect:/review/reviewSub?error=잘못된 검색 유형입니다. '제목' 또는 '내용'을 선택해주세요";
         }
-        return "review/reviewSub"; // 검색 결과를 보여줄 뷰 페이지로 이동
     }
-
-
-
-
 }
 

@@ -46,25 +46,7 @@
               </div>
             </a>
           </div>
-<!--          <div class="card">-->
-<!--            <div class="cardImg">-->
-<!--              <video autoplay loop muted>-->
-<!--                <source src="/video/rankingVideo.mp4">-->
-<!--              </video>-->
-<!--            </div>-->
-<!--            <div class="cardInnerText">-->
-<!--              <h3>닉네임</h3>-->
-<!--              <p>내용</p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="card">-->
-<!--            <div class="cardImg"></div>-->
-<!--            <div class="cardInnerText">-->
-<!--              <h3>닉네임</h3>-->
-<!--              <p>내용</p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        </div>
       </div><!-- ranking 끝 -->
     </div><!-- bestReview 끝 -->
 
@@ -74,16 +56,15 @@
         <h2 class="Title">Review Road</h2>
       </div>
       <div class="search">
-        <a href="#" class="searchOption">
-          제목
-          <span><i class="fa-solid fa-caret-down"></i></span>
-        </a>
-        <ul class="optionList">
-          <li>제목</li>
-          <li>작성자</li>
-        </ul>
-        <form action="/search" method="GET">
-          <input type="text" placeholder="검색어를 입력해주세요.">
+        <form action="/review/search" method="POST">
+          <label for="search-type" hidden>유형</label>
+          <select name="search-type" id="search-type">
+            <option value="reviewTitle">제목</option>
+            <option value="contents">내용</option>
+            <!-- Add other options as needed -->
+          </select>
+
+          <input id="search-value" type="search" name="search-value" placeholder="검색어를 입력해주세요.">
           <button type="submit">검색</button>
         </form>
       </div>
@@ -118,38 +99,11 @@
             <div class="reviewImg">
               <a th:href="'/review/' + ${review.id}"><img th:src="${review.miniImgUrl}"
                                                         th:alt="${review.miniImgName}"></a>
-
-              <!--다중 업로드 할 시 코드-->
-<!--              <th:block th:each="fileName: ${review.storedFileName}">-->
-<!--              <img th:src="@{/review_img/} + ${fileName}" alt="">-->
-<!--              </th:block>-->
             </div>
           </div>
         </div> <!--/reviewContents-->
         </th:block>
-        <!-- 페이징 처리 시작 -->
-<!--        <div th:if="${!paging.isEmpty()}">-->
-<!--          <ul class="pagination justify-content-center">-->
-<!--            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">-->
-<!--              <a class="page-link"-->
-<!--                 th:href="@{|?page=${paging.number-1}|}">-->
-<!--                <span>이전</span>-->
-<!--              </a>-->
-<!--            </li>-->
-<!--            <li th:each="page: ${#numbers.sequence(0, paging.totalPages - 1)}"-->
-<!--                th:if="${page >= paging.number-4 and page <= paging.number+4}"-->
-<!--                th:classappend="${page == paging.number} ? 'active'"-->
-<!--                class="page-item">-->
-<!--              <a th:text="${page + 1}" class="page-link" th:href="@{|?page=${page}|}"></a>-->
-<!--            </li>-->
-<!--            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">-->
-<!--              <a class="page-link" th:href="@{|?page=${paging.number+1}|}">-->
-<!--                <span>다음</span>-->
-<!--              </a>-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--        </div>-->
-        <!-- 페이징 처리 끝 -->
+
         <!-- 페이징 처리 시작 -->
         <div th:with="start=${(paging.number/maxPage)*maxPage},
               end=(${(paging.totalPages == 0) ? 1 : (start + (maxPage - 1) < paging.totalPages ? start + (maxPage - 1) : paging.totalPages-1)})" >
@@ -178,12 +132,12 @@
     </div><!-- /reviewAll -->
   </div>
   <!-- /reviewPage -->
-</section>
+
+
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="/js/sub/header.js"></script>
-<script src="/js/review/reviewSub.js"></script>
 <script src="/js/sub/footer.js"></script>
 
 </body>

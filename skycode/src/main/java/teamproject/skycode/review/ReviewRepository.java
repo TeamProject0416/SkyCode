@@ -27,7 +27,17 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Long>{
     List<ReviewEntity> findAllByOrderByReviewHitsDesc();
 
 //    검색 기능
-    List<ReviewEntity> findByReviewTitleContainingOrContentsContaining(String keyword, String keyword1);
+//    List<ReviewEntity> findByReviewTitleContaining(String searchValue);
+//    List<ReviewEntity> findByContentsContaining(String searchValue);
+// 내림차순으로 reviewTitle 검색 결과를 가져오는 메서드
+    @Query("SELECT r FROM ReviewEntity r WHERE r.reviewTitle LIKE %:searchValue% ORDER BY r.id DESC")
+    List<ReviewEntity> findByReviewTitleContainingOrderByIdDesc(@Param("searchValue") String searchValue);
+// 내림차순으로 contents 검색 결과를 가져오는 메서드
+    @Query("SELECT r FROM ReviewEntity r WHERE r.contents LIKE %:searchValue% ORDER BY r.id DESC")
+    List<ReviewEntity> findByContentsContainingOrderByIdDesc(@Param("searchValue") String searchValue);
+
+
+//    List<ReviewEntity> findByReviewTitleContainingOrContentsContaining(String keyword, String keyword1);
 
 
 //    Page<Review> findByReviewSearchCriteria(ReviewSearchDto searchDto, Pageable pageable);

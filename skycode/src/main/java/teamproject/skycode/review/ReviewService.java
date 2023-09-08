@@ -293,7 +293,7 @@ public class ReviewService {
         reviewRepository.delete(review);
     }
 
-    /* Paging */
+    /* Paging  */
     @Transactional(readOnly = true)
     public Page<ReviewEntity> pageList(Pageable pageable) {
         return reviewRepository.findAll(pageable);
@@ -305,10 +305,8 @@ public class ReviewService {
         return this.reviewRepository.findAll(pageable);
     }
 
-//    public List<ReviewEntity> getTop3BestReviews() {
-//        // 조회수가 가장 높은 상위 3개 리뷰를 가져옵니다.
-//        return reviewRepository.findTop3ByOrderByReviewHitsDesc();
-//    }
+
+
     public List<ReviewEntity> getTop3BestReviews() {
         List<ReviewEntity> bestReviews = reviewRepository.findAllByOrderByReviewHitsDesc(); // 모든 리뷰를 조회수 내림차순으로 가져옵니다.
 
@@ -321,14 +319,37 @@ public class ReviewService {
     }
 
 
-    public List<ReviewEntity> searchReviews(String keyword) {
-        // 검색어를 이용하여 리뷰를 검색하고 결과를 반환합니다.
-        return reviewRepository.findByReviewTitleContainingOrContentsContaining(keyword, keyword);
-    }
+
 
     public List<ReviewEntity> getAllReviews() {
         // 모든 리뷰를 가져옵니다.
         return reviewRepository.findAll();
     }
 
+
+//    public List<ReviewEntity> searchReviews(String keyword) {
+//        // 검색어를 이용하여 리뷰를 검색하고 결과를 반환합니다.
+//        return reviewRepository.findByReviewTitleContainingOrContentsContaining(keyword, keyword);
+//    }
+    public List<ReviewEntity> findByReviewTitleContaining(String searchValue) {
+
+        return reviewRepository.findByReviewTitleContainingOrderByIdDesc(searchValue);
+    }
+
+    public List<ReviewEntity> findByContentsContaining(String searchValue) {
+        return reviewRepository.findByContentsContainingOrderByIdDesc(searchValue);
+    }
+
+    public List<ReviewEntity> searchReviews(String searchType, String searchValue) {
+        // 검색 유형에 따라 검색을 수행하고 결과를 반환합니다.
+        switch (searchType) {
+            case "reviewTitle":
+                return findByReviewTitleContaining(searchValue);
+
+            case "contents":
+                return findByContentsContaining(searchValue);
+            default:
+                throw new IllegalArgumentException("잘못된 검색 유형입니다. '제목' 또는 '내용'을 선택해주세요");
+        }
+    }
 }
