@@ -2,7 +2,7 @@ package teamproject.skycode.login;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
@@ -40,13 +40,18 @@ public class MemberEntity {
     @Column
     private String memberBirthday;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     public static MemberEntity toMemberEntity(MemberDTO memberDTO){
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setId(memberDTO.getId());
         memberEntity.setMemberId(memberDTO.getMemberId());
         memberEntity.setMemberEmail(memberDTO.getMemberEmail());
+
         memberEntity.setMemberPassword(memberDTO.getMemberPassword());
         memberEntity.setMemberPasswordCheck(memberDTO.getMemberPasswordCheck());
+
         memberEntity.setMemberName(memberDTO.getMemberName());
         memberEntity.setMemberAddress(memberDTO.getMemberAddress());
         memberEntity.setMemberPhone(memberDTO.getMemberPhone());

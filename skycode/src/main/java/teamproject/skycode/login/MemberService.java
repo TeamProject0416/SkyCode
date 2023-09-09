@@ -1,12 +1,19 @@
 package teamproject.skycode.login;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.*;
 
-@RequiredArgsConstructor
 @Service
-public class MemberService {
+@Transactional
+@RequiredArgsConstructor
+public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
@@ -14,6 +21,7 @@ public class MemberService {
         // 1. dot -> entity 변환
         // 2. repository 의 save 메서드 호출
         MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
+        memberEntity.setRole(Role.USER);
         memberRepository.save(memberEntity);
         //repository 의 save 메서드 호출 (조건. entity 객체를 넘겨줘야 함)
     }
@@ -73,14 +81,14 @@ public class MemberService {
 
     }
 
-    public MemberDTO updateForm(String myEmail) {
-        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(myEmail);
-        if (optionalMemberEntity.isPresent()) {
-            return MemberDTO.toMemberDTO(optionalMemberEntity.get());
-        } else {
-            return null;
-        }
-    }
+//    public MemberDTO updateForm(String myEmail) {
+//        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(myEmail);
+//        if (optionalMemberEntity.isPresent()) {
+//            return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+//        } else {
+//            return null;
+//        }
+//    }
 
     public void update(MemberDTO memberDTO) {
         memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
@@ -124,6 +132,20 @@ public class MemberService {
         return memberRepository.existsByMemberId(memberId);
     }
 
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        MemberEntity member = memberRepository.findByMemberEmail(email);
+
+        if(member == null){
+            throw new UsernameNotFoundException(email);
+        }
+        return User.builder()
+                .username(member.getMemberEmail())
+                .password(member.getMemberPassword())
+                .roles(member.getRole().toString())
+                .build();
+    }
 
 //    로그인 창에서 오류!!! ai가 알려줌
 //    public boolean isValidMember(String memberId, String memberPassword) {

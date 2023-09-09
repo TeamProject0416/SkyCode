@@ -2,6 +2,7 @@ package teamproject.skycode.login;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
@@ -49,8 +51,7 @@ public class MemberController {
 //    비밀번호 일치 하지 않을 경우!!
     @PostMapping(value = "/member/passerror")
     public String memberForm(@Valid MemberDTO memberDTO,
-                             BindingResult bindingResult, Model model,
-                             Authentication authentication) {
+                             BindingResult bindingResult) {
         // 로그인 시 비밀번호 일치하는지
         if (bindingResult.hasErrors()) {
             System.out.println("로그인 일치");
@@ -63,8 +64,6 @@ public class MemberController {
         }
         return "member/save";
     }
-
-
 
 
 //  비밀번호 일치하는지 -> 이게 지금 작동 안되서 스크립트 사용 했는데 그래도 되나?
@@ -100,16 +99,19 @@ public class MemberController {
         return "member/login";
     }
 
+
     // 로그인 시 실패 또는 성공 했을 경우 오류창
-    @PostMapping("/member/logins")
-    public String login(@ModelAttribute MemberDTO memberDTO, Model model) {
+    @PostMapping("/member/login")
+    public String login(@ModelAttribute MemberDTO memberDTO, Model model, Principal principal) {
 
         MemberDTO loginResult = memberService.login(memberDTO);
         if (loginResult != null) {
             // login  성공
 //            session.setAttribute("loginEmail", loginResult.getMemberEmail());
+            System.out.println("_____________________________________");
+
             model.addAttribute("loginEmail", loginResult.getMemberId());
-            System.out.println("로그인성공");
+
             return "redirect:/";
         } else {
             // login 실패

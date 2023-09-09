@@ -1,4 +1,4 @@
-package teamproject.skycode.member.config;
+package teamproject.skycode.login.config;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
