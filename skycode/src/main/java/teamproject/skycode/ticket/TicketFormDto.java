@@ -63,4 +63,5 @@ public class TicketFormDto {
         return modelMapper.map(ticket, TicketFormDto.class);
     }
     // Ticket 객체에서 TicketFormDto 객체로 매핑
+
 }

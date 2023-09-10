@@ -18,7 +18,7 @@
 <section class="section">
     <div class="ticketPage">
         <div class="ticketPageTitle">
-            <h2 class="ticketTag">#쿠폰</h2>
+            <h2 class="ticketTag">#티켓</h2>
             <button><a href="/ticket/new">티켓 등록</a></button>
         </div>
         <div class="ticketMain">
@@ -33,17 +33,17 @@
                         </div>
                         <div class="ticketInfo">
                             <div>
-                                <p> firstClass 티켓 재고 상태 : <span>[[${ticket.firstStatus}]]</span></p>
+                                <p> firstClass 상태 : <span>[[${ticket.firstStatus}]]</span></p>
                                 <p> firstClass 수량 : <span>[[${ticket.firstNum}]]</span> (장)</p>
                                 <p> firstClass 가격 : <span>[[${ticket.firstPrice}]]</span> (원)</p>
                             </div>
                             <div>
-                                <p> businessClass 티켓 재고 상태 : <span>[[${ticket.businessStatus}]]</span></p>
+                                <p> businessClass 상태 : <span>[[${ticket.businessStatus}]]</span></p>
                                 <p> businessClass 수량 : <span>[[${ticket.businessNum}]]</span> (장)</p>
                                 <p> businessClass 가격 : <span>[[${ticket.businessPrice}]]</span> (원)</p>
                             </div>
                             <div>
-                                <p> economyClass 티켓 재고 상태 : <span>[[${ticket.economyStatus}]]</span></p>
+                                <p> economyClass 상태 : <span>[[${ticket.economyStatus}]]</span></p>
                                 <p> economyClass 수량 : <span>[[${ticket.economyNum}]]</span> (장)</p>
                                 <p> economyClass 가격 : <span>[[${ticket.economyPrice}]]</span> (원)</p>
                             </div>
@@ -64,7 +64,7 @@
                     </div>
                 </th:block>
                 <div th:with="start=${(tickets.number div maxPage) * maxPage + 1},
-                end=(${(tickets.totalPages == 0) ? 1 : (start + (maxPage - 1) < tickets.totalPages ? start + (maxPage - 1) : tickets.totalPages)})">
+                                end=(${(tickets.totalPages == 0) ? 1 : (start + (maxPage - 1) < tickets.totalPages ? start + (maxPage - 1) : tickets.totalPages)})">
                     <ul class="pagination">
                         <li th:classappend="${tickets.first}?'disabled'">
                             <a th:if="${tickets.hasPrevious}"

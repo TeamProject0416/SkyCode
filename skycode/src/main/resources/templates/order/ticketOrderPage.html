@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/order/ticketOrderPage.css}" rel="stylesheet">
+
+</head>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<section class="section">
+    <div class="ticketPage">
+        <div class="ticketPageTitle">
+            <h2>#티켓</h2>
+            <button><a href="/ticket/order">티켓 구매</a></button>
+        </div>
+        <div class="ticketMain">
+            <th:block th:each="ticket: ${tickets}">
+                <div class="ticketContents">
+                    <div class="ticketTitle">
+                        <p> 출발지 : <span>[[${ticket.ticketStart}]]</span></p>
+                        <p> 도착지 : <span>[[${ticket.ticketEnd}]]</span></p>
+                        <p> 비행기 시간 : <span>[[${ticket.ticketStartDate}]] [[${ticket.ticketStartTime}]] ~ [[${ticket.ticketEndDate}]] [[${ticket.ticketEndTime}]]</span>
+                        </p>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</section>
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+<script>
+
+</script>
+</body>
+
+</html>

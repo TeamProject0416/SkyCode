@@ -22,7 +22,7 @@ public class TicketController {
     private final TicketService ticketService;
 
     @GetMapping(value = {"/list", "/list/{page}"}) // 진행 페이지
-    public String skyTicket(@PathVariable(name = "page", required = false) Integer page, TicketEntity ticketEntity , Model model) {
+    public String skyTicket(@PathVariable(name = "page", required = false) Integer page, Model model) {
         int pageSize = 3; // 페이지당 표시할 이벤트 수
         Pageable pageable = PageRequest.of(page != null ? page : 0, pageSize, Sort.by("id").descending());
 
@@ -85,6 +85,7 @@ public class TicketController {
         // 삭제 후 리다이렉션할 URL을 반환
         return "redirect:/ticket/list";
     }
+
 
 
 }

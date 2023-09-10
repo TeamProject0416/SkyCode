@@ -1,24 +1,21 @@
-package teamproject.skycode.ticket;
+package teamproject.skycode.order;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import teamproject.skycode.common.FileService;
-import teamproject.skycode.event.EventEntity;
-import teamproject.skycode.event.EventFormDto;
-import teamproject.skycode.event.EventStatus;
+import teamproject.skycode.ticket.TicketEntity;
+import teamproject.skycode.ticket.TicketFormDto;
+import teamproject.skycode.ticket.TicketRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class TicketService {
+public class OrderService {
 
     private final TicketRepository ticketRepository;
 
