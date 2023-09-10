@@ -12,6 +12,7 @@ import teamproject.skycode.event.EventStatus;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 @Transactional
@@ -19,8 +20,8 @@ import java.time.LocalDateTime;
 public class TicketService {
 
     private final TicketRepository ticketRepository;
-    private final FileService fileService;
 
+    @Transactional
     public Long ticketSave(TicketFormDto ticketFormDto) {
         // 상품 등록
         TicketEntity ticket = ticketFormDto.createTicket();
@@ -69,8 +70,8 @@ public class TicketService {
     }
 
     @Transactional(readOnly = true)
-    public Page<TicketEntity> getTicketPage(TicketEntity ticket, Pageable pageable) {
-        return ticketRepository.findByRegTimeOrderByRegTimeDesc(ticket, pageable);
+    public Page<TicketEntity> getTicketPage(Pageable pageable) {
+        return ticketRepository.findAll(pageable);
     }
 
 }

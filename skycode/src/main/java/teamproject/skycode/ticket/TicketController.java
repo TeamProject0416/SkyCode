@@ -4,12 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -20,14 +22,14 @@ public class TicketController {
     private final TicketService ticketService;
 
     @GetMapping(value = {"/list", "/list/{page}"}) // 진행 페이지
-    public String skyTicket(@PathVariable(name = "page", required = false) Integer page,TicketEntity ticket, Model model) {
+    public String skyTicket(@PathVariable(name = "page", required = false) Integer page, TicketEntity ticketEntity , Model model) {
         int pageSize = 3; // 페이지당 표시할 이벤트 수
-        Pageable pageable = PageRequest.of(page != null ? page : 0, pageSize);
+        Pageable pageable = PageRequest.of(page != null ? page : 0, pageSize, Sort.by("id").descending());
 
         // EventStatus.ONGOING 값을 사용하여 데이터 조회
-        Page<TicketEntity> ticketPage = ticketService.getTicketPage(ticket, pageable);
+        Page<TicketEntity> ticketPage = ticketService.getTicketPage(pageable);
 
-        model.addAttribute("events", ticketPage); // Page 객체를 그대로 넘김
+        model.addAttribute("tickets", ticketPage); // Page 객체를 그대로 넘김
         model.addAttribute("maxPage", 5); // 페이지당 표시할 최대 페이지 수
 
         return "/ticket/ticketList";
@@ -46,12 +48,11 @@ public class TicketController {
         }
         try {
             ticketService.ticketSave(ticketFormDto);
-
         } catch (Exception e) {
             model.addAttribute("errorMessage", "티켓 등록 중 에러가 발생하였습니다");
             return "ticket/ticketForm";
         }
-        return "redirect:/ticket/ticketList";
+        return "redirect:/ticket/list";
     }
 
     @GetMapping(value = "/{ticketId}/edit") // 쿠폰 수정폼

@@ -25,15 +25,15 @@
         <form class="formContainer" action="/ticket/new" method="post" th:object="${ticketFormDto}">
             <input type="hidden" th:field="*{id}">
             <div>
-                <select th:field="*{firstStatus}" class="custom-select">
+                <select th:field="*{firstStatus}">
                     <option value="SELL">판매중</option>
                     <option value="SOLD_OUT">품절</option>
                 </select>
-                <select th:field="*{businessStatus}" class="custom-select">
+                <select th:field="*{businessStatus}">
                     <option value="SELL">판매중</option>
                     <option value="SOLD_OUT">품절</option>
                 </select>
-                <select th:field="*{economyStatus}" class="custom-select">
+                <select th:field="*{economyStatus}">
                     <option value="SELL">판매중</option>
                     <option value="SOLD_OUT">품절</option>
                 </select>
@@ -58,7 +58,7 @@
                     <label class="economyNum">economyClass 수량</label>
                     <input type="number" th:field="*{economyNum}" name="economyNum" placeholder="ex) 1000(장)">
                     <p th:if="${#fields.hasErrors('economyNum')}" th:errors="*{economyNum}" class="fieldError">
-                        Incorrect data</p> </div>
+                        Incorrect data</p></div>
             </div>
             <div class="pack">
                 <div>
@@ -149,16 +149,16 @@
             <div class="pack">
                 <div>
                     <label class="ticketStart">출발 시간</label>
-                    <input name="ticketStart" th:field="*{ticketStart}" type="time">
-                    <p th:if="${#fields.hasErrors('ticketStart')}" th:errors="*{ticketStart}" class="fieldError">
+                    <input type="time" name="ticketStartTime" th:field="*{ticketStartTime}">
+                    <p th:if="${#fields.hasErrors('ticketStartTime')}" th:errors="*{ticketStartTime}" class="fieldError">
                         Incorrect
                         data
                     </p>
                 </div>
                 <div>
                     <label class="ticketEnd">도착 시간</label>
-                    <input name="ticketEnd" th:field="*{ticketEnd}" type="time">
-                    <p th:if="${#fields.hasErrors('ticketEnd')}" th:errors="*{ticketEnd}" class="fieldError">
+                    <input type="time" name="ticketEndTime" th:field="*{ticketEndTime}">
+                    <p th:if="${#fields.hasErrors('ticketEndTime')}" th:errors="*{ticketEndTime}" class="fieldError">
                         Incorrect
                         data
                     </p>
@@ -172,7 +172,6 @@
                 <button th:formaction="@{/ticket/update}" type="submit" class="btn createBtn">수정
                 </button>
             </div>
-
         </form>
         <a href="/ticket/list">
             <button type="submit" class="btn cancelBtn">취소</button>

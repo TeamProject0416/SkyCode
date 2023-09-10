@@ -5,24 +5,24 @@
     top: 80px;
 }
 
-/* couponPageTitle */
-.couponPage {
+/* ticketPageTitle */
+.ticketPage {
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.couponPageTitle {
+.ticketPageTitle {
     display: flex;
     justify-content: space-between;
 }
 
-.couponPage .couponTag {
+.ticketPage .ticketTag {
     font-weight: 700;
     font-size: 3rem;
     padding: 50px 0 20px 15px;
 }
 
-.couponPageTitle>button {
+.ticketPageTitle>button {
     width: 100px;
     height: 45px;
     border: none;
@@ -31,7 +31,7 @@
     margin: 70px 20px 10px 0;
 }
 
-.couponPageTitle>button>a {
+.ticketPageTitle>button>a {
     display: block;
     color: #fff;
     font-size: 1.5rem;
@@ -46,37 +46,37 @@
     border-top: 1px solid #999;
 }
 
-.couponPage .currentPage span a{
+.ticketPage .currentPage span a{
     padding: 0 20px 0 20px;
     color: #ccc;
     font-size: 2rem;
 }
 
-.couponPage .currentPage .active a{
+.ticketPage .currentPage .active a{
     color: #000;
 }
 
-.couponPage .currentPage span:first-of-type{
+.ticketPage .currentPage span:first-of-type{
     border-right: 1px solid #ccc;
 }
 
-/* couponMain */
+/* ticketMain */
 /* 216 358 cards 1080 margin 30*/
-.couponContents:first-of-type {
+.ticketContents:first-of-type {
     border-top: 1px solid #e6e6e6;
 }
 
-.couponContents {
+.ticketContents {
     padding: 0 20px;
     width: 100%;
     border-bottom: 1px solid #e6e6e6;
 }
 
-.couponContents:hover {
+.ticketContents:hover {
     background: #fafafa;
 }
 
-.couponTitle , .couponInfo {
+.ticketTitle , .ticketInfo {
     display: flex;
     justify-content: space-between;
     padding: 10px 0 20px;
@@ -84,7 +84,7 @@
     z-index: 999;
 }
 
-.couponInfo>div>button {
+.ticketInfo>div>button {
     width: 100px;
     height: 45px;
     border: none;
@@ -92,15 +92,15 @@
     margin-left: 5px;
 }
 
-.couponInfo>div>button:nth-of-type(1) {
+.ticketInfo>div>button:nth-of-type(1) {
     background-color: #0065BA;
 }
 
-.couponInfo>div>button:nth-of-type(2) {
+.ticketInfo>div>button:nth-of-type(2) {
     background-color: #C4033E;
 }
 
-.couponInfo>div>button>a {
+.ticketInfo>div>button>a {
     display: block;
     color: #fff;
     font-size: 1.5rem;
@@ -109,15 +109,15 @@
     cursor: pointer;
 }
 
-.couponTitle>p{
+.ticketTitle>p{
     color: #aaa;
 }
 
-.couponInfo>div>p {
+.ticketInfo>div>p {
     font-weight: 600;
 }
 
-.couponInfo>div>p>span{
+.ticketInfo>div>p>span{
     font-weight: 400;
 }
 
@@ -178,4 +178,38 @@
 
 button,button>a{
     cursor: pointer;
+}
+
+/*pagination*/
+
+.pagination{
+    display:flex;
+    justify-content: center;
+    height: 150px;
+    align-items: center;
+}
+
+.pagination>li:first-of-type>a,
+.pagination>li:last-of-type>a{
+    display: block;
+    width: 80px;
+    line-height: 30px;
+    font-size: 1.3rem;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+    background-color: #0065BA;
+    cursor: pointer;
+}
+
+.pages{
+    line-height: 30px;
+    padding: 0 10px;
+    color: #666;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+li.active > .pages {
+    color: #0065BA;
 }

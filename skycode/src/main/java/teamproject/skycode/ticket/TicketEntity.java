@@ -36,7 +36,9 @@ public class TicketEntity extends BaseEntity {
     private Integer businessPrice; // businessClass 가격
     private Integer economyPrice; // economyClass 가격
 
+    @Enumerated(EnumType.STRING)
     private TicketCountry ticketStart; // 출발지
+    @Enumerated(EnumType.STRING)
     private TicketCountry ticketEnd; // 도착지
 
     private String ticketStartDate; // "yyyy-MM-dd" 출발일
@@ -46,6 +48,9 @@ public class TicketEntity extends BaseEntity {
     private String ticketEndTime; // "hh-mm" 도착 시간
 
     public void updateTicket(TicketFormDto ticketFormDto) {
+        this.firstNum = ticketFormDto.getFirstNum();
+        this.businessNum = ticketFormDto.getBusinessNum();
+        this.economyNum = ticketFormDto.getEconomyNum();
 
         this.firstPrice = ticketFormDto.getFirstPrice();
         this.businessPrice = ticketFormDto.getBusinessPrice();

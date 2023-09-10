@@ -6,6 +6,8 @@ import lombok.ToString;
 import org.modelmapper.ModelMapper;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -13,30 +15,30 @@ import javax.validation.constraints.NotBlank;
 public class TicketFormDto {
     private Long id; // 티켓 Id
 
-    @NotBlank(message = "수량은 필수 입력 값입니다.")
-    private int firstNum; // firstClass 수량
-    @NotBlank(message = "수량은 필수 입력 값입니다.")
-    private int businessNum; // businessClass 수량
-    @NotBlank(message = "수량은 필수 입력 값입니다.")
-    private int economyNum; // economyClass 수량
+    @NotNull(message = "수량은 필수 입력 값입니다.")
+    private Integer firstNum; // firstClass 수량
+    @NotNull(message = "수량은 필수 입력 값입니다.")
+    private Integer businessNum; // businessClass 수량
+    @NotNull(message = "수량은 필수 입력 값입니다.")
+    private Integer economyNum; // economyClass 수량
 
-    @NotBlank(message = "가격은 필수 입력 값입니다.")
+    @NotNull(message = "가격은 필수 입력 값입니다.")
     private Integer firstPrice; // firstClass 가격
-    @NotBlank(message = "가격은 필수 입력 값입니다.")
+    @NotNull(message = "가격은 필수 입력 값입니다.")
     private Integer businessPrice; // businessClass 가격
-    @NotBlank(message = "가격은 필수 입력 값입니다.")
+    @NotNull(message = "가격은 필수 입력 값입니다.")
     private Integer economyPrice; // economyClass 가격
 
-    @NotBlank(message = "재고 상태은 필수 입력 값입니다.")
+    @NotNull(message = "재고 상태은 필수 입력 값입니다.")
     private TicketStatus firstStatus; // firstClass 티켓 재고 상태
-    @NotBlank(message = "재고 상태은 필수 입력 값입니다.")
+    @NotNull(message = "재고 상태은 필수 입력 값입니다.")
     private TicketStatus businessStatus; // businessClass 티켓 재고 상태
-    @NotBlank(message = "재고 상태은 필수 입력 값입니다.")
+    @NotNull(message = "재고 상태은 필수 입력 값입니다.")
     private TicketStatus economyStatus; // economyClass 티켓 재고 상태
 
-    @NotBlank(message = "출발지는 필수 입력 값입니다.")
+    @NotNull(message = "출발지는 필수 입력 값입니다.")
     private TicketCountry ticketStart; // 출발지
-    @NotBlank(message = "도착지는 필수 입력 값입니다.")
+    @NotNull(message = "도착지는 필수 입력 값입니다.")
     private TicketCountry ticketEnd; // 도착지
 
     @NotBlank(message = "출발일은 필수 입력 값입니다.")
@@ -44,9 +46,9 @@ public class TicketFormDto {
     @NotBlank(message = "도착일은 필수 입력 값입니다.")
     private String ticketEndDate; // "yyyy-MM-dd" 도착일
 
-    @NotBlank(message = "출발 시간은 필수 입력 값입니다.")
+    @NotEmpty(message = "출발 시간은 필수 입력 값입니다.")
     private String ticketStartTime; // "hh-mm" 출발 시간
-    @NotBlank(message = "도착 시간은 필수 입력 값입니다.")
+    @NotEmpty(message = "도착 시간은 필수 입력 값입니다.")
     private String ticketEndTime; // "hh-mm" 도착 시간
 
     private static ModelMapper modelMapper = new ModelMapper();

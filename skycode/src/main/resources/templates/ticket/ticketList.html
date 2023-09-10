@@ -8,7 +8,7 @@
     <link th:href="@{/css/typo.css}" rel="stylesheet">
     <link th:href="@{/css/sub/header.css}" rel="stylesheet">
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
-    <link th:href="@{/css/coupon/coupon.css}" rel="stylesheet">
+    <link th:href="@{/css/ticket/ticket.css}" rel="stylesheet">
 
 </head>
 
@@ -16,36 +16,38 @@
 <header th:replace="~{fragments/sub/header::header}"></header>
 
 <section class="section">
-    <div class="couponPage">
-        <div class="couponPageTitle">
-            <h2 class="couponTag">#쿠폰</h2>
+    <div class="ticketPage">
+        <div class="ticketPageTitle">
+            <h2 class="ticketTag">#쿠폰</h2>
             <button><a href="/ticket/new">티켓 등록</a></button>
         </div>
-        <div class="couponMain">
-            <div class="couponBoard">
+        <div class="ticketMain">
+            <div class="ticketBoard">
                 <th:block th:each="ticket: ${tickets}">
-                    <div class="couponContents">
-                        <div class="couponTitle">
+                    <div class="ticketContents">
+                        <div class="ticketTitle">
                             <p> 출발지 : <span>[[${ticket.ticketStart}]]</span></p>
                             <p> 도착지 : <span>[[${ticket.ticketEnd}]]</span></p>
                             <p> 비행기 시간 : <span>[[${ticket.ticketStartDate}]] [[${ticket.ticketStartTime}]] ~ [[${ticket.ticketEndDate}]] [[${ticket.ticketEndTime}]]</span>
                             </p>
                         </div>
-                        <div class="couponInfo">
+                        <div class="ticketInfo">
                             <div>
                                 <p> firstClass 티켓 재고 상태 : <span>[[${ticket.firstStatus}]]</span></p>
                                 <p> firstClass 수량 : <span>[[${ticket.firstNum}]]</span> (장)</p>
                                 <p> firstClass 가격 : <span>[[${ticket.firstPrice}]]</span> (원)</p>
-
+                            </div>
+                            <div>
                                 <p> businessClass 티켓 재고 상태 : <span>[[${ticket.businessStatus}]]</span></p>
                                 <p> businessClass 수량 : <span>[[${ticket.businessNum}]]</span> (장)</p>
                                 <p> businessClass 가격 : <span>[[${ticket.businessPrice}]]</span> (원)</p>
-
+                            </div>
+                            <div>
                                 <p> economyClass 티켓 재고 상태 : <span>[[${ticket.economyStatus}]]</span></p>
                                 <p> economyClass 수량 : <span>[[${ticket.economyNum}]]</span> (장)</p>
                                 <p> economyClass 가격 : <span>[[${ticket.economyPrice}]]</span> (원)</p>
-
                             </div>
+
                             <div>
                                 <button><a th:href="'/ticket/' + ${ticket.id} + '/edit'">수정</a></button>
                                 <button class="deleteBtn"><a>삭제</a></button>
@@ -64,7 +66,6 @@
                 <div th:with="start=${(tickets.number div maxPage) * maxPage + 1},
                 end=(${(tickets.totalPages == 0) ? 1 : (start + (maxPage - 1) < tickets.totalPages ? start + (maxPage - 1) : tickets.totalPages)})">
                     <ul class="pagination">
-
                         <li th:classappend="${tickets.first}?'disabled'">
                             <a th:if="${tickets.hasPrevious}"
                                th:onclick="'javascript:page(' + ${tickets.number - 1} + ')'" aria-label='Previous'
@@ -72,14 +73,12 @@
                                 <span aria-hidden='true'>Previous</span>
                             </a>
                         </li>
-
                         <li th:each="page: ${#numbers.sequence(start, end)}"
                             th:classappend="${tickets.number == page-1}?'active':''">
                             <a class="pages" th:if="${tickets.number != page-1}"
                                th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text">[[${page}]]</a>
                             <a class="pages" th:if="${tickets.number == page-1}">[[${page}]]</a>
                         </li>
-
                         <li th:classappend="${tickets.last}?'disabled'">
                             <a th:if="${tickets.hasNext}" th:onclick="'javascript:page(' + ${tickets.number + 1} + ')'"
                                aria-label='Next'>
@@ -123,7 +122,6 @@
     function page(page) {
         location.href = '/ticket/list/' + page;
     }
-
 
 
 </script>
