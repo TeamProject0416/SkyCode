@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -29,19 +30,20 @@ select {
 .oej_container {
     position: relative;
     margin: 0 auto;
-    top: 140px;
-    height: 650px;
+    top: 80px;
+    height: 750px;
     max-width: 1320px;
 }
 
 .oej {
     position: relative;
-    height: 650px;
+    height: 850px;
     max-width: 1320px;
 }
 
 /* 회원가입 */
 .header_oej {
+
     display: flex;
     position: relative;
     justify-content: center;
@@ -59,13 +61,14 @@ select {
 .oej_name {
     position: relative;
     width: 500px;
-    height: 60px;
+    height: 90px;
     margin: 0 auto;
+
 }
 
 .oej_n {
     width: 500px;
-    height: 30px;
+    height: 35px;
     padding-left: 5px;
 }
 
@@ -74,13 +77,13 @@ select {
 .oej_id {
     position: relative;
     width: 500px;
-    height: 60px;
+    height: 90px;
     margin: 0 auto;
 }
 
 .oej_text {
     width: 500px;
-    height: 30px;
+    height: 35px;
     padding-left: 5px;
 }
 
@@ -90,13 +93,13 @@ select {
 .oej_pw {
     position: relative;
     width: 500px;
-    height: 60px;
+    height: 90px;
     margin: 0 auto;
 }
 
 .oej_pass {
     width: 500px;
-    height: 30px;
+    height: 35px;
     padding-left: 5px;
 }
 
@@ -105,86 +108,97 @@ select {
 .oej_pwcheck {
     position: relative;
     width: 500px;
-    height: 60px;
+    height: 90px;
     margin: 0 auto;
 }
 
 .oej_pwchecked {
     width: 500px;
-    height: 30px;
+    height: 35px;
     padding-left: 5px;
+}
+
+/* 전화번호 */
+
+.oej_number {
+    width: 500px;
+    height: 90px;
+    position: relative;
+    margin: 0 auto;
+    padding-top: -25px;
+}
+
+
+.oej_num {
+    margin: 0 auto;
+    height: 20px;
+    margin-top: 15px;
+
+}
+
+.oej_phone {
+    width: 500px;
+    padding-left: 5px;
+    height: 35px;
+
+}
+
+
+.oej_phonenumber{
+    display: flex;
+
 }
 
 /* 생년월일 */
 .oej_birthday{
+
     position: relative;
     width: 500px;
-    height: 60px;
+    height: 90px;
     margin: 0 auto;
 }
 
 .oej_y {
-    height: 30px;
+    height: 35px;
     width: 500px;
     padding-left: 40%;
     font-size: 1.3rem;
     color: #585757;
 }
 
-
-/* 전화번호 */
-
-.oej_number {
-    width: 500px;
-    height: 60px;
-    position: relative;
-    margin: 0 auto;
-
-}
-
-.oej_num {
-    margin-right: 10px;
-}
-
-.oej_phone {
-    width: 383px;
-    padding-left: 5px;
-    height: 30px;
-}
-
-
 /* 이메일 */
 
 .oej_emailid {
     width: 500px;
-    height: 60px;
+    height: 90px;
     position: relative;
     margin: 0 auto;
+    padding-top: 15px;
+}
+
+.oej_em {
+    position: absolute;
+    top: 0px;
+    left: -8px;
+    margin-left: 10px;
 }
 
 .oej_mail {
-    width: 180px;
+    width: 500px;
     padding-left: 5px;
-    height: 30px;
-}
-
-.oej_mail2 {
-
-    width: 180px;
-    padding-left: 5px;
-    height: 30px;
+    height: 35px;
 }
 
 .oej_select {
+  height: 20px;
     margin-left: 10px;
     width: 110px;
 }
 
-
 /* 주소 */
 .oej_address {
     width: 500px;
-    height: 60px;
+    height: 90px;
     position: relative;
     margin: 0 auto;
 
@@ -192,7 +206,7 @@ select {
 
 .oej_add {
     width: 500px;
-    height: 30px;
+    height: 35px;
     padding-left: 5px;
 }
 
@@ -202,7 +216,7 @@ select {
     width: 500px;
     height: 40px;
     position: relative;
-    top: 40px;
+    top: 20px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -211,6 +225,7 @@ select {
     outline: none;
     cursor: pointer;
     background-color: #003999;
+    border: none;
     color: #fff;
 }
 

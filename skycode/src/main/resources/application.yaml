@@ -1,0 +1,16 @@
+security:
+  oauth2:
+    client:
+      registration:
+        kakao:
+          clientId: id
+          clientSecret: key
+          authorization-grant-type: authorization_code
+          redirect-uri: "{baseUrl}/login/oauth2/code/kakao"
+          client-authentication-method: POST
+      provider:
+        kakao:
+          authorization-url: https://kauth.kakao.com/oauth/authorize
+          token-url: https://kauth.kakao.com.oauth/token
+          user-info-url: https://kapi.kakao.com/y2/user/me
+          user-name-attribute: id

@@ -1,13 +1,8 @@
 package teamproject.skycode.news.faq;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,17 +10,28 @@ import java.util.List;
 @Setter
 @ToString
 @Entity
-@Table(name = "faq")
+@AllArgsConstructor
+@NoArgsConstructor
+//@Table(name = "faq")
 public class Faq {
 
     @Id
-    @Column(name = "faq_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String faqTitle;
+    private String type;
 
     @Column
-    private String faqContent;
+    private String faqQuestion;
+
+    @Column
+    private String faqAnswer;
+
+    @Column
+    private LocalDateTime regTime;
+
+    @PrePersist
+    protected void onCreate(){ regTime = LocalDateTime.now(); }
 
 }

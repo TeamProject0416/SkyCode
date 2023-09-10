@@ -36,11 +36,11 @@
                         <li><a href="/event/winner">당첨자 발표</a></li>
                     </ul>
                 </li>
-                <li><a href="/news/notion">고객센터</a>
+                <li><a href="/news/notion/notion">고객센터</a>
                     <ul class="sub">
-                        <li><a href="/news/notion">공지사항</a></li>
-                        <li><a href="/news/inquiry">문의</a></li>
-                        <li><a href="/news/faq">Q&A</a></li>
+                        <li><a href="/news/notion/notion">공지사항</a></li>
+                        <li><a href="/news/inquiry/inquiryList">문의</a></li>
+                        <li><a href="/news/faq/faq">Q&A</a></li>
                     </ul>
                 </li>
             </ul>
@@ -69,9 +69,14 @@
                 <p>닫기</p>
             </div>
 
-            <img class="searchBtn" src="mainImages/btn_header_search.png" alt="">
-
-            <a href="/login"><img class="jhicon userModal" src="mainImages/searchUser.png" alt="user"></a>
+            <img class="searchBtn" src="/mainImages/btn_header_search.png" alt="">
+<!--            <a href="/member/login"><img class="jhicon userModal" src="/mainImages/searchUser.png" alt="user"></a>-->
+            <a th:if="${#strings.isEmpty(user)}" href="/member/login">
+                <img class="jhicon" src="/mainImages/searchUser.png" alt="user">
+            </a>
+            <a th:unless="${#strings.isEmpty(user)}">
+                <img class="jhicon userModal" src="/mainImages/searchUser.png" alt="user">
+            </a>
 
             <!-- user  -->
             <div class="jhModalUser">
@@ -85,7 +90,7 @@
                         <button class="jhicon alarmMenu">내 알람</button>
                     </a>
                     <h2>홍지혜</h2>
-                    <img class="userImg" src="mainImages/UserImg.jpg" alt="userImg">
+                    <img class="userImg" src="/mainImages/UserImg.jpg" alt="userImg">
                     <div class="jhuserBox1">
                         <a href="/user_review">
                             <ul>
