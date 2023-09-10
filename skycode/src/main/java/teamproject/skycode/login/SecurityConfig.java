@@ -1,4 +1,4 @@
-package teamproject.skycode.login.config;
+package teamproject.skycode.login;
 
 
 
@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import teamproject.skycode.login.CustomAuthenticationEntryPoint;
 import teamproject.skycode.login.MemberService;
 
 @Configuration
@@ -24,9 +25,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.formLogin()
                 .loginPage("/member/login")
-                .defaultSuccessUrl("/member/login/error1")
-                .usernameParameter("memberId")
-                .failureUrl("/member/login/error2")
+                .defaultSuccessUrl("/")
+                .usernameParameter("email")
+                .failureUrl("/member/login/error")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
@@ -36,7 +37,6 @@ public class SecurityConfig {
         http.authorizeRequests()
                 .mvcMatchers("/css/**", "/js/**", "/img/**", "/mainImages/**","/subImages/**").permitAll() // 전체 공개
                 .mvcMatchers("/", "/member/**", "/item/**", "/images/**").permitAll() // 전체공개
-                .mvcMatchers("/user/**").hasRole("USER") // 유저
                 .mvcMatchers("/admin/**").hasRole("ADMIN") // 어드민
                 .anyRequest().authenticated()
         ;
@@ -49,7 +49,6 @@ public class SecurityConfig {
     }
 
     @Bean
-    @Primary
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

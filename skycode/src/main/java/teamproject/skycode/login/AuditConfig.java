@@ -1,5 +1,4 @@
-package teamproject.skycode.login.config;
-
+package teamproject.skycode.login;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,3 +15,5 @@ public class AuditConfig {
     }
 
 }
+
+// 엔티티의 생성 및 수정 시간 등을 추적

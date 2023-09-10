@@ -1,4 +1,4 @@
-package teamproject.skycode.login.config;
+package teamproject.skycode.login;
 
 
 import org.springframework.data.domain.AuditorAware;
