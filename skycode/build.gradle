@@ -40,7 +40,7 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.4.2.Final' // Use the latest version
     implementation 'commons-logging:commons-logging:1.2'
 
-    //	시큐리티
+    //   시큐리티
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
 
