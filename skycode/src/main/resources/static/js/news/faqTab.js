@@ -10,8 +10,5 @@ $(document).ready(function () {
             $('.nyFaqTable tbody tr').hide();
             $('.nyFaqTable tbody tr[data-category="' + selectedCategory + '"]').show();
         }
-        console.log(selectedCategory);
     });
-
-    $('.nyFaqTab[data-category="all"]').click(); // 초기에 전체 탭을 선택한 상태로 설정
 });

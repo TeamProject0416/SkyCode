@@ -21,8 +21,7 @@
 <section>
     <div class="nyNotionUpWarp">
         <h2>공지사항 작성하기</h2>
-<!--        <form id="notion" th:action="@{/news/notionUp/create}" method="post" th:object="${notionForm}" enctype="multipart/form-data">-->
-        <form id="notion" th:action="@{/news/notionUp/create}" method="post" th:object="${notionForm}" enctype="multipart/form-data">
+        <form id="notion" th:action="@{/news/notion/notionUp}" method="post" th:object="${notionForm}" enctype="multipart/form-data">
             <div class="nyNotionUpBox">
                 <div class="nyNotionUpInBox">
                     <div class="nySearch">
@@ -39,19 +38,31 @@
                     <div class="nyNotionUpContent">
                         <div>공지 제목</div>
                         <input id="title" class="nyNotionTitle" th:field="*{notionTitle}" type="text"
-                               name="notionTitle" placeholder="공지 제목을 적어주세요"/>
+                               name="notionTitle" placeholder="공지 제목을 적어주세요" required/>
+                               <span th:if="${#fields.hasErrors('notionTitle')}" th:errors="*{notionTitle}"></span>
                         <div class="nyNotionUpContent">
                             <div>공지 내용</div>
                             <textarea id="content" class="nyNotionText" th:field="*{notionContent}" type="text"
-                                      name="notionContent" placeholder="공지 내용을 적어주세요"></textarea>
+                                      name="notionContent" placeholder="공지 내용을 적어주세요" required></textarea>
+                            <span th:if="${#fields.hasErrors('notionContent')}" th:errors="*{notionContent}"></span>
                         </div>
                     </div>
                 </div>
                 <!-- 파일 업로드 인풋 요소와 버튼 추가 -->
-                <div class="nyNotionUpInBox">
-                    <label for="file">첨부 파일: </label>
-                    <input id="file" type="file" name="file" class="fileUpload" accept=".jpg, .jpeg, .png, .pdf">
+<!--                <label for="file">첨부 파일: </label>-->
+<!--                <input id="file" type="file" name="file" class="fileUpload" accept=".jpg, .jpeg, .png, .pdf">-->
+<!--                <div th:if="${successMessage}" class="alert alert-success" role="alert">-->
+<!--                    <span th:text="${successMessage}"></span>-->
+<!--                </div>-->
+                <div class="form-group">
+                    <label for="file">이미지 업로드</label>
+                    <input type="file" class="form-control-file" id="file" name="file" accept="image/*">
                 </div>
+
+                <!--                <div class="nyNotionUpInBox">-->
+<!--                    <label for="file">첨부 파일: </label>-->
+<!--                    <input id="file" type="file" name="file" class="fileUpload" accept=".jpg, .jpeg, .png, .pdf">-->
+<!--                </div>-->
                 <button id="submit" type="submit">공지사항 등록</button>
             </div>
         </form>

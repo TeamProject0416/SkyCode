@@ -50,7 +50,7 @@
             <div class="nyPanelFaqContainer">
               <p class="nyPanelFaqTitle" th:text="${faq.faqQuestion}">What is Lorem Ipsum?</p>
               <div class="nyPanelFaqAnswer">
-                <p>Answer (1) ... ↓</p>
+                <p>답변이 준비 되었습니다 ... ↓</p>
                 <p th:text="${faq.faqAnswer}">...</p>
               </div>
             </div>
@@ -66,8 +66,13 @@
     </div>
     </div>
     <div class="nyFaqPeger">
-      <div class="nyFaqPegerBtn nyFaqClick"><a href="#">1</a></div>
-      <div class="nyFaqPegerBtn"><a href="#">2</a></div>
+      <ul class="pagination">
+        <!-- Iterate over page numbers -->
+        <li class="page-item" th:each="pageNumber : ${pageNumbers}" th:class="${pageNumber == currentPage} ? 'page-item active' : 'page-item'">
+          <a class="page-link" th:href="@{'/news/faq/faq?page=' + ${pageNumber}}" th:text="${pageNumber}"></a>
+        </li>
+        <!-- End of page number iteration -->
+      </ul>
     </div>
 </section>
 

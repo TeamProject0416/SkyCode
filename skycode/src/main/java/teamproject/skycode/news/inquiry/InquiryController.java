@@ -1,22 +1,26 @@
 package teamproject.skycode.news.inquiry;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zaxxer.hikari.HikariConfig;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-
-import java.time.LocalDateTime;
+import org.springframework.web.servlet.ModelAndView;
+import javax.validation.Valid;
 import java.util.Collections;
-
 import java.util.List;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/news")
+@RequiredArgsConstructor
 public class InquiryController {
 
 
@@ -26,12 +30,13 @@ public class InquiryController {
     @Autowired
     private InquiryViewCountRepository inquiryViewCountRepository;
 
+
+
     @Autowired
     private InquiryService inquiryService;
 
     @Autowired
     private InquiryViewCountService inquiryViewCountService;
-
 
     @Autowired
     public void InquiryController(InquiryRepository inquiryRepository) {
@@ -46,43 +51,98 @@ public class InquiryController {
     }
 
     // 1 대 1 문의 등록시 전송하는 것
-    @PostMapping("/inquiry/create")
-    public String submitInquiry(@ModelAttribute InquiryForm inquiryForm) {
-        // InquiryForm을 Inquiry 엔티티로 변환하여 저장
-        Inquiry inquiry = inquiryForm.toEntity(); // InquiryForm에서 Inquiry 엔티티로 변환하는 메서드 필요
-        inquiryRepository.save(inquiry);
-        return "redirect:/news/inquiry/inquiryList"; // 저장 후 등록 날짜 오름차순으로 정렬된 목록 페이지로 리다이렉트
+    @PostMapping("/inquiry/inquiry")
+    public ModelAndView submitInquiry(@Valid InquiryForm inquiryForm, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+        System.out.println("왜!!!");
+        if (bindingResult.hasErrors()) {
+//            Inquiry inquiryEntity = inquiryForm.toEntity();
+//            Inquiry saveInquiry = inquiryService.saveInquiry(inquiryEntity);
+            System.out.println("왜 안돼");
+            modelAndView.setViewName("news/inquiry/inquiry");
+//            modelAndView.addObject("inquiry", saveInquiry);
+        } else {
+            System.out.println("이유가 뭐야");
+            Inquiry inquiryEntity = inquiryForm.toEntity();
+            Inquiry savedInquiry = inquiryService.saveInquiry(inquiryEntity);
+
+            modelAndView.setViewName("redirect:/news/inquiry/inquiryList");
+            modelAndView.addObject("successMessage", "문의가 등록되었습니다.");
+
+        }
+
+        return modelAndView;
     }
+
+
+//    @PostMapping("/inquiry/create")
+//    public String submitInquiry(@ModelAttribute InquiryForm inquiryForm) {
+//        // InquiryForm을 Inquiry 엔티티로 변환하여 저장
+//        Inquiry inquiry = inquiryForm.toEntity(); // InquiryForm에서 Inquiry 엔티티로 변환하는 메서드 필요
+//        inquiryRepository.save(inquiry);
+//        return "redirect:/news/inquiry/inquiryList"; // 저장 후 등록 날짜 오름차순으로 정렬된 목록 페이지로 리다이렉트
+//    }
 
     // 1 대 1 문의 리스트 화면 출력
     @GetMapping("/inquiry/inquiryList")
-    public String getInquiries(Model model, @RequestParam(defaultValue = "0") int page, String sortBy) {
+    public String getInquiries(
+            Model model,
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false) String sortBy
+    ) {
         int pageSize = 10;
-        Page<Inquiry> inquiryPage = inquiryRepository.findAll(PageRequest.of(page, pageSize));
-        // 리스트들의 등록시간 호출
-        List<Inquiry> inquiries = inquiryRepository.findAllOrderByRegistrationTimeDesc();
+        Pageable pageable;
 
-        // 조회수
-        long totalInquiryCount = inquiryService.getTotalInquiryCount();
-        model.addAttribute("totalInquiryCount", totalInquiryCount);
-        // popularity = 조회수 순으로 정렬
         if ("popularity".equals(sortBy)) {
-            inquiries = inquiryService.getAllInquiriesSortedByPopularity();
-            System.out.println("될까");
+            pageable = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.DESC, "viewCount"));
         } else {
-            // 날짜 내림차순으로 정렬
-            // Default to sorting by date (most recent first)
-            inquiries = inquiryService.getAllInquiriesSortedByDate();
+            pageable = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.DESC, "regTime"));
         }
-        System.out.println("된다");
 
+        Page<Inquiry> inquiryPage = inquiryRepository.findAll(pageable);
+        List<Inquiry> inquiries = inquiryPage.getContent();
+
+        long totalInquiryCount = inquiryService.getTotalInquiryCount();
+
+        // Calculate the total number of pages
+        int totalPages = (int) Math.ceil((double) totalInquiryCount / pageSize);
+
+        model.addAttribute("totalInquiryCount", totalInquiryCount);
+        model.addAttribute("totalPages", totalPages); // Add totalPages
         model.addAttribute("inquiries", inquiries);
-        // 페이지 노출문의글 제한
-        model.addAttribute("inquiries", inquiryPage);
-//        return "inquiry-list"; // This should match your Thymeleaf template name
-        return "news/inquiry/inquiryList"; // 혹은 다른 페이지로 이동
+        model.addAttribute("inquiryPage", inquiryPage);
 
+        return "news/inquiry/inquiryList"; // Return the Thymeleaf template name
     }
+
+
+//    @GetMapping("/inquiry/inquiryList")
+//    public String getInquiries(
+//            Model model,
+//            @RequestParam(required = false, defaultValue = "0") int page,
+//            @RequestParam(required = false) String sortBy
+//    ) {
+//            int pageSize = 10;
+//        Pageable pageable;
+//
+//    if ("popularity".equals(sortBy)) {
+//        pageable = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.DESC, "viewCount"));
+//    } else {
+//        pageable = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.DESC, "regTime"));
+//    }
+//
+//    Page<Inquiry> inquiryPage = inquiryRepository.findAll(pageable);
+//    List<Inquiry> inquiries = inquiryPage.getContent();
+//
+//    long totalInquiryCount = inquiryService.getTotalInquiryCount();
+//    model.addAttribute("totalInquiryCount", totalInquiryCount);
+////        model.addAttribute("totalPages", totalPages); // Replace totalPages with the actual total pages
+//    model.addAttribute("inquiries", inquiries);
+//    model.addAttribute("inquiryPage", inquiryPage);
+////        return "inquiry-list"; // This should match your Thymeleaf template name
+//        return "news/inquiry/inquiryList"; // 혹은 다른 페이지로 이동
+//
+//    }
 
 
     // 1 대 1 문의 서브페이지 화면으로 보내기
@@ -92,14 +152,11 @@ public class InquiryController {
         System.out.println("제발1");
         if (savedInquiry != null) {
             Long id = savedInquiry.getId(); // Get the id of the saved/updated inquiry
-
             InquiryViewCount viewCount = inquiryViewCountService.incrementViewCount(id);
-
 
             // Now, based on the id, determine the URL to redirect to
             String redirectUrl = "redirect:/news/inquiry/show/" + id; // Adjust the URL pattern according to your mapping
             System.out.println("제발2");
-
 
             model.addAttribute("viewCount", viewCount.getCount());
 
@@ -114,14 +171,12 @@ public class InquiryController {
     }
 
 
-
     // 1 대 1 문의 서브페이지 화면 출력
     @GetMapping("/inquiry/show/{id}")
     public String showInquiryById(@PathVariable Long id, Model model) {
         Inquiry inquiry = inquiryService.getInquiryById(id);
 
         if (inquiry != null) {
-
             // Increment view count and save
             inquiry.setViewCount(inquiry.getViewCount() + 1); // Increment the view count
             inquiryRepository.save(inquiry); // Save the updated inquiry
@@ -215,6 +270,26 @@ public class InquiryController {
         // 수정된 상세 페이지로 리다이렉트
         return "redirect:/news/inquiry/show/" + inquiry.getId();
     }
+
+    // 문의 답변 작성
+    @PostMapping("/inquiry/respond")
+    public String respondToInquiry(@RequestParam Long inquiryId, @RequestParam String responseContent) {
+        // inquiryId를 사용하여 해당 문의를 찾아서 답변을 등록하고, responseContent를 저장합니다.
+        Inquiry inquiry = inquiryService.findById(inquiryId);
+
+        if (inquiry != null) {
+            inquiry.setResponseContent(responseContent);
+            inquiryService.save(inquiry);
+
+            // 성공적으로 등록되었다면 답변 내용을 반환합니다.
+            return "redirect:/news/inquiry/show/" + inquiry.getId();
+        }
+
+        // 실패했을 경우 null을 반환하거나 에러 메시지를 반환할 수 있습니다.
+        return "답변 등록에 실패했습니다.";
+    }
+
+
 
 }
 

@@ -13,9 +13,6 @@
 </head>
 
 <body>
-
-<!-- 로그인 -->
-
 <header th:replace="~{fragments/sub/header::header}"></header>
 
 
@@ -25,7 +22,7 @@
     <div class="oej_header">
         <p>LOGIN</p>
     </div>
-    <form action="/member/login" method="post">
+    <form  action="/new" method="POST">
         <div class="oej_input-box">
             <label th:for="email"></label>
             <input class="oej_username" type="email" name="email" placeholder="email@skycood.com">
