@@ -22,13 +22,16 @@ public class MainController {
 
     @GetMapping(value = "/")
     public String skyCode(Model model, Principal principal) {
+
+        // 이벤트 캐러셀
         List<EventEntity> event = eventRepository.findByONGOING();
         model.addAttribute("events",event);
+
+        // 유저 로그인
         String user = "";
         if (principal != null) {
             user = principal.getName();
         }
-        System.out.println("user: " + user);
         model.addAttribute("user", user);
         return "main";
     }

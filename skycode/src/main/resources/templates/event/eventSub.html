@@ -18,8 +18,10 @@
         <div class="eventPageTitle">
             <h2 class="eventSubTag"><a href="/event/ongoing">#이벤트</a></h2>
             <div>
-                <button><a th:href="'/event/' + ${eventFormDto.id} + '/edit'">수정</a></button>
-                <button class="deleteBtn"><a>삭제</a></button>
+                <button th:if="${!#strings.isEmpty(admin)}" >
+                    <a th:href="'/event/' + ${eventFormDto.id} + '/edit'">수정</a>
+                </button>
+                <button class="deleteBtn" th:if="${!#strings.isEmpty(admin)}"><a>삭제</a></button>
             </div>
             <div class="deleteModal modal">
                 <div class="modal-content">
