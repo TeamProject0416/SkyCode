@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css">
     <link th:href="@{/css/reset.css}" rel="stylesheet">
     <link th:href="@{/css/typo.css}" rel="stylesheet">
     <link th:href="@{/css/review/reviewStyle.css}" rel="stylesheet">
     <link th:href="@{/css/sub/header.css}" rel="stylesheet">
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 </head>
 
 <body>
@@ -33,30 +35,16 @@
       <div class="ranking">
         <!-- 카드 시작 -->
         <div class="cards">
-          <div class="card">
-            <div class="cardImg"></div>
-            <div class="cardInnerText">
-              <h3>닉네임</h3>
-              <p>내용</p>
-            </div>
-          </div>
-          <div class="card">
-            <div class="cardImg">
-              <video autoplay loop muted>
-                <source src="/video/rankingVideo.mp4">
-              </video>
-            </div>
-            <div class="cardInnerText">
-              <h3>닉네임</h3>
-              <p>내용</p>
-            </div>
-          </div>
-          <div class="card">
-            <div class="cardImg"></div>
-            <div class="cardInnerText">
-              <h3>닉네임</h3>
-              <p>내용</p>
-            </div>
+          <div class="card"  th:each="rank : ${bestReviews}">
+            <a th:href="@{'/review/' + ${rank.id}}">
+              <div class="cardImg">
+                <img th:src="${rank.miniImgUrl}" th:alt="${rank.miniImgName}">
+              </div>
+              <div class="cardInnerText">
+                <h3 th:text="${rank.nickName}">닉네임</h3>
+                <p th:text="${rank.contents}">내용</p>
+              </div>
+            </a>
           </div>
         </div>
       </div><!-- ranking 끝 -->
@@ -68,167 +56,89 @@
         <h2 class="Title">Review Road</h2>
       </div>
       <div class="search">
-        <a href="#" class="searchOption">
-          제목
-          <span><i class="fa-solid fa-caret-down"></i></span>
-        </a>
-        <ul class="optionList">
-          <li>제목</li>
-          <li>작성자</li>
-        </ul>
-        <input type="text" placeholder="검색어를 입력해주세요.">
-        <button type="submit">검색</button>
+        <form action="/review/search" method="POST">
+          <label for="search-type" hidden>유형</label>
+          <select name="search-type" id="search-type">
+            <option value="reviewTitle">제목</option>
+            <option value="contents">내용</option>
+            <!-- Add other options as needed -->
+          </select>
+
+          <input id="search-value" type="search" name="search-value" placeholder="검색어를 입력해주세요.">
+          <button type="submit">검색</button>
+        </form>
       </div>
 
       <div class="createReview">
-        <a href="/newReview"><button type="submit">리뷰 작성하기</button></a>
+        <a href="/review/newReview"><button type="submit">리뷰 작성하기</button></a>
       </div>
     </div>
     <!-- reviewAll -->
     <div class="reviewAllArea">
       <div class="reviewBoard">
-        <div class="reviewContents" th:each="review : ${reviews}">
+        <th:block th:each="review : ${paging}">
+        <div class="reviewContents">
           <div class="reviewInfo">
             <div class="reviewUser">
-              <a href="#">
+              <a th:href="@{/reviewShow/{id} (id=${review.id})}">
                 <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
                 <div>
                   <p class="reviewUserNickName" th:text="${review.nickName}">보라돌이</p>
-                  <span>6시간 전</span>
+                  <span th:text="'조회수 : ' + ${review.reviewHits}"></span>
                 </div>
               </a>
             </div>
             <div class="userReviewText">
-              <a href="#">
+              <a th:href="@{/review/{id} (id=${review.id})}">
                 <h2 class="userReviewTitle" th:text="${review.reviewTitle}"></h2>
-                <p th:text="${review.body}"></p>
-                <span th:text="${#temporals.format(reviews.regTime, 'yyyy-MM-dd')}"></span>
+                <p th:text="${review.contents}"></p>
+<!--                <span th:text="${#temporals.format(review.reviewCreatedTime, 'yyyy-MM-dd')}"></span>-->
+                <span th:text="${review.reviewTime}"></span>
               </a>
             </div>
             <div class="reviewImg">
-              <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
+              <a th:href="'/review/' + ${review.id}"><img th:src="${review.miniImgUrl}"
+                                                        th:alt="${review.miniImgName}"></a>
             </div>
           </div>
         </div> <!--/reviewContents-->
+        </th:block>
 
-        <div class="reviewContents">
-          <div class="reviewInfo">
-            <div class="reviewUser">
-              <a href="#">
-                <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
-                <div>
-                  <p class="reviewUserNickName">뚜비</p>
-                  <span>6시간 전</span>
-                </div>
+        <!-- 페이징 처리 시작 -->
+        <div th:with="start=${(paging.number/maxPage)*maxPage},
+              end=(${(paging.totalPages == 0) ? 1 : (start + (maxPage - 1) < paging.totalPages ? start + (maxPage - 1) : paging.totalPages-1)})" >
+          <ul class="pagination justify-content-center mt-5">
+            <li class="page-item" th:classappend="${paging.number eq 0}? 'disabled':''">
+              <a th:href="@{|?page=${paging.number-1}|}" aria-label='Previous'
+                 class="page-link">
+                <span aria-hidden='true'>Previous</span>
               </a>
-            </div>
-            <div class="userReviewText">
-              <a href="#">
-                <h2 class="userReviewTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
-                </h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
-                  aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
-                  nemo
-                  nobis. Asperiores odit impedit minus accusamus expedita!</p>
-                <span>2022-03-03</span>
+            </li>
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}"
+                th:classappend="${paging.number eq page}?'active':''">
+              <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+            </li>
+
+            <li class="page-item" th:classappend="${paging.number ge paging.totalPages-1}?'disabled':''">
+              <a th:href="@{|?page=${paging.number+1}|}" aria-label='Next' class="page-link">
+                <span aria-hidden='true'>Next</span>
               </a>
-            </div>
-            <div class="reviewImg">
-              <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
-        <div class="reviewContents">
-          <div class="reviewInfo">
-            <div class="reviewUser">
-              <a href="#">
-                <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
-                <div>
-                  <p class="reviewUserNickName">나나나</p>
-                  <span>6시간 전</span>
-                </div>
-              </a>
-            </div>
-            <div class="userReviewText">
-              <a href="#">
-                <h2 class="userReviewTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
-                </h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
-                  aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
-                  nemo
-                  nobis. Asperiores odit impedit minus accusamus expedita!</p>
-                <span>2022-03-03</span>
-              </a>
-            </div>
-            <div class="reviewImg">
-              <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
-            </div>
-          </div>
-        </div>
-        <div class="reviewContents">
-          <div class="reviewInfo">
-            <div class="reviewUser">
-              <a href="#">
-                <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
-                <div>
-                  <p class="reviewUserNickName">뽀오</p>
-                  <span>6시간 전</span>
-                </div>
-              </a>
-            </div>
-            <div class="userReviewText">
-              <a href="#">
-                <h2 class="userReviewTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
-                </h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
-                  aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
-                  nemo
-                  nobis. Asperiores odit impedit minus accusamus expedita!</p>
-                <span>2022-03-03</span>
-              </a>
-            </div>
-            <div class="reviewImg">
-              <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
-            </div>
-          </div>
-        </div>
-        <div class="reviewContents">
-          <div class="reviewInfo">
-            <div class="reviewUser">
-              <a href="#">
-                <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
-                <div>
-                  <p class="reviewUserNickName">햇님</p>
-                  <span>6시간 전</span>
-                </div>
-              </a>
-            </div>
-            <div class="userReviewText">
-              <a href="#">
-                <h2 class="userReviewTitle">Lorem, ipsum dolor sit amet consectetur adipisicing.
-                </h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iste voluptatum et
-                  aliquam ut, quisquam veritatis doloremque expedita quis inventore sed eveniet,
-                  nemo
-                  nobis. Asperiores odit impedit minus accusamus expedita!</p>
-                <span>2022-03-03</span>
-              </a>
-            </div>
-            <div class="reviewImg">
-              <a href="#"><img src="https://dummyimage.com/240X160/ccc/fff" alt=""></a>
-            </div>
-          </div>
-        </div>
+        <!-- 페이징 처리 끝 -->
+
       </div>
     </div><!-- /reviewAll -->
   </div>
   <!-- /reviewPage -->
-</section>
+
+
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="/js/sub/header.js"></script>
-<script src="/js/review/reviewSub.js"></script>
 <script src="/js/sub/footer.js"></script>
+
 </body>
 </html>

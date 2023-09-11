@@ -34,6 +34,7 @@ dependencies {
 
 /* validation */
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'com.querydsl:querydsl-jpa:5.0.0'
 
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4' // 원하는 ModelMapper 버전으로 변경 가능
 	implementation 'org.mapstruct:mapstruct:1.4.2.Final' // Use the latest version
