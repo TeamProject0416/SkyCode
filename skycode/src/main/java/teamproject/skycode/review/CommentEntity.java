@@ -2,6 +2,7 @@ package teamproject.skycode.review;
 
 import lombok.Getter;
 import lombok.Setter;
+import teamproject.skycode.common.BaseEntity;
 
 import javax.persistence.*;
 

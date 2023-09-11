@@ -2,8 +2,8 @@ package teamproject.skycode.review;
 
 
 import lombok.*;
-import teamproject.skycode.event.BaseEntity;
-import teamproject.skycode.event.EventFormDto;
+import teamproject.skycode.common.BaseEntity;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
