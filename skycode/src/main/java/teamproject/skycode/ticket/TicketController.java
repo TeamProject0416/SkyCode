@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
-@RequestMapping("/ticket")
+@RequestMapping("/admin/ticket")
 @RequiredArgsConstructor
 public class TicketController {
 

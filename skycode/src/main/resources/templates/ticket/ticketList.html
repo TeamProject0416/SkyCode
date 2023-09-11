@@ -19,7 +19,7 @@
     <div class="ticketPage">
         <div class="ticketPageTitle">
             <h2 class="ticketTag">#티켓</h2>
-            <button><a href="/ticket/new">티켓 등록</a></button>
+            <button><a href="/admin/ticket/new">티켓 등록</a></button>
         </div>
         <div class="ticketMain">
             <div class="ticketBoard">
@@ -49,14 +49,14 @@
                             </div>
 
                             <div>
-                                <button><a th:href="'/ticket/' + ${ticket.id} + '/edit'">수정</a></button>
+                                <button><a th:href="'/admin/ticket/' + ${ticket.id} + '/edit'">수정</a></button>
                                 <button class="deleteBtn"><a>삭제</a></button>
                             </div>
                             <div class="deleteModal modal">
                                 <div class="modal-content">
                                     <p>쿠폰을 삭제하시겠습니까?</p>
                                     <button class="confirmDelete"><a
-                                            th:href="'/ticket/' + ${ticket.id} + '/delete'">삭제</a></button>
+                                            th:href="'/admin/ticket/' + ${ticket.id} + '/delete'">삭제</a></button>
                                     <button class="cancelDelete">취소</button>
                                 </div>
                             </div>
