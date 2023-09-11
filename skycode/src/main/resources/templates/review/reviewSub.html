@@ -69,7 +69,7 @@
         </form>
       </div>
 
-      <div class="createReview">
+      <div class="createReview" th:if="${!#strings.isEmpty(user)}">
         <a href="/review/newReview"><button type="submit">리뷰 작성하기</button></a>
       </div>
     </div>

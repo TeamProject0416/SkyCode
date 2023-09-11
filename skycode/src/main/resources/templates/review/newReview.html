@@ -26,11 +26,12 @@
         <form class="formContainer" action="/review/create" method="post"
               enctype="multipart/form-data" th:object="${reviewFormDto}">
             <input type="hidden" th:field="*{id}">
-            <div class="nickNameArea">
-                <label class="nickName">닉네임</label>
-                <input type="text" class="titleInput" name="nickName"
-                       placeholder="닉네임을 입력해주세요" th:field="*{nickName}">
-            </div>
+            <input type="hidden" th:field="*{memberId}">
+<!--            <div class="nickNameArea">-->
+<!--                <label class="nickName">닉네임</label>-->
+<!--                <input type="text" class="titleInput" name="nickName"-->
+<!--                       placeholder="닉네임을 입력해주세요" th:field="*{nickName}">-->
+<!--            </div>-->
             <p th:if="${#fields.hasErrors('nickName')}" th:errors="*{nickName}" class="fieldError">Incorrect data</p>
 
             <div class="titleArea">

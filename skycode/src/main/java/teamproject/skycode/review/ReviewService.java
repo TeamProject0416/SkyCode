@@ -124,6 +124,7 @@ public class ReviewService {
         String formattedDate = now.toLocalDate().toString(); // "yyyy-MM-dd"
         review.setReviewTime(formattedDate);
 
+
         // 이벤트 저장
         reviewRepository.save(review);
         return review.getId();

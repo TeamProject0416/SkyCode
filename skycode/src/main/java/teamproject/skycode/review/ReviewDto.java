@@ -1,5 +1,6 @@
 package teamproject.skycode.review;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,6 +46,8 @@ public class ReviewDto {
     private String bigImgUrl; // 큰 이미지 조회 경로
 
     private static ModelMapper modelMapper = new ModelMapper();
+
+    private Long memberId;
 
     public ReviewEntity createReview() {
         return modelMapper.map(this, ReviewEntity.class);

@@ -3,6 +3,7 @@ package teamproject.skycode.review;
 import lombok.Getter;
 import lombok.Setter;
 import teamproject.skycode.common.BaseEntity;
+import teamproject.skycode.login.MemberEntity;
 
 import javax.persistence.*;
 
@@ -24,6 +25,8 @@ public class CommentEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id")
     private ReviewEntity reviewEntity;
+
+
 
 
     public static CommentEntity toSaveEntity(CommentDTO commentDTO, ReviewEntity reviewEntity) {

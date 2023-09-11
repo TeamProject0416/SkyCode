@@ -5,9 +5,13 @@ import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import teamproject.skycode.common.BaseEntity;
 import teamproject.skycode.constant.Role;
+import teamproject.skycode.review.CommentEntity;
+import teamproject.skycode.review.ReviewEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -46,6 +50,9 @@ public class MemberEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<ReviewEntity> reviewEntityList = new ArrayList<>();
 
     public static MemberEntity createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         MemberEntity member = new MemberEntity();

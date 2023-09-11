@@ -3,6 +3,7 @@ package teamproject.skycode.review;
 
 import lombok.*;
 import teamproject.skycode.common.BaseEntity;
+import teamproject.skycode.login.MemberEntity;
 
 
 import javax.persistence.*;
@@ -44,6 +45,10 @@ public class ReviewEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "reviewEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private MemberEntity memberEntity;
 
 //    public void updateReviewImg(String miniImgName, String miniOriImgName, String miniImgUrl,
 //                               List<String> bigImgNames, List<String> bigOriImgNames, List<String> bigImgUrls) {
