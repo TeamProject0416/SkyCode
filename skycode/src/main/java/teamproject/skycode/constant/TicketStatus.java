@@ -1,4 +1,4 @@
-package teamproject.skycode.ticket;
+package teamproject.skycode.constant;
 
 public enum TicketStatus {
     SELL, SOLD_OUT

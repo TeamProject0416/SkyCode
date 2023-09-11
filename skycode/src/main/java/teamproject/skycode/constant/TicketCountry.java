@@ -1,4 +1,4 @@
-package teamproject.skycode.ticket;
+package teamproject.skycode.constant;
 
 public enum TicketCountry {
     Korea, Japan, Mexico, USA, NewYork, Paris, Switzerland, Egypt,

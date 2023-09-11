@@ -21,7 +21,7 @@ public class MainController {
     private final EventRepository eventRepository;
 
     @GetMapping(value = "/")
-    public String skyCode(Model model, Principal principal) {
+    public String skyCode(Model model) {
         List<EventEntity> event = eventRepository.findByONGOING();
         model.addAttribute("events",event);
         return "main";

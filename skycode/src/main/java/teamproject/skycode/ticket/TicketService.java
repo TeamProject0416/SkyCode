@@ -5,16 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import teamproject.skycode.common.FileService;
-import teamproject.skycode.event.EventEntity;
-import teamproject.skycode.event.EventFormDto;
-import teamproject.skycode.event.EventStatus;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
 @Service
 @Transactional
 @RequiredArgsConstructor

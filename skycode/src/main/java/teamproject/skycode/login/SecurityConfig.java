@@ -35,10 +35,9 @@ public class SecurityConfig {
         ;
 
         http.authorizeRequests()
-                .mvcMatchers("/css/**", "/js/**", "/img/**", "/mainImages/**","/subImages/**").permitAll() // 전체 공개
-                .mvcMatchers("/", "/member/**", "/item/**", "/images/**").permitAll() // 전체공개
-                .mvcMatchers("/admin/**").hasRole("ADMIN") // 어드민
-                .anyRequest().authenticated()
+                .mvcMatchers("/**").permitAll() // 전체공개
+//                .mvcMatchers("/css/**", "/js/**", "/img/**", "/mainImages/**","/subImages/**").permitAll() // 전체 공개
+//                .mvcMatchers("/**", "/member/**", "/item/**", "/images/**").permitAll() // 전체공개
         ;
 
         http.exceptionHandling()

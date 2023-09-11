@@ -21,7 +21,7 @@ public class MemberFormDto {
     private String nickName;
 
 
-//    @Pattern(regexp = "^[A-Za-z0-9_.\\-]+@[A-Za-z0-9\\-]+\\.[A-Za-z0-9\\-]+", message = "이메일을 입력해 주세요.")
+    //    @Pattern(regexp = "^[A-Za-z0-9_.\\-]+@[A-Za-z0-9\\-]+\\.[A-Za-z0-9\\-]+", message = "이메일을 입력해 주세요.")
     @NotEmpty(message = "이메일은 필수 입력 값입니다")
     @Email(message = "이메일 형식으로 입력해주세요")
     private String email;

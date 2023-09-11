@@ -4,9 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import teamproject.skycode.common.BaseEntity;
+import teamproject.skycode.constant.TicketCountry;
+import teamproject.skycode.constant.TicketStatus;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Getter
 @Entity

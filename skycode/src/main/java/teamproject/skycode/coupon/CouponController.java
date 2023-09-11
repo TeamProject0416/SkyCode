@@ -62,7 +62,7 @@ public class CouponController {
 
     @PostMapping(value = "/update") // 이벤트 수정
     public String couponUpdate(@Valid CouponFormDto couponFormDto, BindingResult bindingResult,
-                              Model model) {
+                               Model model) {
         if (bindingResult.hasErrors()) {
             return "coupon/couponForm";
         }

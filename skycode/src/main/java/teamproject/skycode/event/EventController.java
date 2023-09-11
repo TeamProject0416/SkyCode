@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import teamproject.skycode.constant.EventStatus;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -70,8 +71,8 @@ public class EventController {
 
     @PostMapping(value = "/new") // 이벤트 등록
     public String createEvent(@Valid EventFormDto eventFormDto, BindingResult bindingResult, Model model,
-                               @RequestParam("eventImgFile1") MultipartFile eventImgFile1,
-                               @RequestParam("eventImgFile2") MultipartFile eventImgFile2) {
+                              @RequestParam("eventImgFile1") MultipartFile eventImgFile1,
+                              @RequestParam("eventImgFile2") MultipartFile eventImgFile2) {
         if (bindingResult.hasErrors()) {
             return "event/eventForm";
         }

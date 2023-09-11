@@ -17,7 +17,7 @@
     <div class="eventPage">
         <div class="eventPageTitle">
             <h2 class="eventTag">#진행중 이벤트</h2>
-            <button><a href="/event/eventForm">이벤트 등록</a></button>
+            <button><a href="/event/new">이벤트 등록</a></button>
         </div>
         <div class="currentPage">
             <span class="active"><a href="/event/ongoing">진행중 이벤트</a></span>
@@ -25,12 +25,12 @@
             <span><a href="/event/winner">당첨자 발표</a></span></div>
         <div class="eventMain">
             <div class="eventBoard">
-                <div class="eventContents">
-                    <div class="eventInfo">
-                        <div class="eventUser">
-                            <a href="#">
-                                <img src="/subImages/adminImg.png" alt="" class="eventUserImg">
-                                <div>
+                <th:block th:each="event: ${events}">
+                    <div class="eventContents">
+                        <div class="eventInfo">
+                            <div class="eventUser">
+                                <a href="#">
+                                    <img src="/subImages/adminImg.png" alt="" class="eventUserImg">
                                     <p class="eventUserNickName">관리자</p>
                                 </a>
                             </div>

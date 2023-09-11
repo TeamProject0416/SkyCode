@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.modelmapper.ModelMapper;
+import teamproject.skycode.constant.CouponStatus;
 
 import javax.validation.constraints.NotBlank;
 
