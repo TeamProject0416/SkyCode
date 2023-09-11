@@ -17,8 +17,8 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Long>{
     @Modifying
     @Query(value = "update ReviewEntity r set r.reviewHits=r.reviewHits+1 where r.id=:id")
     void updateHits(@Param("id") Long id);
-    @Query("SELECT r FROM ReviewEntity r ORDER BY r.regTime DESC")
-    List<ReviewEntity> findByAllEntity();
+//    @Query("SELECT r FROM ReviewEntity r ORDER BY r.regTime DESC")
+//    List<ReviewEntity> findByAllEntity();
 
 //    0907 페이징 처리 하기
     Page<ReviewEntity> findAll(Pageable pageable);
