@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/login/loginForm.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <style>
+        .fieldError {
+          color: #bd2130;
+        }
+    </style>
+
+</head>
+<body>
+
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<section class="oej_container">
+    <form action="/member/new" method="post" role="form" th:object="${memberFormDto}">
+        <div class="oej">
+            <div class="header_oej">회원가입</div>
+
+            <div class="oej_name">
+                <label th:for="name">이름</label>
+                <input type="text" class="oej_n" th:field="*{name}" placeholder="이름을 입력해주세요">
+                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Incorrect
+                    data</p>
+            </div>
+
+            <div class="oej_id">
+                <label th:for="nickName">닉네임</label>
+                <input class="oej_text" type="text" th:field="*{nickName}" placeholder="예) skycode">
+                <p th:if="${#fields.hasErrors('nickName')}" th:errors="*{nickName}" class="fieldError">Incorrect
+                    data</p>
+            </div>
+
+            <!-- 이메일 -->
+            <div class="oej_emailid">
+
+                <label th:for="email" class="oej_em">이메일</label>
+                <input class="oej_mail" th:field="*{email}" type="email" placeholder="예) skycode@hanmail.net"/>
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect
+                    data</p>
+            </div>
+
+            <div class="oej_pw">
+                <label th:for="password">비밀번호</label>
+                <input class="oej_pass" type="password" th:field="*{password}"
+                       placeholder="비밀번호는 8자 이상, 16자 이하로 입력해주세요">
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">
+                    Incorrect data
+                </p>
+            </div>
+
+            <div class="oej_number">
+                <label th:for="phoneNum" class="oej_ber">전화번호</label>
+                <div class="oej_phonenumber">
+                    <select class="oej_num">
+                        <option value="">대한민국 +82</option>
+                    </select>
+                    <input class="oej_phone" type="tel" th:field="*{phoneNum}" placeholder="예) 010-1234-5678">
+                </div>
+                <p th:if="${#fields.hasErrors('phoneNum')}" th:errors="*{phoneNum}" class="fieldError">Incorrect
+                    data</p>
+            </div>
+
+            <div class="oej_birthday">
+                <label th:for="birthday"> 생년월일</label>
+                <input class="oej_y" th:field="*{birthday}" type="date">
+                <p th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" class="fieldError">
+                    Incorrect data
+                </p>
+            </div>
+
+            <div class="oej_address">
+                <label th:for="address">주소</label>
+                <input class="oej_add" type="text" th:field="*{address}" placeholder="상세한 주소를 입력해 주세요">
+                <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="fieldError">
+                    Incorrect data</p>
+            </div>
+            <button id="submit" class="oej_join">JOIN US</button>
+        </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    </form>
+</section>
+
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var errorMessage = [[${errorMessage}]];
+        if(errorMessage != null){
+            alert(errorMessage);
+        }
+    });
+</script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+</body>
+
+</html>

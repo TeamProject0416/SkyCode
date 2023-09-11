@@ -2,71 +2,62 @@ package teamproject.skycode.login;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import teamproject.skycode.common.BaseEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
 @Entity
-@Table(name ="member_table")
-public class MemberEntity {
+@Table(name = "member")
+public class MemberEntity extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
+    @Column(name = "Member_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)  // unique 제약 조건 추가
-    private String memberId;
+    @NotBlank(message = "이름을 입력해 주세요.")
+    private String name;
 
     @Column(unique = true)  // unique 제약 조건 추가
-    private String memberEmail;
+    private String nickName;
 
-
-    @Column
-    private String memberPassword;
-
-    @Column
-    private String memberPasswordCheck;
+    @Column(unique = true)  // unique 제약 조건 추가
+    private String email;
 
     @Column
-    private String memberName;
+    private String password;
+
+//    @Column
+//    private String passwordCheck;
 
     @Column
-    private String memberAddress;
+    private String address;
 
     @Column
-    private String memberPhone;
+    private String phoneNum;
 
     @Column
-    private String memberBirthday;
+    private String birthday;
 
-    public static MemberEntity toMemberEntity(MemberDTO memberDTO){
-        MemberEntity memberEntity = new MemberEntity();
-        memberEntity.setId(memberDTO.getId());
-        memberEntity.setMemberId(memberDTO.getMemberId());
-        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
-        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
-        memberEntity.setMemberPasswordCheck(memberDTO.getMemberPasswordCheck());
-        memberEntity.setMemberName(memberDTO.getMemberName());
-        memberEntity.setMemberAddress(memberDTO.getMemberAddress());
-        memberEntity.setMemberPhone(memberDTO.getMemberPhone());
-        memberEntity.setMemberBirthday(memberDTO.getMemberBirthday());
-        return memberEntity;
-    }
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-//    수정
-    public static MemberEntity toUpdateMemberEntity(MemberDTO memberDTO){
-        MemberEntity memberEntity = new MemberEntity();
-        memberEntity.setId(memberDTO.getId());
-        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
-        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
-        memberEntity.setMemberPasswordCheck(memberDTO.getMemberPasswordCheck());
-        memberEntity.setMemberName(memberDTO.getMemberName());
-        memberEntity.setMemberAddress(memberDTO.getMemberAddress());
-        memberEntity.setMemberPhone(memberDTO.getMemberPhone());
-        memberEntity.setMemberBirthday(memberDTO.getMemberBirthday());
-        return memberEntity;
+    public static MemberEntity createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
+        MemberEntity member = new MemberEntity();
+        member.setName(memberFormDto.getName());
+        member.setNickName(memberFormDto.getNickName());
+        member.setEmail(memberFormDto.getEmail());
+        member.setAddress(memberFormDto.getAddress());
+        member.setPhoneNum(memberFormDto.getPhoneNum());
+        member.setBirthday(memberFormDto.getBirthday());
+        String password = passwordEncoder.encode(memberFormDto.getPassword());
+        member.setPassword(password);
+        member.setRole(Role.ADMIN);
+        return member;
     }
 }
 

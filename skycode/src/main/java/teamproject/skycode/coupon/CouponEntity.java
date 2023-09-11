@@ -2,10 +2,9 @@ package teamproject.skycode.coupon;
 
 
 import lombok.*;
-import teamproject.skycode.event.BaseEntity;
+import teamproject.skycode.common.BaseEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 
 @Getter
 @Entity

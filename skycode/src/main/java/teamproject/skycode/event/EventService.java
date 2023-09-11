@@ -1,28 +1,21 @@
 package teamproject.skycode.event;
 
-import jdk.jfr.Event;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import teamproject.skycode.common.FileService;
 
 import javax.persistence.EntityNotFoundException;
-import javax.swing.text.Document;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
 
 @Service
 @Transactional
@@ -32,8 +25,8 @@ public class EventService {
     private final EventRepository eventRepository;
     private final FileService fileService;
 
-    @Value("${eventImgLocation}")
-    private String eventImgLocation;
+    @Value("${imgLocation}")
+    private String imgLocation;
 
 
     public Long saveEvent(EventFormDto eventFormDto, MultipartFile eventImgFile1, MultipartFile eventImgFile2) throws Exception {
@@ -63,7 +56,7 @@ public class EventService {
 
         if (miniOriImgName != null && !miniOriImgName.isEmpty()) {
             // 파일명 생성
-            miniImgName = fileService.uploadFile(eventImgLocation + basePath, miniOriImgName,
+            miniImgName = fileService.uploadFile(imgLocation + basePath, miniOriImgName,
                     eventImgFile1.getBytes());
 
             // 파일 경로 생성
@@ -76,7 +69,7 @@ public class EventService {
 
         if (bigOriImgName != null && !bigOriImgName.isEmpty()) {
             // 파일명 생성
-            bigImgName = fileService.uploadFile(eventImgLocation + basePath, bigOriImgName,
+            bigImgName = fileService.uploadFile(imgLocation + basePath, bigOriImgName,
                     eventImgFile2.getBytes());
 
             // 파일 경로 생성
@@ -127,7 +120,7 @@ public class EventService {
         if (eventImgFile1 != null && !eventImgFile1.isEmpty()) {
 
             // 수정 전 파일 삭제하기
-            String filePath = eventImgLocation + basePath + "/" + miniImgName;
+            String filePath = imgLocation + basePath + "/" + miniImgName;
             File fileToDelete = new File(filePath);
             if (fileToDelete.delete()) {
                 System.out.println("파일이 성공적으로 삭제되었습니다.");
@@ -139,7 +132,7 @@ public class EventService {
             miniOriImgName = eventImgFile1.getOriginalFilename();
 
             // 파일명 생성
-            miniImgName = fileService.uploadFile(eventImgLocation + basePath, miniOriImgName,
+            miniImgName = fileService.uploadFile(imgLocation + basePath, miniOriImgName,
                     eventImgFile1.getBytes());
 
             // 파일 경로 생성
@@ -154,7 +147,7 @@ public class EventService {
         if (eventImgFile2 != null && !eventImgFile2.isEmpty()) {
 
             // 수정 전 파일 삭제하기
-            String filePath = eventImgLocation + basePath + "/" + bigImgName;
+            String filePath = imgLocation + basePath + "/" + bigImgName;
             File fileToDelete = new File(filePath);
             if (fileToDelete.delete()) {
                 System.out.println("파일이 성공적으로 삭제되었습니다.");
@@ -166,7 +159,7 @@ public class EventService {
             bigOriImgName = eventImgFile2.getOriginalFilename();
 
             // 파일명 생성
-            bigImgName = fileService.uploadFile(eventImgLocation + basePath, bigOriImgName,
+            bigImgName = fileService.uploadFile(imgLocation + basePath, bigOriImgName,
                     eventImgFile2.getBytes());
 
             // 파일 경로 생성
@@ -201,7 +194,7 @@ public class EventService {
 
         // 파일 삭제하기
         if (!event.getMiniImgName().isEmpty()) {
-            String filePath = eventImgLocation + basePath + "/" + event.getMiniImgName();
+            String filePath = imgLocation + basePath + "/" + event.getMiniImgName();
             System.out.println("filePath : " + filePath);
             File fileToDelete = new File(filePath);
             if (fileToDelete.delete()) {
@@ -212,7 +205,7 @@ public class EventService {
         }
 
         if (!event.getBigImgName().isEmpty()) {
-            String filePath = eventImgLocation + basePath + "/" + event.getBigImgName();
+            String filePath = imgLocation + basePath + "/" + event.getBigImgName();
             File fileToDelete = new File(filePath);
             if (fileToDelete.delete()) {
                 System.out.println("파일이 성공적으로 삭제되었습니다.");

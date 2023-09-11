@@ -165,6 +165,7 @@ position:relative;
     color: #fff;
     border-radius: 5px;
     background-color: #0065BA;
+    cursor: pointer;
 }
 
 .pages{
@@ -172,6 +173,7 @@ position:relative;
     padding: 0 10px;
     color: #666;
     font-weight: 600;
+    cursor: pointer;
 }
 
 li.active > .pages {

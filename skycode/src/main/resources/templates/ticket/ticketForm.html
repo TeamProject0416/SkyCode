@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--User Style-->
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/ticket/ticketForm.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+<!--header-->
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<!--body-->
+<div class="wrap">
+    <h2 class="newCoupon">#티켓 등록하기</h2>
+    <hr>
+    <div class="container">
+        <form class="formContainer" action="/admin/ticket/new" method="post" th:object="${ticketFormDto}">
+            <input type="hidden" th:field="*{id}">
+            <div>
+                <select th:field="*{firstStatus}">
+                    <option value="SELL">판매중</option>
+                    <option value="SOLD_OUT">품절</option>
+                </select>
+                <select th:field="*{businessStatus}">
+                    <option value="SELL">판매중</option>
+                    <option value="SOLD_OUT">품절</option>
+                </select>
+                <select th:field="*{economyStatus}">
+                    <option value="SELL">판매중</option>
+                    <option value="SOLD_OUT">품절</option>
+                </select>
+            </div>
+            <div class="pack">
+                <div>
+
+                </div>
+            </div>
+            <div class="pack">
+                <div>
+                    <label class="firstNum">firstClass 수량</label>
+                    <input type="number" th:field="*{firstNum}" name="firstNum" placeholder="ex) 1000(장)">
+                    <p th:if="${#fields.hasErrors('firstNum')}" th:errors="*{firstNum}" class="fieldError">
+                        Incorrect data</p></div>
+                <div>
+                    <label class="businessNum">businessClass 수량</label>
+                    <input type="number" th:field="*{businessNum}" name="businessNum" placeholder="ex) 1000(장)">
+                    <p th:if="${#fields.hasErrors('businessNum')}" th:errors="*{businessNum}" class="fieldError">
+                        Incorrect data</p></div>
+                <div>
+                    <label class="economyNum">economyClass 수량</label>
+                    <input type="number" th:field="*{economyNum}" name="economyNum" placeholder="ex) 1000(장)">
+                    <p th:if="${#fields.hasErrors('economyNum')}" th:errors="*{economyNum}" class="fieldError">
+                        Incorrect data</p></div>
+            </div>
+            <div class="pack">
+                <div>
+                    <label class="firstPrice">firstClass 가격</label>
+                    <input type="number" th:field="*{firstPrice}" name="firstPrice" placeholder="ex) 1000(원)">
+                    <p th:if="${#fields.hasErrors('firstPrice')}" th:errors="*{firstPrice}" class="fieldError">
+                        Incorrect data</p></div>
+
+                <div>
+                    <label class="businessPrice">businessClass 가격</label>
+                    <input type="number" th:field="*{businessPrice}" name="businessPrice" placeholder="ex) 10%">
+                    <p th:if="${#fields.hasErrors('businessPrice')}" th:errors="*{businessPrice}" class="fieldError">
+                        Incorrect data</p></div>
+                <div>
+                    <label class="economyPrice">economyClass 가격</label>
+                    <input type="number" th:field="*{economyPrice}" name="economyPrice" placeholder="ex) 10%">
+                    <p th:if="${#fields.hasErrors('economyPrice')}" th:errors="*{economyPrice}" class="fieldError">
+                        Incorrect data</p>
+                </div>
+            </div>
+
+            <div class="pack">
+                <div>
+                    <label for="start">출발지</label>
+                    <select th:field="*{ticketStart}" id="start">
+                        <option value="Korea">한국</option>
+                        <option value="Japan">일본</option>
+                        <option value="Mexico">멕시코</option>
+                        <option value="USA">미국(워싱턴)</option>
+                        <option value="NewYork">뉴욕</option>
+                        <option value="Paris">파리</option>
+                        <option value="Switzerland">스위스</option>
+                        <option value="Egypt">이집트</option>
+                        <option value="Maldive">몰디브</option>
+                        <option value="Bangkok">방콕</option>
+                        <option value="Hanoi">하노이</option>
+                        <option value="HongKong">홍콩</option>
+                        <option value="Macau">마카오</option>
+                        <option value="Beijing">베이징</option>
+                        <option value="Australia">호주</option>
+                        <option value="Guam">괌</option>
+                    </select>
+                    <p th:if="${#fields.hasErrors('ticketStart')}" th:errors="*{ticketStart}" class="fieldError">
+                        Incorrect data</p></div>
+                <div>
+                    <label for="end">출발지</label>
+                    <select th:field="*{ticketEnd}" id="end">
+                        <option value="Korea">한국</option>
+                        <option value="Japan">일본</option>
+                        <option value="Mexico">멕시코</option>
+                        <option value="USA">미국(워싱턴)</option>
+                        <option value="NewYork">뉴욕</option>
+                        <option value="Paris">파리</option>
+                        <option value="Switzerland">스위스</option>
+                        <option value="Egypt">이집트</option>
+                        <option value="Maldive">몰디브</option>
+                        <option value="Bangkok">방콕</option>
+                        <option value="Hanoi">하노이</option>
+                        <option value="HongKong">홍콩</option>
+                        <option value="Macau">마카오</option>
+                        <option value="Beijing">베이징</option>
+                        <option value="Australia">호주</option>
+                        <option value="Guam">괌</option>
+                    </select>
+                    <p th:if="${#fields.hasErrors('ticketEnd')}" th:errors="*{ticketEnd}" class="fieldError">
+                        Incorrect data</p>
+                </div>
+            </div>
+
+            <div class="pack">
+                <div>
+                    <label class="ticketStartDate">출발일</label>
+                    <input name="ticketStartDate" th:field="*{ticketStartDate}" type="date">
+                    <p th:if="${#fields.hasErrors('ticketStartDate')}" th:errors="*{ticketStartDate}"
+                       class="fieldError">
+                        Incorrect data
+                    </p>
+                </div>
+                <div>
+                    <label class="ticketEndDate">도착일</label>
+                    <input name="ticketEndDate" th:field="*{ticketEndDate}" type="date">
+                    <p th:if="${#fields.hasErrors('ticketEndDate')}" th:errors="*{ticketEndDate}" class="fieldError">
+                        Incorrect data
+                    </p>
+                </div>
+            </div>
+
+            <div class="pack">
+                <div>
+                    <label class="ticketStart">출발 시간</label>
+                    <input type="time" name="ticketStartTime" th:field="*{ticketStartTime}">
+                    <p th:if="${#fields.hasErrors('ticketStartTime')}" th:errors="*{ticketStartTime}" class="fieldError">
+                        Incorrect
+                        data
+                    </p>
+                </div>
+                <div>
+                    <label class="ticketEnd">도착 시간</label>
+                    <input type="time" name="ticketEndTime" th:field="*{ticketEndTime}">
+                    <p th:if="${#fields.hasErrors('ticketEndTime')}" th:errors="*{ticketEndTime}" class="fieldError">
+                        Incorrect
+                        data
+                    </p>
+                </div>
+            </div>
+
+            <div class="btnArea" th:if="${#strings.isEmpty(ticketFormDto.id)}">
+                <button th:formaction="@{/admin/ticket/new}" type="submit" class="btn createBtn">저장</button>
+            </div>
+            <div class="btnArea" th:unless="${#strings.isEmpty(ticketFormDto.id)}">
+                <button th:formaction="@{/admin/ticket/update}" type="submit" class="btn createBtn">수정
+                </button>
+            </div>
+        </form>
+        <a href="/ticket/list">
+            <button type="submit" class="btn cancelBtn">취소</button>
+        </a>
+    </div>
+</div>
+
+<!--footer-->
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+
+<!--User Script-->
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 package teamproject.skycode.event;
 
 import lombok.*;
+import teamproject.skycode.common.BaseEntity;
 
 import javax.persistence.*;
 

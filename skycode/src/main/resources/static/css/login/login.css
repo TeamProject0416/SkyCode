@@ -102,6 +102,16 @@ border-color: #0065BA;
     color: #fff;
 }
 
+/* 오류시 에러창 */
+
+.oej_error {
+    position: relative;
+    width: 500px;
+    margin: 0 auto;
+    padding-left: 3px;
+    color: red;
+}
+
 /* 보안접속 */
 .oej_connect {
     position: relative;
@@ -133,7 +143,9 @@ border-color: #0065BA;
     color: #fff;
 }
 
-/* 찾기버튼 */
+
+
+/* 카카오 네이버 구글 */
 .oej_search {
     position: relative;
     display: flex;

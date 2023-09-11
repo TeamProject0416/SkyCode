@@ -69,7 +69,7 @@ public class EventController {
     }
 
     @PostMapping(value = "/new") // 이벤트 등록
-    public String createReview(@Valid EventFormDto eventFormDto, BindingResult bindingResult, Model model,
+    public String createEvent(@Valid EventFormDto eventFormDto, BindingResult bindingResult, Model model,
                                @RequestParam("eventImgFile1") MultipartFile eventImgFile1,
                                @RequestParam("eventImgFile2") MultipartFile eventImgFile2) {
         if (bindingResult.hasErrors()) {
