@@ -36,8 +36,8 @@ public class SecurityConfig {
 
         http.authorizeRequests()
                 .mvcMatchers("/**").permitAll() // 전체공개
-//                .mvcMatchers("/css/**", "/js/**", "/img/**", "/mainImages/**","/subImages/**").permitAll() // 전체 공개
-//                .mvcMatchers("/**", "/member/**", "/item/**", "/images/**").permitAll() // 전체공개
+                .mvcMatchers("/css/**", "/js/**", "/img/**", "/mainImages/**","/subImages/**").permitAll() // 전체 공개
+                .mvcMatchers("/", "/member/**", "/item/**", "/images/**","/skycode/**", "/SkyCodeProject/**").permitAll() // 전체공개
         ;
 
         http.exceptionHandling()
