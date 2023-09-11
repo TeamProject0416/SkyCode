@@ -35,18 +35,10 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-/* validation */
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 
-
-
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-
-
-//	시큐리티
-
+	//	시큐리티
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
