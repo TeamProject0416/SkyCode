@@ -60,7 +60,7 @@
     background: rgba(0, 102, 186);
   }
 
-  .userReivewContent {
+  .userReviewContent {
     width: 100%;
     height: 750px;
     display: flex;
@@ -108,14 +108,14 @@
     left: 20px;
   }
 
-  .userReivewContent .contentArea {
+  .userReviewContent .contentArea {
     width: 700px;
     height: 100%;
     padding: 90px 16px;
     /* 800 180  mainContent height = 620 */
   }
 
-  .userReivewContent .contentArea .mainContent {
+  .userReviewContent .contentArea .mainContent {
     margin-top: 8px;
     line-height: 1.6;
   }
