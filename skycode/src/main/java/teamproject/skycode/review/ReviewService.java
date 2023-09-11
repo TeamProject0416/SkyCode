@@ -44,6 +44,7 @@ public class ReviewService {
     private String reviewImgLocation;
 
 
+    @Transactional
     public Long saveReview(ReviewDto reviewDto, MultipartFile reviewImgFile1, MultipartFile reviewImgFile2) throws Exception {
         // 상품 등록
         ReviewEntity review = reviewDto.createReview();
@@ -123,7 +124,6 @@ public class ReviewService {
         // 게시글 시간 저장 - 날짜까지만
         String formattedDate = now.toLocalDate().toString(); // "yyyy-MM-dd"
         review.setReviewTime(formattedDate);
-
 
         // 이벤트 저장
         reviewRepository.save(review);
@@ -248,6 +248,8 @@ public class ReviewService {
 //        reviewDto.setBigImgNameList(newBigImgNameList);
 //        reviewDto.setBigOriImgNameList(newBigOriImgNameList);
 //        reviewDto.setBigImgUrlList(newBigImgUrlList);
+
+
 
         review.updateReview(reviewDto);
 

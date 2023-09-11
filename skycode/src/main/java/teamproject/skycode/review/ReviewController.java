@@ -42,25 +42,24 @@ public class ReviewController {
                                Model model, Principal principal,
                                @RequestParam("reviewImgFile1") MultipartFile reviewImgFile1,
                                @RequestParam("reviewImgFile2") MultipartFile reviewImgFile2) {
-
-        // 유저 로그인
-        String user = "";
-        if (principal != null) {
-            user = principal.getName();
-            MemberEntity memberEntity = memberRepository.findByEmail(user);
-            Long userID = memberEntity.getId();
-            reviewDto.setMemberId(userID);
-            System.err.println(userID);
-            String userNickname = memberEntity.getNickName();
-            reviewDto.setNickName(userNickname);
-        }
-
         if (bindingResult.hasErrors()) {
             return "review/newReview";
         }
         try {
+
+            // 유저 로그인
+            String user = "";
+            if (principal != null) {
+                user = principal.getName();
+                MemberEntity memberEntity = memberRepository.findByEmail(user);
+//                reviewDto.setMemberId(memberEntity.getId());
+                String userNickname = memberEntity.getNickName();
+                reviewDto.setNickName(userNickname);
+            }
+
             reviewService.saveReview(reviewDto, reviewImgFile1, reviewImgFile2);
         } catch (Exception e) {
+            e.printStackTrace();
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
             return "review/newReview";
         }
