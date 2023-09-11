@@ -61,10 +61,6 @@ public class ReviewDto {
     // Review 객체에서 ReviewDto 객체로 매핑
 
 
-
-
-
-
 //    public List<String> getBigImgNameList() {
 //        return bigImgNameList;
 //    }
