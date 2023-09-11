@@ -10,9 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import teamproject.skycode.event.EventEntity;
-import teamproject.skycode.event.EventFormDto;
-import teamproject.skycode.event.FileService;
+import teamproject.skycode.common.FileService;
 
 import javax.persistence.EntityNotFoundException;
 import java.io.File;
@@ -24,7 +22,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

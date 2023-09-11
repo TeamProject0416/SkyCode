@@ -1,5 +1,5 @@
 package teamproject.skycode.constant;
 
 public enum Role {
-    USER, ADMIN
+    USER, ADMIN, PUBLIC
 }

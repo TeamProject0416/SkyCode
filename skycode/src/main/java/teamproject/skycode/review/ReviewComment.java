@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class ReviewComment {
     private Long id;
-    private Review review;  // 게시글 (ID)
+    private ReviewEntity reviewEntity;  // 게시글 (ID)
     private String content; // 본문
     private LocalDateTime regTime; // 댓글 생성 시간
 }
