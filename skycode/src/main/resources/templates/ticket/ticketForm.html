@@ -22,7 +22,7 @@
     <h2 class="newCoupon">#티켓 등록하기</h2>
     <hr>
     <div class="container">
-        <form class="formContainer" action="/admin/ticket/new" method="post" th:object="${ticketFormDto}">
+        <form class="formContainer" action="/ticket/new" method="post" th:object="${ticketFormDto}">
             <input type="hidden" th:field="*{id}">
             <div>
                 <select th:field="*{firstStatus}">
@@ -166,10 +166,10 @@
             </div>
 
             <div class="btnArea" th:if="${#strings.isEmpty(ticketFormDto.id)}">
-                <button th:formaction="@{/admin/ticket/new}" type="submit" class="btn createBtn">저장</button>
+                <button th:formaction="@{/ticket/new}" type="submit" class="btn createBtn">저장</button>
             </div>
             <div class="btnArea" th:unless="${#strings.isEmpty(ticketFormDto.id)}">
-                <button th:formaction="@{/admin/ticket/update}" type="submit" class="btn createBtn">수정
+                <button th:formaction="@{/ticket/update}" type="submit" class="btn createBtn">수정
                 </button>
             </div>
         </form>
