@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 
-@RequestMapping("/members")
+@RequestMapping("/member")
 @Controller
 @RequiredArgsConstructor
 public class MemberController {

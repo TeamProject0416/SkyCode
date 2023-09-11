@@ -16,7 +16,7 @@ public class MemberEntity extends BaseEntity {
 
     @Id
     @Column(name = "Member_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "이름을 입력해 주세요.")

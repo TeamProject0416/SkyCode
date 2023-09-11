@@ -27,20 +27,20 @@
     </div>
     <form action="/member/login" method="post">
         <div class="oej_input-box">
-            <input class="oej_username" type="text" id="memberId" name="memberId" placeholder="ID">
-            <label th:for="memberId"></label>
+            <label th:for="email"></label>
+            <input class="oej_username" type="email" name="email" placeholder="email@skycood.com">
         </div>
 
         <div class="oej_input-box">
-            <input class="oej_password" type="password" id="password"  name="memberPassword" placeholder="PASSWORD">
             <label th:for="password"></label>
+            <input class="oej_password" type="password" id="password"  name="password" placeholder="PASSWORD">
         </div>
         <p th:if="${loginErrorMsg}" class="oej_error"  th:text="${loginErrorMsg}"></p>
         <button class="oej_log1" type="submit" value="LOGIN">로그인</button>
 
         <div class="oej_connect"><i class="fa-solid fa-unlock-keyhole">보안접속</i> </div>
 
-        <a href="/member/save"><button type="button" class="oej_us">JOIN US</button></a>
+        <a href="/member/new"><button type="button" class="oej_us">JOIN US</button></a>
         <div class="oej_search">
             <div class="oej_na">
                 <img src="../subImages/naver2.png" alt="">
