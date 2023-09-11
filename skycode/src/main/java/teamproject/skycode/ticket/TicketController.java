@@ -52,7 +52,7 @@ public class TicketController {
             model.addAttribute("errorMessage", "티켓 등록 중 에러가 발생하였습니다");
             return "ticket/ticketForm";
         }
-        return "redirect:/admin/ticket/list";
+        return "redirect:/ticket/list";
     }
 
     @GetMapping(value = "/{ticketId}/edit") // 쿠폰 수정폼
@@ -74,7 +74,7 @@ public class TicketController {
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
             return "ticket/ticketForm";
         }
-        return "redirect:/admin/ticket/list";
+        return "redirect:/ticket/list";
     }
 
     @GetMapping("/{ticketId}/delete") // 이벤트 삭제
@@ -83,7 +83,7 @@ public class TicketController {
         ticketService.deleteTicket(ticketId);
 
         // 삭제 후 리다이렉션할 URL을 반환
-        return "redirect:/admin/ticket/list";
+        return "redirect:/ticket/list";
     }
 
 

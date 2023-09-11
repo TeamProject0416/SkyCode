@@ -70,8 +70,7 @@
             </div>
 
             <img class="searchBtn" src="/mainImages/btn_header_search.png" alt="">
-            <!--            <a href="/member/login"><img class="jhicon userModal" src="/mainImages/searchUser.png" alt="user"></a>-->
-            <a th:if="${#strings.isEmpty(user)}" href="/member/login">
+            <a th:if="${#strings.isEmpty(user)}" href="/member/login" id="loginLink">
                 <img class="jhicon" src="/mainImages/searchUser.png" alt="user">
             </a>
             <a th:unless="${#strings.isEmpty(user)}">

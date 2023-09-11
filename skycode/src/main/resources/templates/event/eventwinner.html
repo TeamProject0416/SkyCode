@@ -17,7 +17,7 @@
     <div class="eventPage">
         <div class="eventPageTitle">
             <h2 class="eventTag">#당첨자 발표</h2>
-            <button><a href="/event/new">이벤트 등록</a></button>
+            <button th:if="${!#strings.isEmpty(admin)}"><a href="/event/new">이벤트 등록</a></button>
         </div>
         <div class="currentPage">
             <span><a href="/event/ongoing">진행중 이벤트</a></span>
