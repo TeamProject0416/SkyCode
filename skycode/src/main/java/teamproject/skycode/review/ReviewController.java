@@ -25,6 +25,7 @@ import java.util.List;
 @RequestMapping("review")
 public class ReviewController {
     private final ReviewRepository reviewRepository;
+    private final ReviewEntity reviewEntity;
     private final ReviewService reviewService;
     private final CommentService commentService;
     private final MemberRepository memberRepository;
@@ -52,7 +53,8 @@ public class ReviewController {
             if (principal != null) {
                 user = principal.getName();
                 MemberEntity memberEntity = memberRepository.findByEmail(user);
-//                reviewDto.setMemberId(memberEntity.getId());
+                reviewDto.setMemberId(memberEntity.getId());
+                reviewEntity.setMemberEntity(memberEntity);
                 String userNickname = memberEntity.getNickName();
                 reviewDto.setNickName(userNickname);
             }
