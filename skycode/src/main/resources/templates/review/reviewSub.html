@@ -69,7 +69,10 @@
         </form>
       </div>
 
-      <div class="createReview" th:if="${!#strings.isEmpty(user)}">
+      <div class="createReview" th:if="${#strings.isEmpty(user)}">
+        <a  href="/member/login" id="reviewLink"><button  type="submit">리뷰 작성하기</button></a>
+      </div>
+      <div class="createReview" th:unless="${#strings.isEmpty(user)}">
         <a href="/review/newReview"><button type="submit">리뷰 작성하기</button></a>
       </div>
     </div>
@@ -132,11 +135,26 @@
     </div><!-- /reviewAll -->
   </div>
   <!-- /reviewPage -->
+</section>
 
 
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script>
+    // 리뷰 경고창
+    $('#reviewLink').click(function (event) {
+        event.preventDefault(); // 링크의 기본 동작을 중지
+
+        // 경고 창을 표시
+        var confirmation = confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?");
+
+        if (confirmation) {
+            // 사용자가 확인을 클릭한 경우 로그인 페이지로 이동
+            window.location.href = "/member/login";
+        }
+    });
+  </script>
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
 

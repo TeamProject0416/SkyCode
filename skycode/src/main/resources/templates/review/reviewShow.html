@@ -26,12 +26,12 @@
                     </div>
                     <div class="userNE">
                         <div class="userNickName">
-                            <h3 th:text="${reviewDto.nickName}">보라돌이</h3>
+                            <h3>[[${reviewDto.nickName}]]</h3>
                         </div>
-                        <div class="userEmail"><span>test1@naver.com</span></div>
+                        <div class="userEmail"><span>[[${reviewDto.email}]]</span></div>
                     </div>
                     <div class="newBtn">
-                        <a href="#">
+                        <a href="/review/newReview">
                             <button>새 글 작성하기</button>
                         </a>
                     </div>
