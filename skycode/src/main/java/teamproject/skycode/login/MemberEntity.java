@@ -36,9 +36,6 @@ public class MemberEntity extends BaseEntity {
     @Column
     private String password;
 
-//    @Column
-//    private String passwordCheck;
-
     @Column
     private String address;
 

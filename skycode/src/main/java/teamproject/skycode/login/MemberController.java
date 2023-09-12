@@ -6,10 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import teamproject.skycode.event.EventEntity;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @RequestMapping("/member")
 @Controller
@@ -19,6 +22,7 @@ public class MemberController {
     // 생성자 주입
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+    private final MemberRepository memberRepository;
 
 
     @GetMapping(value = "/new")
@@ -69,6 +73,21 @@ public class MemberController {
     public String loginError(Model model) {
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
         return "/member/memberLoginForm";
+    }
+
+    @GetMapping(value = "list")
+    public String memberList (Model model){
+        List<MemberEntity> memberList = memberRepository.findAll();
+        model.addAttribute("memberList",memberList);
+        return "/member/list";
+    }
+
+    @GetMapping("/delete/{memberId}")
+    public String memberDelete (@PathVariable("memberId") Long memberId){
+        MemberEntity member = memberRepository.findById(memberId)
+                .orElseThrow(EntityNotFoundException::new);
+        memberRepository.delete(member);
+        return "redirect:/member/list";
     }
 
 }
