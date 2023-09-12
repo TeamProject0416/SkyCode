@@ -22,12 +22,11 @@ import java.util.List;
 @AllArgsConstructor
 public class ReviewDto {
     private Long id;
+    private  String email;
     private String nickName;
     private String reviewTitle;
     private String contents;
     private int reviewHits;
-//    private LocalDateTime reviewCreatedTime;
-//    private LocalDateTime reviewUpdatedTime;
 
     private String reviewTime; // "yyyy-MM-dd"
 

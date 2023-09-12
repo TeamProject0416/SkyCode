@@ -50,6 +50,7 @@ public class ReviewController {
             if (principal != null) {
                 String user = principal.getName();
                 MemberEntity memberEntity = memberRepository.findByEmail(user);
+                reviewDto.setEmail(user);
                 reviewDto.setMemberId(memberEntity.getId());
                 reviewDto.setNickName(memberEntity.getNickName());
             }
@@ -63,27 +64,6 @@ public class ReviewController {
         return "redirect:/review/reviewSub";
     }
 
-
-//    리뷰 리스트 보기 기존 코드
-//    @GetMapping(value = "/reviewSub")
-//    public String reviewSub(Model model) {
-////        List<ReviewDto> reviewDtoList = reviewService.findAll();
-//        List<ReviewEntity> reviewEntityList = reviewRepository.findByAllEntity();
-//        model.addAttribute("reviews", reviewEntityList);
-//        return "review/reviewSub";
-//    }
-
-    //    0907 페이징 하기 위한 수정 코드
-//    @GetMapping(value = "/reviewSub")
-//    public String reviewSub(@PageableDefault(size=5,sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Model model) {
-//        Page<ReviewEntity> page = reviewService.pageList(pageable);
-//        model.addAttribute("paging", page);
-//
-////        long reviewCount = reviewService.calculateTotalPages();
-////        model.addAttribute("paging", reviewService.pageList(pageable));
-////        model.addAttribute("totalPages", reviewCount);
-//        return "review/reviewSub";
-//    }
     @GetMapping(value = "/reviewSub")
     public String reviewSub(@RequestParam(value = "page", defaultValue = "0") int page,
                             Principal principal, Model model) {
@@ -120,26 +100,19 @@ public class ReviewController {
         List<CommentDTO> commentDTOList = commentService.findAll(reviewId);
 
         model.addAttribute("commentList", commentDTOList);
-//        model.addAttribute("review", reviewDto);
-//        model.addAttribute("page", pageable.getPageNumber());
 
         model.addAttribute("reviewDto", reviewDto);
 
-//
-//        // 유저 로그인
-//        String user = "";
-//        if (principal != null) {
-//            user = principal.getName();
-//        }
-//
-//        // ADMIN 권한 확인
-//        Authentication admin = null;
-//        Authentication authentication = (Authentication) principal;
-//        if (authentication != null) {
-//            admin = authentication;
-//        }
-//
-//        if(user == )
+        // 유저 로그인
+        String user = "";
+        String nickname = "";
+        if (principal != null) {
+            user = principal.getName();
+            MemberEntity memberEntity = memberRepository.findByEmail(user);
+            nickname = memberEntity.getNickName();
+        }
+        model.addAttribute("user", user);
+        model.addAttribute("nickname", nickname);
 
 
         return "review/reviewShow";

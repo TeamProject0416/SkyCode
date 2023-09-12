@@ -23,6 +23,9 @@ public class ReviewEntity extends BaseEntity {
     @Column(name="review_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    // 리뷰 id
+
+    @Column
+    private String email; // 작성자 이메일
     @Column
     private String nickName;    // 작성자 닉네임
     @Column
@@ -37,9 +40,6 @@ public class ReviewEntity extends BaseEntity {
     private String miniImgName; // 미니 이미지 파일명
     private String miniOriImgName; // 미니 원본 이미지 파일명
     private String miniImgUrl; // 미니 이미지 조회 경로
-//    private List<String> bigImgNames; // 큰 이미지 파일명
-//    private List<String> bigOriImgNames; // 큰 원본 이미지 파일명
-//    private List<String> bigImgUrls; // 큰 이미지 조회 경로
     private String bigImgName; // 큰 이미지 파일명
     private String bigOriImgName; // 큰 원본 이미지 파일명
     private String bigImgUrl; // 큰 이미지 조회 경로
@@ -51,22 +51,6 @@ public class ReviewEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
-
-//    public void updateReviewImg(String miniImgName, String miniOriImgName, String miniImgUrl,
-//                               List<String> bigImgNames, List<String> bigOriImgNames, List<String> bigImgUrls) {
-//        this.miniImgName = miniImgName;
-//        this.miniOriImgName = miniOriImgName;
-//        this.miniImgUrl = miniImgUrl;
-//
-//        this.bigImgNames.clear();
-//        this.bigOriImgNames.clear();
-//        this.bigImgUrls.clear();
-//
-//        this.bigImgNames.addAll(bigImgNames);
-//        this.bigOriImgNames.addAll(bigOriImgNames);
-//        this.bigImgUrls.addAll(bigImgUrls);
-//    }
-//    단일
     public void updateReviewImg(String miniImgName, String miniOriImgName, String miniImgUrl,
                                String bigImgName, String bigOriImgName, String bigImgUrl) {
         this.miniImgName = miniImgName;
@@ -81,6 +65,7 @@ public class ReviewEntity extends BaseEntity {
 
     public void updateReview(ReviewDto reviewDto) {
         this.nickName = reviewDto.getNickName();
+        this.email = reviewDto.getEmail();
         this.reviewTitle = reviewDto.getReviewTitle();
         this.contents = reviewDto.getContents();
         this.reviewHits = reviewDto.getReviewHits();
@@ -94,39 +79,4 @@ public class ReviewEntity extends BaseEntity {
         this.bigImgUrl = reviewDto.getBigImgUrl();
     }
 
-
-//    public List<String> getBigImgNameList() {
-//        return bigImgNames;
-//    }
-
-//    public void updateReview(ReviewDto reviewDto) {
-//        this.nickName = reviewDto.getNickName();
-//        this.reviewTitle = reviewDto.getReviewTitle();
-//        this.contents = reviewDto.getContents();
-//        this.reviewHits = reviewDto.getReviewHits();
-//
-//        this.miniImgName = reviewDto.getMiniImgName();
-//        this.miniOriImgName = reviewDto.getMiniOriImgName();
-//        this.miniImgUrl = reviewDto.getMiniImgUrl();
-//
-//        this.bigImgNames.clear();
-//        this.bigOriImgNames.clear();
-//        this.bigImgUrls.clear();
-//
-//        List<String> newBigImgNames = reviewDto.getBigImgNameList();
-//        List<String> newBigOriImgNames = reviewDto.getBigOriImgNameList();
-//        List<String> newBigImgUrls = reviewDto.getBigImgUrlList();
-//
-//        if (newBigImgNames != null) {
-//            this.bigImgNames.addAll(newBigImgNames);
-//        }
-//
-//        if (newBigOriImgNames != null) {
-//            this.bigOriImgNames.addAll(newBigOriImgNames);
-//        }
-//
-//        if (newBigImgUrls != null) {
-//            this.bigImgUrls.addAll(newBigImgUrls);
-//        }
-//    }
 }
