@@ -1,0 +1,268 @@
+.joon {
+    width: 100%;
+    height: 800px;
+}
+
+.oej_bigDiv {
+    max-width: 1320px;
+    position: relative;
+    height: 800px;
+     margin: 0 auto;
+}
+
+.oej_box1 {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 30px;
+}
+
+.oej_select {
+    width: 200px;
+    border: 1px solid rgb(197, 197, 197);
+    outline: none;
+}
+
+
+.oej_input {
+    margin-left: 10px;
+    width: 300px;
+    outline: none;
+    border: 1px solid rgb(197, 197, 197);
+}
+
+.oej_b {
+    margin-left: 10px;
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    background-color: #3264FF;
+}
+
+.oej_aa {
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 10px;
+    font-size: 15px;
+    color:#3264FF;
+    text-decoration: underline;
+}
+
+.oej_download {
+    margin-left: auto;
+    padding-right: 20px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    color:#3264FF;
+}
+
+
+
+/* 섹션2 */
+.oej_bigbox {
+    position: relative;
+    display: flex;
+    width: 100%;
+    top: 50px;
+    height: 350px;
+   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgb(197, 197, 197);
+    margin: 20px 0;
+}
+
+.oej_box2 {
+    position:absolute;
+    /* margin: 0 auto; */
+    width: 100%;
+    padding-top: 10px;
+    text-align: center;
+    height: 100px;
+}
+
+.oej_plane {
+    position: relative;
+    display: flex;
+    width: 1280px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.2rem;
+    color: #333;
+    padding-left: 10px;
+    margin-left: 20px;
+    top:-10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.oej_planeImg {
+    padding-left: 10px;
+    padding-right: 15px;
+    width: 70px;
+}
+
+.oej_number1 {
+    position: absolute;
+    left: 100px;
+    width: 200px;
+    display: flex;
+    font-size: 1.6rem;
+}
+
+.oej_number1::after {
+    padding-left: 5px;
+    content: attr(data-number); /* 가상 요소의 내용을 data-number 속성으로 설정 */
+    color: #3264FF;
+}
+
+
+.oej_number2 {
+    position: absolute;
+    left: 300px;
+    width: 200px;
+    display: flex;
+    font-size: 1.6rem;
+}
+
+.oej_number3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    width: 150px;
+    font-size: 1.5rem;
+}
+
+.oej_bigPtext {
+    position: relative;
+    width: 100%;
+    top: -10px;
+    height: 80px;
+    line-height: 80px;
+}
+
+.oej_bigP {
+    position: absolute;
+    font-weight: 700;
+    font-size: 2.5rem;
+    width: 300px;
+    height: 80px;
+    line-height: 80px;
+    margin-left: 20px;
+}
+
+ .oej_bigPP1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 20px;
+    font-size: 2.1rem;
+    width: 150px;
+    color: #FC9954;
+}
+
+.oej_box3 {
+    position: relative;
+    width: 100%;
+    height: 100px;
+}
+
+    .oej_go1{
+        position: absolute;
+        display: flex;
+        height: 30px;
+        line-height: 30px;
+        top:20px;
+        padding-left: 30px;
+        width: 100%;
+        font-size: 15px;
+        color: #999;
+}
+
+.oej_go1 >li {
+    width: 100px;
+    margin-right: 80px;
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+}
+
+.oej_come1 {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    top:50px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 30px;
+    font-size: 15px;
+}
+
+.oej_come1 >li{
+    width: 100px;
+    margin-right: 80px;
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+}
+
+
+
+
+.oej_person {
+    position: relative;
+    display: flex;
+    top: 10px;
+    font-size: 15px;
+    height: 30px;
+}
+
+.oej_person > p {
+    position: absolute;
+    margin-left: 31px;
+    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+}
+
+
+.oej_name {
+    position: relative;
+    display: flex;
+    top: 10px;
+    height: 30px;
+}
+
+.oej_name > p {
+    position: absolute;
+    margin-left: 30px;
+    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+}
+
+
+.oej_del {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    top:10px;
+    margin-right: 5px;
+    padding-right: 30px;
+    margin-left: auto;
+}
+
+.oej_del > button {
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    background-color: #3264FF;
+    margin-left: 10px;
+    cursor: pointer;
+}
