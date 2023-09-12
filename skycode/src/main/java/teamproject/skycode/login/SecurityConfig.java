@@ -41,7 +41,8 @@ public class SecurityConfig {
                 .ignoringAntMatchers("/event/**",
                         "/review/**",
                         "/ticket/**",
-                        "/coupon/**"
+                        "/coupon/**",
+                        "/comment/**"
                 ) //csrf예외처리
         ;
 

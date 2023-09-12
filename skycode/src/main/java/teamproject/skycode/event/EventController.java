@@ -117,7 +117,7 @@ public class EventController {
     }
 
     @GetMapping(value = "/new") // 이벤트 등록
-    public String newEventForm(Model model, Principal principal) {
+    public String newEventForm(Model model) {
         model.addAttribute("eventFormDto", new EventFormDto());
         return "event/eventForm";
     }

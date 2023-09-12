@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.common.FileService;
+import teamproject.skycode.login.MemberEntity;
+import teamproject.skycode.login.MemberRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.io.File;
@@ -22,12 +24,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final MemberRepository memberRepository;
     private final FileService fileService;
 
 //    public List<ReviewDto> findAll() {
@@ -44,6 +48,7 @@ public class ReviewService {
     private String reviewImgLocation;
 
 
+    @Transactional
     public Long saveReview(ReviewDto reviewDto, MultipartFile reviewImgFile1, MultipartFile reviewImgFile2) throws Exception {
         // 상품 등록
         ReviewEntity review = reviewDto.createReview();
@@ -123,6 +128,11 @@ public class ReviewService {
         // 게시글 시간 저장 - 날짜까지만
         String formattedDate = now.toLocalDate().toString(); // "yyyy-MM-dd"
         review.setReviewTime(formattedDate);
+
+        // 부모 엔티티 조회
+        Optional<MemberEntity> memberEntityList = memberRepository.findById(reviewDto.getMemberId());
+        MemberEntity memberEntity = memberEntityList.get();
+        review.setMemberEntity(memberEntity);
 
         // 이벤트 저장
         reviewRepository.save(review);
@@ -247,6 +257,8 @@ public class ReviewService {
 //        reviewDto.setBigImgNameList(newBigImgNameList);
 //        reviewDto.setBigOriImgNameList(newBigOriImgNameList);
 //        reviewDto.setBigImgUrlList(newBigImgUrlList);
+
+
 
         review.updateReview(reviewDto);
 
