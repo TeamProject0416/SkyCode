@@ -26,9 +26,6 @@ public class CommentEntity extends BaseEntity {
     @JoinColumn(name = "review_id")
     private ReviewEntity reviewEntity;
 
-
-
-
     public static CommentEntity toSaveEntity(CommentDTO commentDTO, ReviewEntity reviewEntity) {
         CommentEntity commentEntity = new CommentEntity();
         commentEntity.setCommentWriter(commentDTO.getCommentWriter());

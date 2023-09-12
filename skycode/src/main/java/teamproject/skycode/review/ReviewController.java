@@ -24,8 +24,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("review")
 public class ReviewController {
-    private final ReviewRepository reviewRepository;
-    private final ReviewEntity reviewEntity;
     private final ReviewService reviewService;
     private final CommentService commentService;
     private final MemberRepository memberRepository;
@@ -49,14 +47,11 @@ public class ReviewController {
         try {
 
             // 유저 로그인
-            String user = "";
             if (principal != null) {
-                user = principal.getName();
+                String user = principal.getName();
                 MemberEntity memberEntity = memberRepository.findByEmail(user);
                 reviewDto.setMemberId(memberEntity.getId());
-                reviewEntity.setMemberEntity(memberEntity);
-                String userNickname = memberEntity.getNickName();
-                reviewDto.setNickName(userNickname);
+                reviewDto.setNickName(memberEntity.getNickName());
             }
 
             reviewService.saveReview(reviewDto, reviewImgFile1, reviewImgFile2);

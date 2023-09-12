@@ -2,6 +2,7 @@ package teamproject.skycode.review;
 
 
 import lombok.*;
+import org.springframework.stereotype.Component;
 import teamproject.skycode.common.BaseEntity;
 import teamproject.skycode.login.MemberEntity;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Component
 public class ReviewEntity extends BaseEntity {
     @Id
     @Column(name="review_id")
