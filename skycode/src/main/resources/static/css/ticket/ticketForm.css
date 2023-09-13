@@ -1,53 +1,58 @@
 .wrap {
-    position: relative;
-    top: 100px;
-    width: 1200px;
-    margin: 0 auto;
+  position: relative;
+  top: 100px;
+  width: 1200px;
+  margin: 0 auto;
 }
 
 .newCoupon {
-    padding: 30px;
-    border-bottom: 1px solid #ddd;
+  padding: 30px;
+  border-bottom: 1px solid #ddd;
 }
 
 .container {
-    position: relative;
-    margin: 30px 50px;
+  position: relative;
+  margin: 30px 50px;
 }
 
 select {
-    width: 100px;
-    height: 30px;
-    padding: 6px 12px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    vertical-align: middle;
+  width: 100px;
+  height: 30px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  outline: none;
+  vertical-align: middle;
 }
 
 input {
-    width: 100%;
-    height: 40px;
-    padding: 12px;
-    border-radius: 5px;
-    margin-top: 10px;
-    border: 1px solid #ddd;
+  width: 100%;
+  height: 40px;
+  padding: 12px;
+  border-radius: 5px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
 }
 
 .contentTextArea {
-    width: 100%;
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
 }
 
+
+
 .formContainer>div{
-    padding: 8px 0;
+  padding: 8px 0;
 }
 
 .pack{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 90px;
 }
 
 .pack>div{
@@ -56,29 +61,200 @@ width: 48%;
 
 
 /* btn */
+
+.oej_btn {
+  display: flex;
+  width: 100%;
+  justify-content: right;
+}
+
 .btnArea {
-    width: 100%;
-    display: flex;
-    justify-content: right;
+  /* width: 100%; */
+  margin-right: 10px;
+  display: flex;
+  justify-content: right;
 }
 
 .btn {
-    width: 70px;
-    height: 40px;
-    margin-top: 10px;
-    border: none;
-    color: #fff;
-    border-radius: 10px;
-    background-color: #0065BA;
-    cursor: pointer;
+  width: 70px;
+  height: 40px;
+  margin-top: 10px;
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  background-color: #0065BA;
+  cursor: pointer;
 }
 
-.createBtn {
-    margin-right: 80px;
+
+/* 내가 수정한것들 */
+
+.oej_sale {
+  margin-left: 95px;
 }
 
-.cancelBtn {
-    position: absolute;
-    right: 0;
-    bottom: 8px;
+.oej_sale2 {
+  margin-left:-20px;
 }
+
+.oej_sale3 {
+  margin-right: 80px;
+}
+
+.formContainer {
+  position: relative;
+}
+
+.oej_pack1 {
+  position: relative;
+  width: 250px;
+  height: 90px;
+  top:-9px;
+}
+
+.firstNum {
+  position: absolute;
+  margin-top: 15px;
+}
+
+.firstPrice {
+  position: absolute;
+  margin-top: 15px;
+}
+
+.oej_num0 {
+  width: 220px;
+  left:135px;
+  position: absolute;
+  outline: none;
+}
+
+.oej_packEc {
+  position: relative;
+  width: 250px;
+  height: 90px;
+  top:-9px;
+}
+
+
+.economyNum {
+  position: absolute;
+  margin-top: 15px;
+}
+
+.economyPrice {
+  position: absolute;
+  margin-top: 15px;
+}
+
+
+.oej_select {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.oej_num {
+  width: 220px;
+  outline: none;
+}
+.oej_num1 {
+  position: absolute;
+  width: 220px;
+  height: 40px;
+  left: 145px;
+  outline: none;
+}
+
+#start {
+  position: absolute;
+width: 220px;
+height: 40px;
+left: 130px;
+outline: none;
+}
+
+.oej_packpa {
+  position: relative;
+  width: 366px;
+  height: 77px;
+}
+
+.oej_fieldError {
+  position: absolute;
+  top: 46px;
+}
+
+.oej_pack22 {
+  position: relative;
+  width: 366px;
+  height: 77px;
+}
+
+#end {
+  position: absolute;
+width: 220px;
+height: 40px;
+left: 145px;
+outline: none;
+margin-right: 50px;
+}
+
+
+.oej_packStart {
+  position: relative;
+  width: 366px;
+  height: 77px;
+}
+
+.ticketStartDate {
+  position: absolute;
+}
+
+
+.oej_ticketStart {
+  position: absolute;
+  width: 220px;
+  top:-10px;
+  left: 130px;
+  outline: none;
+}
+
+
+.oej_ticketEnd {
+  position: absolute;
+  width: 220px;
+  height: 40px;
+  /* right: 95px; */
+  left: 145px;
+  top:-10px;
+  outline: none;
+}
+
+
+.oej_SStart {
+  position: relative;
+  width: 366px;
+  height: 77px;
+}
+
+
+.oej_time {
+  position: absolute;
+  width: 220px;
+  top:-10px;
+  left: 130px;
+  outline: none;
+}
+
+.oej_timeEnd {
+  position: absolute;
+  width: 220px;
+  height: 40px;
+  /* right: 95px; */
+  left: 145px;
+  top:-10px;
+  outline: none;
+}
+
