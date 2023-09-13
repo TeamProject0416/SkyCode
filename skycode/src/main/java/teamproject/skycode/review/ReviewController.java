@@ -45,7 +45,6 @@ public class ReviewController {
             return "review/newReview";
         }
         try {
-
             // 유저 로그인
             if (principal != null) {
                 String user = principal.getName();
@@ -78,8 +77,9 @@ public class ReviewController {
         String user = "";
         if (principal != null) {
             user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
         }
-        model.addAttribute("user", user);
 
         return "review/reviewSub";
     }
@@ -108,12 +108,11 @@ public class ReviewController {
         String nickname = "";
         if (principal != null) {
             user = principal.getName();
-            MemberEntity memberEntity = memberRepository.findByEmail(user);
-            nickname = memberEntity.getNickName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            nickname = userInfo.getNickName();
+            model.addAttribute("userInfo", userInfo);
+            model.addAttribute("nickname", nickname);
         }
-        model.addAttribute("user", user);
-        model.addAttribute("nickname", nickname);
-
 
         return "review/reviewShow";
     }

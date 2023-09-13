@@ -53,10 +53,10 @@
             <a>
                 <img class="jhicon searchBtn" src="/subImages/alarmMenu.png" alt="">
             </a>
-            <a th:if="${#strings.isEmpty(user)}" href="/member/login" id="loginLink">
+            <a th:if="${#strings.isEmpty(userInfo)}" href="/member/login" id="loginLink">
                 <img class="jhicon" src="/subImages/searchUser.png" alt="user">
             </a>
-            <a th:unless="${#strings.isEmpty(user)}">
+            <a th:unless="${#strings.isEmpty(userInfo)}">
                 <img class="jhicon userModal" src="/subImages/searchUser.png" alt="user">
             </a>
 
