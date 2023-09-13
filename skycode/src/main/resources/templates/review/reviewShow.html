@@ -80,11 +80,11 @@
             </div>
             <div class="userReviewBt">
                 <div class="btns">
-                    <a th:if="${!#strings.isEmpty(userInfo) && userInfo == reviewDto.email}"
+                    <a th:if="${!#strings.isEmpty(userInfo.getEmail) && userInfo.getEmail == reviewDto.email}"
                        th:href="@{/review/{id}/edit (id=${reviewDto.id})}">
                         <button type="submit" class="editBtn">글 수정</button>
                     </a>
-                    <a th:if="${!#strings.isEmpty(userInfo) && userInfo == reviewDto.email}"
+                    <a th:if="${!#strings.isEmpty(userInfo.getEmail) && userInfo.getEmail == reviewDto.email}"
                        th:href="@{/review/{id}/delete (id=${reviewDto.id})}">
                         <button type="submit" class="deleteBtn">글 삭제</button>
                     </a>
