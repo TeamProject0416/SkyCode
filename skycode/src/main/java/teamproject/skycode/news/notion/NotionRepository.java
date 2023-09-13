@@ -14,7 +14,6 @@ public interface NotionRepository extends JpaRepository<Notion, Long> {
     @Query("SELECT i FROM Notion i ORDER BY i.regTime DESC")
     List<Notion> findAllOrderNotionByRegistrationTimeDesc();
 
-//    List<Notion> findAllByOrderByViewCountDesc();
 
     List<Notion> findAllByOrderByCountViewDesc();
 

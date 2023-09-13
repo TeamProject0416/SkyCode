@@ -207,10 +207,6 @@ public class InquiryController {
             searchResults = inquiryService.findByInquiryContentContaining(searchValue);
         } else if ("id".equals(searchType)) {
             searchResults = inquiryService.findByIdContaining(searchValue);
-//        } else if ("nickname".equals(searchType)) {
-//            searchResults = inquiryService.findByUserNicknameContaining(searchValue);
-//        } else if ("hashtag".equals(searchType)) {
-//            searchResults = inquiryService.findByHashtagsContaining(searchValue);
         } else {
             // Handle invalid search type
             searchResults = Collections.emptyList();

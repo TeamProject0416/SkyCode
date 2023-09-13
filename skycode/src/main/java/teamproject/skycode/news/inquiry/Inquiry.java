@@ -50,6 +50,11 @@ public class  Inquiry {
     @Column(name = "reg_time")
     private LocalDateTime regTime;  // 등록 시간
 
+    private String writer;
+    public String getWriter() {
+        return writer;
+    }
+
 
     public LocalDateTime getRegistrationTime() {
         return regTime;

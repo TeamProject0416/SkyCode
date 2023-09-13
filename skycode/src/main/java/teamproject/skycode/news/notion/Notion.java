@@ -61,7 +61,7 @@ public class Notion {
     }
 
     private String saveImage(MultipartFile file) throws IOException {
-        String uploadDir = "/SkyCodeProject/notionImg/"; // 이미지를 저장할 경로
+        String uploadDir = "/SkyCodeProject/img/notion/"; // 이미지를 저장할 경로
         String fileName = file.getOriginalFilename();
         Path filePath = Paths.get(uploadDir + fileName);
         Files.write(filePath, file.getBytes());
