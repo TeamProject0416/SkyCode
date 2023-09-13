@@ -4,6 +4,7 @@ package teamproject.skycode.myPage.users;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
+import teamproject.skycode.constant.Gender;
 import teamproject.skycode.login.MemberEntity;
 
 import javax.validation.constraints.Email;
@@ -26,11 +27,11 @@ public class MemberEditFormDto {
     @Email(message = "이메일 형식으로 입력해주세요")
     private String email;
 
-    @NotBlank(message ="휴대전화를 입력해 주세요.")
     private String phoneNum;
 
-    @NotBlank(message ="생일을 입력해 주세요.")
     private String birthday;
+
+    private Gender gender;
 
     private static ModelMapper modelMapper = new ModelMapper();
 

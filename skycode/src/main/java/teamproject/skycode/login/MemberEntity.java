@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import teamproject.skycode.common.BaseEntity;
+import teamproject.skycode.constant.Gender;
 import teamproject.skycode.constant.Role;
 import teamproject.skycode.myPage.users.MemberEditFormDto;
 import teamproject.skycode.review.ReviewEntity;
@@ -40,6 +41,9 @@ public class MemberEntity extends BaseEntity {
     private String address;
 
     @Column
+    private Gender gender;
+
+    @Column
     private String phoneNum;
 
     @Column
@@ -60,6 +64,7 @@ public class MemberEntity extends BaseEntity {
         member.setName(memberFormDto.getName());
         member.setNickName(memberFormDto.getNickName());
         member.setEmail(memberFormDto.getEmail());
+        member.setGender(memberFormDto.getGender());
         member.setAddress(memberFormDto.getAddress());
         member.setPhoneNum(memberFormDto.getPhoneNum());
         member.setBirthday(memberFormDto.getBirthday());
@@ -76,6 +81,7 @@ public class MemberEntity extends BaseEntity {
         this.phoneNum = memberEditFormDto.getPhoneNum();
         this.email = memberEditFormDto.getEmail();
         this.nickName = memberEditFormDto.getNickName();
+        this.gender = memberEditFormDto.getGender();
 
         this.userImgName = memberEditFormDto.getUserImgName();
         this.userOriImgName = memberEditFormDto.getUserOriImgName();

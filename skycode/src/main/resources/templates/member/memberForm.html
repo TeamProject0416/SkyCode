@@ -56,6 +56,18 @@
                 </p>
             </div>
 
+            <div class="editGender">
+                <span>성별</span>
+                <label>
+                    <input type="radio" name="gender" th:value="${gender}" th:checked="${gender eq 'MALE'}" >
+                    <span>남성</span>
+                </label>
+                <label>
+                    <input type="radio" name="gender" th:value="${gender}" th:checked="${gender eq 'FEMALE'}">
+                    <span>여성</span>
+                </label>
+            </div>
+
             <div class="oej_number">
                 <label th:for="phoneNum" class="oej_ber">전화번호</label>
                 <div class="oej_phonenumber">
