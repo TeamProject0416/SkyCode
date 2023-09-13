@@ -192,11 +192,11 @@
                                 <div class="editGender">
                                     <span>성별</span>
                                     <label>
-                                        <input type="radio" name="gender" value="male">
+                                        <input type="radio" name="gender" th:value="*{gender}" th:checked="${gender eq 'MALE'}" >
                                         <span>남성</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="gender" value="female">
+                                        <input type="radio" name="gender" th:value="*{gender}" th:checked="${gender eq 'FEMALE'}">
                                         <span>여성</span>
                                     </label>
                                 </div>

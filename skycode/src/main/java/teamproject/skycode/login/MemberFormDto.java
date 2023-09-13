@@ -4,6 +4,7 @@ package teamproject.skycode.login;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.modelmapper.ModelMapper;
+import teamproject.skycode.constant.Gender;
 import teamproject.skycode.event.EventFormDto;
 
 import javax.validation.constraints.Email;
@@ -27,18 +28,17 @@ public class MemberFormDto {
     @Email(message = "이메일 형식으로 입력해주세요")
     private String email;
 
-    @NotEmpty(message = "비밀번호는 필수 입력 값입니다")
     @Length(min = 8,max = 16,message = "비밀번호는 8자 이상, 16자 이하로 입력해주세요")
     private String password;
 
-    @NotBlank(message = "주소를 입력해 주세요.")
     private String address;
 
-    @NotBlank(message ="휴대전화를 입력해 주세요.")
+    @Pattern(regexp = "^(01[1|6|7|8|9|0])-(\\d{3,4})-(\\d{4})$", message = "010-1111-1111의 형식으로 적어주세요")
     private String phoneNum;
 
-    @NotBlank(message ="생일을 입력해 주세요.")
     private String birthday;
+
+    private Gender gender;
 
     private static ModelMapper modelMapper = new ModelMapper();
 
