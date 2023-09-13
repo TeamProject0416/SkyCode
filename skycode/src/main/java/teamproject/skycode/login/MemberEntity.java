@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import teamproject.skycode.common.BaseEntity;
 import teamproject.skycode.constant.Role;
+import teamproject.skycode.myPage.users.EditDto;
 import teamproject.skycode.review.CommentEntity;
 import teamproject.skycode.review.ReviewEntity;
 
@@ -45,6 +46,10 @@ public class MemberEntity extends BaseEntity {
     @Column
     private String birthday;
 
+    private String userImgName; // 미니 이미지 파일명
+    private String userOriImgName; // 미니 원본 이미지 파일명
+    private String userImgUrl; // 미니 이미지 조회 경로
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -63,6 +68,22 @@ public class MemberEntity extends BaseEntity {
         member.setPassword(password);
         member.setRole(Role.ADMIN);
         return member;
+    }
+
+    public void updateUser(EditDto editDto) {
+//
+//        this.name = editDto.getBigOriImgName();
+//        this.birthday = editDto.getBirthday();
+//        this.phoneNum = editDto.getContent();
+//        this.email = editDto.getEventStatus();
+//
+//        this.nickName = editDto.getBigImgName();
+
+        this.userImgName = editDto.getUserImgName();
+        this.userOriImgName = editDto.getUserOriImgName();
+        this.userImgUrl = editDto.getUserImgUrl();
+
+
     }
 }
 

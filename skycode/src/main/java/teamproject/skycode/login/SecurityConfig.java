@@ -4,18 +4,13 @@ package teamproject.skycode.login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import teamproject.skycode.login.CustomAuthenticationEntryPoint;
-import teamproject.skycode.login.MemberService;
+import teamproject.skycode.constant.Role;
 
 @Configuration
 @EnableWebSecurity
@@ -42,7 +37,8 @@ public class SecurityConfig {
                         "/review/**",
                         "/ticket/**",
                         "/coupon/**",
-                        "/comment/**"
+                        "/comment/**",
+                        "/user/**"
                 ) //csrf예외처리
         ;
 
@@ -50,7 +46,7 @@ public class SecurityConfig {
                 .mvcMatchers("*").permitAll()
                 .mvcMatchers("/css/**", "/js/**", "/img/**", "/mainImages/**","/subImages/**").permitAll() // 전체 공개
                 .mvcMatchers("/", "/member/**", "/images/**","/skycode/**", "/SkyCodeProject/**").permitAll() // 전체공개
-//                .antMatchers("/user/**").hasRole("USER")
+//                .antMatchers("/user_shopping/orderList").hasAnyAuthority(Role.USER.name(),Role.ADMIN.name())
 //                .antMatchers("/admin/**").hasRole("ADMIN")
 //                .anyRequest().authenticated()/* 그 외 모든 요청은 인증된 사용자만 접근이 가능하게 처리*/
         ;

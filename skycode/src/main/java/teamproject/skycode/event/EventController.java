@@ -11,6 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.constant.EventStatus;
+import teamproject.skycode.login.MemberEntity;
+import teamproject.skycode.login.MemberRepository;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -23,6 +25,7 @@ import java.util.Optional;
 public class EventController {
 
     private final EventService eventService;
+    private final MemberRepository memberRepository;
 
     @GetMapping(value = {"/ongoing", "/ongoing/{page}"}) // 진행 페이지
     public String ongoingEvent(@PathVariable(name = "page", required = false) Integer page,
@@ -41,6 +44,8 @@ public class EventController {
         String user = "";
         if (principal != null) {
             user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo",userInfo);
         }
         model.addAttribute("user", user);
 
@@ -72,6 +77,8 @@ public class EventController {
         String user = "";
         if (principal != null) {
             user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo",userInfo);
         }
         model.addAttribute("user", user);
 
@@ -102,6 +109,8 @@ public class EventController {
         String user = "";
         if (principal != null) {
             user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo",userInfo);
         }
         model.addAttribute("user", user);
 
@@ -149,6 +158,8 @@ public class EventController {
         String user = "";
         if (principal != null) {
             user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo",userInfo);
         }
         model.addAttribute("user", user);
 
