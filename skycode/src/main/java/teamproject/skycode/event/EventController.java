@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.constant.EventStatus;
+import teamproject.skycode.constant.Role;
 import teamproject.skycode.login.MemberEntity;
 import teamproject.skycode.login.MemberRepository;
 
@@ -45,17 +46,13 @@ public class EventController {
         if (principal != null) {
             user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo",userInfo);
+            model.addAttribute("userInfo", userInfo);
+            // ADMIN 권한 확인
+            Role admin = userInfo.getRole();
+            if(admin.equals(Role.ADMIN)){
+                model.addAttribute("admin", admin);
+            }
         }
-        model.addAttribute("user", user);
-
-        // ADMIN 권한 확인
-        Authentication admin = null;
-        Authentication authentication = (Authentication) principal;
-        if (authentication != null) {
-            admin = authentication;
-        }
-        model.addAttribute("admin", admin);
 
         return "/event/eventongoing";
     }
@@ -78,17 +75,13 @@ public class EventController {
         if (principal != null) {
             user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo",userInfo);
+            model.addAttribute("userInfo", userInfo);
+            // ADMIN 권한 확인
+            Role admin = userInfo.getRole();
+            if(admin.equals(Role.ADMIN)){
+                model.addAttribute("admin", admin);
+            }
         }
-        model.addAttribute("user", user);
-
-        // ADMIN 권한 확인
-        Authentication admin = null;
-        Authentication authentication = (Authentication) principal;
-        if (authentication != null) {
-            admin = authentication;
-        }
-        model.addAttribute("admin", admin);
 
         return "/event/eventend";
     }
@@ -110,17 +103,13 @@ public class EventController {
         if (principal != null) {
             user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo",userInfo);
+            model.addAttribute("userInfo", userInfo);
+            // ADMIN 권한 확인
+            Role admin = userInfo.getRole();
+            if(admin.equals(Role.ADMIN)){
+                model.addAttribute("admin", admin);
+            }
         }
-        model.addAttribute("user", user);
-
-        // ADMIN 권한 확인
-        Authentication admin = null;
-        Authentication authentication = (Authentication) principal;
-        if (authentication != null) {
-            admin = authentication;
-        }
-        model.addAttribute("admin", admin);
 
         return "/event/eventwinner";
     }
@@ -159,16 +148,13 @@ public class EventController {
         if (principal != null) {
             user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo",userInfo);
+            model.addAttribute("userInfo", userInfo);
+            // ADMIN 권한 확인
+            Role admin = userInfo.getRole();
+            if(admin.equals(Role.ADMIN)){
+                model.addAttribute("admin", admin);
+            }
         }
-
-        // ADMIN 권한 확인
-        Authentication admin = null;
-        Authentication authentication = (Authentication) principal;
-        if (authentication != null) {
-            admin = authentication;
-        }
-        model.addAttribute("admin", admin);
 
         return "event/eventSub";
     }
