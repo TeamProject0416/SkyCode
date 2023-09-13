@@ -75,9 +75,11 @@
                         <h2>[[${userInfo.getNickName}]]
                             <button onclick="location.href='/member/logout'">로그아웃</button>
                         </h2>
-                        <img th:if="${#strings.isEmpty(userInfo.getUserOriImgName)}" class="userImg"
-                             src="/subImages/UserImg.png" alt="userImg">
-                        <img th:unless="${#strings.isEmpty(userInfo.getUserOriImgName)}"
+                        <img class="userImg"
+                             th:if="${#strings.isEmpty(userInfo.getUserOriImgName)}"
+                             src="/mainImages/UserImg.png" alt="userImg">
+                        <img class="userImg"
+                             th:unless="${#strings.isEmpty(userInfo.getUserOriImgName)}"
                              th:src="${userInfo.getUserImgUrl}" th:alt="${userInfo.getUserOriImgName}">
                         <div class="jhuserBox1">
                             <a href="/user_review">

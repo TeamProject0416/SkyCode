@@ -161,7 +161,6 @@ public class EventController {
             MemberEntity userInfo = memberRepository.findByEmail(user);
             model.addAttribute("userInfo",userInfo);
         }
-        model.addAttribute("user", user);
 
         // ADMIN 권한 확인
         Authentication admin = null;

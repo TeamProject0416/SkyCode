@@ -38,6 +38,7 @@ public class MyPageController {
         if (principal != null) {
             user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
             MemberEditFormDto memberEditFormDto = memberService.getMemberDtl(userInfo.getId());
             model.addAttribute("memberEditFormDto", memberEditFormDto);
         }
