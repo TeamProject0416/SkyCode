@@ -143,8 +143,8 @@ public class ReviewController {
     //    리뷰 업데이트
     @PostMapping(value = "/update")
     public String reviewUpdate(@Valid ReviewDto reviewDto, BindingResult bindingResult,
-                               @RequestParam("eventImgFile1") MultipartFile reviewImgFile1,
-                               @RequestParam("eventImgFile2") MultipartFile reviewImgFile2,
+                               @RequestParam("reviewImgFile1") MultipartFile reviewImgFile1,
+                               @RequestParam("reviewImgFile2") MultipartFile reviewImgFile2,
                                Model model) {
         if (bindingResult.hasErrors()) {
             return "review/newReview";
