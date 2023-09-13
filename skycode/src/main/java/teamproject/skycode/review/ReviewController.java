@@ -30,7 +30,13 @@ public class ReviewController {
 
 
     @GetMapping(value = "/newReview")
-    public String newReviewForm(Model model) {
+    public String newReviewForm(Model model, Principal principal) {
+        String user = "";
+        if (principal != null) {
+            user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+        }
         model.addAttribute("reviewFormDto", new ReviewDto());
         return "review/newReview";
     }
@@ -120,7 +126,14 @@ public class ReviewController {
 
     //    리뷰 수정하기
     @GetMapping(value = "/{reviewId}/edit")
-    public String reviewEdit(@PathVariable("reviewId") Long reviewId, Model model) {
+    public String reviewEdit(@PathVariable("reviewId") Long reviewId,
+                             Model model,Principal principal) {
+        String user = "";
+        if (principal != null) {
+            user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+        }
         ReviewDto reviewDto = reviewService.getReviewDtl(reviewId);
         model.addAttribute("reviewFormDto", reviewDto);
         return "review/newReview";
