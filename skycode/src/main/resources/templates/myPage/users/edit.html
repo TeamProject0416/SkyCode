@@ -138,7 +138,6 @@
         margin: 20px;
         cursor: pointer;
     }
-
     </style>
 </head>
 
@@ -233,7 +232,7 @@
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script th:inline="javascript">
     $(".file").on('change', function () {
-        const  fileName = $(".file").val();
+        const fileName = $(".file").val();
         $(".upload-name").val(fileName);
         setImageFromFile(this, '.editImg img');
     });
@@ -260,6 +259,11 @@
         }
         if (errorMessage) {
             alert(errorMessage); // 오류 메시지를 경고 창으로 표시
+        }
+
+        // 확인 버튼을 누르면 "/"로 리다이렉트
+        if (successMessage || errorMessage) {
+            window.location.href = "/"; // "/"로 리다이렉트
         }
     }
 
