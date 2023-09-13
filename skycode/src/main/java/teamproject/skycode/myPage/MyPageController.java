@@ -118,9 +118,6 @@ public class MyPageController {
         return "myPage/review/review";
     }
 
-    @GetMapping(value = "/user_review/write")
-    public String userReview_write() {
-        return "myPage/review/review_write";
-    }
+
 
 }
