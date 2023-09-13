@@ -5,8 +5,7 @@ import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import teamproject.skycode.common.BaseEntity;
 import teamproject.skycode.constant.Role;
-import teamproject.skycode.myPage.users.EditDto;
-import teamproject.skycode.review.CommentEntity;
+import teamproject.skycode.myPage.users.MemberEditFormDto;
 import teamproject.skycode.review.ReviewEntity;
 
 import javax.persistence.*;
@@ -70,20 +69,17 @@ public class MemberEntity extends BaseEntity {
         return member;
     }
 
-    public void updateUser(EditDto editDto) {
-//
-//        this.name = editDto.getBigOriImgName();
-//        this.birthday = editDto.getBirthday();
-//        this.phoneNum = editDto.getContent();
-//        this.email = editDto.getEventStatus();
-//
-//        this.nickName = editDto.getBigImgName();
+    public void updateUser(MemberEditFormDto memberEditFormDto) {
 
-        this.userImgName = editDto.getUserImgName();
-        this.userOriImgName = editDto.getUserOriImgName();
-        this.userImgUrl = editDto.getUserImgUrl();
+        this.name = memberEditFormDto.getName();
+        this.birthday = memberEditFormDto.getBirthday();
+        this.phoneNum = memberEditFormDto.getPhoneNum();
+        this.email = memberEditFormDto.getEmail();
+        this.nickName = memberEditFormDto.getNickName();
 
-
+        this.userImgName = memberEditFormDto.getUserImgName();
+        this.userOriImgName = memberEditFormDto.getUserOriImgName();
+        this.userImgUrl = memberEditFormDto.getUserImgUrl();
     }
 }
 

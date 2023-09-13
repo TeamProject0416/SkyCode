@@ -139,10 +139,6 @@
         cursor: pointer;
     }
 
-
-
-
-
     </style>
 </head>
 
@@ -162,7 +158,6 @@
             <!-- 탭2 -->
             <div>
                 <div class="tabBox secondTab">
-
                     <ul class="mainTab">
                         <li><a href="/user">모두 보기</a></li>
                         <li class="on"><a href="/user/edit">회원정보수정</a></li>
@@ -171,28 +166,29 @@
                         <li><a href="/user/edit_password">비밀번호 번경</a></li>
                     </ul>
                     <form action="/user/update" enctype="multipart/form-data"
-                          method="post" th:object="${userInfo}">
+                          method="post" th:object="${memberEditFormDto}">
                         <div class="subTab">
                             <div class="editSection">
+                                <input type="hidden" th:field="*{id}">
                                 <div class="editHeader">
                                     <h2>회원 정보 수정</h2>
                                     <a href="/user/delete">탈퇴하기</a>
                                 </div>
                                 <div class="editEmail">
                                     <span>이메일</span>
-                                    <input type="text" th:value="${userInfo.getEmail}" placeholder="email" readonly>
+                                    <input type="text" th:value="*{email}" name="email" placeholder="email" readonly>
                                 </div>
                                 <div class="editName">
                                     <span>이름</span>
-                                    <input type="text" th:value="${userInfo.getName}" placeholder="Name" readonly>
+                                    <input type="text" th:value="*{name}" name="name" placeholder="Name" readonly>
                                 </div>
                                 <div class="editNickname">
                                     <span>닉네임</span>
-                                    <input type="text" th:value="${userInfo.getNickName}" placeholder="ID">
+                                    <input type="text" th:value="*{nickName}" name="nickName" placeholder="ID">
                                 </div>
                                 <div class="editPhoneNum">
                                     <span>핸드폰 번호</span>
-                                    <input type="text" th:value="${userInfo.getPhoneNum}" placeholder="Phone">
+                                    <input type="text" th:value="*{phoneNum}" name="phoneNum" placeholder="Phone">
                                 </div>
                                 <div class="editGender">
                                     <span>성별</span>
@@ -207,18 +203,17 @@
                                 </div>
                                 <div class="editBrithday">
                                     <span>생일</span>
-                                    <input type="date" th:value="${userInfo.getBirthday}">
+                                    <input type="date" th:value="*{birthday}" name="birthday">
                                 </div>
                                 <div class="editImg">
                                     <span>프로필이미지</span>
                                     <div>
-                                        <img th:if="${#strings.isEmpty(userInfo.getUserOriImgName)}"
-                                             src="/subImages/UserImg.png" alt="userImg">
-                                        <img th:unless="${#strings.isEmpty(userInfo.getUserOriImgName)}"
-                                             th:src="${userInfo.getUserImgUrl}" th:alt="${userInfo.getUserOriImgName}">
+                                        <img class="userImgFile"
+                                             th:src=" *{userImgUrl} != null ? *{userImgUrl} : '/subImages/UserImg.png'"
+                                             th:alt="*{userImgUrl} != null ? *{userImgName} : '썸네일 이미지' ">
                                         <div>
                                             <input class="upload-name"
-                                                   th:placeholder=" ${userInfo.getUserImgUrl} != null ? *{userInfo.getUserImgName} : '프로필 사진'">
+                                                   th:placeholder=" *{userImgUrl} != null ? *{userOriImgName} : '프로필 사진'">
                                             <label>프로필 이미지 선택<input type="file" class="file" name="userImgFile"
                                                                     accept="image/*"></label>
                                         </div>
@@ -236,9 +231,9 @@
 
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script>
+<script th:inline="javascript">
     $(".file").on('change', function () {
-        var fileName = $(".file").val();
+        const  fileName = $(".file").val();
         $(".upload-name").val(fileName);
         setImageFromFile(this, '.editImg img');
     });
@@ -246,14 +241,32 @@
     function setImageFromFile(input, expression) {
         if (input.files && input.files[0])
         {
-            var reader = new FileReader();
+            const reader = new FileReader();
 
                 reader.onload = function (e) {
                     $(expression).attr('src', e.target.result);
                }
                reader.readAsDataURL(input.files[0]);
          }
+    };
+
+    // 마이페이지 수정 경고창
+    function showAlert() {
+        const successMessage = [[${successMessage}]];
+        const errorMessage = [[${errorMessage}]];
+
+        if (successMessage) {
+            alert(successMessage); // 성공 메시지를 경고 창으로 표시
+        }
+        if (errorMessage) {
+            alert(errorMessage); // 오류 메시지를 경고 창으로 표시
+        }
     }
+
+    // showAlert 함수를 페이지 로딩 시 호출
+    $(document).ready(function() {
+        showAlert();
+    });
 </script>
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>

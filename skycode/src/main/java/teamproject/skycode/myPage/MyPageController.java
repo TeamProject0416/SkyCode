@@ -4,15 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import teamproject.skycode.event.EventFormDto;
 import teamproject.skycode.login.MemberEntity;
+import teamproject.skycode.login.MemberFormDto;
 import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.login.MemberService;
-import teamproject.skycode.myPage.users.EditDto;
+import teamproject.skycode.myPage.users.MemberEditFormDto;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -37,13 +38,14 @@ public class MyPageController {
         if (principal != null) {
             user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
+            MemberEditFormDto memberEditFormDto = memberService.getMemberDtl(userInfo.getId());
+            model.addAttribute("memberEditFormDto", memberEditFormDto);
         }
         return "myPage/users/edit";
     }
 
     @PostMapping(value = "/user/update") // 이벤트 수정
-    public String userUpdate(@Valid EditDto editDto, BindingResult bindingResult,
+    public String userUpdate(@Valid MemberEditFormDto memberEditFormDto, BindingResult bindingResult,
                              @RequestParam("userImgFile") MultipartFile userImgFile,
                              Principal principal, Model model) {
 
@@ -51,14 +53,15 @@ public class MyPageController {
             return "myPage/users/edit";
         }
         try {
-            if (principal != null){
-                memberService.updateUser(editDto, userImgFile);
+            if (principal.getName().equals(memberEditFormDto.getEmail())) {
+                memberService.updateUser(memberEditFormDto, userImgFile);
+                model.addAttribute("successMessage", "회원 정보 수정이 완료되었습니다");
             }
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
+            model.addAttribute("errorMessage", "회원 정보 수정 중 에러가 발생하였습니다");
             return "myPage/users/edit";
         }
-        return "redirect:/user/edit";
+        return "myPage/users/edit";
     }
 
 

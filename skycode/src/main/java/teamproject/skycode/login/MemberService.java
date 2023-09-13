@@ -10,13 +10,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.common.FileService;
-import teamproject.skycode.event.EventEntity;
-import teamproject.skycode.myPage.users.EditDto;
+import teamproject.skycode.myPage.users.MemberEditFormDto;
 
 import javax.persistence.EntityNotFoundException;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.*;
 
 @Service
 @Transactional
@@ -53,13 +55,34 @@ public class MemberService implements UserDetailsService {
                 .build();
     }
 
-    public Long updateUser(EditDto editDto, MultipartFile userImgFile)  throws Exception{
-        // 상품 수정
-        MemberEntity member = memberRepository.findByEmail(editDto.getEmail());
-        System.err.println(editDto.getEmail());
+    public MemberEditFormDto getMemberDtl(Long memberId) {
+        MemberEntity member = memberRepository.findById(memberId)
+                .orElseThrow(EntityNotFoundException::new);
+        // member 정보를 memberEditFormDto 로 변환합니다
+        MemberEditFormDto memberEditFormDto = MemberEditFormDto.of(member);
+        return memberEditFormDto;
+    }
+
+    public Long updateUser(MemberEditFormDto memberEditFormDto, MultipartFile userImgFile)  throws Exception{
+        // 유저 정보 수정
+        MemberEntity member = memberRepository.findById(memberEditFormDto.getId())
+                .orElseThrow(EntityNotFoundException::new);;
 
         // 파일 경로 설정
         String basePath = "/user";
+
+        // 폴더 없을시 폴더 생성
+        Path directoryPath = Paths.get("/SkyCodeProject/img/user");
+
+        try {
+            // 디렉토리 생성
+            Files.createDirectories(directoryPath);
+            System.out.println(directoryPath + " 디렉토리가 생성되었습니다.");
+
+        } catch (IOException e) {
+            System.out.println(directoryPath + " 디렉토리 생성이 실패하였습니다.");
+            e.printStackTrace();
+        }
 
         // 이미지 업로드 처리 및 파일명 생성
         String userImgName = member.getUserImgName();
@@ -67,7 +90,6 @@ public class MemberService implements UserDetailsService {
         String userImgUrl = member.getUserImgUrl();
 
         if (userImgFile != null && !userImgFile.isEmpty()) {
-
             // 수정 전 파일 삭제하기
             if(member.getUserImgName() != null) {
                 String filePath = imgLocation + basePath + "/" + userImgName;
@@ -90,14 +112,20 @@ public class MemberService implements UserDetailsService {
             userImgUrl = "/img/user/" + userImgName;
         }
 
-        editDto.setUserImgName(userImgName);
-        editDto.setUserOriImgName(userOriImgName);
-        editDto.setUserImgUrl(userImgUrl);
+        // DB 업데이트 시간 저장
+        LocalDateTime now = LocalDateTime.now();
+        member.setUpdateTime(now);
 
-        member.updateUser(editDto);
+        memberEditFormDto.setUserImgName(userImgName);
+        memberEditFormDto.setUserOriImgName(userOriImgName);
+        memberEditFormDto.setUserImgUrl(userImgUrl);
+
+        member.updateUser(memberEditFormDto);
 
         return member.getId();
     }
+
+
 }
 
 
