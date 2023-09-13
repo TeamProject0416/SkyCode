@@ -41,6 +41,7 @@ public class MyPageController {
             model.addAttribute("userInfo", userInfo);
             MemberEditFormDto memberEditFormDto = memberService.getMemberDtl(userInfo.getId());
             model.addAttribute("memberEditFormDto", memberEditFormDto);
+            System.err.println(memberEditFormDto.getGender());
         }
         return "myPage/users/edit";
     }

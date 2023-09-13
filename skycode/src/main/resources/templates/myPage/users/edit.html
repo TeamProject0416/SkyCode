@@ -138,6 +138,7 @@
         margin: 20px;
         cursor: pointer;
     }
+
     </style>
 </head>
 
@@ -192,11 +193,13 @@
                                 <div class="editGender">
                                     <span>성별</span>
                                     <label>
-                                        <input type="radio" name="gender" th:value="*{gender}" th:checked="${gender eq 'MALE'}" >
+                                        <input type="radio" name="gender" value="MALE"
+                                               th:checked="${#strings.equals(memberEditFormDto.gender, 'MALE')} ? 'checked' : null">
                                         <span>남성</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="gender" th:value="*{gender}" th:checked="${gender eq 'FEMALE'}">
+                                        <input type="radio" name="gender" value="FEMALE"
+                                               th:checked="${#strings.equals(memberEditFormDto.gender, 'FEMALE')} ? 'checked' : null">
                                         <span>여성</span>
                                     </label>
                                 </div>
@@ -271,6 +274,7 @@
     $(document).ready(function() {
         showAlert();
     });
+
 </script>
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
