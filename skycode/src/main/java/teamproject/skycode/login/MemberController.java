@@ -44,7 +44,6 @@ public class MemberController {
     @PostMapping(value = "/new")
     public String memberSave(@Valid MemberFormDto memberFormDto,
                              BindingResult bindingResult, Model model) {
-        System.err.println(memberFormDto.getGender());
         if (bindingResult.hasErrors()) {
             for (ObjectError error : bindingResult.getAllErrors()) {
                 System.err.println(error.getDefaultMessage());
@@ -80,7 +79,7 @@ public class MemberController {
         return "/member/memberLoginForm";
     }
 
-    @GetMapping(value = "list")
+    @GetMapping(value = "/list")
     public String memberList(Model model) {
         List<MemberEntity> memberList = memberRepository.findAll();
         model.addAttribute("memberList", memberList);
@@ -94,6 +93,7 @@ public class MemberController {
         memberRepository.delete(member);
         return "redirect:/member/list";
     }
+
 
 }
 
