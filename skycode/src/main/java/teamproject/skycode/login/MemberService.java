@@ -33,19 +33,28 @@ public class MemberService implements UserDetailsService {
 
     public MemberEntity saveMember(MemberEntity member) {
         validateDuplicateMember(member);
+        DuplicateNicknameMember(member);
         return memberRepository.save(member);
     }
 
     private void validateDuplicateMember(MemberEntity member) {
-        MemberEntity findmember = memberRepository.findByEmail(member.getEmail());
-        if (findmember != null) {
+        MemberEntity findEmail = memberRepository.findByEmail(member.getEmail());
+        if (findEmail != null) {
             throw new IllegalStateException("이미 가입된 회원입니다.");
         }
     }
+
+    private void DuplicateNicknameMember(MemberEntity member) {
+        MemberEntity findNickname = memberRepository.findByNickName(member.getNickName());
+        if (findNickname != null) {
+            throw new IllegalStateException("이미 사용중인 닉네임입니다.");
+        }
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         MemberEntity member = memberRepository.findByEmail(email);
-        if(member == null){
+        if (member == null) {
             throw new UsernameNotFoundException(email);
         }
         return User.builder()
@@ -63,10 +72,11 @@ public class MemberService implements UserDetailsService {
         return memberEditFormDto;
     }
 
-    public Long updateUser(MemberEditFormDto memberEditFormDto, MultipartFile userImgFile)  throws Exception{
+    public Long updateUser(MemberEditFormDto memberEditFormDto, MultipartFile userImgFile) throws Exception {
         // 유저 정보 수정
         MemberEntity member = memberRepository.findById(memberEditFormDto.getId())
-                .orElseThrow(EntityNotFoundException::new);;
+                .orElseThrow(EntityNotFoundException::new);
+        ;
 
         // 파일 경로 설정
         String basePath = "/user";
@@ -91,7 +101,7 @@ public class MemberService implements UserDetailsService {
 
         if (userImgFile != null && !userImgFile.isEmpty()) {
             // 수정 전 파일 삭제하기
-            if(member.getUserImgName() != null) {
+            if (member.getUserImgName() != null) {
                 String filePath = imgLocation + basePath + "/" + userImgName;
                 File fileToDelete = new File(filePath);
                 if (fileToDelete.delete()) {

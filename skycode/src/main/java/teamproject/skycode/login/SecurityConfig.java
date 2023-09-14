@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import java.net.URLEncoder;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -19,6 +21,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http.formLogin()
                 .loginPage("/member/login")
                 .defaultSuccessUrl("/")
@@ -27,7 +30,7 @@ public class SecurityConfig {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-                .logoutSuccessUrl("/member/login")
+                .logoutSuccessUrl("/member/login?logout=" + URLEncoder.encode("로그아웃 되었습니다","UTF-8"))
                 .clearAuthentication(true) /*권한정보 제거*/
         ;
 

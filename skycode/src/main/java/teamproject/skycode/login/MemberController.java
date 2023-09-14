@@ -12,6 +12,8 @@ import teamproject.skycode.event.EventEntity;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.List;
 
@@ -25,6 +27,15 @@ public class MemberController {
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
 
+    // 메세지
+    private String encodeMessage(String message) {
+        try {
+            return URLEncoder.encode(message, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // 예외 처리
+            return "";
+        }
+    }
 
     @GetMapping(value = "/new")
     public String memberForm(Model model, Principal principal) {
@@ -53,7 +64,8 @@ public class MemberController {
         try {
             MemberEntity member = MemberEntity.createMember(memberFormDto, passwordEncoder);
             memberService.saveMember(member);
-            return "redirect:/member/login?logout&message=회원가입에 성공하였습니다";
+            String message = "회원가입 되었습니다";
+            return "redirect:/member/login?message=" + encodeMessage(message);
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "member/memberForm";
@@ -72,7 +84,7 @@ public class MemberController {
         model.addAttribute("user", user);
 
         if (logout != null) {
-            model.addAttribute("logoutMessage", "로그아웃되었습니다");
+            model.addAttribute("logoutMessage", logout);
         }
         if (message != null) {
             model.addAttribute("successMessage", message);

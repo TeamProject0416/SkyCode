@@ -5,7 +5,6 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.modelmapper.ModelMapper;
 import teamproject.skycode.constant.Gender;
-import teamproject.skycode.event.EventFormDto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -33,7 +32,7 @@ public class MemberFormDto {
 
     private String address;
 
-    @Pattern(regexp = "^(01[1|6|7|8|9|0])-(\\d{3,4})-(\\d{4})$", message = "010-1111-1111의 형식으로 적어주세요")
+    @Pattern(regexp = "^(01[1|6|7|8|9|0])-(\\d{3,4})-(\\d{4})$", message = "01x-xxxx-xxxx의 형식으로 적어주세요")
     private String phoneNum;
 
     private String birthday;
