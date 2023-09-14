@@ -65,6 +65,20 @@
 
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script th:inline="javascript">
+    $(document).ready(function(){
+        const logoutMessage = [[${logoutMessage}]];
+        const successMessage = [[${successMessage}]];
+
+        if(logoutMessage != null){
+            alert(logoutMessage);
+        }
+        if(successMessage != null){
+            alert(successMessage);
+        }
+    });
+
+</script>
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
 
