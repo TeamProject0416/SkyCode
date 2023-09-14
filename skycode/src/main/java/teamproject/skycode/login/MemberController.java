@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import teamproject.skycode.event.EventEntity;
 
@@ -44,6 +45,9 @@ public class MemberController {
     public String memberSave(@Valid MemberFormDto memberFormDto,
                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                System.err.println(error.getDefaultMessage());
+            }
             return "member/memberForm";
         }
         try {
@@ -58,7 +62,7 @@ public class MemberController {
     }
 
     @GetMapping(value = "/login")
-    public String loginMember(Principal principal , Model model) {
+    public String loginMember(Principal principal, Model model) {
         // 유저 로그인
         String user = "";
         if (principal != null) {
@@ -75,20 +79,21 @@ public class MemberController {
         return "/member/memberLoginForm";
     }
 
-    @GetMapping(value = "list")
-    public String memberList (Model model){
+    @GetMapping(value = "/list")
+    public String memberList(Model model) {
         List<MemberEntity> memberList = memberRepository.findAll();
-        model.addAttribute("memberList",memberList);
+        model.addAttribute("memberList", memberList);
         return "/member/list";
     }
 
     @GetMapping("/delete/{memberId}")
-    public String memberDelete (@PathVariable("memberId") Long memberId){
+    public String memberDelete(@PathVariable("memberId") Long memberId) {
         MemberEntity member = memberRepository.findById(memberId)
                 .orElseThrow(EntityNotFoundException::new);
         memberRepository.delete(member);
         return "redirect:/member/list";
     }
+
 
 }
 

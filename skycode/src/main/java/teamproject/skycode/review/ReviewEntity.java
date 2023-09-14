@@ -61,8 +61,6 @@ public class ReviewEntity extends BaseEntity {
         this.bigOriImgName = bigOriImgName;
         this.bigImgUrl = bigImgUrl;
     }
-
-
     public void updateReview(ReviewDto reviewDto) {
         this.nickName = reviewDto.getNickName();
         this.email = reviewDto.getEmail();

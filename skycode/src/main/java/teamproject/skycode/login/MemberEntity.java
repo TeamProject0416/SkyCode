@@ -41,6 +41,7 @@ public class MemberEntity extends BaseEntity {
     private String address;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @Column

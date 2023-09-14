@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +16,7 @@ import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.login.MemberService;
 import teamproject.skycode.myPage.users.MemberEditFormDto;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -41,6 +43,7 @@ public class MyPageController {
             model.addAttribute("userInfo", userInfo);
             MemberEditFormDto memberEditFormDto = memberService.getMemberDtl(userInfo.getId());
             model.addAttribute("memberEditFormDto", memberEditFormDto);
+            System.err.println(memberEditFormDto.getGender());
         }
         return "myPage/users/edit";
     }
@@ -65,13 +68,29 @@ public class MyPageController {
         return "myPage/users/edit";
     }
 
+    @GetMapping("/user/delete/{memberId}")
+    public String userDelete(@PathVariable("memberId") Long memberId,Principal principal,Model model) {
+        MemberEntity member = memberRepository.findById(memberId)
+                .orElseThrow(EntityNotFoundException::new);
+        try {
+            if (principal.getName().equals(member.getEmail())) {
+                memberRepository.delete(member);
+                model.addAttribute("successDelete", "탈퇴가 완료되었습니다");
+            }
+        } catch (Exception e) {
+            model.addAttribute("errorDelete", "탈퇴 중 에러가 발생하였습니다");
+            return "myPage/users/edit";
+        }
+        return "redirect:/";
+    }
 
-    @GetMapping(value = "user/collections")
+
+    @GetMapping(value = "/user/collections")
     public String userCollections() {
         return "myPage/users/collections";
     }
 
-    @GetMapping(value = "user/praise")
+    @GetMapping(value = "/user/praise")
     public String userPraise() {
         return "myPage/users/praise";
     }
@@ -82,32 +101,32 @@ public class MyPageController {
     }
 
 
-    @GetMapping(value = "user_shopping/orderList")
+    @GetMapping(value = "/user_shopping/orderList")
     public String userOrderList() {
         return "myPage/shopping/orderList";
     }
 
-    @GetMapping(value = "user_shopping/cart")
+    @GetMapping(value = "/user_shopping/cart")
     public String userCart() {
         return "myPage/shopping/cart";
     }
 
-    @GetMapping(value = "user_shopping/point")
+    @GetMapping(value = "/user_shopping/point")
     public String userPoint() {
         return "myPage/shopping/point";
     }
 
-    @GetMapping(value = "user_shopping/coupon")
+    @GetMapping(value = "/user_shopping/coupon")
     public String userCoupon() {
         return "myPage/shopping/coupon";
     }
 
-    @GetMapping(value = "user_shopping/questions")
+    @GetMapping(value = "/user_shopping/questions")
     public String userQuestions() {
         return "myPage/shopping/questions";
     }
 
-    @GetMapping(value = "user_trip/tripTool")
+    @GetMapping(value = "/user_trip/tripTool")
     public String userTripTool() {
         return "myPage/trip/tripTool";
     }
@@ -117,9 +136,6 @@ public class MyPageController {
         return "myPage/review/review";
     }
 
-    @GetMapping(value = "/user_review/write")
-    public String userReview_write() {
-        return "myPage/review/review_write";
-    }
+
 
 }
