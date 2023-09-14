@@ -97,14 +97,21 @@
     </div>
 
     <!-- 댓글 작성 부분 -->
-    <div id="comment-write">
-        <input type="hidden" th:value="${nickname}" id="commentWriter" placeholder="작성자">
-        <input type="text" id="commentContents" placeholder="내용">
-        <button th:if="${#strings.isEmpty(userInfo)}" id="reviewLink">댓글작성</button>
-        <button th:unless="${#strings.isEmpty(userInfo)}" onclick="commentWrite()">댓글작성</button>
-    </div>
+    <div class="oej_box">
+        <div class="comment-write">
+            <!-- css 다 끝나고 나서 작성자 type hidden으로 바꾸기 -->
+            <!-- css 하고 싶으면 type text로 바꾸기 -->
+            <div class="oej_icon">
+                <input type="hidden" th:value="${nickname}" id="commentWriter" placeholder="작성자">
+                <i class="fa-solid fa-circle-user"></i>
+            </div>
+            <input type="text" id="commentContents" placeholder="내용">
+            <button th:if="${#strings.isEmpty(userInfo)}" id="reviewLink">댓글작성</button>
+            <button class="oej_button" th:unless="${#strings.isEmpty(userInfo)}" onclick="commentWrite()">댓글작성</button>
+        </div>
 
-    <!-- 댓글 출력 부분 -->
+
+        <!-- 댓글 출력 부분 -->
     <div id="error-message" style="color: red;"></div>
     <div id="comment-list">
         <table>
