@@ -10,7 +10,6 @@ import teamproject.skycode.myPage.users.MemberEditFormDto;
 import teamproject.skycode.review.ReviewEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
