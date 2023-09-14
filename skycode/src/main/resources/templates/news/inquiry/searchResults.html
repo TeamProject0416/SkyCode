@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/news/inquiry/inquiryListStyle.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<!-- 1:1문의 -->
+<section class="nyInquiryWrap">
+<!--    &lt;!&ndash; Display search results &ndash;&gt;-->
+<!--    <div class="search-results">-->
+<!--        <h2>Search Results</h2>-->
+<!--        <ul>-->
+<!--            <li th:each="result : ${searchResults}">-->
+<!--                &lt;!&ndash; Display search result details here &ndash;&gt;-->
+<!--                <a th:href="@{/news/inquiry/show/{id}(id=${result.id})}">-->
+<!--                    <span th:text="${result.id}"></span>-->
+<!--                    <span th:text="${result.inquiryTitle}"></span>-->
+<!--                    <span th:text="${result.inquiryContent}"></span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+    <h2># 1 : 1 문의</h2>
+    <div class="nyInquiryContainer search-results">
+        <div class="nySearch">
+            <form th:action="@{/news/inquiry/search}" method="get">
+                <label for="search-type" hidden>유형</label>
+                <select name="search-type" id="search-type">
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                    <option value="id">ID</option>
+                    <!-- Add other options as needed -->
+                </select>
+                <label for="search-value" hidden></label>
+                <input id="search-value" type="search" name="search-value" placeholder="검색어...">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+<!--        <div class="nyInquiryCheck">-->
+<!--&lt;!&ndash;            <strong>총 <strong th:text="${totalInquiryCount}">522</strong>건</strong>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="nyInquiryButton">&ndash;&gt;-->
+<!--&lt;!&ndash;                <button type="button">최신순</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                <span>|</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                <button type="button">인기순</button>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--        </div>-->
+        <table class="nyInquiryList">
+            <thead>
+            <tr>
+                <th class="nyInquiryListNum">번호</th>
+                <th>카테고리</th>
+                <th class="nyInquiryListText">제목</th>
+                <th>조회수</th>
+                <th>날짜</th>
+                <th class="nyInquiryListNone"><i class="fa-solid fa-lock"></i></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Display search result details here -->
+            <tr th:each="result : ${searchResults}">
+                    <td><span th:text="${result.id}"></span></td>
+                    <td><span th:text="${result.type}">회원가입/탈퇴</span></td>
+                    <td><a th:href="@{/news/inquiry/show/{id}(id=${result.id})}"><span th:text="${result.inquiryTitle}"></span></a></td>
+                    <td><span th:text="${result.viewCount}">조회수</span></td>
+                    <td><span th:text="${#temporals.format(result.regTime, 'yyyy.MM.dd')}"></span></td>
+                    <td th:text="${result.isPrivate ? '비공개' : '공개'}">공개</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="nyInquiryPeger">
+            <div class="nyInquiryPegerBtn nyInquiryClick"><a href="#">1</a></div>
+            <div class="nyInquiryPegerBtn"><a href="#">2</a></div>
+        </div>
+        <div class="nyInquiryGoText">
+            <a th:href="@{/news/inquiry}">문의쓰기</a>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+
+</body>
+</html>

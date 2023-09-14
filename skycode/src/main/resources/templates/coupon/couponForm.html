@@ -17,77 +17,77 @@
 <!--header-->
 <header th:replace="~{fragments/sub/header::header}"></header>
 
-    <!--body-->
-    <div class="wrap">
-        <h2 class="newCoupon">#쿠폰 등록하기</h2>
-        <hr>
-        <div class="container">
-            <form class="formContainer" action="/coupon/new" method="post" th:object="${couponFormDto}">
-                <input type="hidden" th:field="*{id}">
+<!--body-->
+<div class="wrap">
+    <h2 class="newCoupon">#쿠폰 등록하기</h2>
+    <hr>
+    <div class="container">
+        <form class="formContainer" action="/coupon/new" method="post" th:object="${couponFormDto}">
+            <input type="hidden" th:field="*{id}">
+            <div>
+                <select th:field="*{couponStatus}" class="custom-select">
+                    <option value="ONGOING">진행중</option>
+                    <option value="END">종료</option>
+                </select>
+            </div>
+            <div class="pack">
                 <div>
-                    <select th:field="*{couponStatus}" class="custom-select">
-                        <option value="ONGOING">진행중</option>
-                        <option value="END">종료</option>
-                    </select>
+                    <label class="couponName">쿠폰명</label>
+                    <input type="text" th:field="*{couponName}" name="couponName" placeholder="쿠폰 이름을 입력해주세요">
+                    <p th:if="${#fields.hasErrors('couponName')}" th:errors="*{couponName}" class="fieldError">
+                        Incorrect
+                        data</p>
                 </div>
-                <div class="pack">
-                    <div>
-                        <label class="couponName">쿠폰명</label>
-                        <input type="text" th:field="*{couponName}" name="couponName" placeholder="쿠폰 이름을 입력해주세요">
-                        <p th:if="${#fields.hasErrors('couponName')}" th:errors="*{couponName}" class="fieldError">
-                            Incorrect
-                            data</p>
-                    </div>
-                    <div>
-                        <label class="couponNum">쿠폰 수량</label>
-                        <input type="number" th:field="*{couponNum}" name="couponNum" placeholder="ex) 1000(장)">
-                    </div>
+                <div>
+                    <label class="couponNum">쿠폰 수량</label>
+                    <input type="number" th:field="*{couponNum}" name="couponNum" placeholder="ex) 1000(장)">
                 </div>
-                <div class="pack">
+            </div>
+            <div class="pack">
 
-                    <div>
-                        <label class="couponPrice">할인 금액(원)</label>
-                        <input type="number" th:field="*{couponPrice}" name="couponPrice" placeholder="ex) 1000(원)">
-                    </div>
-
-                    <div>
-                        <label class="couponRatio">할인 비율(%)</label>
-                        <input type="number" th:field="*{couponRatio}" name="couponRatio" placeholder="ex) 10%"
-                            max="100">
-                    </div>
+                <div>
+                    <label class="couponPrice">할인 금액(원)</label>
+                    <input type="number" th:field="*{couponPrice}" name="couponPrice" placeholder="ex) 1000(원)">
                 </div>
 
-                <div class="pack">
-                    <div>
-                        <label class="maxPrice">최대 할인 금액(원)</label>
-                        <input type="number" th:field="*{maxPrice}" name="maxPrice" placeholder="ex) 1000(원)">
-                    </div>
-                    <div>
-                        <label class="useMinPrice">최소 사용 금액(원)</label>
-                        <input type="number" th:field="*{useMinPrice}" name="useMinPrice" placeholder="ex) 10000(원)">
-                    </div>
+                <div>
+                    <label class="couponRatio">할인 비율(%)</label>
+                    <input type="number" th:field="*{couponRatio}" name="couponRatio" placeholder="ex) 10%"
+                           max="100">
                 </div>
+            </div>
 
-                <div class="pack">
-                    <div>
-                        <label class="couponStart">쿠폰 시작일</label>
-                        <input class="oej_y" name="couponStart" th:field="*{couponStart}" type="date" value="xxx"
-                            min="yyy" max="zzz">
-                        <p th:if="${#fields.hasErrors('couponStart')}" th:errors="*{couponStart}" class="fieldError">
-                            Incorrect
-                            data
-                        </p>
-                    </div>
-                    <div>
-                        <label class="couponEnd">쿠폰 종료일</label>
-                        <input class="oej_y" name="couponEnd" th:field="*{couponEnd}" type="date" value="xxx" min="yyy"
-                            max="zzz">
-                        <p th:if="${#fields.hasErrors('couponEnd')}" th:errors="*{couponEnd}" class="fieldError">
-                            Incorrect
-                            data
-                        </p>
-                    </div>
+            <div class="pack">
+                <div>
+                    <label class="maxPrice">최대 할인 금액(원)</label>
+                    <input type="number" th:field="*{maxPrice}" name="maxPrice" placeholder="ex) 1000(원)">
                 </div>
+                <div>
+                    <label class="useMinPrice">최소 사용 금액(원)</label>
+                    <input type="number" th:field="*{useMinPrice}" name="useMinPrice" placeholder="ex) 10000(원)">
+                </div>
+            </div>
+
+            <div class="pack">
+                <div>
+                    <label class="couponStart">쿠폰 시작일</label>
+                    <input class="oej_y" name="couponStart" th:field="*{couponStart}" type="date" value="xxx"
+                           min="yyy" max="zzz">
+                    <p th:if="${#fields.hasErrors('couponStart')}" th:errors="*{couponStart}" class="fieldError">
+                        Incorrect
+                        data
+                    </p>
+                </div>
+                <div>
+                    <label class="couponEnd">쿠폰 종료일</label>
+                    <input class="oej_y" name="couponEnd" th:field="*{couponEnd}" type="date" value="xxx" min="yyy"
+                           max="zzz">
+                    <p th:if="${#fields.hasErrors('couponEnd')}" th:errors="*{couponEnd}" class="fieldError">
+                        Incorrect
+                        data
+                    </p>
+                </div>
+            </div>
 
             <div class="btnArea" th:if="${#strings.isEmpty(couponFormDto.id)}">
                 <button th:formaction="@{/coupon/new}" type="submit" class="btn createBtn">저장</button>

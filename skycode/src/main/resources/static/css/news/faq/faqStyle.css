@@ -96,14 +96,26 @@
     height:150px;
 
 }
+.nyFaqBox .nyFaqGoText{
+    text-align: end;
+}
+.nyFaqBox .nyFaqGoText a{
+    background: #0065BA;
+    color: #fff;
+    padding: 10px;
+    /* border: 1px solid #333; */
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+}
 
-.nyFaqPeger{
+.nyFaqPeger ul{
     position: relative;
     top: 30px;
     display: flex;
     justify-content: center;
 }
-.nyFaqPeger .nyFaqPegerBtn{
+.nyFaqPeger .page-item{
     width: 50px;
     height: 50px;
     line-height: 50px;
@@ -115,7 +127,7 @@
 }
 .nyFaqPeger .nyFaqPegerBtn.nyFaqClick{
     background: #e9b0b0;
-
 }
+
 
 

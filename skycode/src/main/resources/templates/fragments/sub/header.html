@@ -14,10 +14,10 @@
                 <li>
                     <a href="#">여행추천</a>
                 </li>
-                <li><a href="/reviewSub">여행리뷰</a>
+                <li><a href="/review/reviewSub">여행리뷰</a>
                     <ul class="sub">
-                        <li><a href="/reviewSub">국내 여행</a></li>
-                        <li><a href="/reviewSub">해외 여행</a></li>
+                        <li><a href="/review/reviewSub">국내 여행</a></li>
+                        <li><a href="/review/reviewSub">해외 여행</a></li>
                     </ul>
                 </li>
 
@@ -47,67 +47,89 @@
             </ul>
         </nav>
         <div class="search_user">
-            <img class="jhicon cart" src="/subImages/Cart.png" alt="">
-            <img class="jhicon searchBtn" src="/subImages/alarmMenu.png" alt="">
-            <img class="jhicon userModal" src="/subImages/searchUser.png" alt="user">
+            <a>
+                <img class="jhicon cart" src="/subImages/Cart.png" alt="">
+            </a>
+            <a>
+                <img class="jhicon searchBtn" src="/subImages/alarmMenu.png" alt="">
+            </a>
+            <a th:if="${#strings.isEmpty(userInfo)}" href="/member/login" id="loginLink">
+                <img class="jhicon" src="/subImages/searchUser.png" alt="user">
+            </a>
+            <a th:unless="${#strings.isEmpty(userInfo)}">
+                <img class="jhicon userModal" src="/subImages/searchUser.png" alt="user">
+            </a>
 
             <!-- user  -->
-            <div class="jhModalUser">
-                <div class="jhModalUserBg"></div>
-                <div class="jhUser">
-                    <button class="closeMenu">X</button>
-                    <a href="/user_shopping/cart"><button class="jhicon cartMenu">장바구니</button></a>
-                    <a href="#"><button class="jhicon alarmMenu">내 알람</button></a>
-                    <h2>홍지혜</h2>
-                    <img class="userImg" src="/subImages/UserImg.jpg" alt="userImg">
-                    <div class="jhuserBox1">
-                        <a href="/user_review">
-                            <ul>
-                                <li>8</li>
-                                <li>리뷰</li>
-                            </ul>
+            <th:block th:each="userInfo: ${userInfo}">
+                <div class="jhModalUser">
+                    <div class="jhModalUserBg"></div>
+                    <div class="jhUser">
+                        <button class="closeMenu">X</button>
+                        <a href="/user_shopping/cart">
+                            <button class="jhicon cartMenu">장바구니</button>
                         </a>
-                        <a href="/user/praise">
-                            <ul>
-                                <li>5</li>
-                                <li>좋아요</li>
-                            </ul>
+                        <a href="#">
+                            <button class="jhicon alarmMenu">내 알람</button>
                         </a>
-                        <a href="/user_shopping/coupon">
+                        <h2>[[${userInfo.getNickName}]]
+                            <button onclick="location.href='/member/logout'">로그아웃</button>
+                        </h2>
+                        <img class="userImg"
+                             th:if="${#strings.isEmpty(userInfo.getUserOriImgName)}"
+                             src="/mainImages/UserImg.png" alt="userImg">
+                        <img class="userImg"
+                             th:unless="${#strings.isEmpty(userInfo.getUserOriImgName)}"
+                             th:src="${userInfo.getUserImgUrl}" th:alt="${userInfo.getUserOriImgName}">
+                        <div class="jhuserBox1">
+                            <a href="/user_review">
+                                <ul>
+                                    <li>8</li>
+                                    <li>리뷰</li>
+                                </ul>
+                            </a>
+                            <a href="/user/praise">
+                                <ul>
+                                    <li>5</li>
+                                    <li>좋아요</li>
+                                </ul>
+                            </a>
+                            <a href="/user_shopping/coupon">
+                                <ul>
+                                    <li>1</li>
+                                    <li>쿠폰</li>
+                                </ul>
+                            </a>
+                        </div>
+                        <div class="jhuserBox2">
                             <ul>
-                                <li>1</li>
-                                <li>쿠폰</li>
+                                <li><a href="/user_shopping/orderList">예약
+                                    <div></div>
+                                </a></li>
+                                <li><a href="/user">프로필
+                                    <div></div>
+                                </a></li>
+                                <li><a href="/user_trip/tripTool">여행도구
+                                    <div></div>
+                                </a></li>
+                                <li><a href="/user/edit">설정
+                                    <div></div>
+                                </a></li>
                             </ul>
-                        </a>
-                    </div>
-                    <div class="jhuserBox2">
-                        <ul>
-                            <li><a href="/user_shopping/orderList">예약
-                                <div></div>
-                            </a></li>
-                            <li><a href="/user">프로필
-                                <div></div>
-                            </a></li>
-                            <li><a href="/user_trip/tripTool">여행도구
-                                <div></div>
-                            </a></li>
-                            <li><a href="/user/edit">설정
-                                <div></div>
-                            </a></li>
-                        </ul>
-                    </div>
-                    <div class="jhuserBox3">
-                        <div></div>
-                        <ul>
-                            <li><a href="#">이벤트</a></li>
-                            <li><a href="#">공지사항</a></li>
-                            <li><a href="#">고객센터</a></li>
-                            <li><a href="#">Q&A</a></li>
-                        </ul>
-                        <img src="/subImages/banner123.png" alt="">
+                        </div>
+                        <div class="jhuserBox3">
+                            <div></div>
+                            <ul>
+                                <li><a href="#">이벤트</a></li>
+                                <li><a href="#">공지사항</a></li>
+                                <li><a href="#">고객센터</a></li>
+                                <li><a href="#">Q&A</a></li>
+                            </ul>
+                            <img src="/subImages/banner123.png" alt="">
+                        </div>
                     </div>
                 </div>
-            </div>
+            </th:block>
         </div>
     </div>
 </header>

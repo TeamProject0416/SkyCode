@@ -3,6 +3,7 @@ package teamproject.skycode.coupon;
 
 import lombok.*;
 import teamproject.skycode.common.BaseEntity;
+import teamproject.skycode.constant.CouponStatus;
 
 import javax.persistence.*;
 

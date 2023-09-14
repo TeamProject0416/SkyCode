@@ -26,12 +26,15 @@
             <span class="nyTitleDate" th:text="${viewCount}">조회수</span>
         </div>
         <div class="nyNewsContent">
-            <img src="http://placehold.it/320x100" />
+<!--            <img src="${'/images/' + notion.fileName}" alt=""/>-->
+            <img th:src="@{'/notionImg/'+${notion.fileName}}" alt="이미지">
             <p th:text="${notion.notionContent}">공지사항에 대한 정보</p>
         </div>
         <div class="nyNewsSubPager">
-            <div><a href=""><i class="fa-solid fa-caret-up"></i> 다음글</a></div>
-            <div><a href=""><i class="fa-solid fa-caret-down"></i> 이전글</a></div>
+<!--            <div><a th:href="@{'/news/notion/notionSub/' + ${notion.id}-1}"><i class="fa-solid fa-caret-up"></i> 다음글</a></div>-->
+<!--            <div><a th:href="@{'/news/notion/notionSub/' + ${notion.id}+1}"><i class="fa-solid fa-caret-down"></i> 이전글</a></div>-->
+            <div><a th:href="'/news/notion/notionSub/' + (${notion.id} + 1)"><i class="fa-solid fa-caret-up"></i> 다음글</a></div>
+            <div><a th:href="'/news/notion/notionSub/' + (${notion.id} - 1)"><i class="fa-solid fa-caret-up"></i> 이전글</a></div>
         </div>
     </div>
     <div class="nyNewsList">

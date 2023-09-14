@@ -9,135 +9,194 @@
     <link th:href="@{/css/sub/header.css}" rel="stylesheet">
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
     <style>
-    /* 1-2 editSection */
-    .editSection {
-        width: 1000px;
-        padding: 50px 50px 20px 50px;
-        margin: 30px auto;
-        border: 1px solid #eee;
-        box-shadow: 0 1px 3px 0 #dbdbdb;
-        border-radius: 10px;
-    }
+        /* 1-2 editSection */
+        .editSection {
+            width: 1000px;
+            padding: 50px 50px 20px 50px;
+            margin: 30px auto;
+            border: 1px solid #eee;
+            box-shadow: 0 1px 3px 0 #dbdbdb;
+            border-radius: 10px;
+        }
 
-    .editSection>div {
-        padding-bottom: 20px;
-    }
+        .editSection>div {
+            padding-bottom: 20px;
+        }
 
-    .editSection>div>span {
-        display: inline-block;
-        padding: 0 20px;
-        width: 130px;
-    }
+        .editSection>div>span {
+            display: inline-block;
+            padding: 0 20px;
+            width: 130px;
+        }
 
-    .editHeader {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+        .editHeader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    .editHeader>a {
-        color: #ff4a4a;
-    }
+        .editHeader>a {
+            color: #ff4a4a;
+        }
 
-    .editHeader>a:hover {
-        text-decoration: underline;
-    }
+        .editHeader>a:hover {
+            text-decoration: underline;
+        }
 
-    .editGender>label {
-        padding-right: 10px;
-    }
+        .editGender>label {
+            padding-right: 10px;
+        }
 
-    [type="text"] {
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        padding: 6px 12px;
-    }
+        [type="text"] {
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 6px 12px;
+        }
 
-    .editBrithday input {
-        width: 100px;
-        height: 30px;
-        padding: 6px 12px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-    }
-    .editBrithday select{
-        width: 100px;
-        height: 30px;
-        padding: 6px 12px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        vertical-align: middle;
-    }
+        .editBrithday input {
+            width: 195px;
+            height: 30px;
+            padding: 6px 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .editBrithday select{
+            width: 100px;
+            height: 30px;
+            padding: 6px 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            vertical-align: middle;
+        }
 
-    [type="radio"] {
-        vertical-align: middle;
-        appearance: none;
-        border: 1px solid #ddd;
-        border-radius: 50%;
-        width: 18px;
-        height: 18px;
-        padding: 0;
-    }
+        [type="radio"] {
+            vertical-align: middle;
+            appearance: none;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            padding: 0;
+        }
 
-    [type="radio"]:checked {
-        border: 5px solid #0065BA;
-        transition: .1s;
-    }
+        [type="radio"]:checked {
+            border: 5px solid #0065BA;
+            transition: .1s;
+        }
 
-    input[type="file"] {
-        display: none;
-    }
+        input[type="file"] {
+            display: none;
+        }
 
-    .editImg .upload-name {
-        display: inline-block;
-        padding: 0 10px;
-        border-radius: 5px 0 0 5px;
-        vertical-align: middle;
-        height: 30px;
-        border: 1px solid #dddddd;
-        width: 200px;
-        color: #aaa;
+        .editImg .upload-name {
+            display: inline-block;
+            padding: 0 10px;
+            border-radius: 5px 0 0 5px;
+            vertical-align: middle;
+            height: 30px;
+            border: 1px solid #dddddd;
+            width: 200px;
+            color: #aaa;
 
-    }
+        }
 
-    .editImg label {
-        display: inline-block;
-        padding: 0 16px;
-        height: 30px;
-        border-radius: 0px 5px 5px 0;
-        color: #fff;
-        vertical-align: middle;
-        background-color: #0065BA;
-        cursor: pointer;
-        margin-left: -4px;
-    }
+        .editImg label {
+            display: inline-block;
+            padding: 0 16px;
+            height: 30px;
+            border-radius: 0px 5px 5px 0;
+            color: #fff;
+            vertical-align: middle;
+            background-color: #0065BA;
+            cursor: pointer;
+            margin-left: -4px;
+        }
 
-    .editImg>div {
-        border: 1px solid #dddddd;
-        border-radius: 10px;
-        margin: 20px 20px 0 20px;
-        padding: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: end;
-    }
+        .editImg>div {
+            border: 1px solid #dddddd;
+            border-radius: 10px;
+            margin: 20px 20px 0 20px;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: end;
+        }
 
-    .editImg>div>img {
-        height: 200px;
-        width: 200px;
-        margin-right: 50px;
-        border-radius: 50%;
-    }
+        .editImg>div>img {
+            height: 200px;
+            width: 200px;
+            margin-right: 50px;
+            border-radius: 50%;
+        }
 
-    .editSection>button {
-        border: none;
-        color: #fff;
-        border-radius: 10px;
-        background-color: #0065BA;
-        padding: 10px 20px;
-        margin: 20px;
-        cursor: pointer;
-    }
+        .editSection>button {
+            border: none;
+            color: #fff;
+            border-radius: 10px;
+            background-color: #0065BA;
+            padding: 10px 20px;
+            margin: 20px;
+            cursor: pointer;
+        }
+        /* modal */
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .modal-content {
+            background-color: white;
+            width: 300px;
+            top: 50%;
+            left: 50%;
+            margin: 300px auto;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            transform: translate(-50% -50%);
+        }
+
+        .confirmDelete, .cancelDelete {
+            margin : 10px;
+            width: 100px;
+            height: 45px;
+            border: none;
+            border-radius: 5px;
+            margin-left: 5px;
+            transition: .3s;
+            font-size : 1.5rem;
+        }
+
+        .confirmDelete>a{
+            display: block;
+            font-size : 1.5rem;
+            line-height: 45px;
+        }
+
+        .confirmDelete:hover{
+            background-color: #C4033E;
+        }
+
+        .confirmDelete:hover>a{
+            color: #fff;
+        }
+
+        .cancelDelete:hover{
+            background-color: #0065BA;
+            color: #fff;
+        }
+
+        button,button>a{
+            cursor: pointer;
+        }
+
     </style>
 </head>
 
@@ -164,64 +223,75 @@
                         <li><a href="/user/praise">좋아요</a></li>
                         <li><a href="/user/edit_password">비밀번호 번경</a></li>
                     </ul>
-                    <div class="subTab">
-                        <div class="editSection">
-                            <div class="editHeader">
-                                <h2>회원 정보 수정</h2>
-                                <a href="#">탈퇴하기</a>
-                            </div>
-                            <div class="editEmail">
-                                <span>이메일</span>
-                                <input type="text" placeholder="email">
-                            </div>
-                            <div class="editID">
-                                <span>닉네임</span>
-                                <input type="text" placeholder="ID">
-                            </div>
-                            <div class="editGender">
-                                <span>성별</span>
-                                <label>
-                                    <input type="radio" name="gender" value="male">
-                                    <span>남성</span>
-                                </label>
-                                <label>
-                                    <input type="radio" name="gender" value="female">
-                                    <span>여성</span>
-                                </label>
-                            </div>
-                            <div class="editBrithday">
-                                <span>생일</span>
-                                <input type="text" placeholder="년(4자)" maxlength='4'>
-                                <select>
-                                    <option>월</option>
-                                    <option value="01">1</option>
-                                    <option value="02">2</option>
-                                    <option value="03">3</option>
-                                    <option value="04">4</option>
-                                    <option value="05">5</option>
-                                    <option value="06">6</option>
-                                    <option value="07">7</option>
-                                    <option value="08">8</option>
-                                    <option value="09">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
-                                <input type="text" placeholder="일" maxlength='2'>
-                            </div>
-                            <div class="editImg">
-                                <span>프로필이미지</span>
-                                <div>
-                                    <img src="/subImages/UserImg.jpg" alt="">
-                                    <div>
-                                        <input class="upload-name" value="첨부파일" placeholder="첨부파일">
-                                        <label>파일 찾기<input type="file" class="file" accept="image/*"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <button>회원 정보 수정</button>
+
+                    <div class="deleteModal modal">
+                        <div class="modal-content">
+                            <p>탈퇴하시겠습니까?</p>
+                            <button class="confirmDelete"><a th:href="'/user/delete/' + ${memberEditFormDto.id}">삭제</a></button>
+                            <button class="cancelDelete">취소</button>
                         </div>
                     </div>
+
+                    <form action="/user/update" enctype="multipart/form-data"
+                          method="post" th:object="${memberEditFormDto}">
+                        <div class="subTab">
+                            <div class="editSection">
+                                <input type="hidden" th:field="*{id}">
+                                <div class="editHeader">
+                                    <h2>회원 정보 수정</h2>
+                                    <a class="deleteBtn">탈퇴하기</a>
+                                </div>
+                                <div class="editEmail">
+                                    <span>이메일</span>
+                                    <input type="text" th:value="*{email}" name="email" placeholder="email" readonly>
+                                </div>
+                                <div class="editName">
+                                    <span>이름</span>
+                                    <input type="text" th:value="*{name}" name="name" placeholder="Name" readonly>
+                                </div>
+                                <div class="editNickname">
+                                    <span>닉네임</span>
+                                    <input type="text" th:value="*{nickName}" name="nickName" placeholder="ID">
+                                </div>
+                                <div class="editPhoneNum">
+                                    <span>핸드폰 번호</span>
+                                    <input type="text" th:value="*{phoneNum}" name="phoneNum" placeholder="Phone">
+                                </div>
+                                <div class="editGender">
+                                    <span>성별</span>
+                                    <label>
+                                        <input type="radio" name="gender" value="MALE"
+                                               th:checked="${#strings.equals(memberEditFormDto.gender, 'MALE')} ? 'checked' : null">
+                                        <span>남성</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="gender" value="FEMALE"
+                                               th:checked="${#strings.equals(memberEditFormDto.gender, 'FEMALE')} ? 'checked' : null">
+                                        <span>여성</span>
+                                    </label>
+                                </div>
+                                <div class="editBrithday">
+                                    <span>생일</span>
+                                    <input type="date" th:value="*{birthday}" name="birthday">
+                                </div>
+                                <div class="editImg">
+                                    <span>프로필이미지</span>
+                                    <div>
+                                        <img class="userImgFile"
+                                             th:src=" *{userImgUrl} != null ? *{userImgUrl} : '/subImages/UserImg.png'"
+                                             th:alt="*{userImgUrl} != null ? *{userImgName} : '썸네일 이미지' ">
+                                        <div>
+                                            <input class="upload-name"
+                                                   th:placeholder=" *{userImgUrl} != null ? *{userOriImgName} : '프로필 사진'">
+                                            <label>프로필 이미지 선택<input type="file" class="file" name="userImgFile"
+                                                                    accept="image/*"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button th:formaction="@{/user/update}" type="submit">회원 정보 수정</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -230,9 +300,11 @@
 
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script>
+<script th:inline="javascript">
+
+    // 사진 변경시 미리보기
     $(".file").on('change', function () {
-        var fileName = $(".file").val();
+        const fileName = $(".file").val();
         $(".upload-name").val(fileName);
         setImageFromFile(this, '.editImg img');
     });
@@ -240,14 +312,66 @@
     function setImageFromFile(input, expression) {
         if (input.files && input.files[0])
         {
-            var reader = new FileReader();
+            const reader = new FileReader();
 
                 reader.onload = function (e) {
                     $(expression).attr('src', e.target.result);
                }
                reader.readAsDataURL(input.files[0]);
          }
+    };
+
+    // 마이페이지 수정 & 회원탈퇴 경고창
+    function showAlert() {
+        const successMessage = [[${successMessage}]];
+        const errorMessage = [[${errorMessage}]];
+        const errorDelete = [[${errorDelete}]];
+
+        if (successMessage) {
+            alert(successMessage);
+        }
+        if (errorMessage) {
+            alert(errorMessage);
+        }
+        if (errorDelete) {
+            alert(errorDelete);
+        }
+
+        // 확인 버튼을 누르면 "/"로 리다이렉트
+        if (successMessage || errorMessage || errorDelete) {
+            window.location.href = "/";
+        }
     }
+
+    // showAlert 함수를 페이지 로딩 시 호출
+    $(document).ready(function() {
+        showAlert();
+    });
+
+    // 회원 탈퇴 경고창 Madal
+    function openModal() {
+        $(".deleteModal").css("display", "block");
+    }
+
+    function closeModal() {
+        $(".deleteModal").css("display", "none");
+    }
+
+    $(".deleteBtn").click(function() {
+        openModal(); // 모달 열기
+    });
+
+    // 삭제 확인 버튼 클릭 시 처리
+    $(".confirmDelete").click(function() {
+        closeModal(); // 모달 닫기
+    });
+
+    // 취소 버튼 클릭 시 모달 닫기
+        $(".cancelDelete").click(function() {
+        closeModal(); // 모달 닫기
+    });
+
+
 
 </script>
 <script src="/js/sub/header.js"></script>

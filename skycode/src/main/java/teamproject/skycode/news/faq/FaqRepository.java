@@ -5,5 +5,4 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface FaqRepository extends JpaRepository<Faq, Long> {
 
-
 }

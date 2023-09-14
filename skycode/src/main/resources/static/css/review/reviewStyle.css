@@ -1,4 +1,6 @@
 .section {
+            position: relative;
+            top:100px;
             width: 100%;
             height: 100%;
         }
@@ -20,6 +22,7 @@
             font-weight: 600;
             font-size: 2.5rem;
             margin: 20px 0;
+            padding: 10px 0;
             background: #8ED3FF;
             color: #fff;
             border-radius: 10px;
@@ -34,12 +37,17 @@
             margin-right: 378px;
         }
 
+
+        .cardImg > img {
+            width: 100%;
+            height: 100%;
+        }
+
         /* card 시작 */
         .cards {
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url(/subImages/reviewRanking1.jpg) no-repeat cover;
         }
 
         .card {
@@ -77,17 +85,10 @@
             bottom: 0;
         }
 
-        .card:first-of-type {
-            background: url(/subImages/reviewRanking1.jpg) no-repeat 50%/cover;
-        }
-
         .card:nth-of-type(2) video {
             height: 100%;
         }
 
-        .card:last-of-type {
-            background: url(/subImages/reviewRanking2.jpg) no-repeat 50%/cover;
-        }
 
         .card:not(.card:last-of-type) {
             margin-right: 30px;
@@ -130,24 +131,12 @@
             align-items: center;
         }
 
-        .optionList {
-            width: 110px;
+        .search select {
             position: absolute;
-            left: 0;
-            top: 0;
-            background: #fff;
-            border: 1px solid #aaa;
-            display: none;
-        }
-
-        .optionList li {
-            padding-left: 10px;
-            line-height: 35px;
-            cursor: pointer;
-        }
-
-        .optionList li:hover {
-            background: rgba(170, 170, 170, 0.5);
+            width: 70px;
+            height: 50px;
+            padding-left: 4px;
+            outline: none;
         }
 
         .search a {
@@ -166,7 +155,8 @@
         .search input {
             width: 500px;
             height: 50px;
-            padding: 0 16px 0 115px;
+            padding: 0 16px 0 80px;
+            outline: none;
         }
 
         .search button {
@@ -248,7 +238,7 @@
             font-size: 1.2rem;
         }
 
-        .reviewImg {
+        .reviewImg img {
             width: 240px;
             height: 160px;
         }

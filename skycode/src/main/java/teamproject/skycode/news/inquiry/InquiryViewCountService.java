@@ -28,7 +28,6 @@ public class InquiryViewCountService {
         } else {
             inquiryViewCount.setCount(inquiryViewCount.getCount() + 1);
         }
-
         return inquiryViewCountRepository.save(inquiryViewCount);
     }
 }

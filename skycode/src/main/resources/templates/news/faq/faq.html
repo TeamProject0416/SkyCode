@@ -24,10 +24,6 @@
   <div class="nyFaqBox">
     <div class="nyFaqTitle">
       <h2># 자주 묻는 질문</h2>
-      <div class="nySearch">
-        <input type="text" name="nyFaqSearch" placeholder="검색">
-        <button>검색</button>
-      </div>
     </div>
     <div class="nyFaqContainer">
       <ul class="nyFaqNav">
@@ -45,7 +41,6 @@
           <th class="nyFaqTableText">제목</th>
           <th>카테고리</th>
           <th>날짜</th>
-          <th>조회수</th>
         </tr>
         </thead>
         <tbody>
@@ -55,24 +50,30 @@
             <div class="nyPanelFaqContainer">
               <p class="nyPanelFaqTitle" th:text="${faq.faqQuestion}">What is Lorem Ipsum?</p>
               <div class="nyPanelFaqAnswer">
-                <p>Answer (1) ... ↓</p>
+                <p>답변이 준비 되었습니다 ... ↓</p>
                 <p th:text="${faq.faqAnswer}">...</p>
               </div>
             </div>
           </td>
           <td th:text="${faq.type}">비행기상품</td>
           <td th:text="${#temporals.format(faq.regTime, 'yyyy.MM.dd')}">2032.01.01</td>
-          <td>84</td>
         </tr>
         </tbody>
       </table>
     </div>
+    <div class="nyFaqGoText">
+      <a th:href="@{/news/faqUp}">자주 묻는 질문 올리기</a>
+    </div>
     </div>
     <div class="nyFaqPeger">
-      <div class="nyFaqPegerBtn nyFaqClick"><a href="#">1</a></div>
-      <div class="nyFaqPegerBtn"><a href="#">2</a></div>
+      <ul class="pagination">
+        <!-- Iterate over page numbers -->
+        <li class="page-item" th:each="pageNumber : ${pageNumbers}" th:class="${pageNumber == currentPage} ? 'page-item active' : 'page-item'">
+          <a class="page-link" th:href="@{'/news/faq/faq?page=' + ${pageNumber}}" th:text="${pageNumber}"></a>
+        </li>
+        <!-- End of page number iteration -->
+      </ul>
     </div>
-  </div>
 </section>
 
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>

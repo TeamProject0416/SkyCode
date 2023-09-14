@@ -27,7 +27,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
 
-    private final TicketService ticketService;
     private final TicketRepository ticketRepository;
 
     @GetMapping(value = "/list") // 진행중인 쿠폰 목록 보이기

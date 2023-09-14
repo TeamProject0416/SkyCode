@@ -22,67 +22,66 @@
     <h2 class="newCoupon">#티켓 등록하기</h2>
     <hr>
     <div class="container">
-        <form class="formContainer" action="/admin/ticket/new" method="post" th:object="${ticketFormDto}">
+        <form class="formContainer" action="/ticket/new" method="post" th:object="${ticketFormDto}">
             <input type="hidden" th:field="*{id}">
-            <div>
-                <select th:field="*{firstStatus}">
+            <div class="oej_select">
+                <select class="oej_sale" th:field="*{firstStatus}">
                     <option value="SELL">판매중</option>
                     <option value="SOLD_OUT">품절</option>
                 </select>
-                <select th:field="*{businessStatus}">
+                <select class="oej_sale2" th:field="*{businessStatus}">
                     <option value="SELL">판매중</option>
                     <option value="SOLD_OUT">품절</option>
                 </select>
-                <select th:field="*{economyStatus}">
+                <select  class="oej_sale3" th:field="*{economyStatus}">
                     <option value="SELL">판매중</option>
                     <option value="SOLD_OUT">품절</option>
                 </select>
             </div>
-            <div class="pack">
-                <div>
 
-                </div>
-            </div>
+
+
+
             <div class="pack">
-                <div>
+                <div class="oej_pack1">
                     <label class="firstNum">firstClass 수량</label>
-                    <input type="number" th:field="*{firstNum}" name="firstNum" placeholder="ex) 1000(장)">
-                    <p th:if="${#fields.hasErrors('firstNum')}" th:errors="*{firstNum}" class="fieldError">
+                    <input class="oej_num0" type="number" th:field="*{firstNum}" name="firstNum" placeholder="ex) 1000(장)">
+                    <p th:if="${#fields.hasErrors('firstNum')}" th:errors="*{firstNum}" class="oej_fieldError">
                         Incorrect data</p></div>
-                <div>
+                <div class="oej_pack1">
                     <label class="businessNum">businessClass 수량</label>
-                    <input type="number" th:field="*{businessNum}" name="businessNum" placeholder="ex) 1000(장)">
-                    <p th:if="${#fields.hasErrors('businessNum')}" th:errors="*{businessNum}" class="fieldError">
+                    <input  class="oej_num" type="number" th:field="*{businessNum}" name="businessNum" placeholder="ex) 1000(장)">
+                    <p th:if="${#fields.hasErrors('businessNum')}" th:errors="*{businessNum}" class="oej_fieldError">
                         Incorrect data</p></div>
-                <div>
+                <div class="oej_packEc">
                     <label class="economyNum">economyClass 수량</label>
-                    <input type="number" th:field="*{economyNum}" name="economyNum" placeholder="ex) 1000(장)">
-                    <p th:if="${#fields.hasErrors('economyNum')}" th:errors="*{economyNum}" class="fieldError">
+                    <input class="oej_num1" type="number" th:field="*{economyNum}" name="economyNum" placeholder="ex) 1000(장)">
+                    <p th:if="${#fields.hasErrors('economyNum')}" th:errors="*{economyNum}" class="oej_fieldError">
                         Incorrect data</p></div>
             </div>
             <div class="pack">
-                <div>
+                <div class="oej_pack1">
                     <label class="firstPrice">firstClass 가격</label>
-                    <input type="number" th:field="*{firstPrice}" name="firstPrice" placeholder="ex) 1000(원)">
-                    <p th:if="${#fields.hasErrors('firstPrice')}" th:errors="*{firstPrice}" class="fieldError">
+                    <input class="oej_num0" type="number" th:field="*{firstPrice}" name="firstPrice" placeholder="ex) 1000(원)">
+                    <p th:if="${#fields.hasErrors('firstPrice')}" th:errors="*{firstPrice}" class="oej_fieldError">
                         Incorrect data</p></div>
 
-                <div>
+                <div class="oej_pack1">
                     <label class="businessPrice">businessClass 가격</label>
-                    <input type="number" th:field="*{businessPrice}" name="businessPrice" placeholder="ex) 10%">
-                    <p th:if="${#fields.hasErrors('businessPrice')}" th:errors="*{businessPrice}" class="fieldError">
+                    <input  class="oej_num" type="number" th:field="*{businessPrice}" name="businessPrice" placeholder="ex) 10%">
+                    <p th:if="${#fields.hasErrors('businessPrice')}" th:errors="*{businessPrice}" class="oej_fieldError">
                         Incorrect data</p></div>
-                <div>
+                <div class="oej_packEc">
                     <label class="economyPrice">economyClass 가격</label>
-                    <input type="number" th:field="*{economyPrice}" name="economyPrice" placeholder="ex) 10%">
-                    <p th:if="${#fields.hasErrors('economyPrice')}" th:errors="*{economyPrice}" class="fieldError">
+                    <input class="oej_num1" type="number" th:field="*{economyPrice}" name="economyPrice" placeholder="ex) 10%">
+                    <p th:if="${#fields.hasErrors('economyPrice')}" th:errors="*{economyPrice}" class="oej_fieldError">
                         Incorrect data</p>
                 </div>
             </div>
 
             <div class="pack">
-                <div>
-                    <label for="start">출발지</label>
+                <div class="oej_packpa">
+                    <label class="oej_start" for="start">출발지</label>
                     <select th:field="*{ticketStart}" id="start">
                         <option value="Korea">한국</option>
                         <option value="Japan">일본</option>
@@ -101,10 +100,18 @@
                         <option value="Australia">호주</option>
                         <option value="Guam">괌</option>
                     </select>
-                    <p th:if="${#fields.hasErrors('ticketStart')}" th:errors="*{ticketStart}" class="fieldError">
-                        Incorrect data</p></div>
-                <div>
-                    <label for="end">출발지</label>
+                    <p th:if="${#fields.hasErrors('ticketStart')}" th:errors="*{ticketStart}" class="oej_fieldError">
+                        Incorrect data</p>
+                </div>
+
+                <div class="arrow-container">
+                    <div class="arrow"></div>
+                    <div class="arrow"></div>
+                    <div class="arrow"></div>
+                </div>
+
+                <div class="oej_pack22">
+                    <label class="oej_end" for="end">도착지</label>
                     <select th:field="*{ticketEnd}" id="end">
                         <option value="Korea">한국</option>
                         <option value="Japan">일본</option>
@@ -123,61 +130,74 @@
                         <option value="Australia">호주</option>
                         <option value="Guam">괌</option>
                     </select>
-                    <p th:if="${#fields.hasErrors('ticketEnd')}" th:errors="*{ticketEnd}" class="fieldError">
+                    <p th:if="${#fields.hasErrors('ticketEnd')}" th:errors="*{ticketEnd}" class="oej_fieldError">
                         Incorrect data</p>
                 </div>
             </div>
 
             <div class="pack">
-                <div>
+                <div class="oej_packStart">
                     <label class="ticketStartDate">출발일</label>
-                    <input name="ticketStartDate" th:field="*{ticketStartDate}" type="date">
+                    <input class="oej_ticketStart" name="ticketStartDate" th:field="*{ticketStartDate}" type="date">
                     <p th:if="${#fields.hasErrors('ticketStartDate')}" th:errors="*{ticketStartDate}"
-                       class="fieldError">
+                       class="oej_fieldError">
                         Incorrect data
                     </p>
                 </div>
                 <div>
+
+                </div>
+
+
+                <div class="oej_packStart">
                     <label class="ticketEndDate">도착일</label>
-                    <input name="ticketEndDate" th:field="*{ticketEndDate}" type="date">
-                    <p th:if="${#fields.hasErrors('ticketEndDate')}" th:errors="*{ticketEndDate}" class="fieldError">
+                    <input class="oej_ticketEnd" name="ticketEndDate" th:field="*{ticketEndDate}" type="date">
+                    <p th:if="${#fields.hasErrors('ticketEndDate')}" th:errors="*{ticketEndDate}" class="oej_fieldError">
                         Incorrect data
                     </p>
                 </div>
             </div>
 
             <div class="pack">
-                <div>
+                <div class="oej_SStart">
                     <label class="ticketStart">출발 시간</label>
-                    <input type="time" name="ticketStartTime" th:field="*{ticketStartTime}">
-                    <p th:if="${#fields.hasErrors('ticketStartTime')}" th:errors="*{ticketStartTime}" class="fieldError">
+                    <input class="oej_time" type="time" name="ticketStartTime" th:field="*{ticketStartTime}">
+                    <p th:if="${#fields.hasErrors('ticketStartTime')}" th:errors="*{ticketStartTime}" class="oej_fieldError">
                         Incorrect
                         data
                     </p>
                 </div>
+
                 <div>
+
+                </div>
+
+                <div class="oej_SStart">
                     <label class="ticketEnd">도착 시간</label>
-                    <input type="time" name="ticketEndTime" th:field="*{ticketEndTime}">
-                    <p th:if="${#fields.hasErrors('ticketEndTime')}" th:errors="*{ticketEndTime}" class="fieldError">
+                    <input class="oej_timeEnd" type="time" name="ticketEndTime" th:field="*{ticketEndTime}">
+                    <p th:if="${#fields.hasErrors('ticketEndTime')}" th:errors="*{ticketEndTime}" class="oej_fieldError">
                         Incorrect
                         data
                     </p>
                 </div>
             </div>
 
-            <div class="btnArea" th:if="${#strings.isEmpty(ticketFormDto.id)}">
-                <button th:formaction="@{/admin/ticket/new}" type="submit" class="btn createBtn">저장</button>
-            </div>
-            <div class="btnArea" th:unless="${#strings.isEmpty(ticketFormDto.id)}">
-                <button th:formaction="@{/admin/ticket/update}" type="submit" class="btn createBtn">수정
-                </button>
-            </div>
-        </form>
+            <div class="oej_btn">
+                <div class="btnArea" th:if="${#strings.isEmpty(ticketFormDto.id)}">
+                    <button th:formaction="@{/ticket/new}" type="submit" class="btn createBtn">저장</button>
+                </div>
+                <div class="btnArea" th:unless="${#strings.isEmpty(ticketFormDto.id)}">
+                    <button th:formaction="@{/ticket/update}" type="submit" class="btn createBtn">수정
+                    </button>
+                </div>
+         </form>
         <a href="/ticket/list">
             <button type="submit" class="btn cancelBtn">취소</button>
         </a>
     </div>
 </div>
+</div>
+
 
 <!--footer-->
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>

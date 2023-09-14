@@ -840,6 +840,7 @@
       position: relative;
       left: 750px;
       bottom: 10px;
+      cursor: pointer;
     }
 
     /* /modalHeader */
@@ -1035,7 +1036,7 @@
 
     .modalContentCenterArea {
       position: relative;
-      display: none;
+      /*display: none;*/
       /* input 박스 앱솔 후 왼쪽으로 붙이기 위함 */
     }
 
@@ -1046,7 +1047,7 @@
       z-index: 1;
       width: 20px;
       height: 20px;
-      background: url(/mainImages/locationIcon.png);
+      /*background: url(/mainImages/locationIcon.png);*/
     }
 
     .modalContentCenterArea input {
@@ -1112,7 +1113,7 @@
     }
 
     .travelPopularList input {
-      display: none;
+      /*display: none;*/
     }
 
     .travelPopularList label {
