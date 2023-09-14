@@ -73,6 +73,7 @@
 .nyPanelFaqContainer {
     /* margin-bottom: -16px; */
     text-align: center;
+    overflow-wrap: break-word; // 줄바꿈
 
 }
 .nyPanelFaqTitle {
@@ -83,6 +84,7 @@
 }
 .nyPanelFaqAnswer {
     height: 0;
+    width: 800px;
     /* display: none; */
     overflow: hidden;
     transition: all 1s;
@@ -128,6 +130,7 @@
 .nyFaqPeger .nyFaqPegerBtn.nyFaqClick{
     background: #e9b0b0;
 }
+
 
 
 
