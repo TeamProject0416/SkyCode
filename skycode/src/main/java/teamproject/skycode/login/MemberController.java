@@ -32,8 +32,9 @@ public class MemberController {
         try {
             return URLEncoder.encode(message, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            // 예외 처리
-            return "";
+            String errorMessage = "지원되지 않는 문자 인코딩: " + e.getMessage();// 예외 처리
+            System.err.println(errorMessage);
+            return "redirect:/";
         }
     }
 
