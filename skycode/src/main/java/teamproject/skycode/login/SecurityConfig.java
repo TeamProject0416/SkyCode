@@ -10,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import teamproject.skycode.constant.Role;
 
 @Configuration
 @EnableWebSecurity
@@ -28,7 +27,7 @@ public class SecurityConfig {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/member/login")
                 .clearAuthentication(true) /*권한정보 제거*/
         ;
 

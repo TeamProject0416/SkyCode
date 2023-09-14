@@ -301,6 +301,8 @@
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script th:inline="javascript">
+
+    // 사진 변경시 미리보기
     $(".file").on('change', function () {
         const fileName = $(".file").val();
         $(".upload-name").val(fileName);
@@ -319,31 +321,34 @@
          }
     };
 
-    // 마이페이지 수정 경고창
-    function showAlert_Message() {
+    // 마이페이지 수정 & 회원탈퇴 경고창
+    function showAlert() {
         const successMessage = [[${successMessage}]];
         const errorMessage = [[${errorMessage}]];
+        const errorDelete = [[${errorDelete}]];
 
         if (successMessage) {
-            alert(successMessage); // 성공 메시지를 경고 창으로 표시
+            alert(successMessage);
         }
         if (errorMessage) {
-            alert(errorMessage); // 오류 메시지를 경고 창으로 표시
+            alert(errorMessage);
+        }
+        if (errorDelete) {
+            alert(errorDelete);
         }
 
         // 확인 버튼을 누르면 "/"로 리다이렉트
-        if (successMessage || errorMessage) {
-            window.location.href = "/"; // "/"로 리다이렉트
+        if (successMessage || errorMessage || errorDelete) {
+            window.location.href = "/";
         }
     }
 
     // showAlert 함수를 페이지 로딩 시 호출
     $(document).ready(function() {
-        showAlert_Message();
-        showAlert_Delete();
+        showAlert();
     });
 
-    // 회원 탈퇴 경고창
+    // 회원 탈퇴 경고창 Madal
     function openModal() {
         $(".deleteModal").css("display", "block");
     }
@@ -366,23 +371,7 @@
         closeModal(); // 모달 닫기
     });
 
-    // 회원탈퇴 경고창
-    function showAlert_Delete() {
-        const successDelete = [[${successDelete}]];
-        const errorDelete = [[${errorDelete}]];
 
-        if (successDelete) {
-            alert(successDelete); // 성공 메시지를 경고 창으로 표시
-        }
-        if (errorDelete) {
-            alert(errorDelete); // 오류 메시지를 경고 창으로 표시
-        }
-
-        // 확인 버튼을 누르면 "/"로 리다이렉트
-        if (successDelete || errorDelete) {
-            window.location.href = "/"; // "/"로 리다이렉트
-        }
-    }
 
 </script>
 <script src="/js/sub/header.js"></script>

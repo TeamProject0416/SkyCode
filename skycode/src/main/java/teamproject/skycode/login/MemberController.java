@@ -53,22 +53,30 @@ public class MemberController {
         try {
             MemberEntity member = MemberEntity.createMember(memberFormDto, passwordEncoder);
             memberService.saveMember(member);
+            return "redirect:/member/login?logout&message=회원가입에 성공하였습니다";
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "member/memberForm";
         }
-        return "redirect:/";
-
     }
 
     @GetMapping(value = "/login")
-    public String loginMember(Principal principal, Model model) {
+    public String loginMember(@RequestParam(name = "logout", required = false) String logout,
+                              @RequestParam(name = "message", required = false) String message,
+                              Principal principal, Model model) {
         // 유저 로그인
         String user = "";
         if (principal != null) {
             user = principal.getName();
         }
         model.addAttribute("user", user);
+
+        if (logout != null) {
+            model.addAttribute("logoutMessage", "로그아웃되었습니다");
+        }
+        if (message != null) {
+            model.addAttribute("successMessage", message);
+        }
 
         return "/member/memberLoginForm";
     }
