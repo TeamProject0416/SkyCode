@@ -25,7 +25,6 @@ public class MemberEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "이름을 입력해 주세요.")
     private String name;
 
     @Column(unique = true)  // unique 제약 조건 추가
