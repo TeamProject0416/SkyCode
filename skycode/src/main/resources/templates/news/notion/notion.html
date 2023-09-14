@@ -33,26 +33,7 @@
             <ul>
                 <li th:each="notion : ${notions}">
                     <a th:href="@{'/news/notion/notionSub/' + ${notion.id}}">
-<!--                        <img src="http://placehold.it/320x100" />-->
-<!--                        <div>첨부된 파일 경로: <span th:text="${notionForm.filePath}"></span></div>-->
-<!--                        <img th:src="@{'/notion/getFile/' + ${notion.fileName}}" alt="Notion Image">-->
-<!--                        <img th:src="@{/notion/getFile/{fileName}(fileName=${notion.filePath})}" alt="이미지">-->
-<!--                        <img th:src="@{'C:/SkyCodeProject/notionImg/' + ${notion.fileName}}" alt="이미지">-->
-<!--                        <img th:src="${notion.base64Image}" alt="이미지">-->
-<!--                        <img th:src="@{'/notionImg/' + ${notion.fileName}}" alt="Notion Image">-->
-<!--                        <img th:src="@{'C:/SkyCodeProject/notionImg/' + ${notion.fileName}}" alt="Notion Image" width="100" height="100">-->
-                        <img th:src="@{'/notionImg/'+${notion.fileName}}" alt="Notion Image" width="100" height="100">
-<!--                        <img th:src="@{'data:image/png;base64,' + ${notion.base64Image}}" alt="이미지">-->
-<!--                        <img th:if="${notion.base64Image}" th:src="@{'data:image/png;base64,' + ${notion.base64Image}}" alt="이미지">-->
-<!--                        <img th:src="'data:image/png;base64,' + ${notion.base64Image}" width="100" height="100"/>-->
-                        <!--                        <img src="../../../../../../../notionImg/pj3.png" alt="">-->
-
-                        <!--                                                <img th:src="@{'data:image/png;base64,' + ${notion.base64Image}}" alt="이미지">-->
-                        <!--                        <img th:src="@{'data:image/png;base64,' + ${notion.fileName}}" alt="이미지">-->
-<!--                        <img src="data:image/png;base64,iVBORw0KG..." alt="Notion Image" width="100" height="100">-->
-<!--                        <img th:src="'data:image/png;base64,' + ${base64Image}" alt="이미지">-->
-                        <!--                        <img th:src="${notion.filePath}" alt="이미지">-->
-<!--                            <img th:src="@{${notion.filePath}}" alt="Notion Image" width="100" height="100" />-->
+                        <img th:src="@{'/img/notion/'+${notion.fileName}}" alt="Notion Image" width="100" height="100">
                             <div class="nyNewsBodyText">
                             <td><span class="nyTitleDate" th:text="${viewCount}">조회수</span></td>
                             <div th:text="${notion.notionTitle}" class="nyNewTitle">한국관광 데이터랩 공모전 소문내기 이벤트</div>
@@ -64,7 +45,7 @@
             </ul>
         </div>
     </div>
-    <div class="nyNotionGoText">
+    <div class="nyNotionGoText" th:if="${T(teamproject.skycode.login.MemberUtils).isAdmin()}">
         <a th:href="@{/news/notionUp}">공지글쓰기</a>
     </div>
     <div class="nyNotionPeger">

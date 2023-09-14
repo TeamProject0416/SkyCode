@@ -1,7 +1,5 @@
 package teamproject.skycode.news.inquiry;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zaxxer.hikari.HikariConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,10 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/news")
@@ -207,10 +206,6 @@ public class InquiryController {
             searchResults = inquiryService.findByInquiryContentContaining(searchValue);
         } else if ("id".equals(searchType)) {
             searchResults = inquiryService.findByIdContaining(searchValue);
-//        } else if ("nickname".equals(searchType)) {
-//            searchResults = inquiryService.findByUserNicknameContaining(searchValue);
-//        } else if ("hashtag".equals(searchType)) {
-//            searchResults = inquiryService.findByHashtagsContaining(searchValue);
         } else {
             // Handle invalid search type
             searchResults = Collections.emptyList();

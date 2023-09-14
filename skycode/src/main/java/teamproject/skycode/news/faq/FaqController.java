@@ -4,14 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-
-import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import teamproject.skycode.news.notion.Notion;
+import teamproject.skycode.login.MemberEntity;
+import teamproject.skycode.login.MemberRepository;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -24,6 +27,10 @@ public class FaqController {
 
     @Autowired
     private FaqService faqService;
+
+    private MemberEntity memberEntity;
+
+    private MemberRepository memberRepository;
 
 
     @GetMapping(value = "/faqUp")
@@ -51,8 +58,13 @@ public class FaqController {
         Page<Faq> faqPage = faqRepository.findAll(PageRequest.of(page - 1, PAGE_SIZE));
         int totalPages = faqPage.getTotalPages();
 
+        // Check if the user is an admin
+        boolean isAdmin = checkIfUserIsAdmin();
+
+        model.addAttribute("isAdmin", isAdmin);
+
         // Create a list of page numbers for the pager
-        java.util.List<Integer> pageNumbers = new java.util.ArrayList<>();
+        List<Integer> pageNumbers = new ArrayList<>();
         for (int i = 1; i <= totalPages; i++) {
             pageNumbers.add(i);
         }
@@ -63,6 +75,15 @@ public class FaqController {
 
         return "news/faq/faq";
     }
+
+    private boolean checkIfUserIsAdmin() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+        return authorities.stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+    }
+
 //    @GetMapping(value = "/faq/faq")
 //    public String newsFaq(Model model){
 //        List<Faq> faqs = faqService.getAllFaqs();
