@@ -29,13 +29,15 @@ public class MyPageController {
     private final MemberRepository memberRepository;
     private final MemberService memberService;
 
-    @GetMapping(value = "user")
+    //---------------------------/user------------------------//
+    @GetMapping(value = "user") // 유저 모두 보기
     public String user() {
         return "myPage/users/user";
     }
 
 
-    @GetMapping(value = "/user/edit")
+    //---------------------------/user/edit------------------------//
+    @GetMapping(value = "/user/edit") // 회원 정보 폼
     public String userEdit(Model model, Principal principal) {
         // 유저 로그인
         String user = "";
@@ -49,7 +51,7 @@ public class MyPageController {
         return "myPage/users/edit";
     }
 
-    @PostMapping(value = "/user/update") // 이벤트 수정
+    @PostMapping(value = "/user/update") // 회원 정보 수정
     public String userUpdate(@Valid MemberEditFormDto memberEditFormDto, BindingResult bindingResult,
                              @RequestParam("userImgFile") MultipartFile userImgFile,
                              Principal principal, Model model) {
@@ -69,7 +71,7 @@ public class MyPageController {
         return "myPage/users/edit";
     }
 
-    @GetMapping("/user/delete/{memberId}")
+    @GetMapping("/user/delete/{memberId}") // 회원 삭제
     public String userDelete(@PathVariable("memberId") Long memberId,Principal principal,Model model) {
         MemberEntity member = memberRepository.findById(memberId)
                 .orElseThrow(EntityNotFoundException::new);
@@ -89,52 +91,71 @@ public class MyPageController {
         return "redirect:/";
     }
 
+
+    //---------------------------/user/collections------------------------//
     @GetMapping(value = "/user/collections")
     public String userCollections() {
         return "myPage/users/collections";
     }
 
+
+    //---------------------------/user/praise------------------------//
     @GetMapping(value = "/user/praise")
     public String userPraise() {
         return "myPage/users/praise";
     }
 
+
+    //---------------------------/user/edit_password------------------------//
     @GetMapping(value = "/user/edit_password")
     public String userEditPw() {
         return "myPage/users/edit_password";
     }
 
 
+    //---------------------------/user_shopping/orderList------------------------//
     @GetMapping(value = "/user_shopping/orderList")
     public String userOrderList() {
         return "myPage/shopping/orderList";
     }
 
+
+    //---------------------------/user_shopping/cart------------------------//
     @GetMapping(value = "/user_shopping/cart")
     public String userCart() {
         return "myPage/shopping/cart";
     }
 
+
+    //---------------------------/user_shopping/point------------------------//
     @GetMapping(value = "/user_shopping/point")
     public String userPoint() {
         return "myPage/shopping/point";
     }
 
+
+    //---------------------------/user_shopping/coupon------------------------//
     @GetMapping(value = "/user_shopping/coupon")
     public String userCoupon() {
         return "myPage/shopping/coupon";
     }
 
+
+    //---------------------------/user_shopping/questions------------------------//
     @GetMapping(value = "/user_shopping/questions")
     public String userQuestions() {
         return "myPage/shopping/questions";
     }
 
+
+    //---------------------------/user_trip/tripTool------------------------//
     @GetMapping(value = "/user_trip/tripTool")
     public String userTripTool() {
         return "myPage/trip/tripTool";
     }
 
+
+    //---------------------------/user_review------------------------//
     @GetMapping(value = "/user_review")
     public String userReview() {
         return "myPage/review/review";
