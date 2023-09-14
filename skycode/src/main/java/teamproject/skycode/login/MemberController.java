@@ -7,10 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import teamproject.skycode.event.EventEntity;
 
 import javax.persistence.EntityNotFoundException;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -32,8 +30,9 @@ public class MemberController {
         try {
             return URLEncoder.encode(message, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            // 예외 처리
-            return "";
+            String errorMessage = "지원되지 않는 문자 인코딩: " + e.getMessage();// 예외 처리
+            System.err.println(errorMessage);
+            return "redirect:/";
         }
     }
 
