@@ -1,6 +1,7 @@
 package teamproject.skycode.myPage;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import teamproject.skycode.myPage.users.MemberEditFormDto;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.net.URLEncoder;
 import java.security.Principal;
 
 @Controller
@@ -75,15 +77,18 @@ public class MyPageController {
         try {
             if (principal.getName().equals(member.getEmail())) {
                 memberRepository.delete(member);
-                model.addAttribute("successDelete", "탈퇴가 완료되었습니다");
+
+                // 강제 로그아웃
+                SecurityContextHolder.clearContext();
+
+                return "redirect:/member/login?message=" + URLEncoder.encode("탈퇴가 완료되었습니다","UTF-8");
             }
         } catch (Exception e) {
             model.addAttribute("errorDelete", "탈퇴 중 에러가 발생하였습니다");
-            return "myPage/users/edit";
+            return "/myPage/users/edit";
         }
         return "redirect:/";
     }
-
 
     @GetMapping(value = "/user/collections")
     public String userCollections() {
@@ -135,7 +140,5 @@ public class MyPageController {
     public String userReview() {
         return "myPage/review/review";
     }
-
-
 
 }
