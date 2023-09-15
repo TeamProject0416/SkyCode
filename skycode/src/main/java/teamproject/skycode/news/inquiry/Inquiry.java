@@ -1,19 +1,11 @@
 package teamproject.skycode.news.inquiry;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.apache.catalina.User;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 
 @Getter
@@ -49,6 +41,11 @@ public class  Inquiry {
     @CreationTimestamp
     @Column(name = "reg_time")
     private LocalDateTime regTime;  // 등록 시간
+
+    private String writer;
+    public String getWriter() {
+        return writer;
+    }
 
 
     public LocalDateTime getRegistrationTime() {

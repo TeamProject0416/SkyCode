@@ -24,6 +24,7 @@ public class MemberFormDto {
     //    @Pattern(regexp = "^[A-Za-z0-9_.\\-]+@[A-Za-z0-9\\-]+\\.[A-Za-z0-9\\-]+", message = "이메일을 입력해 주세요.")
     @NotEmpty(message = "이메일은 필수 입력 값입니다")
     @Email(message = "이메일 형식으로 입력해주세요")
+    @Pattern(regexp = "^((\\w+\\-?)+@(\\w+\\.)*\\w+)|(\"[\\w\\.]+\"\\s*<\\s*(\\w+\\-?)+@(\\w+\\.)*\\w+\\s*>)$", message = "skycode@skycode.com 형식으로 작성해주세요")
     private String email;
 
     @NotEmpty(message = "비밀번호는 필수 입력 값입니다")
@@ -36,7 +37,11 @@ public class MemberFormDto {
     @NotBlank(message = "주소를 입력해 주세요.")
     private String address;
 
+<<<<<<< Updated upstream
     @NotBlank(message ="휴대전화를 입력해 주세요.")
+=======
+    @Pattern(regexp = "^(01[1|6|7|8|9|0])-(\\d{3,4})-(\\d{4})$", message = "01x-xxxx-xxxx의 형식으로 작성해주세요")
+>>>>>>> Stashed changes
     private String phoneNum;
 
     @NotBlank(message ="생일을 입력해 주세요.")

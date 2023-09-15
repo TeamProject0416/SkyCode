@@ -7,7 +7,12 @@ import teamproject.skycode.common.BaseEntity;
 import teamproject.skycode.constant.Role;
 
 import javax.persistence.*;
+<<<<<<< Updated upstream
 import javax.validation.constraints.NotBlank;
+=======
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> Stashed changes
 
 @Getter
 @Setter

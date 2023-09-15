@@ -6,16 +6,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -61,7 +57,7 @@ public class Notion {
     }
 
     private String saveImage(MultipartFile file) throws IOException {
-        String uploadDir = "/SkyCodeProject/notionImg/"; // 이미지를 저장할 경로
+        String uploadDir = "/SkyCodeProject/img/notion/"; // 이미지를 저장할 경로
         String fileName = file.getOriginalFilename();
         Path filePath = Paths.get(uploadDir + fileName);
         Files.write(filePath, file.getBytes());

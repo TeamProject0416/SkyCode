@@ -61,10 +61,10 @@
         </tbody>
       </table>
     </div>
-    <div class="nyFaqGoText">
+    <div class="nyFaqGoText" th:if="${T(teamproject.skycode.login.MemberUtils).isAdmin()}">
       <a th:href="@{/news/faqUp}">자주 묻는 질문 올리기</a>
     </div>
-    </div>
+  </div>
     <div class="nyFaqPeger">
       <ul class="pagination">
         <!-- Iterate over page numbers -->

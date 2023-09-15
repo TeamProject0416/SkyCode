@@ -7,7 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< Updated upstream
 import javax.servlet.http.HttpSession;
+=======
+import javax.persistence.EntityNotFoundException;
+>>>>>>> Stashed changes
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -20,7 +24,20 @@ public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
+<<<<<<< Updated upstream
 
+=======
+    // 메세지
+    private String encodeMessage(String message) {
+        try {
+            return URLEncoder.encode(message, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            String errorMessage = "지원되지 않는 문자 인코딩: " + e.getMessage();// 예외 처리
+            System.err.println(errorMessage);
+            return "redirect:/";
+        }
+    }
+>>>>>>> Stashed changes
 
     @GetMapping(value = "/new")
     public String memberForm(Model model){

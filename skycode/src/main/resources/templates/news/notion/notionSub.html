@@ -27,7 +27,7 @@
         </div>
         <div class="nyNewsContent">
 <!--            <img src="${'/images/' + notion.fileName}" alt=""/>-->
-            <img th:src="@{'/notionImg/'+${notion.fileName}}" alt="이미지">
+            <img th:src="@{'/img/notion/'+${notion.fileName}}" alt="이미지">
             <p th:text="${notion.notionContent}">공지사항에 대한 정보</p>
         </div>
         <div class="nyNewsSubPager">
