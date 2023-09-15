@@ -39,6 +39,8 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Long>{
 
     List<ReviewEntity> findAllByMemberEntityOrderByIdDesc(MemberEntity memberEntity);
 
+    List<ReviewEntity> findByMemberId(Long memberId);
+
 
 //    List<ReviewEntity> findByReviewTitleContainingOrContentsContaining(String keyword, String keyword1);
 

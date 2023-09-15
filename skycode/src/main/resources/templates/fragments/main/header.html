@@ -71,16 +71,16 @@
 
             <img class="searchBtn" src="/mainImages/btn_header_search.png" alt="">
 
-            <a th:if="${#strings.isEmpty(user)}" href="/member/login" id="loginLink">
+            <a th:if="${#strings.isEmpty(userInfo)}" href="/member/login" id="loginLink">
                 <img class="jhicon" src="/mainImages/searchUser.png" alt="user">
             </a>
 
-            <a th:unless="${#strings.isEmpty(user)}">
+            <a th:unless="${#strings.isEmpty(userInfo)}">
                 <img class="jhicon userModal" src="/mainImages/searchUser.png" alt="user">
             </a>
 
             <!-- user  -->
-            <th:block th:each="userInfo: ${userInfo}">
+            <th:block th:object="${userInfo}">
                 <div class="jhModalUser">
                     <div class="jhModalUserBg"></div>
                     <div class="jhUser">
@@ -92,7 +92,7 @@
                             <button class="jhicon alarmMenu">내 알람</button>
                         </a>
 
-                        <h2>[[${userInfo.getNickName}]]
+                        <h2>[[*{nickName}]]
                             <button onclick="location.href='/member/logout'">로그아웃</button>
                         </h2>
                         <img class="userImg"
@@ -105,7 +105,7 @@
                         <div class="jhuserBox1">
                             <a href="/user_review">
                                 <ul>
-                                    <li>8</li>
+                                    <li>[[${reviewNum}]]</li>
                                     <li>리뷰</li>
                                 </ul>
                             </a>
