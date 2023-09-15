@@ -13,6 +13,7 @@ import teamproject.skycode.review.ReviewRepository;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -26,12 +27,11 @@ public class MainController {
     public String skyCode(Model model, Principal principal) {
 
         // 유저 로그인
-        String user = "";
         if (principal != null) {
-            user = principal.getName();
+            String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
             model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberId(userInfo.getId());
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
             model.addAttribute("reviewNum",reviewNum);
         }

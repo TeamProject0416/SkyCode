@@ -80,7 +80,7 @@
             </a>
 
             <!-- user  -->
-            <th:block th:object="${userInfo}">
+            <th:block th:if="${!#strings.isEmpty(userInfo)}" th:object="${userInfo}">
                 <div class="jhModalUser">
                     <div class="jhModalUserBg"></div>
                     <div class="jhUser">
@@ -96,11 +96,11 @@
                             <button onclick="location.href='/member/logout'">로그아웃</button>
                         </h2>
                         <img class="userImg"
-                             th:if="${#strings.isEmpty(userInfo.getUserOriImgName)}"
+                             th:if="${#strings.isEmpty(userOriImgName)}"
                              src="/mainImages/UserImg.png" alt="userImg">
                         <img class="userImg"
-                             th:unless="${#strings.isEmpty(userInfo.getUserOriImgName)}"
-                             th:src="${userInfo.getUserImgUrl}" th:alt="${userInfo.getUserOriImgName}">
+                             th:unless="${#strings.isEmpty(userOriImgName)}"
+                             th:src="*{userImgUrl}" th:alt="*{userOriImgName}">
 
                         <div class="jhuserBox1">
                             <a href="/user_review">
