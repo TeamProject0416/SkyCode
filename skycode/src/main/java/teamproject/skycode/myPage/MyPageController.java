@@ -23,6 +23,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.Principal;
 
@@ -116,15 +117,11 @@ public class MyPageController {
 
     //---------------------------/user/edit_password------------------------//
     @GetMapping(value = "/user/edit_password")
-    public String userEditPw(Principal principal, Model model) {
+    public String userEditPw(Model model) {
 
-        if (principal != null) {
-
-        }
         model.addAttribute("passwordFormDto", new PasswordFormDto());
         return "myPage/users/edit_password";
     }
-
 
     @PostMapping("/user/edit_password/update")
     public String userEditPwUpdate(PasswordFormDto passwordFormDto, Principal principal,
