@@ -1,0 +1,87 @@
+.oej_bigBox{
+    top:50px;
+    position: relative;
+    max-width: 1320px;
+    height: 200px;
+    border-bottom:none;
+}
+
+.oej_smallBox1 {
+    position: absolute;
+    width:100%;
+    height: 200px;
+   border-bottom: 1px solid #ccc;
+
+}
+
+.oej_smallBox1:hover {
+    cursor: pointer;
+    background: #eee;
+}
+
+.oej_smallBox1 h1 {
+  padding-left: 100px;
+    width: 700px;
+    color: #4b4b4b
+}
+
+/* 날짜 */
+.oej_smallBox1 p {
+    padding-left: 30px;
+      width: 700px;
+  }
+
+.oej_smallBox1 .oej_small {
+    padding-left: 100px;
+    color: #4b4b4b
+}
+
+.oej_smallBox1 .oej_smallP {
+    position: absolute;
+    width: 200px;
+    top: 0;
+    margin-right: 420px;
+    padding-left: 115px;
+    right: 0;
+    color: #777;
+}
+
+/* 조회수 댓글수 */
+.oej_p {
+    position: absolute;
+    display: flex;
+    width: 200px;
+    bottom: 0;
+    margin-right: 420px;
+  right: 0;
+  color: #777;
+}
+.oej_p i {
+    margin-right: 10px;
+}
+
+/* 이미지 */
+
+.oej_smallBox2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 420px;
+    height: 200px;
+
+}
+
+.smallBox3 {
+    /* position: absolute; */
+    width: 250px;
+    height: 200px;
+   padding-top: 10px;
+    margin: 0 auto;
+}
+
+.oej_smallBox2 img {
+    position: absolute;
+    margin-left: 10px;
+    left: 105px;
+    width: 45%;
+}
