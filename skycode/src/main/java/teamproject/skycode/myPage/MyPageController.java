@@ -1,8 +1,10 @@
 package teamproject.skycode.myPage;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,8 @@ import teamproject.skycode.myPage.users.MemberEditFormDto;
 import teamproject.skycode.myPage.users.PasswordFormDto;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.net.URLEncoder;
 import java.security.Principal;
@@ -74,7 +78,8 @@ public class MyPageController {
 
     @GetMapping("/user/delete/{memberId}") // 회원 삭제
     public String userDelete(@PathVariable("memberId") Long memberId,
-                             Principal principal, Model model) {
+                             Authentication authentication, HttpServletRequest request,
+                             HttpServletResponse response, Principal principal, Model model) {
         MemberEntity member = memberRepository.findById(memberId)
                 .orElseThrow(EntityNotFoundException::new);
         model.addAttribute("passwordFormDto", new PasswordFormDto());
@@ -82,8 +87,8 @@ public class MyPageController {
             if (principal.getName().equals(member.getEmail())) {
                 memberRepository.delete(member);
 
-                // 강제 로그아웃
-                SecurityContextHolder.clearContext();
+                // 회원 탈퇴 후 로그아웃
+                new SecurityContextLogoutHandler().logout(request, response, authentication);
 
                 return "redirect:/member/login?message=" + URLEncoder.encode("탈퇴가 완료되었습니다", "UTF-8");
             }
@@ -112,21 +117,25 @@ public class MyPageController {
     //---------------------------/user/edit_password------------------------//
     @GetMapping(value = "/user/edit_password")
     public String userEditPw(Principal principal, Model model) {
+
         if (principal != null) {
 
         }
+        model.addAttribute("passwordFormDto", new PasswordFormDto());
         return "myPage/users/edit_password";
     }
 
 
     @PostMapping("/user/edit_password/update")
     public String userEditPwUpdate(PasswordFormDto passwordFormDto, Principal principal,
-                                   Model model) {
+                                   Authentication authentication, HttpServletRequest request,
+                                   HttpServletResponse response, Model model) {
         // 현재 로그인한 사용자의 이메일 가져오기
         String userEmail = principal.getName();
 
         // 사용자 정보 가져오기
         MemberEntity user = memberRepository.findByEmail(userEmail);
+
         try {
             if (user != null && passwordEncoder.matches(passwordFormDto.getCheckPassword(), user.getPassword())) {
                 // 현재 비밀번호가 일치하면 새로운 비밀번호 설정
@@ -134,8 +143,8 @@ public class MyPageController {
                 user.setPassword(newPassword);
                 memberRepository.save(user);
 
-                // 로그아웃
-                SecurityContextHolder.clearContext();
+                // 비밀번호 변경 후 로그아웃
+                new SecurityContextLogoutHandler().logout(request, response, authentication);
 
                 return "redirect:/member/login?message=" + URLEncoder.encode("비밀번호가 변경되었습니다.", "UTF-8");
             }
