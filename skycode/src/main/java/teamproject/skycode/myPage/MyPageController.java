@@ -18,6 +18,9 @@ import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.login.MemberService;
 import teamproject.skycode.myPage.users.MemberEditFormDto;
 import teamproject.skycode.myPage.users.PasswordFormDto;
+import teamproject.skycode.news.inquiry.Inquiry;
+import teamproject.skycode.news.inquiry.InquiryRepository;
+import teamproject.skycode.news.inquiry.InquiryService;
 import teamproject.skycode.review.CommentEntity;
 import teamproject.skycode.review.CommentRepository;
 import teamproject.skycode.review.ReviewEntity;
@@ -39,6 +42,10 @@ public class MyPageController {
     private final MemberService memberService;
     private final MemberRepository memberRepository;
     private final ReviewRepository reviewRepository;
+
+    private final InquiryService inquiryService;
+    private final InquiryRepository inquiryRepository;
+
 
     //---------------------------/user------------------------//
     @GetMapping(value = "user") // 유저 모두 보기
@@ -301,9 +308,15 @@ public class MyPageController {
             String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
             model.addAttribute("userInfo", userInfo);
+
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
             model.addAttribute("reviewNum",reviewNum);
+
+            List<Inquiry> inquiryList = inquiryRepository.findByWriterId(userInfo.getId());
+            int inquiryNum = inquiryList.size();
+            model.addAttribute("inquiryList",inquiryList);
+
         }
 
         return "myPage/shopping/questions";

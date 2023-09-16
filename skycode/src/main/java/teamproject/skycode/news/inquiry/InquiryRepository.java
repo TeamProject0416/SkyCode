@@ -24,7 +24,7 @@ public interface InquiryRepository extends JpaRepository<Inquiry, Long > {
 
     Page<Inquiry> findAll(Pageable pageable);
 
-
+    List<Inquiry> findByWriterId(Long memberId);
 
 
 //    List<Inquiry> findByUserNicknameContaining(String searchValue);
