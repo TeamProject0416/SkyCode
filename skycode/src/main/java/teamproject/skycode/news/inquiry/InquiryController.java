@@ -136,7 +136,7 @@ public class InquiryController {
 
     // 1 대 1 문의 서브페이지 화면으로 보내기
     @PostMapping("inquiry/inquiryShow")
-    public String submitInquiry(@ModelAttribute InquiryForm inquiryForm, Model model) {
+    public String submitInquiry(@ModelAttribute InquiryForm inquiryForm, Model model, Principal principal) {
         Inquiry savedInquiry = inquiryService.saveInquiry(inquiryForm); // Save or update inquiry
         System.out.println("제발1");
         if (savedInquiry != null) {
@@ -162,7 +162,7 @@ public class InquiryController {
 
     // 1 대 1 문의 서브페이지 화면 출력
     @GetMapping("/inquiry/show/{id}")
-    public String showInquiryById(@PathVariable Long id, Model model, Principal principal) {
+    public String showInquiryById(@PathVariable Long id, Model model) {
 
         // 유저 로그인
         if (principal != null) {
@@ -191,6 +191,54 @@ public class InquiryController {
             return "error";
         }
     }
+
+//    @GetMapping("/inquiry/show/{id}")
+//    public String showInquiryById(@PathVariable Long id, Model model, Principal principal) {
+//
+//        // 유저 로그인
+//        if (principal != null) {
+//            String user = principal.getName();
+//            MemberEntity userInfo = memberRepository.findByEmail(user);
+//            model.addAttribute("userInfo", userInfo);
+//            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+//            int reviewNum = review.size();
+//            model.addAttribute("reviewNum",reviewNum);
+//        }
+//
+//        Inquiry inquiry = inquiryService.getInquiryById(id);
+//
+//        if (inquiry != null) {
+//            // Increment view count and save
+//            inquiry.setViewCount(inquiry.getViewCount() + 1); // Increment the view count
+//            inquiryRepository.save(inquiry); // Save the updated inquiry
+//
+//            model.addAttribute("inquiry", inquiry);
+//            model.addAttribute("viewCount", inquiry.getViewCount());
+//
+//            // 현재 사용자와 작성자 비교
+//            if (principal != null) {
+//                MemberEntity loggedInUser = memberRepository.findByEmail(principal.getName());
+//                MemberEntity writer = inquiry.getWriter();
+//
+//                if (loggedInUser.equals(writer) || loggedInUser.getRoles().contains("ADMIN")) {
+//                    return "news/inquiry/inquiryShow";
+//                } else {
+//                    // 로그인 사용자와 작성자가 다를 경우에 대한 처리
+//                    return "access-denied";
+//                }
+//            } else {
+//                // 로그인 되어있지 않은 경우
+//                return "access-denied";
+//            }
+//        } else {
+//            // Handle inquiry not found case
+//            // Return appropriate error view or handle differently
+//            return "error";
+//        }
+//    }
+
+
+
 
     // 검색하기
     @GetMapping("/inquiry/search")

@@ -36,6 +36,9 @@
                 <input id="search-value" type="search" name="search-value" placeholder="검색어...">
                 <button id="submit">검색</button>
             </form>
+            <div class="nyInquiryGoText">
+                <a th:href="@{/news/inquiry}">문의쓰기</a>
+            </div>
         </div>
         <div class="nyInquiryCheck">
             <strong>총 <strong th:text="${totalInquiryCount}">522</strong>건</strong>
@@ -69,9 +72,6 @@
             </tr>
             </tbody>
         </table>
-        <div class="nyInquiryGoText">
-            <a th:href="@{/news/inquiry}">문의쓰기</a>
-        </div>
         <div class="nyInquiryPeger">
             <div class="nyInquiryPegerBtn" th:each="i : ${#numbers.sequence(0, inquiryPage.totalPages - 1)}">
                 <a th:href="@{/news/inquiry/inquiryList(page=${i})}" th:text="${i + 1}"></a>

@@ -13,6 +13,10 @@
     font-weight: 700;
 }
 
+.nySearch{
+    display: flex;
+    justify-content: space-between;
+}
 
 .nyInquiryContainer .nyInquiryCheck{
     display: flex;
@@ -87,7 +91,4 @@
     border-radius: 10px;
     width: 100px;
     height: 30px;
-}
-.nyInquiryWrap .nyInquiryContainer .nyInquiryGoText a:hover{
-    padding: 15px;
 }

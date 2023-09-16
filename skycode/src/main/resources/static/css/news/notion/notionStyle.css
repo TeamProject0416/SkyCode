@@ -11,6 +11,10 @@
 .nyNewsWrap h2{
     font-weight: 700;
 }
+.nyNewsWrapIn {
+    display: flex;
+    justify-content: space-between;
+}
 
 .nyNewsContainer {
     /* background: #c5ffe9; */

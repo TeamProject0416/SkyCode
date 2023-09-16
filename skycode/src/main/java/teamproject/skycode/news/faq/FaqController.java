@@ -37,6 +37,7 @@ public class FaqController {
     private final FaqService faqService;
 
 
+
     @GetMapping(value = "/faqUp")
     public String newsFaqUp(Model model, Principal principal){
 

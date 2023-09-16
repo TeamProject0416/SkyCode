@@ -19,7 +19,12 @@
 <header th:replace="~{fragments/sub/header::header}"></header>
 <!-- 공지사항 -->
 <section class="nyNewsWrap">
+    <div class="nyNewsWrapIn">
     <h2>#공지사항</h2>
+    <div class="nyNotionGoText" th:if="${T(teamproject.skycode.login.MemberUtils).isAdmin()}">
+        <a th:href="@{/news/notionUp}">공지글쓰기</a>
+    </div>
+    </div>
     <div class="nyNewsContainer">
         <div class="nyNewsCheck">
             <strong>총 <strong th:text="${totalNotionCount}">522</strong>건</strong>
@@ -44,9 +49,6 @@
                 </li>
             </ul>
         </div>
-    </div>
-    <div class="nyNotionGoText" th:if="${T(teamproject.skycode.login.MemberUtils).isAdmin()}">
-        <a th:href="@{/news/notionUp}">공지글쓰기</a>
     </div>
     <div class="nyNotionPeger">
         <div class="nyNotionPegerBtn" th:each="i : ${#numbers.sequence(0, notions.totalPages - 1)}">

@@ -44,6 +44,7 @@
             </div>
             <textarea id="title" th:class="nyInquiryTitle" th:field="*{inquiryTitle}" name="inquiryTitle"
                       placeholder="문의 제목" rows="1"></textarea>
+            <input type="hidden" th:field="*{id}">
             <span th:if="${#fields.hasErrors('inquiryTitle')}" th:errors="*{inquiryTitle}"></span>
 
             <textarea id="content" th:class="nyInquiryContent" th:field="*{inquiryContent}" name="inquiryContent"

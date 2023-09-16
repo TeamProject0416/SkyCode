@@ -1,18 +1,19 @@
 package teamproject.skycode.news.inquiry;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import teamproject.skycode.common.BaseEntity;
 
 import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
 @ToString
-
-public class InquiryForm {
+@NoArgsConstructor
+@AllArgsConstructor
+public class InquiryForm extends BaseEntity {
     private Long id;
     private String type;
+    private String email;
     private boolean isPrivate;
 //    private String inquiryTitle
     @NotBlank(message = "1 대 1 문의의 내용은 필수 입력값 입니다")
