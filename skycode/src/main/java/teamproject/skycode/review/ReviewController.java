@@ -154,11 +154,21 @@ public class ReviewController {
     public String reviewUpdate(@Valid ReviewDto reviewDto, BindingResult bindingResult,
                                @RequestParam("reviewImgFile1") MultipartFile reviewImgFile1,
                                @RequestParam("reviewImgFile2") MultipartFile reviewImgFile2,
-                               Model model) {
+                               Model model, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "review/newReview";
         }
         try {
+
+            // 유저 로그인
+            if (principal != null) {
+                String user = principal.getName();
+                MemberEntity memberEntity = memberRepository.findByEmail(user);
+                reviewDto.setEmail(user);
+                reviewDto.setMemberId(memberEntity.getId());
+                reviewDto.setNickName(memberEntity.getNickName());
+            }
+
             reviewService.updateReview(reviewDto, reviewImgFile1, reviewImgFile2);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
