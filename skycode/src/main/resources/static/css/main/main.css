@@ -799,383 +799,452 @@
 
     /* 모달 시작 */
     .modal {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      display: none;
-      background-color: rgba(0, 0, 0, 0.4);
-      z-index: 9999;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 9999;
     }
 
     .modal.show {
-      display: block;
+        display: block;
     }
 
     .modalMain {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #000;
-      height: 800px;
-      text-align: center;
-      background-color: rgb(255, 255, 255);
-      border-radius: 10px;
-      box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #000;
+        height: 800px;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
     }
 
     /* modalHeader */
     .modalTitle {
-      display: inline-block;
-      font-size: 4rem;
-      font-weight: bold;
-      padding-top: 30px;
+        display: inline-block;
+        font-size: 4rem;
+        font-weight: bold;
+        padding-top: 30px;
     }
 
     .modalCloseArea {
-      display: inline-block;
-      font-size: 2.5rem;
-      position: relative;
-      left: 750px;
-      bottom: 10px;
-      cursor: pointer;
+        display: inline-block;
+        font-size: 2.5rem;
+        position: relative;
+        left: 750px;
+        bottom: 10px;
     }
 
     /* /modalHeader */
     .modalHeader,
     .modalBody {
-      background: rgba(142, 212, 255, 0.3);
-      width: 100%;
-      height: 150px;
+        background: rgba(142, 212, 255, 0.3);
+        width: 100%;
+        height: 150px;
     }
 
     /* modalSchedule */
     .modalSchedule {
-      display: flex;
-      justify-content: space-between;
-      width: 1320px;
-      margin: 0 auto;
-      padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        width: 1320px;
+        margin: 0 auto;
+        padding-top: 20px;
     }
 
     /* modalAirplaneSA */
     .modalAirplaneSA {
-      width: 478px;
-      height: 96px;
-      border-radius: 10px;
-      background: #fff;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        width: 478px;
+        height: 96px;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     }
 
     .modalAirplaneList {
-      position: relative;
-      display: flex;
-      line-height: 96px;
+        position: relative;
+        display: flex;
+        /* line-height: 96px; */
     }
 
     .modalAirplaneList p {
-      position: relative;
-      bottom: 20px;
-      font-weight: bold;
-      display: inline;
+        position: relative;
+        bottom: 20px;
+        font-weight: bold;
+        display: inline;
     }
-
-    .modalAirplaneList button {
-      position: relative;
-      top: 10px;
-      right: 35px;
-      color: #aaa;
-      font-size: 1.7rem;
-      border: none;
-      background: transparent;
+    .modalAirplaneList label {
+        position: relative;
+        /* top: 10px;
+        right: 35px;
+        color: #aaa;
+        font-size: 1.7rem;
+        border: none;
+        background: transparent;
+        cursor: pointer; */
     }
-
+    .modalAirplaneList input {
+        display: none;
+    }
     .modalAirplaneStart {
-      text-align: left;
-      width: 239px;
-      height: 96px;
-      padding: 0 23px;
-      border-radius: 10px 0 0 10px;
-      background: #E6EFFE;
+        /* text-align: left; */
+        width: 239px;
+        height: 96px;
+        padding: 0 23px;
+        border-radius: 10px 0 0 10px;
+        background: #E6EFFE;
     }
-
-    .transferImg {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 32px;
-      height: 32px;
-      background: url(/mainImages/transferImg.png) no-repeat;
-      cursor: pointer;
-      background-color: #000;
+    .modalAirplaneStart p {
+        position: absolute;
+        left: 23px;
+        top: 20px;
+        font-weight: bold;
+        display: inline;
+    }
+    .modalAirplaneStart label {
+        position: absolute;
+        left: 23px;
+        bottom: 20px;
+        color: #aaa;
+        font-size: 1.7rem;
+        border: none;
+        background: transparent;
     }
 
 
     .modalAirplaneArrive {
-      text-align: left;
-      width: 239px;
-      height: 96px;
-      padding: 0 23px;
+        position: relative;
+        text-align: left;
+        width: 239px;
+        /* height: 96px; */
+        padding: 0 23px;
+    }
+    .modalAirplaneArrive p {
+        position: absolute;
+        left: 23px;
+        top: 20px;
+        font-weight: bold;
+        display: inline;
+    }
+    .modalAirplaneArrive label {
+        position: absolute;
+        left: 23px;
+        bottom: 20px;
+        color: #aaa;
+        font-size: 1.7rem;
+        border: none;
+        background: transparent;
     }
 
     /* /modalAirplaneSA */
 
     /* modalAirplaneDate */
     .modalAirplaneDate {
-      width: 278px;
-      line-height: 96px;
-      border-radius: 10px;
-      padding: 0 23px;
-      background: #fff;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        position: relative;
+        width: 268px;
+        /* line-height: 96px; */
+        border-radius: 10px;
+        padding: 0 23px;
+        background: #fff;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     }
 
     .modalAirplaneDate p {
-      position: relative;
-      right: 10px;
-      bottom: 20px;
-      font-weight: bold;
-      display: inline;
+        position: absolute;
+        left: 23px;
+        top: 20px;
+        font-weight: bold;
+        display: inline;
     }
 
-    .modalAirplaneDate button {
-      position: relative;
-      top: 10px;
-      right: 60px;
-      color: #aaa;
-      font-size: 1.7rem;
-      border: none;
-      background: transparent;
+    .modalAirplaneDate label {
+        text-align: left;
+        position: absolute;
+        left: 23px;
+        bottom: 20px;
+        color: #aaa;
+        font-size: 1.7rem;
+        border: none;
+        background: transparent;
+
+        /*말줄임 효과*/
+        width: 220px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
+    .modalAirplaneDate input {
+        display: none;
+
+    }
+
 
     /* /modalAirplaneDate */
 
     /* modalPersonNum */
     .modalPersonNum {
-      width: 232px;
-      height: 96px;
-      border-radius: 10px;
-      padding: 0 23px;
-      background: #fff;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        position: relative;
+        width: 200px;
+        /* height: 96px; */
+        border-radius: 10px;
+        padding: 0 23px;
+        background: #fff;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     }
 
-    .modalPersonNum>p {
-      display: inline;
-      color: #ccc;
-      position: relative;
-      top: 20px;
-      right: 35px;
+    .modalPersonNum p {
+        position: absolute;
+        left: 23px;
+        top: 20px;
+        font-weight: bold;
+        display: inline;
     }
 
-    .modalPersonNum>button {
-      border: none;
-      background: transparent;
-      font-size: 1.7rem;
-      position: relative;
-      top: 25px;
-      right: 50px;
-    }
+    .modalPersonNum label {
+        position: absolute;
+        left: 23px;
+        bottom: 20px;
+        color: #aaa;
+        font-size: 1.7rem;
+        border: none;
+        background: transparent;
+        text-align: left;
 
-    .modalSearchBtn>button {
-      width: 96px;
-      height: 96px;
-      background: #63A1FF;
-      color: #fff;
-      font-weight: bold;
-      font-size: 2rem;
-      border-radius: 10px;
-      border: none;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        /* 말줄임 효과 */
+        width: 160px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
-
+    .modalPersonNum input {
+        display: none;
+    }
     /* /modalPersonNum */
 
+    /* modalSeatGrade */
+    .modalSeatGrade {
+        position: relative;
+        width: 200px;
+        /* height: 96px; */
+        border-radius: 10px;
+        padding: 0 23px;
+        background: #fff;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+    .modalSeatGrade p {
+        position: absolute;
+        left: 23px;
+        top: 20px;
+        font-weight: bold;
+        display: inline;
+    }
+    .modalSeatGrade label {
+        position: absolute;
+        left: 23px;
+        bottom: 20px;
+        color: #aaa;
+        font-size: 1.7rem;
+        border: none;
+        background: transparent;
+    }
+    .modalSeatGrade input {
+        display: none;
+    }
+    /* /modalSeatGrade */
+
+    .modalSearchBtn>button {
+        width: 96px;
+        height: 96px;
+        background: #63A1FF;
+        color: #fff;
+        font-weight: bold;
+        font-size: 2rem;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
     /* /modalSchedule */
 
 
     /* modalContents */
     /* 모달 컨텐츠 전체 */
     .modalContents {
-      display: flex;
-      width: 1320px;
-      height: 100%;
-      margin: 0 auto;
+        display: flex;
+        width: 1320px;
+        height: 100%;
+        margin: 0 auto;
     }
-
     .modalContentLeft,
-    .modalContentCenter,
     .modalContentRight {
-      border-right: 1px solid #ccc;
-      width: 440px;
-      height: 100%;
+        border-right: 1px solid #ccc;
+        width: 510px;
+        height: 100%;
+    }
+    .modalContentCenter {
+        border-right: 1px solid #ccc;
+        width: 300px;
+        height: 100%;
     }
 
     /* 모달 컨텐츠 부분 왼쪽 타이틀 */
     .modalContentLeftArea {
-      width: 100%;
-      height: 500px;
-      padding: 48px 0 24px;
+        width: 100%;
+        height: 250px;
+        padding: 48px 0 24px;
+        background: lightblue;
+        /* display: none; */
     }
 
     .modalContentLeftArea h3 {
-      text-align: left;
-      font-size: 3rem;
+        text-align: left;
     }
 
-    /* 모달 컨텐츠 센터, 우측 area 여백 */
-    .modalContentCenterArea,
-    .modalContentRightArea {
-      width: 100%;
-      height: 500px;
-      padding: 48px 0 24px 39px;
+    .modalContentLeftAreaD {
+        height: 250px;
+        background: lightcoral;
+        /* display: none; */
+    }
+    .modalContentLeftAreaD h3 {
+        text-align: left;
     }
 
+    .startAirplaneList {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .startAirplaneList li:nth-child(n+6) {
+        margin: 20px 0;
+    }
+    .startAirplaneList input {
+        display: none;
+    }
+    .startAirplaneList label {
+        display: block;
+        width: 90px;
+        line-height: 48px;
+        text-align: center;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        color: #555;
+        font-size: 1.5rem;
+    }
+
+    .arriveAirplaneList {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .arriveAirplaneList li:nth-child(n+6) {
+        margin: 20px 0;
+    }
+    .arriveAirplaneList input {
+        display: none;
+    }
+    .arriveAirplaneList label {
+        display: block;
+        width: 90px;
+        line-height: 48px;
+        text-align: center;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        color: #555;
+        font-size: 1.5rem;
+    }
+
+    /* calendar */
     .modalContentCenterArea {
-      position: relative;
-      /*display: none;*/
-      /* input 박스 앱솔 후 왼쪽으로 붙이기 위함 */
+        text-align: left;
+        height: 500px;
+        position: relative;
+        /* input 박스 앱솔 후 왼쪽으로 붙이기 위함 */
     }
+    /* /calendar */
 
-    .locationIcon {
-      position: absolute;
-      left: 50px;
-      top: 60px;
-      z-index: 1;
-      width: 20px;
-      height: 20px;
-      /*background: url(/mainImages/locationIcon.png);*/
-    }
 
-    .modalContentCenterArea input {
-      position: absolute;
-      /* 0 0 하면 여백으로 나가버림, area padding 값 만큼 이동 */
-      left: 39px;
-      top: 48px;
-      padding: 0 50px 0 40px;
-      width: 350px;
-      height: 46px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-weight: bold;
-    }
-
-    .modalContentCenterArea3 {
-      width: 100%;
-      height: 500px;
-      padding: 48px 0 24px 39px;
-    }
-
-    .passengerArea {
-      text-align-last: left;
-    }
-
-    /* input placehoadler 색 지정 */
-    .modalContentCenterArea input::placeholder {
-      color: #ccc;
-    }
-
-    .scrollContent {
-      position: relative;
-      top: 50px;
-      width: 350px;
-      height: 350px;
-      background: #ddd;
-      /* 영역 표시 하기 위함 추후 제거 필수 */
-    }
-
-    /* 주요 인기도시 */
+    /* 인원수, 등급 */
     .modalContentRightArea {
-      overflow-y: scroll;
-      /* 여기에 설정해야 스크롤바가 생김 */
+        width: 100%;
+        height: 500px;
+
     }
-
-    .modalTravelPopular h3 {
-      display: inline-block;
-      margin-bottom: 23px;
-      position: relative;
-      right: 135px;
+    .modalContentRightArea {
+        text-align: left;
+        padding: 50px 0 0 23px;
+        overflow-y: scroll;   /* 여기에 설정해야 스크롤바가 생김 */
     }
-
-    .travelPopularList {
-      width: 350px;
-      height: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+    .numArea label {
+        display: block;
+        font-size: 1.7rem;
     }
-
-    .travelPopularList li:nth-child(n+6) {
-      margin: 20px 0;
+    .numArea input {
+        height: 25px;
+        padding-left: 8px;
     }
+    .personNumber h3 {
+        margin-bottom: 4px;
 
-    .travelPopularList input {
-      /*display: none;*/
     }
-
-    .travelPopularList label {
-      display: block;
-      width: 62px;
-      line-height: 48px;
-      text-align: center;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      color: #555;
+    .seatGrade {
+        margin-top: 8px;
     }
+    /* /인원수, 등급 */
 
-    /* /주요 인기도시 */
-
-    /* 국내 여행지 */
+    /* 등급 */
     .modalFlightList h3 {
-      display: inline-block;
-      margin-bottom: 23px;
-      position: relative;
-      right: 170px;
+        display: inline-block;
+        margin-bottom: 23px;
+        position: relative;
+        right: 170px;
     }
 
     .modalFlightList input {
-      display: none;
+        display: none;
     }
 
     .domesticList {
-      display: flex;
-      justify-content: space-evenly;
-      flex-wrap: wrap;
-
-      /* 왼쪽으로 살짝 밀라고 설정 */
-      position: relative;
-      right: 10px;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        /* 왼쪽으로 살짝 밀라고 설정 */
+        position: relative;
+        right: 10px;
 
     }
 
     .modalFlightList ul li {
-      width: 91px;
-      height: 113px;
+        width: 91px;
+        height: 113px;
     }
 
     .modalFlightList ul li img {
-      width: 71px;
-      height: 71px;
+        width: 71px;
+        height: 71px;
     }
-
-    /* /국내 여행지 */
-
+    /* /등급 */
     /* /modalContents */
 
     .btnOpenPopup {
-      position: fixed;
-      bottom: 100px;
-      right: 100px;
-      width: 100px;
-      height: 100px;
-      border-style: none;
-      border-radius: 50%;
-      border-color: #fff;
+        position: fixed;
+        bottom: 100px;
+        right: 100px;
+        width: 100px;
+        height: 100px;
+        border-style: none;
+        border-radius: 50%;
+        border-color: #fff;
     }
-
     /* 모달 끝 */
     /*/재웅 css*/
 
