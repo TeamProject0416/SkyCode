@@ -47,6 +47,9 @@
                     <textarea type="text" id="answer" th:field="*{faqAnswer}" name="faqAnswer" placeholder="알맞은 답변을 적어주세요"></textarea>
                 </div>
             </div>
+            <div th:if="${errorMsg}" class="error-message">
+                <p th:text="${errorMsg}"></p>
+            </div>
             <div class="nyFaqUpPost">
                 <button id="submit">업로드하기</button>
             </div>

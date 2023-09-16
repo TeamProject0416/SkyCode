@@ -21,10 +21,10 @@ public class Faq {
     @Column
     private String type;
 
-    @Column
+    @Column(length = 1000)
     private String faqQuestion;
 
-    @Column
+    @Column(length = 4000)
     private String faqAnswer;
 
     @Column

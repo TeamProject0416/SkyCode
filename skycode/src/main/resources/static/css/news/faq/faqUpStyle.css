@@ -54,7 +54,6 @@ section{
     height: 300px;
     border: 1px solid #555;
     padding-left: 10px;
-
 }
 
 .nyFaqUpWarp .nyFaqUpBox .nyFaqUpPost{
@@ -68,5 +67,10 @@ section{
     margin-top: 30px;
     margin-right: 65px;
     color: #fff;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
 }
 

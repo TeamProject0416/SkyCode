@@ -13,7 +13,7 @@ window.onload = () => {
             // FaqUp 제목 클릭시 -> 본문이 보이게끔 -> active 클래스 추가
             panelFaqUpAnswer[i].classList.toggle('active');
         });
-    };
+    }
 
 
 }
