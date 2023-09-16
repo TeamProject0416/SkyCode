@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.login.MemberEntity;
+import teamproject.skycode.login.MemberFormDto;
 import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.login.MemberService;
 import teamproject.skycode.myPage.users.MemberEditFormDto;
@@ -60,6 +61,9 @@ public class MyPageController {
     //---------------------------/user/edit------------------------//
     @GetMapping(value = "/user/edit") // 회원 정보 폼
     public String userEdit(Model model, Principal principal) {
+
+        model.addAttribute("memberEditFormDto", new MemberEditFormDto());
+
         // 유저 로그인
         if (principal != null) {
             String user = principal.getName();
