@@ -40,7 +40,7 @@ public class ReviewController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
         }
 
         model.addAttribute("reviewFormDto", new ReviewDto());
@@ -49,13 +49,23 @@ public class ReviewController {
 
     //  리뷰 생성 (Post)
     @PostMapping(value = "/create")
-    public String createReview(@Valid ReviewDto reviewDto, BindingResult bindingResult, Model model,
+    public String createReview(@Valid ReviewDto reviewDto, BindingResult bindingResult,
+                               Model model, Principal principal,
                                @RequestParam("reviewImgFile1") MultipartFile reviewImgFile1,
                                @RequestParam("reviewImgFile2") MultipartFile reviewImgFile2) {
         if (bindingResult.hasErrors()) {
             return "review/newReview";
         }
         try {
+            // 유저 로그인
+            if (principal != null) {
+                String user = principal.getName();
+                MemberEntity memberEntity = memberRepository.findByEmail(user);
+                reviewDto.setEmail(user);
+                reviewDto.setMemberId(memberEntity.getId());
+                reviewDto.setNickName(memberEntity.getNickName());
+            }
+
             reviewService.saveReview(reviewDto, reviewImgFile1, reviewImgFile2);
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,7 +86,7 @@ public class ReviewController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
         }
 
         Page<ReviewEntity> paging = this.reviewService.getList(page);
@@ -101,7 +111,7 @@ public class ReviewController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
         }
 
         /*
@@ -122,7 +132,7 @@ public class ReviewController {
     //    리뷰 수정하기
     @GetMapping(value = "/{reviewId}/edit")
     public String reviewEdit(@PathVariable("reviewId") Long reviewId,
-                             Model model,Principal principal) {
+                             Model model, Principal principal) {
         // 유저 로그인
         if (principal != null) {
             String user = principal.getName();
@@ -130,7 +140,7 @@ public class ReviewController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
         }
 
         ReviewDto reviewDto = reviewService.getReviewDtl(reviewId);

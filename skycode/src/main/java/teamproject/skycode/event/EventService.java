@@ -105,6 +105,7 @@ public class EventService {
         return eventFormDto;
     }
 
+
     public Long updateEvent(EventFormDto eventFormDto, MultipartFile eventImgFile1, MultipartFile eventImgFile2) throws Exception {
         // 상품 수정
         EventEntity event = eventRepository.findById(eventFormDto.getId())
