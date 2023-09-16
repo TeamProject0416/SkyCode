@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import teamproject.skycode.constant.Role;
+
 import teamproject.skycode.login.MemberEntity;
 import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.login.MemberService;
@@ -53,6 +55,7 @@ public class InquiryController {
     // 1 대 1 문의폼 화면 출력
     @GetMapping("/inquiry")
     public String showInquiryForm(Model model, Principal principal) {
+
         if (principal == null) {
             // 사용자가 로그인하지 않은 경우 에러 페이지로 리다이렉트
             return "redirect:/error";
@@ -65,6 +68,7 @@ public class InquiryController {
         List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
         int reviewNum = review.size();
         model.addAttribute("reviewNum", reviewNum);
+
 
         model.addAttribute("inquiryForm", new InquiryForm());
         return "/news/inquiry/inquiry";
@@ -124,6 +128,7 @@ public class InquiryController {
             if(admin.equals(Role.ADMIN)){
                 model.addAttribute("admin", admin);
             }
+
         }
 
         int pageSize = 10;
