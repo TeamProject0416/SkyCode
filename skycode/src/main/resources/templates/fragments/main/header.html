@@ -96,10 +96,10 @@
                             <button onclick="location.href='/member/logout'">로그아웃</button>
                         </h2>
                         <img class="userImg"
-                             th:if="${#strings.isEmpty(userOriImgName)}"
+                             th:if="${#strings.isEmpty(userInfo.getUserOriImgName)}"
                              src="/mainImages/UserImg.png" alt="userImg">
                         <img class="userImg"
-                             th:unless="${#strings.isEmpty(userOriImgName)}"
+                             th:unless="${#strings.isEmpty(userInfo.getUserOriImgName)}"
                              th:src="*{userImgUrl}" th:alt="*{userOriImgName}">
 
                         <div class="jhuserBox1">
