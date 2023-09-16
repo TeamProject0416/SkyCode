@@ -2,6 +2,8 @@ package teamproject.skycode.login;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import teamproject.skycode.common.BaseEntity;
 import teamproject.skycode.constant.Gender;
@@ -11,6 +13,7 @@ import teamproject.skycode.review.ReviewEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -85,6 +88,15 @@ public class MemberEntity extends BaseEntity {
         this.userImgName = memberEditFormDto.getUserImgName();
         this.userOriImgName = memberEditFormDto.getUserOriImgName();
         this.userImgUrl = memberEditFormDto.getUserImgUrl();
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER")); // 예시: 일반 사용자 권한
+
+        // 추가적으로 필요한 권한 정보를 가져오는 로직을 구현해주세요.
+
+        return authorities;
     }
 }
 

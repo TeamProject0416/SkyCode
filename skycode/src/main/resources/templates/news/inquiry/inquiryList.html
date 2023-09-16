@@ -36,6 +36,10 @@
                 <input id="search-value" type="search" name="search-value" placeholder="검색어...">
                 <button id="submit">검색</button>
             </form>
+            <div class="nyInquiryGoText">
+                <a th:if="${#strings.isEmpty(userInfo)}" href="/member/login" id="loginLink">문의쓰기</a>
+                <a th:unless="${#strings.isEmpty(userInfo)}" th:href="@{/news/inquiry}">문의쓰기</a>
+            </div>
         </div>
         <div class="nyInquiryCheck">
             <strong>총 <strong th:text="${totalInquiryCount}">522</strong>건</strong>
@@ -60,18 +64,41 @@
             <tr th:each="inquiry : ${inquiries}">
                 <td><span th:text="${inquiry.id}">1</span></td>
                 <td><span th:text="${inquiry.type}">회원가입/탈퇴</span></td>
-                    <td><a th:href="@{'/news/inquiry/show/' + ${inquiry.id}}">
+                <td>
+                    <!--admin-->
+                    <a th:if="${!#strings.isEmpty(admin)}"
+                       th:href="@{'/news/inquiry/show/' + ${inquiry.id}}">
                         <span th:text="${inquiry.inquiryTitle}"></span>
-                    </a></td>
+                    </a>
+                    <!--public-->
+                    <a th:if="${userInfo == null and !inquiry.isPrivate and #strings.isEmpty(admin)}"
+                       th:href="@{'/news/inquiry/show/' + ${inquiry.id}}">
+                        <span th:text="${inquiry.inquiryTitle}"></span>
+                    </a>
+                    <a th:if="${userInfo == null and inquiry.isPrivate and #strings.isEmpty(admin)}"
+                       onclick="alert('권한이 없습니다.'); return false;">
+                        <span th:text="${inquiry.inquiryTitle}"></span>
+                    </a>
+                    <!--user-->
+                    <a th:if="${userInfo != null and !inquiry.isPrivate and #strings.isEmpty(admin)}"
+                       th:href="@{'/news/inquiry/show/' + ${inquiry.id}}">
+                        <span th:text="${inquiry.inquiryTitle}"></span>
+                    </a>
+                    <a th:if="${userInfo != null and inquiry.isPrivate and inquiry.writer.email == userInfo.email and #strings.isEmpty(admin)}"
+                       th:href="@{'/news/inquiry/show/' + ${inquiry.id}}">
+                        <span th:text="${inquiry.inquiryTitle}"></span>
+                    </a>
+                    <a th:if="${userInfo != null and inquiry.isPrivate and inquiry.writer.email != userInfo.email and #strings.isEmpty(admin)}"
+                       onclick="alert('권한이 없습니다.'); return false;">
+                        <span th:text="${inquiry.inquiryTitle}"></span>
+                    </a>
+                </td>
                 <td><span th:text="${inquiry.viewCount}">조회수</span></td>
                 <td><span th:text="${#temporals.format(inquiry.regTime, 'yyyy.MM.dd')}">2023.08.25</span></td>
                 <td th:text="${inquiry.isPrivate ? '비공개' : '공개'}">공개</td>
             </tr>
             </tbody>
         </table>
-        <div class="nyInquiryGoText">
-            <a th:href="@{/news/inquiry}">문의쓰기</a>
-        </div>
         <div class="nyInquiryPeger">
             <div class="nyInquiryPegerBtn" th:each="i : ${#numbers.sequence(0, inquiryPage.totalPages - 1)}">
                 <a th:href="@{/news/inquiry/inquiryList(page=${i})}" th:text="${i + 1}"></a>

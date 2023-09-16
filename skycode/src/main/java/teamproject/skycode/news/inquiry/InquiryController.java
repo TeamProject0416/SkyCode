@@ -161,36 +161,69 @@ public class InquiryController {
 
 
     // 1 대 1 문의 서브페이지 화면 출력
+//    @GetMapping("/inquiry/show/{id}")
+//    public String showInquiryById(@PathVariable Long id, Model model, Principal principal) {
+//
+//        // 유저 로그인
+//        if (principal != null) {
+//            String user = principal.getName();
+//            MemberEntity userInfo = memberRepository.findByEmail(user);
+//            model.addAttribute("userInfo", userInfo);
+//            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+//            int reviewNum = review.size();
+//            model.addAttribute("reviewNum",reviewNum);
+//        }
+//
+//        Inquiry inquiry = inquiryService.getInquiryById(id);
+//
+//        if (inquiry != null) {
+//            // Increment view count and save
+//            inquiry.setViewCount(inquiry.getViewCount() + 1); // Increment the view count
+//            inquiryRepository.save(inquiry); // Save the updated inquiry
+//
+//            model.addAttribute("inquiry", inquiry);
+//            model.addAttribute("viewCount", inquiry.getViewCount());
+//
+//            return "news/inquiry/inquiryShow";
+//        } else {
+//            // Handle inquiry not found case
+//            // Return appropriate error view or handle differently
+//            return "error";
+//        }
+//    }
+
     @GetMapping("/inquiry/show/{id}")
     public String showInquiryById(@PathVariable Long id, Model model, Principal principal) {
-
-        // 유저 로그인
-        if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
-        }
-
         Inquiry inquiry = inquiryService.getInquiryById(id);
 
         if (inquiry != null) {
+            // 작성자 정보 가져오기
+            MemberEntity writer = inquiry.getWriter();
+
+            // 로그인한 사용자 정보 가져오기
+            if (principal != null) {
+                String loggedInUserEmail = principal.getName();
+                model.addAttribute("loggedInUserEmail", loggedInUserEmail);
+            }
+
+            // 작성자와 로그인한 사용자의 이메일 비교
+            String writerEmail = writer.getEmail();
+            model.addAttribute("writerEmail", writerEmail);
+
             // Increment view count and save
-            inquiry.setViewCount(inquiry.getViewCount() + 1); // Increment the view count
-            inquiryRepository.save(inquiry); // Save the updated inquiry
+            inquiry.setViewCount(inquiry.getViewCount() + 1);
+            inquiryRepository.save(inquiry);
 
             model.addAttribute("inquiry", inquiry);
             model.addAttribute("viewCount", inquiry.getViewCount());
 
             return "news/inquiry/inquiryShow";
         } else {
-            // Handle inquiry not found case
-            // Return appropriate error view or handle differently
             return "error";
         }
     }
+
+
 
     // 검색하기
     @GetMapping("/inquiry/search")

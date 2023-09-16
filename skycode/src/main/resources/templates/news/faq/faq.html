@@ -25,6 +25,9 @@
     <div class="nyFaqTitle">
       <h2># 자주 묻는 질문</h2>
     </div>
+    <div class="nyFaqGoText" th:if="${T(teamproject.skycode.login.MemberUtils).isAdmin()}">
+      <a th:href="@{/news/faqUp}">자주 묻는 질문 올리기</a>
+    </div>
     <div class="nyFaqContainer">
       <ul class="nyFaqNav">
         <li class="nyFaqTab active" data-category="all">전체</li>
@@ -60,9 +63,6 @@
         </tr>
         </tbody>
       </table>
-    </div>
-    <div class="nyFaqGoText" th:if="${T(teamproject.skycode.login.MemberUtils).isAdmin()}">
-      <a th:href="@{/news/faqUp}">자주 묻는 질문 올리기</a>
     </div>
   </div>
     <div class="nyFaqPeger">

@@ -2,6 +2,7 @@ package teamproject.skycode.news.inquiry;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import teamproject.skycode.login.MemberEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -20,8 +21,15 @@ import java.time.LocalDateTime;
 public class  Inquiry {
 
     @Id
+    @Column(name="inquiry_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 문의글 id
+
+    @Column
+    private String email; // 작성자의 이메일
+
+    @Column
+    private String nickName;    // 작성자 닉네임
 
     @Column(nullable = false)
     private String type;    // 문의글 종류
@@ -40,10 +48,15 @@ public class  Inquiry {
     @Column(name = "reg_time")
     private LocalDateTime regTime;  // 등록 시간
 
-    private String writer;
-    public String getWriter() {
-        return writer;
-    }
+//    private String writer;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private MemberEntity writer;
+
+//    public String getWriter() {
+//        return writer;
+//    }
 
 
     public LocalDateTime getRegistrationTime() {
@@ -83,5 +96,9 @@ public class  Inquiry {
 
     public void setResponseContent(String responseContent) {
         this.responseContent = responseContent;
+    }
+
+    public boolean isOwner(String userEmail) {
+        return this.writer.getEmail().equals(userEmail);
     }
 }
