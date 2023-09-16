@@ -48,11 +48,14 @@ public class ReviewEntity extends BaseEntity {
     @OneToMany(mappedBy = "reviewEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList = new ArrayList<>();
 
+    @Transient
+    private int commentCount;  // 댓글 수
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
     public void updateReviewImg(String miniImgName, String miniOriImgName, String miniImgUrl,
-                               String bigImgName, String bigOriImgName, String bigImgUrl) {
+                                String bigImgName, String bigOriImgName, String bigImgUrl) {
         this.miniImgName = miniImgName;
         this.miniOriImgName = miniOriImgName;
         this.miniImgUrl = miniImgUrl;

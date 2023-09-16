@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ReviewService {
 
@@ -38,7 +39,6 @@ public class ReviewService {
     private String reviewImgLocation;
 
 
-    @Transactional
     public Long saveReview(ReviewDto reviewDto, MultipartFile reviewImgFile1, MultipartFile reviewImgFile2) throws Exception {
         // 상품 등록
         ReviewEntity review = reviewDto.createReview();
@@ -199,7 +199,6 @@ public class ReviewService {
 
         return review.getId();
     }
-    @Transactional
     public void updateHits(Long id) {
         reviewRepository.updateHits(id);
     }

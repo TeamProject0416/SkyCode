@@ -23,7 +23,6 @@ public class MemberFormDto {
     @NotBlank(message = "닉네임을 입력해 주세요.")
     private String nickName;
 
-    @NotEmpty(message = "이메일은 필수 입력 값입니다")
     @Email(message = "이메일 형식으로 입력해주세요")
     @Pattern(regexp = "^((\\w+\\-?)+@(\\w+\\.)*\\w+)|(\"[\\w\\.]+\"\\s*<\\s*(\\w+\\-?)+@(\\w+\\.)*\\w+\\s*>)$", message = "skycode@skycode.com 형식으로 작성해주세요")
     private String email;
