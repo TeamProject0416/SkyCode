@@ -99,7 +99,7 @@
             </div><!--ticketBoard-->
             <h2 class="travelInfo">여행 정보</h2>
             <hr>
-            <form action="" method="post">
+            <form action="tosspayments/tossPayments" method="post">
                 <div class="startAndArriveTickets">
                     <div class="startResult">
                         <div class="startResultTicket">
@@ -111,7 +111,7 @@
                                     <p> 출발지 : 출발지 <i class="fa-solid fa-arrow-right"></i></p>
                                     <p> 도착지 : 도착지</p>
                                 </div>
-                                <p> 비행기 시간 : 2023-09-15 (금) 11:38 ~ 15:38 <span>좌석등급</span></p>
+                                <p> 비행기 시간 : <span>좌석등급</span></p>
                             </div>
                             <div class="priceResult">
                                 <p>총 금액 : <span>가격 변동</span> 원</p>
@@ -128,7 +128,7 @@
                                     <p> 출발지 : 출발지 <i class="fa-solid fa-arrow-right"></i></p>
                                     <p> 도착지 : 도착지</p>
                                 </div>
-                                <p> 비행기 시간 : 2023-09-15 (금) 11:38 ~ 15:38 <span>좌석등급</span></p>
+                                <p> 비행기 시간 : <span>좌석등급</span></p>
                             </div>
                             <div class="priceResult">
                                 <p>총 금액 : <span>가격 변동</span> 원</p>
@@ -161,21 +161,34 @@
         const ticketContents = button.closest('.ticketContents');
         const ticketTitle = ticketContents.querySelector('.ticketTitle');
 
+        // firstClass, businessClass, economyClass 가격 정보 가져오기
+        let firstClassPrice = ticketContents.querySelector('.ticketInfo div:nth-child(1) p:nth-child(3) span').textContent;
+        let businessClassPrice = ticketContents.querySelector('.ticketInfo div:nth-child(2) p:nth-child(3) span').textContent;
+        let economyClassPrice = ticketContents.querySelector('.ticketInfo div:nth-child(3) p:nth-child(3) span').textContent;
+
+        // 추출한 가격 정보 출력
+        console.log("First Class 가격: " + firstClassPrice);
+        console.log("Business Class 가격: " + businessClassPrice);
+        console.log("Economy Class 가격: " + economyClassPrice);
+
         // 출발지, 도착지, 비행기 시간 정보 가져오기
         const departure = ticketTitle.querySelector('p:nth-child(1) span').textContent;
         const destination = ticketTitle.querySelector('p:nth-child(2) span').textContent;
         const flightTime = ticketTitle.querySelector('p:nth-child(3) span').textContent;
 
+        // 여기에서 선택한 티켓의 가격 정보를 가져와서 계산
+        // const selectedTicketPrice = calculateTicketPrice(/* 여기에 가격 계산 로직 추가 */);
+
         // "가는 편" 티켓 결과 부분에 선택한 티켓 정보를 동적으로 추가합니다.
         const resultStartArrive = document.querySelector('.resultStartArrive');
-        const startArrive = document.querySelector('.startArrive>p');
+
 
         resultStartArrive.innerHTML = `
         <div class="startArrive">
             <p> 출발지 : ${departure} <i class="fa-solid fa-arrow-right"></i></p>
             <p> 도착지 : ${destination}</p>
         </div>
-        <p> 비행기 시간 : ${flightTime} <span>좌석등급</span></p>
+        <p> 비행기 시간 : ${flightTime} <span>[[${userSeatGrade}]]</span></p>
     `;
         alert("선택되었습니다.");
 
@@ -196,9 +209,6 @@
 
         // "가는 편" 티켓 결과 부분에 선택한 티켓 정보를 동적으로 추가합니다.
         const resultArriveStart = document.querySelector('.resultArriveStart');
-        const arriveStart = document.querySelector('.arriveStart>p');
-
-
 
 
         resultArriveStart.innerHTML = `
@@ -206,7 +216,7 @@
             <p> 출발지 : ${destination} <i class="fa-solid fa-arrow-right"></i></p>
             <p> 도착지 : ${departure}</p>
         </div>
-        <p> 비행기 시간 : ${flightTime} <span>좌석등급</span></p>
+        <p> 비행기 시간 : ${flightTime} <span>[[${userSeatGrade}]]</span></p>
     `;
         alert("선택되었습니다.");
 

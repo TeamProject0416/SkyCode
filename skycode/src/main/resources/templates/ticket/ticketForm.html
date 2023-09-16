@@ -45,17 +45,17 @@
             <div class="pack">
                 <div class="oej_pack1">
                     <label class="firstNum">firstClass 수량</label>
-                    <input class="oej_num0" type="number" th:field="*{firstNum}" name="firstNum" placeholder="ex) 1000(장)">
+                    <input class="oej_num0" type="number" th:field="*{firstNum}" name="firstNum" placeholder="ex) 1000(장)" value="firstClass">
                     <p th:if="${#fields.hasErrors('firstNum')}" th:errors="*{firstNum}" class="oej_fieldError">
                         Incorrect data</p></div>
                 <div class="oej_pack1">
                     <label class="businessNum">businessClass 수량</label>
-                    <input  class="oej_num" type="number" th:field="*{businessNum}" name="businessNum" placeholder="ex) 1000(장)">
+                    <input  class="oej_num" type="number" th:field="*{businessNum}" name="businessNum" placeholder="ex) 1000(장)" value="businessClass">
                     <p th:if="${#fields.hasErrors('businessNum')}" th:errors="*{businessNum}" class="oej_fieldError">
                         Incorrect data</p></div>
                 <div class="oej_packEc">
                     <label class="economyNum">economyClass 수량</label>
-                    <input class="oej_num1" type="number" th:field="*{economyNum}" name="economyNum" placeholder="ex) 1000(장)">
+                    <input class="oej_num1" type="number" th:field="*{economyNum}" name="economyNum" placeholder="ex) 1000(장)" value="economyClass">
                     <p th:if="${#fields.hasErrors('economyNum')}" th:errors="*{economyNum}" class="oej_fieldError">
                         Incorrect data</p></div>
             </div>
@@ -83,22 +83,16 @@
                 <div class="oej_packpa">
                     <label class="oej_start" for="start">출발지</label>
                     <select th:field="*{ticketStart}" id="start">
-                        <option value="Korea">한국</option>
-                        <option value="Japan">일본</option>
-                        <option value="Mexico">멕시코</option>
-                        <option value="USA">미국(워싱턴)</option>
-                        <option value="NewYork">뉴욕</option>
-                        <option value="Paris">파리</option>
-                        <option value="Switzerland">스위스</option>
-                        <option value="Egypt">이집트</option>
-                        <option value="Maldive">몰디브</option>
-                        <option value="Bangkok">방콕</option>
-                        <option value="Hanoi">하노이</option>
-                        <option value="HongKong">홍콩</option>
-                        <option value="Macau">마카오</option>
-                        <option value="Beijing">베이징</option>
-                        <option value="Australia">호주</option>
-                        <option value="Guam">괌</option>
+                        <option value="ICN">인천</option>
+                        <option value="CJU">제주</option>
+                        <option value="NRT">나리타</option>
+                        <option value="HND">하네다</option>
+                        <option value="LAX">로스앤젤레스</option>
+                        <option value="SFO">샌프란시스코</option>
+                        <option value="LAS">라스베이거스</option>
+                        <option value="GUM">괌</option>
+                        <option value="BUD">부다페스트</option>
+                        <option value="BKK">방콕</option>
                     </select>
                     <p th:if="${#fields.hasErrors('ticketStart')}" th:errors="*{ticketStart}" class="oej_fieldError">
                         Incorrect data</p>
@@ -113,22 +107,16 @@
                 <div class="oej_pack22">
                     <label class="oej_end" for="end">도착지</label>
                     <select th:field="*{ticketEnd}" id="end">
-                        <option value="Korea">한국</option>
-                        <option value="Japan">일본</option>
-                        <option value="Mexico">멕시코</option>
-                        <option value="USA">미국(워싱턴)</option>
-                        <option value="NewYork">뉴욕</option>
-                        <option value="Paris">파리</option>
-                        <option value="Switzerland">스위스</option>
-                        <option value="Egypt">이집트</option>
-                        <option value="Maldive">몰디브</option>
-                        <option value="Bangkok">방콕</option>
-                        <option value="Hanoi">하노이</option>
-                        <option value="HongKong">홍콩</option>
-                        <option value="Macau">마카오</option>
-                        <option value="Beijing">베이징</option>
-                        <option value="Australia">호주</option>
-                        <option value="Guam">괌</option>
+                        <option value="ICN">인천</option>
+                        <option value="CJU">제주</option>
+                        <option value="NRT">나리타</option>
+                        <option value="HND">하네다</option>
+                        <option value="LAX">로스앤젤레스</option>
+                        <option value="SFO">샌프란시스코</option>
+                        <option value="LAS">라스베이거스</option>
+                        <option value="GUM">괌</option>
+                        <option value="BUD">부다페스트</option>
+                        <option value="BKK">방콕</option>
                     </select>
                     <p th:if="${#fields.hasErrors('ticketEnd')}" th:errors="*{ticketEnd}" class="oej_fieldError">
                         Incorrect data</p>
