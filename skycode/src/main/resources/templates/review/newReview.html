@@ -26,13 +26,7 @@
         <form class="formContainer" action="/review/create" method="post"
               enctype="multipart/form-data" th:object="${reviewFormDto}">
             <input type="hidden" th:field="*{id}">
-            <div class="nickNameArea">
-                <label class="nickName">닉네임</label>
-                <input type="text" class="titleInput" name="nickName"
-                       placeholder="닉네임을 입력해주세요" th:field="*{nickName}">
-            </div>
-            <p th:if="${#fields.hasErrors('nickName')}" th:errors="*{nickName}" class="fieldError">Incorrect data</p>
-
+            <input type="hidden" th:field="*{memberId}">
             <div class="titleArea">
                 <label class="reviewTitle">제목</label>
                 <input type="text" class="titleInput" name="reviewTitle"
@@ -71,10 +65,12 @@
                 </div>
             </div>
 
-
-
-            <div class="btnArea">
-                <button type="submit" class="btn createBtn">작성</button>
+            <div class="btnArea" th:if="${#strings.isEmpty(reviewFormDto.id)}">
+                <button th:formaction="@{/review/create}" type="submit" class="btn createBtn">저장</button>
+            </div>
+            <div class="btnArea" th:unless="${#strings.isEmpty(reviewFormDto.id)}">
+                <button th:formaction="@{/review/update}" type="submit" class="btn createBtn">수정
+                </button>
             </div>
         </form>
         <a href="/review/reviewSub"><button type="submit" class="btn cancelBtn">취소</button></a>

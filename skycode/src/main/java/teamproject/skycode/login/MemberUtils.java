@@ -4,7 +4,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.Collection;
 
-
 public class MemberUtils {
     public static boolean isAdmin() {
         Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)

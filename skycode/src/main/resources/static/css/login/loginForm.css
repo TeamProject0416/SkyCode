@@ -27,6 +27,10 @@ select {
     outline: none;
 }
 
+label {
+    font-size: 1.5rem;
+}
+
 .oej_container {
     position: relative;
     margin: 0 auto;
@@ -72,7 +76,7 @@ select {
     padding-left: 5px;
 }
 
-/* 아이디 */
+/* 닉네임 */
 
 .oej_id {
     position: relative;
@@ -140,18 +144,14 @@ select {
     width: 500px;
     padding-left: 5px;
     height: 35px;
-
 }
-
 
 .oej_phonenumber{
     display: flex;
-
 }
 
 /* 생년월일 */
 .oej_birthday{
-
     position: relative;
     width: 500px;
     height: 90px;
@@ -186,6 +186,7 @@ select {
 .oej_mail {
     width: 500px;
     padding-left: 5px;
+    margin-top:10px;
     height: 35px;
 }
 
@@ -194,6 +195,34 @@ select {
     margin-left: 10px;
     width: 110px;
 }
+
+/* 성별 */
+
+.editGender {
+    position: relative;
+    width: 500px;
+    height: 90px;
+    margin: 0 auto;
+    /* border: 1px solid #ccc; */
+}
+
+.oej_choice {
+    font-size: 1.5rem;
+    display: flex;
+}
+
+.oej_man {
+    position: absolute;
+    top: 40px
+}
+
+.oej_man1 {
+    position: absolute;
+    top: 40px;
+    margin-left: 60px;
+}
+
+
 
 /* 주소 */
 .oej_address {

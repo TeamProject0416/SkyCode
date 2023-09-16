@@ -1,11 +1,10 @@
 package teamproject.skycode.news.notion;
 
-import java.io.*;
-import java.nio.file.*;
-import java.awt.*;
-import java.awt.image.*;
-import java.util.Base64;
-import javax.imageio.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class ImageUtils {
     public static byte[] compressImage(byte[] originalImageBytes, float quality) throws IOException {

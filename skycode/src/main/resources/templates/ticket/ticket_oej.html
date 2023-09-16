@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/ticket/ticket_oej.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header th:replace="~{fragments/sub/header::header}"></header>
+<section class="joon">
+    <div class="oej_bigDiv">
+        <div class="oej_box1">
+            <select class="oej_select" title="이메일 도메인 주소 선택">
+                <option value="">예약번호</option>
+                <option value="">예약번호</option>
+                <option value="">예약번호</option>
+                <option value="">예약번호</option>
+                <option value="">예약번호</option>
+            </select>
+            <input class="oej_input" type="text" placeholder="예약번호를 입력하세요"><button class="oej_b">검색</button>
+            <a class="oej_aa" href="#">이메일로 예약 검색</a><a class="oej_download" href="#">다운로드</a>
+        </div>
+
+
+        <!-- 섹션2 -->
+        <div class="oej_bigbox">
+            <div class="oej_box2">
+                <ul class="oej_plane">
+                    <img class="oej_planeImg" src="../sub/images/비행기2.png" alt="">
+                    <li class="oej_number1" data-number="21790514794">예약번호 :</li>
+                    <li class="oej_number2">예약날짜 : 2022년 12월 9일</li>
+                    <li class="oej_number3">발권완료</li>
+                </ul>
+                <div class="oej_bigPtext">
+                    <p class="oej_bigP">다낭 (DAD) - 달랏 (DLI)</p>
+                    <p class="oej_bigPP1">122,600원</p>
+                </div>
+                <div class="oej_box3">
+                    <div class="oej_go">
+                        <ul class="oej_go1">
+                            <li>항공편명</li>
+                            <li>출발 시간</li>
+                            <li>도착 시간</li>
+                        </ul>
+                    </div>
+                    <div class="oej_come">
+                        <ul class="oej_come1">
+                            <li>VJ729</li>
+                            <li>1월 7일 09:10</li>
+                            <li>1월 7일 10:15</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oej_person">
+                    <p>승객</p>
+                </div>
+                <div class="oej_name">
+                    <p>HONG/JIHYE, LEE/JONGHEON</p>
+                </div>
+                <div class="oej_del">
+                    <button>삭제</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 섹션3 -->
+        <div class="oej_bigbox">
+            <div class="oej_box2">
+                <ul class="oej_plane">
+                    <img class="oej_planeImg" src="../sub/images/비행기2.png" alt="">
+                    <li class="oej_number1" data-number="21640752042">예약번호 :</li>
+                    <li class="oej_number2">예약날짜 : 2022년 11월 12일</li>
+                    <li class="oej_number3">발권완료</li>
+                </ul>
+                <div class="oej_bigPtext">
+                    <p class="oej_bigP">서울 (ICN) - 다낭 (DAD)</p>
+                    <p class="oej_bigPP1">549,650원</p>
+                </div>
+                <div class="oej_box3">
+                    <div class="oej_go">
+                        <ul class="oej_go1">
+                            <li>항공편명</li>
+                            <li>출발 시간</li>
+                            <li>도착 시간</li>
+                        </ul>
+                    </div>
+                    <div class="oej_come">
+                        <ul class="oej_come1">
+                            <li>TW125</li>
+                            <li>1월 2일 07:45</li>
+                            <li>1월 2일 10:55</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oej_person">
+                    <p>승객</p>
+                </div>
+                <div class="oej_name">
+                    <p>HONG/JIHYE, LEE/JONGHEON</p>
+                </div>
+                <div class="oej_del">
+                    <button>삭제</button>
+                    <button>변경</button>
+                    <button>취소</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+
+
+</body>
+
+</html>

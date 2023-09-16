@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.common.FileService;
+import teamproject.skycode.login.MemberEntity;
+import teamproject.skycode.login.MemberRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.io.File;
@@ -22,28 +24,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final MemberRepository memberRepository;
     private final FileService fileService;
-
-//    public List<ReviewDto> findAll() {
-//        List<ReviewEntity> reviewEntityList = reviewRepository.findAll();
-//        List<ReviewDto> reviewDtoList = new ArrayList<>();
-//        for (ReviewEntity reviewEntity: reviewEntityList) {
-//            reviewDtoList.add(ReviewDto.toReviewDto(reviewEntity));
-//        }
-//
-//        return reviewDtoList;
-//    }
 
     @Value("${reviewImgLocation}")
     private String reviewImgLocation;
 
 
+    @Transactional
     public Long saveReview(ReviewDto reviewDto, MultipartFile reviewImgFile1, MultipartFile reviewImgFile2) throws Exception {
         // 상품 등록
         ReviewEntity review = reviewDto.createReview();
@@ -81,10 +76,6 @@ public class ReviewService {
         String bigImgName = "";
         String bigOriImgName = reviewImgFile2.getOriginalFilename();
         String bigImgUrl = "";
-//        List<String> bigImgNameList = new ArrayList<>();
-//        List<String> bigOriImgNameList = new ArrayList<>();
-//        List<String> bigImgUrlList = new ArrayList<>();
-//        List<MultipartFile> reviewImgFiles = new ArrayList<>();
 
         if (bigOriImgName != null && !bigOriImgName.isEmpty()) {
             // 파일명 생성
@@ -94,26 +85,11 @@ public class ReviewService {
             // 파일 경로 생성
             bigImgUrl = "/img/review/" + bigImgName;
         }
-//        list
-//        for (MultipartFile reviewImgFile : reviewImgFiles) {
-//            if (reviewImgFile != null && !reviewImgFile.isEmpty()) {
-//                String bigOriImgName = reviewImgFile.getOriginalFilename();
-//                String bigImgName = fileService.uploadFile(reviewImgLocation + basePath, bigOriImgName,
-//                        reviewImgFile.getBytes());
-//                String bigImgUrl = "/img/review/" + bigImgName;
-//
-//                bigImgNameList.add(bigImgName);
-//                bigOriImgNameList.add(bigOriImgName);
-//                bigImgUrlList.add(bigImgUrl);
-//            }
-//        }
+
 
         // 상품 이미지 정보 저장
         review.updateReviewImg(miniImgName, miniOriImgName, miniImgUrl,
                 bigImgName, bigOriImgName, bigImgUrl);
-//        list
-//        review.updateReviewImg(miniImgName, miniOriImgName, miniImgUrl,
-//                bigImgNameList, bigOriImgNameList, bigImgUrlList);
 
         // DB 시간 저장
         LocalDateTime now = LocalDateTime.now();
@@ -123,6 +99,11 @@ public class ReviewService {
         // 게시글 시간 저장 - 날짜까지만
         String formattedDate = now.toLocalDate().toString(); // "yyyy-MM-dd"
         review.setReviewTime(formattedDate);
+
+        // 부모 엔티티 조회
+        Optional<MemberEntity> memberEntityList = memberRepository.findById(reviewDto.getMemberId());
+        MemberEntity memberEntity = memberEntityList.get();
+        review.setMemberEntity(memberEntity);
 
         // 이벤트 저장
         reviewRepository.save(review);
@@ -178,10 +159,6 @@ public class ReviewService {
         String bigImgName = review.getBigImgName();
         String bigOriImgName = review.getBigOriImgName();
         String bigImgUrl = review.getBigImgUrl();
-//        List<String> newBigImgNameList = new ArrayList<>();
-//        List<String> newBigOriImgNameList = new ArrayList<>();
-//        List<String> newBigImgUrlList = new ArrayList<>();
-//        List<MultipartFile> reviewImgFiles = new ArrayList<>();
 
         if (reviewImgFile2 != null && !reviewImgFile2.isEmpty()) {
 
@@ -205,32 +182,6 @@ public class ReviewService {
             bigImgUrl = "/img/review/" + bigImgName;
 
         }
-//        list
-//        for (MultipartFile reviewImgFile : reviewImgFiles) {
-//            if (reviewImgFile != null && !reviewImgFile.isEmpty()) {
-//                String newBigOriImgName = reviewImgFile.getOriginalFilename();
-//                String newBigImgName = fileService.uploadFile(reviewImgLocation + basePath, newBigOriImgName,
-//                        reviewImgFile.getBytes());
-//                String newBigImgUrl = "/img/review/" + newBigImgName;
-//
-//                newBigImgNameList.add(newBigImgName);
-//                newBigOriImgNameList.add(newBigOriImgName);
-//                newBigImgUrlList.add(newBigImgUrl);
-//            }
-//        }
-//
-//        // 기존 이미지 파일 삭제
-//        if (!review.getBigImgNameList().isEmpty()) {
-//            for (String oldBigImgName : review.getBigImgNameList()) {
-//                String filePath = reviewImgLocation + basePath + "/" + oldBigImgName;
-//                File fileToDelete = new File(filePath);
-//                if (fileToDelete.delete()) {
-//                    System.out.println("파일이 성공적으로 삭제되었습니다.");
-//                } else {
-//                    System.err.println("파일 삭제 중 오류가 발생했습니다.");
-//                }
-//            }
-//        }
 
         // DB 시간 저장
         LocalDateTime now = LocalDateTime.now();
@@ -243,10 +194,6 @@ public class ReviewService {
         reviewDto.setBigImgName(bigImgName);
         reviewDto.setBigOriImgName(bigOriImgName);
         reviewDto.setBigImgUrl(bigImgUrl);
-//        list
-//        reviewDto.setBigImgNameList(newBigImgNameList);
-//        reviewDto.setBigOriImgNameList(newBigOriImgNameList);
-//        reviewDto.setBigImgUrlList(newBigImgUrlList);
 
         review.updateReview(reviewDto);
 
@@ -323,11 +270,6 @@ public class ReviewService {
         return reviewRepository.findAll();
     }
 
-
-//    public List<ReviewEntity> searchReviews(String keyword) {
-//        // 검색어를 이용하여 리뷰를 검색하고 결과를 반환합니다.
-//        return reviewRepository.findByReviewTitleContainingOrContentsContaining(keyword, keyword);
-//    }
     public List<ReviewEntity> findByReviewTitleContaining(String searchValue) {
 
         return reviewRepository.findByReviewTitleContainingOrderByIdDesc(searchValue);

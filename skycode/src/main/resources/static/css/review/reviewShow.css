@@ -148,3 +148,188 @@
   .userReviewBt .btns a:not(.btns a:last-of-type) {
     margin-right: 8px;
   }
+
+
+
+  /* 댓글작성 */
+
+.oej_bigbox {
+   position: relative;
+    width: 1320px;
+    height: 600px;
+    top:30px;
+    margin: 0 auto;
+}
+
+.oej_box {
+  position: absolute;
+  /* display: flex; */
+  width: 100%;
+  height: 160px;
+   border-bottom: 1px solid #ccc;
+  }
+
+.oej_icon {
+  position: relative;
+  width: 100px;
+  top: 33px;
+  line-height: 80px;
+  height: 80px;
+}
+
+.oej_icon i{
+  position: absolute;
+  /* left: 10px; */
+  top: 0px;
+  width: 100px;
+  height: 80px;
+ padding-left: 28px;
+  line-height: 80px;
+ font-size:40px;
+}
+
+/* 내용 */
+#commentContents {
+  position: absolute;
+ left: 100px;
+  top:33px;
+  width: 1060px;
+  height: 80px;
+  padding-left: 10px;
+  border-width: 0 0 1px;
+  outline: none;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+/* 댓글 */
+#reviewLink {
+  position: absolute;
+ right: 35px;
+  width: 90px;
+  height: 35px;
+  top:53px;
+  border-radius: 10px;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+ border: 1px solid rgba(0, 102, 186, 0.8);
+ background: rgba(0, 102, 186, 0.8) ;
+}
+
+.oej_button {
+  position: absolute;
+  top:240px;
+ right: 10px;
+ width: 90px;
+  height: 35px;
+ border-radius: 10px;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid rgba(0, 102, 186, 0.8);
+  background: rgba(0, 102, 186, 0.8) ;
+}
+
+
+/* 댓글 출력 부분 */
+
+#comment-list {
+  position: relative;
+  top:80px;
+  width: 100%;
+  height: 160px;
+}
+
+#comment-list i {
+position: absolute;
+  top: 15px;
+  left: -105px;
+  width: 100px;
+  height: 80px;
+ padding-left: 28px;
+  line-height: 80px;
+ font-size:40px;
+}
+
+.oej_form {
+  position: absolute;
+  width: 1060px;
+  height: 160px;
+  top: 0px;
+  left: 100px;
+}
+
+.oej_content {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+}
+
+.oej_time2{
+  position: relative;
+  display: flex;
+  width: 500px;
+  height: 60px;
+  left:0px;
+}
+
+.oej_time {
+  position: absolute;
+  top: 20px;
+  left: 0px;
+}
+
+#contents2 {
+  display: flex;
+  position: absolute;
+  width: 200px;
+  height: 30px;
+  top:20px;
+  left: 70px;
+  border-width: 0 0 1px;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  padding-left: 10px;
+}
+
+.oej_smallBox {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 60px;
+}
+
+#contents {
+  /* display: flex; */
+  position: absolute;
+  top: 60px;
+  height: 95px;
+  width: 1060px;
+  outline: none;
+  border-radius: 10px;
+  padding-left: 10px;
+  border: 1px solid #ccc;
+}
+
+ .oej_name{
+  position: absolute;
+  top: 100px;
+  left: -80px;
+}
+
+
+.oej_button2 {
+  position: absolute;
+  top: 93px;
+  right: -130px;
+  width: 90px;
+  height: 35px;
+  border-radius: 10px;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+ border: 1px solid rgba(0, 102, 186, 0.8);
+ background: rgba(0, 102, 186, 0.8) ;
+}
+

@@ -1,5 +1,6 @@
 package teamproject.skycode.review;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,12 +22,11 @@ import java.util.List;
 @AllArgsConstructor
 public class ReviewDto {
     private Long id;
+    private  String email;
     private String nickName;
     private String reviewTitle;
     private String contents;
     private int reviewHits;
-//    private LocalDateTime reviewCreatedTime;
-//    private LocalDateTime reviewUpdatedTime;
 
     private String reviewTime; // "yyyy-MM-dd"
 
@@ -46,6 +46,8 @@ public class ReviewDto {
 
     private static ModelMapper modelMapper = new ModelMapper();
 
+    private Long memberId;
+
     public ReviewEntity createReview() {
         return modelMapper.map(this, ReviewEntity.class);
     }
@@ -56,10 +58,6 @@ public class ReviewDto {
         return modelMapper.map(review, ReviewDto.class);
     }
     // Review 객체에서 ReviewDto 객체로 매핑
-
-
-
-
 
 
 //    public List<String> getBigImgNameList() {

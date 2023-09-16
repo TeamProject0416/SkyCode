@@ -5,14 +5,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.event.EventFormDto;
+import teamproject.skycode.login.MemberEntity;
+import teamproject.skycode.login.MemberRepository;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,69 +24,77 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("review")
 public class ReviewController {
-    private final ReviewRepository reviewRepository;
     private final ReviewService reviewService;
     private final CommentService commentService;
+    private final MemberRepository memberRepository;
+
 
     @GetMapping(value = "/newReview")
-    public String newReviewForm(Model model) {
+    public String newReviewForm(Model model, Principal principal) {
+        String user = "";
+        if (principal != null) {
+            user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+        }
         model.addAttribute("reviewFormDto", new ReviewDto());
         return "review/newReview";
     }
 
     //  리뷰 생성 (Post)
     @PostMapping(value = "/create")
-    public String createReview(@Valid ReviewDto reviewDto, BindingResult bindingResult, Model model,
+    public String createReview(@Valid ReviewDto reviewDto, BindingResult bindingResult,
+                               Model model, Principal principal,
                                @RequestParam("reviewImgFile1") MultipartFile reviewImgFile1,
                                @RequestParam("reviewImgFile2") MultipartFile reviewImgFile2) {
         if (bindingResult.hasErrors()) {
             return "review/newReview";
         }
         try {
+            // 유저 로그인
+            if (principal != null) {
+                String user = principal.getName();
+                MemberEntity memberEntity = memberRepository.findByEmail(user);
+                reviewDto.setEmail(user);
+                reviewDto.setMemberId(memberEntity.getId());
+                reviewDto.setNickName(memberEntity.getNickName());
+            }
+
             reviewService.saveReview(reviewDto, reviewImgFile1, reviewImgFile2);
         } catch (Exception e) {
+            e.printStackTrace();
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
             return "review/newReview";
         }
         return "redirect:/review/reviewSub";
     }
 
-
-//    리뷰 리스트 보기 기존 코드
-//    @GetMapping(value = "/reviewSub")
-//    public String reviewSub(Model model) {
-////        List<ReviewDto> reviewDtoList = reviewService.findAll();
-//        List<ReviewEntity> reviewEntityList = reviewRepository.findByAllEntity();
-//        model.addAttribute("reviews", reviewEntityList);
-//        return "review/reviewSub";
-//    }
-
-//    0907 페이징 하기 위한 수정 코드
-//    @GetMapping(value = "/reviewSub")
-//    public String reviewSub(@PageableDefault(size=5,sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Model model) {
-//        Page<ReviewEntity> page = reviewService.pageList(pageable);
-//        model.addAttribute("paging", page);
-//
-////        long reviewCount = reviewService.calculateTotalPages();
-////        model.addAttribute("paging", reviewService.pageList(pageable));
-////        model.addAttribute("totalPages", reviewCount);
-//        return "review/reviewSub";
-//    }
     @GetMapping(value = "/reviewSub")
-    public String reviewSub(@RequestParam(value="page", defaultValue="0") int page, Model model) {
+    public String reviewSub(@RequestParam(value = "page", defaultValue = "0") int page,
+                            Principal principal, Model model) {
         Page<ReviewEntity> paging = this.reviewService.getList(page);
         List<ReviewEntity> bestReviews = reviewService.getTop3BestReviews();
 
         model.addAttribute("bestReviews", bestReviews);
         model.addAttribute("paging", paging);
         model.addAttribute("maxPage", 5);
+
+        // 로그인 된 사람만
+        String user = "";
+        if (principal != null) {
+            user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+        }
+
         return "review/reviewSub";
     }
 
 
-//    리뷰 디테일 보여주기
+    //    리뷰 디테일 보여주기
     @GetMapping(value = "/{reviewId}")
-    public String reviewDetail(@PathVariable("reviewId") Long reviewId, Model model) {
+    public String reviewDetail(@PathVariable("reviewId") Long reviewId,
+                               Principal principal, Model model) {
         /*
             해당 게시글의 조회수를 하나 올리고
             게시글 데이터를 가져와서 reviewShow.html에 출력
@@ -94,37 +106,51 @@ public class ReviewController {
         List<CommentDTO> commentDTOList = commentService.findAll(reviewId);
 
         model.addAttribute("commentList", commentDTOList);
-//        model.addAttribute("review", reviewDto);
-//        model.addAttribute("page", pageable.getPageNumber());
 
         model.addAttribute("reviewDto", reviewDto);
+
+        // 유저 로그인
+        String user = "";
+        String nickname = "";
+        if (principal != null) {
+            user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            nickname = userInfo.getNickName();
+            model.addAttribute("userInfo", userInfo);
+            model.addAttribute("nickname", nickname);
+        }
 
         return "review/reviewShow";
     }
 
 
-
     //    리뷰 수정하기
     @GetMapping(value = "/{reviewId}/edit")
-    public String reviewEdit(@PathVariable("reviewId") Long reviewId, Model model) {
+    public String reviewEdit(@PathVariable("reviewId") Long reviewId,
+                             Model model,Principal principal) {
+        String user = "";
+        if (principal != null) {
+            user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+        }
         ReviewDto reviewDto = reviewService.getReviewDtl(reviewId);
         model.addAttribute("reviewFormDto", reviewDto);
         return "review/newReview";
     }
 
 
-
-//    리뷰 업데이트
+    //    리뷰 업데이트
     @PostMapping(value = "/update")
     public String reviewUpdate(@Valid ReviewDto reviewDto, BindingResult bindingResult,
-                         @RequestParam("eventImgFile1") MultipartFile reviewImgFile1,
-                         @RequestParam("eventImgFile2") MultipartFile reviewImgFile2,
-                         Model model) {
+                               @RequestParam("reviewImgFile1") MultipartFile reviewImgFile1,
+                               @RequestParam("reviewImgFile2") MultipartFile reviewImgFile2,
+                               Model model) {
         if (bindingResult.hasErrors()) {
             return "review/newReview";
         }
         try {
-            reviewService.updateReview(reviewDto,reviewImgFile1,reviewImgFile2);
+            reviewService.updateReview(reviewDto, reviewImgFile1, reviewImgFile2);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
             return "review/newReview";
@@ -132,7 +158,7 @@ public class ReviewController {
         return "redirect:/review/reviewSub";
     }
 
-//    리뷰 삭제
+    //    리뷰 삭제
     @GetMapping("/{reviewId}/delete")
     public String deleteEvent(@PathVariable("reviewId") Long reviewId) {
         // 리뷰 삭제 로직을 구현
@@ -157,7 +183,7 @@ public class ReviewController {
             try {
                 if ("reviewTitle".equals(searchType)) {
                     // 검색 유형이 "reviewTitle"인 경우 제목으로 검색
-                    searchResults = reviewService.searchReviews(searchType,searchValue);
+                    searchResults = reviewService.searchReviews(searchType, searchValue);
                     System.out.println("service=" + searchResults);
                 } else {
                     // 검색 유형이 "contents"인 경우 내용으로 검색

@@ -57,6 +57,19 @@ $(function () {
         }
     });
 
+    // 로그인 경고창
+    $('#loginLink').click(function (event) {
+        event.preventDefault(); // 링크의 기본 동작을 중지
+
+        // 경고 창을 표시
+        var confirmation = confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?");
+
+        if (confirmation) {
+            // 사용자가 확인을 클릭한 경우 로그인 페이지로 이동
+            window.location.href = "/member/login";
+        }
+    });
+
     // slider
     const slider = $('.slider>li'),
         prev = $('.pageBtnPrev'),

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import teamproject.skycode.login.MemberEntity;
 
 import java.util.List;
 
@@ -35,6 +36,8 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Long>{
 // 내림차순으로 contents 검색 결과를 가져오는 메서드
     @Query("SELECT r FROM ReviewEntity r WHERE r.contents LIKE %:searchValue% ORDER BY r.id DESC")
     List<ReviewEntity> findByContentsContainingOrderByIdDesc(@Param("searchValue") String searchValue);
+
+    List<ReviewEntity> findAllByMemberEntityOrderByIdDesc(MemberEntity memberEntity);
 
 
 //    List<ReviewEntity> findByReviewTitleContainingOrContentsContaining(String keyword, String keyword1);

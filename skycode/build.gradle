@@ -22,6 +22,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -29,20 +30,18 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'mysql:mysql-connector-java:8.0.27'
     annotationProcessor 'org.projectlombok:lombok'
-//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'com.querydsl:querydsl-jpa:5.0.0'
-    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4' // 원하는 ModelMapper 버전으로 변경 가능
-//    implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.0'
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4'
     implementation 'org.mapstruct:mapstruct:1.4.2.Final' // Use the latest version
     implementation 'commons-logging:commons-logging:1.2'
 
-    //	시큐리티
+    //   시큐리티
     implementation 'org.springframework.boot:spring-boot-starter-security'
-
     testImplementation 'org.springframework.security:spring-security-test'
 
     // 카카오

@@ -15,18 +15,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import teamproject.skycode.news.notion.ImageToBase64;
-
 import javax.validation.Valid;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Base64;
-import java.util.List;
 import java.time.LocalDateTime;
-import java.util.zip.GZIPOutputStream;
+import java.util.List;
 
 @Controller
 @RequestMapping("/news")
