@@ -79,15 +79,21 @@ public class ReviewController {
     public String reviewSub(@RequestParam(value = "page", defaultValue = "0") int page,
                             Principal principal, Model model) {
 
-        // 유저 로그인
+//        // 유저 로그인
+//        if (principal != null) {
+//            String user = principal.getName();
+//            MemberEntity userInfo = memberRepository.findByEmail(user);
+//            model.addAttribute("userInfo", userInfo);
+//            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+//            int reviewNum = review.size();
+//            model.addAttribute("reviewNum", reviewNum);
+//        }
+        // 로그인 된 사람만
+        String user = "";
         if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum", reviewNum);
+            user = principal.getName();
         }
+        model.addAttribute("user", user);
 
         Page<ReviewEntity> paging = this.reviewService.getList(page);
         List<ReviewEntity> bestReviews = reviewService.getTop3BestReviews();
