@@ -10,8 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import teamproject.skycode.constant.TicketCountry;
+import teamproject.skycode.login.MemberEntity;
+import teamproject.skycode.login.MemberRepository;
+import teamproject.skycode.review.ReviewEntity;
+import teamproject.skycode.review.ReviewRepository;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,9 +26,24 @@ import java.util.List;
 public class TicketController {
 
     private final TicketService ticketService;
+    private final MemberRepository memberRepository;
+    private final ReviewRepository reviewRepository;
+
 
     @GetMapping(value = {"/list", "/list/{page}"}) // 진행 페이지
-    public String skyTicket(@PathVariable(name = "page", required = false) Integer page, Model model) {
+    public String skyTicket(@PathVariable(name = "page", required = false) Integer page,
+                            Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         int pageSize = 3; // 페이지당 표시할 이벤트 수
         Pageable pageable = PageRequest.of(page != null ? page : 0, pageSize, Sort.by("id").descending());
 
@@ -37,7 +57,18 @@ public class TicketController {
     }
 
     @GetMapping(value = "/new") // 티켓 등록
-    public String newTicketForm(Model model) {
+    public String newTicketForm(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         model.addAttribute("ticketFormDto", new TicketFormDto());
         return "ticket/ticketForm";
     }
@@ -57,7 +88,18 @@ public class TicketController {
     }
 
     @GetMapping(value = "/{ticketId}/edit") // 티켓 수정폼
-    public String ticketEdit(@PathVariable("ticketId") Long ticketId, Model model) {
+    public String ticketEdit(@PathVariable("ticketId") Long ticketId, Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         TicketFormDto ticketFormDto = ticketService.getTicketDtl(ticketId);
         model.addAttribute("ticketFormDto", ticketFormDto);
         return "ticket/ticketForm";
@@ -79,7 +121,18 @@ public class TicketController {
     }
 
     @GetMapping("/{ticketId}/delete") // 티켓 삭제
-    public String deleteTicket(@PathVariable("ticketId") Long ticketId) {
+    public String deleteTicket(@PathVariable("ticketId") Long ticketId,Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         // 이벤트 삭제 로직을 구현
         ticketService.deleteTicket(ticketId);
 

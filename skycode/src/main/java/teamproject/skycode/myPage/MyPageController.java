@@ -36,8 +36,8 @@ import java.util.List;
 public class MyPageController {
 
     private final PasswordEncoder passwordEncoder;
-    private final MemberRepository memberRepository;
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
     private final ReviewRepository reviewRepository;
 
     //---------------------------/user------------------------//
