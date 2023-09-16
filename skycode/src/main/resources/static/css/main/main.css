@@ -658,9 +658,12 @@
       width: 100%;
       height: 250px;
       border-bottom: 1px solid black;
-      background-image: url(/mainImages/travelImg.jpg);
-      background-repeat: no-repeat;
-      background-size: cover;
+
+    }
+
+    .cardImg> img {
+    width: 291px;
+    height: 250px;
     }
 
     /* like 시작 */
@@ -736,13 +739,18 @@
     .userContext {
       word-break: break-all;
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
-      height: 70px;
+      height: 110px;
       padding: 0 12px 8px;
       line-height: 1.6;
+    }
+
+    .userContext > a:hover {
+    text-decoration : underline;
+    text-underline-position: under;
     }
 
     .reviewDate {

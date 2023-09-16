@@ -55,7 +55,9 @@
                         <div class="reviewDate">
                             <span th:text="${reviewDto.reviewTime}"></span>
                         </div>
-                        <div class="hashtag"><span>#집보내줘</span></div>
+                        <div class="hashtag">
+                            <span> 여행 기간 : <span>[[${reviewDto.reviewStart}]] ~ [[${reviewDto.reviewEnd}]]</span></span>
+                        </div>
                     </div> <!-- contentTitleArea 끝 -->
                     <div class="mainContent" th:text="${reviewDto.contents}">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur modi laudantium eum harum

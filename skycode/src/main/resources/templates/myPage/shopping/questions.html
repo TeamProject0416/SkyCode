@@ -37,7 +37,20 @@
                         <li class="on"><a href="/user_shopping/questions">나의문의내역</a></li>
                     </ul>
                     <div class="subTab">
-                        2-5
+                        <th:block th:each="event: ${events}">
+                            <div class="eventContents">
+                                <div class="QInfo">
+                                    <h2>[[${review.reviewTitle}]]</h2>
+                                    <p class="oej_small">[[${review.contents}]]</p>
+                                    <p class="oej_smallP">[[${review.reviewTime}]]</p>
+                                    <div class="thumbImg">
+                                        <a th:href="'/event/' + ${event.id}">
+                                            <img th:src="${event.miniImgUrl}" th:alt="${event.miniImgName}">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
                     </div>
                 </div>
             </div>

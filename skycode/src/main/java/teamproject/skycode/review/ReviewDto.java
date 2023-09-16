@@ -29,6 +29,8 @@ public class ReviewDto {
     private int reviewHits;
 
     private String reviewTime; // "yyyy-MM-dd"
+    private String reviewStart; // 여행 시작일 "yyyy-MM-dd"
+    private String reviewEnd; // 여행 종료일 "yyyy-MM-dd"
 
     private String miniImgName; // 미니 이미지 파일명
     private String miniOriImgName; // 미니 원본 이미지 파일명
