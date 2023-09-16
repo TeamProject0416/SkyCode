@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import teamproject.skycode.constant.Role;
 import teamproject.skycode.login.MemberEntity;
 import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.login.MemberService;
@@ -89,18 +90,6 @@ public class InquiryController {
 
             Inquiry inquiryEntity = inquiryForm.toEntity();
 
-            // Check if the inquiry is private and if the logged-in user is the writer
-            if (inquiryEntity.isPrivate() && principal != null) {
-                String loggedInUserEmail = principal.getName();
-                String writerEmail = inquiryEntity.getWriter().getEmail();
-
-                if (!loggedInUserEmail.equals(writerEmail)) {
-                    // If the inquiry is private and the logged-in user is not the writer, redirect to an error page
-                    modelAndView.setViewName("redirect:/error"); // Adjust the URL accordingly
-                    return modelAndView;
-                }
-            }
-
             inquiryService.saveInquiry(inquiryEntity);
 
             modelAndView.setViewName("redirect:/news/inquiry/inquiryList"); // Adjust the URL accordingly
@@ -129,6 +118,12 @@ public class InquiryController {
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
             model.addAttribute("reviewNum",reviewNum);
+
+            // ADMIN 권한 확인
+            Role admin = userInfo.getRole();
+            if(admin.equals(Role.ADMIN)){
+                model.addAttribute("admin", admin);
+            }
         }
 
         int pageSize = 10;

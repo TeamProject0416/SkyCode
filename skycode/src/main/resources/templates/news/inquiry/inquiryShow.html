@@ -32,15 +32,13 @@
             <!-- 문의 내용 이미지 등 출력 -->
             <p th:text="${inquiry.inquiryContent}">문의 내용</p>
         </div>
-        <!-- 이전/다음 문의 버튼 등 -->
         <!-- 삭제 버튼 -->
-            <form th:if="${userInfo.email == inquiry.writer.email}" th:action="@{/news/inquiry/delete}" method="post">
+            <form th:if="${userInfo != null and userInfo.email == inquiry.writer.email}" th:action="@{/news/inquiry/delete}" method="post">
                 <input type="hidden" name="inquiryId" th:value="${inquiry.id}" />
                 <button type="submit">삭제</button>
             </form>
             <!-- 수정 버튼 -->
-            <!-- 수정 버튼 -->
-            <a th:if="${userInfo.email == inquiry.writer.email}" th:href="@{'/news/inquiry/edit/' + ${inquiry.id}}" class="editButton">수정</a>
+            <a th:if="${userInfo != null and userInfo.email == inquiry.writer.email}" th:href="@{'/news/inquiry/edit/' + ${inquiry.id}}" class="editButton">수정</a>
         <div class="nyNotionGoText" th:if="${T(teamproject.skycode.login.MemberUtils).isAdmin()}">
         <div class="nyInquiryResponseForm">
             <form th:action="@{/news/inquiry/respond}" method="post">
