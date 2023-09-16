@@ -62,13 +62,16 @@ public class MyPageController {
     @GetMapping(value = "/user/edit") // 회원 정보 폼
     public String userEdit(Model model, Principal principal) {
 
-        model.addAttribute("memberEditFormDto", new MemberEditFormDto());
 
         // 유저 로그인
         if (principal != null) {
             String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
             model.addAttribute("userInfo", userInfo);
+
+            MemberEditFormDto memberEditFormDto = memberService.getMemberDtl(userInfo.getId());
+            model.addAttribute("memberEditFormDto", memberEditFormDto);
+
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
             model.addAttribute("reviewNum",reviewNum);
