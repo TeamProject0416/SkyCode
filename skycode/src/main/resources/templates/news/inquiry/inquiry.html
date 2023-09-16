@@ -27,6 +27,11 @@
     <div th:class="nyInquiryWarp">
         <h2>문의하기</h2>
         <form id="inquiry" th:action="@{/news/inquiry/inquiry}" method="post" th:object="${inquiryForm}">
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{email}">
+            <input type="hidden" th:field="*{nickName}">
+            <input type="hidden" th:field="*{writer}">
+            <input>
             <div th:class="nyInquiryBox">
                 <div th:class="nyInquiryInBox">
                     <label for="type">문의 유형: </label>
@@ -44,7 +49,6 @@
             </div>
             <textarea id="title" th:class="nyInquiryTitle" th:field="*{inquiryTitle}" name="inquiryTitle"
                       placeholder="문의 제목" rows="1"></textarea>
-            <input type="hidden" th:field="*{id}">
             <span th:if="${#fields.hasErrors('inquiryTitle')}" th:errors="*{inquiryTitle}"></span>
 
             <textarea id="content" th:class="nyInquiryContent" th:field="*{inquiryContent}" name="inquiryContent"

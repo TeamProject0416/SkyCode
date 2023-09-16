@@ -69,15 +69,25 @@ public class InquiryController {
 
     // 1 대 1 문의 등록시 전송하는 것
     @PostMapping("/inquiry/inquiry")
-    public ModelAndView submitInquiry(@Valid InquiryForm inquiryForm, BindingResult bindingResult) {
+    public ModelAndView submitInquiry(@Valid InquiryForm inquiryForm, BindingResult bindingResult,
+                                      Model model, Principal principal) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("왜!!!");
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("news/inquiry/inquiry");
         } else {
             System.out.println("이유가 뭐야");
+            // 유저 로그인
+            if (principal != null) {
+                String user = principal.getName();
+                MemberEntity memberEntity = memberRepository.findByEmail(user);
+                inquiryForm.setEmail(user);
+                inquiryForm.setWriter(memberEntity);
+                inquiryForm.setNickName(memberEntity.getNickName());
+            }
+
             Inquiry inquiryEntity = inquiryForm.toEntity();
-            Inquiry savedInquiry = inquiryService.saveInquiry(inquiryEntity);
+            inquiryService.saveInquiry(inquiryEntity);
 
             modelAndView.setViewName("redirect:/news/inquiry/inquiryList");
             modelAndView.addObject("successMessage", "문의가 등록되었습니다.");
@@ -162,7 +172,7 @@ public class InquiryController {
 
     // 1 대 1 문의 서브페이지 화면 출력
     @GetMapping("/inquiry/show/{id}")
-    public String showInquiryById(@PathVariable Long id, Model model) {
+    public String showInquiryById(@PathVariable Long id, Model model, Principal principal) {
 
         // 유저 로그인
         if (principal != null) {

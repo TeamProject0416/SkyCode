@@ -21,11 +21,15 @@ import java.time.LocalDateTime;
 public class  Inquiry {
 
     @Id
+    @Column(name="inquiry_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 문의글 id
 
     @Column
     private String email; // 작성자의 이메일
+
+    @Column
+    private String nickName;    // 작성자 닉네임
 
     @Column(nullable = false)
     private String type;    // 문의글 종류
@@ -47,8 +51,9 @@ public class  Inquiry {
 //    private String writer;
 
     @ManyToOne
-    @JoinColumn(name = "writer_id")
+    @JoinColumn(name = "member_id")
     private MemberEntity writer;
+
 //    public String getWriter() {
 //        return writer;
 //    }
