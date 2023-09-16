@@ -29,6 +29,7 @@ public class TicketEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private TicketStatus economyStatus; // economyClass 티켓 재고 상태
 
+
     private int firstNum; // firstClass 수량
     private int businessNum; // businessClass 수량
     private int economyNum; // economyClass 수량
@@ -39,11 +40,14 @@ public class TicketEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private TicketCountry ticketStart; // 출발지
+
     @Enumerated(EnumType.STRING)
     private TicketCountry ticketEnd; // 도착지
 
     private String ticketStartDate; // "yyyy-MM-dd" 출발일
     private String ticketEndDate; // "yyyy-MM-dd" 도착일
+
+    private String operatingTime; // 운행시간
 
     private String ticketStartTime; // "hh-mm" 출발 시간
     private String ticketEndTime; // "hh-mm" 도착 시간

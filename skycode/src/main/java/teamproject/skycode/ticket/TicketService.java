@@ -5,9 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import teamproject.skycode.constant.TicketCountry;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -66,6 +69,20 @@ public class TicketService {
     @Transactional(readOnly = true)
     public Page<TicketEntity> getTicketPage(Pageable pageable) {
         return ticketRepository.findAll(pageable);
+    }
+
+    // 티켓 검색
+    public List<TicketEntity> ticketGoinhEntityList(TicketCountry startValue, TicketCountry arriveValue, String startDate){
+        return ticketRepository.findByGoingTicket(startValue, arriveValue, startDate);
+    }
+
+    public List<TicketEntity> ticketComingEntityList(TicketCountry arriveValue, TicketCountry startValue, String endDate) {
+        return ticketRepository.findByComingTicket(arriveValue, startValue, endDate);
+    }
+
+    public List<TicketEntity> ticketPrice(Integer firstPrice) {
+
+        return null;
     }
 
 }
