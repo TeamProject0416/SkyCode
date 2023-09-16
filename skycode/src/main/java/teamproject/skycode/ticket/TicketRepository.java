@@ -31,18 +31,18 @@ public interface TicketRepository extends JpaRepository<TicketEntity, Long> {
 //            "WHERE destination = '도착지값' AND departure_time >= '시간값';")
 //    가는 편 검색 쿼리
     @Query("SELECT t FROM TicketEntity t " +
-           "WHERE (t.ticketStart = :startValue AND t.ticketEnd = :arriveValue AND t.ticketStartDate = :startDate) " +
-           "AND (t.firstStatus = 'SELL' OR t.businessStatus = 'SELL' OR t.economyStatus = 'SELL') ")
+            "WHERE (t.ticketStart = :startValue AND t.ticketEnd = :arriveValue AND t.ticketStartDate = :startDate) " +
+            "AND (t.firstStatus = 'SELL' OR t.businessStatus = 'SELL' OR t.economyStatus = 'SELL') ")
     List<TicketEntity> findByGoingTicket(
             @Param("startValue") TicketCountry startValue,
             @Param("arriveValue") TicketCountry arriveValue,
             @Param("startDate") String startDate
     );
 
-//    오는편 검색 쿼리
+    //    오는편 검색 쿼리
     @Query("SELECT t FROM TicketEntity t " +
-           "WHERE (t.ticketStart = :arriveValue AND t.ticketEnd = :startValue AND t.ticketStartDate = :endDate) " +
-           "AND (t.firstStatus = 'SELL' OR t.businessStatus = 'SELL' OR t.economyStatus = 'SELL') ")
+            "WHERE (t.ticketStart = :arriveValue AND t.ticketEnd = :startValue AND t.ticketStartDate = :endDate) " +
+            "AND (t.firstStatus = 'SELL' OR t.businessStatus = 'SELL' OR t.economyStatus = 'SELL') ")
     List<TicketEntity> findByComingTicket(
             @Param("arriveValue") TicketCountry arriveValue,
             @Param("startValue") TicketCountry startValue,
