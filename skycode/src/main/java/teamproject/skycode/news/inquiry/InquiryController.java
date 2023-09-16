@@ -11,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import teamproject.skycode.constant.Role;
+
 import teamproject.skycode.login.MemberEntity;
 import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.login.MemberService;
@@ -53,15 +56,19 @@ public class InquiryController {
     @GetMapping("/inquiry")
     public String showInquiryForm(Model model, Principal principal) {
 
-        // 유저 로그인
-        if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+        if (principal == null) {
+            // 사용자가 로그인하지 않은 경우 에러 페이지로 리다이렉트
+            return "redirect:/error";
         }
+
+        // 사용자가 로그인한 경우 처리 로직을 수행
+        String user = principal.getName();
+        MemberEntity userInfo = memberRepository.findByEmail(user);
+        model.addAttribute("userInfo", userInfo);
+        List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+        int reviewNum = review.size();
+        model.addAttribute("reviewNum", reviewNum);
+
 
         model.addAttribute("inquiryForm", new InquiryForm());
         return "/news/inquiry/inquiry";
@@ -69,23 +76,34 @@ public class InquiryController {
 
     // 1 대 1 문의 등록시 전송하는 것
     @PostMapping("/inquiry/inquiry")
-    public ModelAndView submitInquiry(@Valid InquiryForm inquiryForm, BindingResult bindingResult) {
+    public ModelAndView submitInquiry(@Valid InquiryForm inquiryForm, BindingResult bindingResult,
+                                      Model model, Principal principal) {
         ModelAndView modelAndView = new ModelAndView();
-        System.out.println("왜!!!");
+
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("news/inquiry/inquiry");
         } else {
-            System.out.println("이유가 뭐야");
+            // 유저 로그인
+            if (principal != null) {
+                String user = principal.getName();
+                MemberEntity memberEntity = memberRepository.findByEmail(user);
+                inquiryForm.setEmail(user);
+                inquiryForm.setWriter(memberEntity);
+                inquiryForm.setNickName(memberEntity.getNickName());
+            }
+
             Inquiry inquiryEntity = inquiryForm.toEntity();
-            Inquiry savedInquiry = inquiryService.saveInquiry(inquiryEntity);
 
-            modelAndView.setViewName("redirect:/news/inquiry/inquiryList");
+            inquiryService.saveInquiry(inquiryEntity);
+
+            modelAndView.setViewName("redirect:/news/inquiry/inquiryList"); // Adjust the URL accordingly
             modelAndView.addObject("successMessage", "문의가 등록되었습니다.");
-
         }
 
         return modelAndView;
     }
+
+
 
 
     // 1 대 1 문의 리스트 화면 출력
@@ -104,6 +122,13 @@ public class InquiryController {
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
             model.addAttribute("reviewNum",reviewNum);
+
+            // ADMIN 권한 확인
+            Role admin = userInfo.getRole();
+            if(admin.equals(Role.ADMIN)){
+                model.addAttribute("admin", admin);
+            }
+
         }
 
         int pageSize = 10;
@@ -136,12 +161,23 @@ public class InquiryController {
 
     // 1 대 1 문의 서브페이지 화면으로 보내기
     @PostMapping("inquiry/inquiryShow")
-    public String submitInquiry(@ModelAttribute InquiryForm inquiryForm, Model model) {
+    public String submitInquiry(@ModelAttribute InquiryForm inquiryForm, Model model, Principal principal) {
         Inquiry savedInquiry = inquiryService.saveInquiry(inquiryForm); // Save or update inquiry
         System.out.println("제발1");
         if (savedInquiry != null) {
             Long id = savedInquiry.getId(); // Get the id of the saved/updated inquiry
             InquiryViewCount viewCount = inquiryViewCountService.incrementViewCount(id);
+
+            // Check if the logged-in user's email matches the writer's email
+            if (principal != null) {
+                String loggedInUserEmail = principal.getName();
+                String writerEmail = savedInquiry.getWriter().getEmail();
+
+                if (!loggedInUserEmail.equals(writerEmail)) {
+                    // The logged-in user is not the writer, meaning it's a viewer
+                    return "error"; // Or return a view for unauthorized access
+                }
+            }
 
             // Now, based on the id, determine the URL to redirect to
             String redirectUrl = "redirect:/news/inquiry/show/" + id; // Adjust the URL pattern according to your mapping
@@ -149,15 +185,14 @@ public class InquiryController {
 
             model.addAttribute("viewCount", viewCount.getCount());
 
-
             return redirectUrl;
         }
 
         // Handle error case if savedInquiry is null
         // You can return an error view or redirect to an error page
         return "error"; // Change to the appropriate view name
-
     }
+
 
 
     // 1 대 1 문의 서브페이지 화면 출력
@@ -191,6 +226,54 @@ public class InquiryController {
             return "error";
         }
     }
+
+//    @GetMapping("/inquiry/show/{id}")
+//    public String showInquiryById(@PathVariable Long id, Model model, Principal principal) {
+//
+//        // 유저 로그인
+//        if (principal != null) {
+//            String user = principal.getName();
+//            MemberEntity userInfo = memberRepository.findByEmail(user);
+//            model.addAttribute("userInfo", userInfo);
+//            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+//            int reviewNum = review.size();
+//            model.addAttribute("reviewNum",reviewNum);
+//        }
+//
+//        Inquiry inquiry = inquiryService.getInquiryById(id);
+//
+//        if (inquiry != null) {
+//            // Increment view count and save
+//            inquiry.setViewCount(inquiry.getViewCount() + 1); // Increment the view count
+//            inquiryRepository.save(inquiry); // Save the updated inquiry
+//
+//            model.addAttribute("inquiry", inquiry);
+//            model.addAttribute("viewCount", inquiry.getViewCount());
+//
+//            // 현재 사용자와 작성자 비교
+//            if (principal != null) {
+//                MemberEntity loggedInUser = memberRepository.findByEmail(principal.getName());
+//                MemberEntity writer = inquiry.getWriter();
+//
+//                if (loggedInUser.equals(writer) || loggedInUser.getRoles().contains("ADMIN")) {
+//                    return "news/inquiry/inquiryShow";
+//                } else {
+//                    // 로그인 사용자와 작성자가 다를 경우에 대한 처리
+//                    return "access-denied";
+//                }
+//            } else {
+//                // 로그인 되어있지 않은 경우
+//                return "access-denied";
+//            }
+//        } else {
+//            // Handle inquiry not found case
+//            // Return appropriate error view or handle differently
+//            return "error";
+//        }
+//    }
+
+
+
 
     // 검색하기
     @GetMapping("/inquiry/search")

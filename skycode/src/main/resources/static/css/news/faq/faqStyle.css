@@ -99,6 +99,7 @@
 }
 .nyFaqBox .nyFaqGoText{
     text-align: end;
+    margin-bottom: 30px;
 }
 .nyFaqBox .nyFaqGoText a{
     background: #0065BA;
