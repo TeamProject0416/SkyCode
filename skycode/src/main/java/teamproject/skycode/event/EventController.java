@@ -185,7 +185,6 @@ public class EventController {
     @GetMapping(value = "/{eventId}/edit") // 이벤트 수정폼
     public String eventEdit(@PathVariable("eventId") Long eventId,
                             Principal principal, Model model) {
-
         // 유저 로그인
         if (principal != null) {
             String user = principal.getName();
