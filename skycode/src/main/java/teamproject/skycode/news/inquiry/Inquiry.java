@@ -28,13 +28,11 @@ public class  Inquiry {
 
     private boolean isPrivate;  // 공개여부
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     @NotBlank(message = "1 대 1 문의의 제목은 필수 입력값 입니다")
-//    @NotBlank(message = "inquiry title is required")
     private String inquiryTitle;    // 문의글 제목
 
-//    @Column(nullable = false)
-//    @Size(min = 0)
+    @Column(nullable = false, length = 4000)
     @NotBlank(message = "1 대 1 문의의 내용은 필수 입력값 입니다")
     private String inquiryContent;  // 문의글 내용
 

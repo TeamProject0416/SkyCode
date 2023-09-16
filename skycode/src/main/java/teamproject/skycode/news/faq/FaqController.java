@@ -12,6 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import teamproject.skycode.login.MemberEntity;
 import teamproject.skycode.login.MemberRepository;
@@ -47,7 +48,13 @@ public class FaqController {
     }
 
     @PostMapping(value = "/faq/faq")
-    public String createFaq(@ModelAttribute FaqForm faqForm){
+    public String createFaq(@ModelAttribute FaqForm faqForm, Model model){
+        if (faqForm.getFaqQuestion().isEmpty() || faqForm.getFaqAnswer().isEmpty()) {
+            // 필수 필드가 비어있는 경우
+            String errorMsg = "질문과 답변을 모두 입력해주세요.";
+            model.addAttribute("errorMsg", errorMsg);
+            return "news/faq/faqUp"; // 에러 메시지와 함께 원래의 입력 페이지로 돌아갑니다.
+        }
         Faq faq = faqForm.toEntity();
         faqRepository.save(faq);
         System.out.println("faq보내기");

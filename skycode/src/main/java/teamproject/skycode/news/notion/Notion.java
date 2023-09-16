@@ -30,11 +30,12 @@ public class Notion {
     @Column(nullable = false)
     private String type;    // 공지글 종류
 
-    @Column(nullable = false)
+
+    @Column(nullable = false, length = 1000) // 예시로 1000 글자까지 저장 가능하도록 설정
     @NotBlank(message = "Notion title is required")
     private String notionTitle;
 
-//    @NotBlank(message = "Notion content is required")
+    @Column(length = 4000) // 예시로 4000 글자까지 저장 가능하도록 설정
     @Size(min = 0)
     private String notionContent;
 

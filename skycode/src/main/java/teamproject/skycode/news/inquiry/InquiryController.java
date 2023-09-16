@@ -11,9 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import teamproject.skycode.login.MemberService;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
+import java.lang.reflect.Member;
+import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,6 +39,8 @@ public class InquiryController {
     @Autowired
     private InquiryViewCountService inquiryViewCountService;
 
+    private final MemberService userService;
+
     @Autowired
     public void InquiryController(InquiryRepository inquiryRepository) {
         this.inquiryRepository = inquiryRepository;
@@ -51,36 +55,26 @@ public class InquiryController {
 
     // 1 대 1 문의 등록시 전송하는 것
     @PostMapping("/inquiry/inquiry")
-    public ModelAndView submitInquiry(@Valid InquiryForm inquiryForm, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
-        System.out.println("왜!!!");
+    public String submitInquiry(@Valid InquiryForm inquiryForm, BindingResult bindingResult,
+                                @RequestParam(name = "isPrivate", defaultValue = "false") boolean isPrivate,
+                                Principal principal) {
         if (bindingResult.hasErrors()) {
-//            Inquiry inquiryEntity = inquiryForm.toEntity();
-//            Inquiry saveInquiry = inquiryService.saveInquiry(inquiryEntity);
-            System.out.println("왜 안돼");
-            modelAndView.setViewName("news/inquiry/inquiry");
-//            modelAndView.addObject("inquiry", saveInquiry);
-        } else {
-            System.out.println("이유가 뭐야");
-            Inquiry inquiryEntity = inquiryForm.toEntity();
-            Inquiry savedInquiry = inquiryService.saveInquiry(inquiryEntity);
-
-            modelAndView.setViewName("redirect:/news/inquiry/inquiryList");
-            modelAndView.addObject("successMessage", "문의가 등록되었습니다.");
-
+            return "news/inquiry/inquiry";
         }
 
-        return modelAndView;
+        // 현재 로그인한 사용자의 역할을 가져옵니다.
+        String role = userService.getUserRole(principal.getName());
+
+        // private 페이지에 접근 가능한지 확인합니다.
+        if (isPrivate && (role.equals("PUBLISHER") || role.equals("ADMIN"))) {
+            Inquiry inquiryEntity = inquiryForm.toEntity();
+            Inquiry savedInquiry = inquiryService.saveInquiry(inquiryEntity);
+            return "redirect:/news/inquiry/inquiryList";
+        } else {
+            return "error";
+        }
     }
 
-
-//    @PostMapping("/inquiry/create")
-//    public String submitInquiry(@ModelAttribute InquiryForm inquiryForm) {
-//        // InquiryForm을 Inquiry 엔티티로 변환하여 저장
-//        Inquiry inquiry = inquiryForm.toEntity(); // InquiryForm에서 Inquiry 엔티티로 변환하는 메서드 필요
-//        inquiryRepository.save(inquiry);
-//        return "redirect:/news/inquiry/inquiryList"; // 저장 후 등록 날짜 오름차순으로 정렬된 목록 페이지로 리다이렉트
-//    }
 
     // 1 대 1 문의 리스트 화면 출력
     @GetMapping("/inquiry/inquiryList")
@@ -115,33 +109,6 @@ public class InquiryController {
     }
 
 
-//    @GetMapping("/inquiry/inquiryList")
-//    public String getInquiries(
-//            Model model,
-//            @RequestParam(required = false, defaultValue = "0") int page,
-//            @RequestParam(required = false) String sortBy
-//    ) {
-//            int pageSize = 10;
-//        Pageable pageable;
-//
-//    if ("popularity".equals(sortBy)) {
-//        pageable = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.DESC, "viewCount"));
-//    } else {
-//        pageable = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.DESC, "regTime"));
-//    }
-//
-//    Page<Inquiry> inquiryPage = inquiryRepository.findAll(pageable);
-//    List<Inquiry> inquiries = inquiryPage.getContent();
-//
-//    long totalInquiryCount = inquiryService.getTotalInquiryCount();
-//    model.addAttribute("totalInquiryCount", totalInquiryCount);
-////        model.addAttribute("totalPages", totalPages); // Replace totalPages with the actual total pages
-//    model.addAttribute("inquiries", inquiries);
-//    model.addAttribute("inquiryPage", inquiryPage);
-////        return "inquiry-list"; // This should match your Thymeleaf template name
-//        return "news/inquiry/inquiryList"; // 혹은 다른 페이지로 이동
-//
-//    }
 
 
     // 1 대 1 문의 서브페이지 화면으로 보내기

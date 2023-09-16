@@ -136,6 +136,13 @@ public class MemberService implements UserDetailsService {
     }
 
 
+    public String getUserRole(String name) {
+        if (name.equals("admin")) {
+            return "ADMIN";
+        } else {
+            return "USER";
+        }
+    }
 }
 
 
