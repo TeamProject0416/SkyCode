@@ -18,6 +18,8 @@ import teamproject.skycode.login.MemberEntity;
 import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.login.MemberUtils;
 import teamproject.skycode.news.notion.Notion;
+import teamproject.skycode.review.ReviewEntity;
+import teamproject.skycode.review.ReviewRepository;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -29,19 +31,25 @@ import java.util.List;
 @RequestMapping("/news")
 public class FaqController {
 
-    @Autowired
-    private FaqRepository faqRepository;
-
-    @Autowired
-    private FaqService faqService;
-
-    private MemberEntity memberEntity;
-
-    private MemberRepository memberRepository;
+    private final FaqRepository faqRepository;
+    private final MemberRepository memberRepository;
+    private final ReviewRepository reviewRepository;
+    private final FaqService faqService;
 
 
     @GetMapping(value = "/faqUp")
-    public String newsFaqUp(Model model){
+    public String newsFaqUp(Model model, Principal principal){
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         model.addAttribute("faqForm", new FaqForm());
         System.out.println("1234");
         return "news/faq/faqUp";
@@ -66,8 +74,19 @@ public class FaqController {
     @GetMapping("/faq/faq")
     public String faqPage(
             @RequestParam(name = "page", defaultValue = "1") int page,
-            Model model
+            Model model, Principal principal
     ) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         Page<Faq> faqPage = faqRepository.findAll(PageRequest.of(page - 1, PAGE_SIZE));
         int totalPages = faqPage.getTotalPages();
 

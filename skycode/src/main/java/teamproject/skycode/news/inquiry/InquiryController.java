@@ -11,7 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import teamproject.skycode.login.MemberEntity;
+import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.login.MemberService;
+import teamproject.skycode.review.ReviewEntity;
+import teamproject.skycode.review.ReviewRepository;
 
 import javax.validation.Valid;
 import java.lang.reflect.Member;
@@ -29,16 +33,14 @@ public class InquiryController {
     @Autowired
     private InquiryRepository inquiryRepository;
 
-    @Autowired
-    private InquiryViewCountRepository inquiryViewCountRepository;
+    private final InquiryViewCountRepository inquiryViewCountRepository;
 
+    private final InquiryService inquiryService;
 
+    private final InquiryViewCountService inquiryViewCountService;
 
-    @Autowired
-    private InquiryService inquiryService;
-
-    @Autowired
-    private InquiryViewCountService inquiryViewCountService;
+    private final MemberRepository memberRepository;
+    private final ReviewRepository reviewRepository;
 
     private final MemberService userService;
 
@@ -49,7 +51,18 @@ public class InquiryController {
 
     // 1 대 1 문의폼 화면 출력
     @GetMapping("/inquiry")
-    public String showInquiryForm(Model model) {
+    public String showInquiryForm(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         model.addAttribute("inquiryForm", new InquiryForm());
         return "/news/inquiry/inquiry";
     }
@@ -78,10 +91,21 @@ public class InquiryController {
     // 1 대 1 문의 리스트 화면 출력
     @GetMapping("/inquiry/inquiryList")
     public String getInquiries(
-            Model model,
+            Model model, Principal principal,
             @RequestParam(required = false, defaultValue = "0") int page,
             @RequestParam(required = false) String sortBy
     ) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         int pageSize = 10;
         Pageable pageable;
 
@@ -138,7 +162,18 @@ public class InquiryController {
 
     // 1 대 1 문의 서브페이지 화면 출력
     @GetMapping("/inquiry/show/{id}")
-    public String showInquiryById(@PathVariable Long id, Model model) {
+    public String showInquiryById(@PathVariable Long id, Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         Inquiry inquiry = inquiryService.getInquiryById(id);
 
         if (inquiry != null) {
@@ -162,8 +197,19 @@ public class InquiryController {
     public String searchInquiries(
             @RequestParam("search-type") String searchType,
             @RequestParam("search-value") String searchValue,
-            Model model
+            Model model, Principal principal
     ) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         List<Inquiry> searchResults;
         System.out.println("검색");
         if ("title".equals(searchType)) {
@@ -192,7 +238,18 @@ public class InquiryController {
 
     // 1 대 1 문의글 수정 페이지 출력
     @GetMapping("/inquiry/edit/{inquiryId}")
-    public String showEditForm(@PathVariable Long inquiryId, Model model) {
+    public String showEditForm(@PathVariable Long inquiryId, Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         // inquiryId를 사용하여 해당 문의 내용을 불러오는 로직을 추가
         Inquiry inquiry = inquiryService.findById(inquiryId);
 
