@@ -52,16 +52,18 @@ public class InquiryController {
     // 1 대 1 문의폼 화면 출력
     @GetMapping("/inquiry")
     public String showInquiryForm(Model model, Principal principal) {
-
-        // 유저 로그인
-        if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+        if (principal == null) {
+            // 사용자가 로그인하지 않은 경우 에러 페이지로 리다이렉트
+            return "redirect:/error";
         }
+
+        // 사용자가 로그인한 경우 처리 로직을 수행
+        String user = principal.getName();
+        MemberEntity userInfo = memberRepository.findByEmail(user);
+        model.addAttribute("userInfo", userInfo);
+        List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+        int reviewNum = review.size();
+        model.addAttribute("reviewNum", reviewNum);
 
         model.addAttribute("inquiryForm", new InquiryForm());
         return "/news/inquiry/inquiry";
@@ -72,11 +74,10 @@ public class InquiryController {
     public ModelAndView submitInquiry(@Valid InquiryForm inquiryForm, BindingResult bindingResult,
                                       Model model, Principal principal) {
         ModelAndView modelAndView = new ModelAndView();
-        System.out.println("왜!!!");
+
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("news/inquiry/inquiry");
         } else {
-            System.out.println("이유가 뭐야");
             // 유저 로그인
             if (principal != null) {
                 String user = principal.getName();
@@ -87,15 +88,29 @@ public class InquiryController {
             }
 
             Inquiry inquiryEntity = inquiryForm.toEntity();
+
+            // Check if the inquiry is private and if the logged-in user is the writer
+            if (inquiryEntity.isPrivate() && principal != null) {
+                String loggedInUserEmail = principal.getName();
+                String writerEmail = inquiryEntity.getWriter().getEmail();
+
+                if (!loggedInUserEmail.equals(writerEmail)) {
+                    // If the inquiry is private and the logged-in user is not the writer, redirect to an error page
+                    modelAndView.setViewName("redirect:/error"); // Adjust the URL accordingly
+                    return modelAndView;
+                }
+            }
+
             inquiryService.saveInquiry(inquiryEntity);
 
-            modelAndView.setViewName("redirect:/news/inquiry/inquiryList");
+            modelAndView.setViewName("redirect:/news/inquiry/inquiryList"); // Adjust the URL accordingly
             modelAndView.addObject("successMessage", "문의가 등록되었습니다.");
-
         }
 
         return modelAndView;
     }
+
+
 
 
     // 1 대 1 문의 리스트 화면 출력
@@ -153,12 +168,22 @@ public class InquiryController {
             Long id = savedInquiry.getId(); // Get the id of the saved/updated inquiry
             InquiryViewCount viewCount = inquiryViewCountService.incrementViewCount(id);
 
+            // Check if the logged-in user's email matches the writer's email
+            if (principal != null) {
+                String loggedInUserEmail = principal.getName();
+                String writerEmail = savedInquiry.getWriter().getEmail();
+
+                if (!loggedInUserEmail.equals(writerEmail)) {
+                    // The logged-in user is not the writer, meaning it's a viewer
+                    return "error"; // Or return a view for unauthorized access
+                }
+            }
+
             // Now, based on the id, determine the URL to redirect to
             String redirectUrl = "redirect:/news/inquiry/show/" + id; // Adjust the URL pattern according to your mapping
             System.out.println("제발2");
 
             model.addAttribute("viewCount", viewCount.getCount());
-
 
             return redirectUrl;
         }
@@ -166,8 +191,8 @@ public class InquiryController {
         // Handle error case if savedInquiry is null
         // You can return an error view or redirect to an error page
         return "error"; // Change to the appropriate view name
-
     }
+
 
 
     // 1 대 1 문의 서브페이지 화면 출력
