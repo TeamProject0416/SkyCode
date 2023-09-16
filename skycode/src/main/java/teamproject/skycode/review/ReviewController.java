@@ -110,14 +110,10 @@ public class ReviewController {
         model.addAttribute("reviewDto", reviewDto);
 
         // 유저 로그인
-        String user = "";
-        String nickname = "";
         if (principal != null) {
-            user = principal.getName();
+            String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
-            nickname = userInfo.getNickName();
             model.addAttribute("userInfo", userInfo);
-            model.addAttribute("nickname", nickname);
         }
 
         return "review/reviewShow";
