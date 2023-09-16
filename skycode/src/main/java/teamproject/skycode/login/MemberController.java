@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import teamproject.skycode.review.ReviewEntity;
+import teamproject.skycode.review.ReviewRepository;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
@@ -24,6 +26,7 @@ public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
+    private final ReviewRepository reviewRepository;
 
     // 메세지
     private String encodeMessage(String message) {
@@ -42,11 +45,14 @@ public class MemberController {
         model.addAttribute("memberFormDto", new MemberFormDto());
 
         // 유저 로그인
-        String user = "";
         if (principal != null) {
-            user = principal.getName();
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
         }
-        model.addAttribute("user", user);
 
         return "member/memberForm";
     }
@@ -76,11 +82,14 @@ public class MemberController {
                               @RequestParam(name = "message", required = false) String message,
                               Principal principal, Model model) {
         // 유저 로그인
-        String user = "";
         if (principal != null) {
-            user = principal.getName();
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
         }
-        model.addAttribute("user", user);
 
         if (logout != null) {
             model.addAttribute("logoutMessage", logout);
@@ -93,11 +102,23 @@ public class MemberController {
     }
 
     @GetMapping(value = "/login/error")
-    public String loginError(Model model) {
+    public String loginError(Model model, Principal principal) {
+
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
         return "/member/memberLoginForm";
     }
 
+
+    //---------------------------/admin------------------------//
     @GetMapping(value = "/list")
     public String memberList(Model model) {
         List<MemberEntity> memberList = memberRepository.findAll();
@@ -115,13 +136,3 @@ public class MemberController {
 
 
 }
-
-
-
-
-
-
-
-
-
-

@@ -61,7 +61,7 @@
             </a>
 
             <!-- user  -->
-            <th:block th:each="userInfo: ${userInfo}">
+            <th:block th:if="${!#strings.isEmpty(userInfo)}" th:object="${userInfo}">
                 <div class="jhModalUser">
                     <div class="jhModalUserBg"></div>
                     <div class="jhUser">
@@ -72,7 +72,7 @@
                         <a href="#">
                             <button class="jhicon alarmMenu">내 알람</button>
                         </a>
-                        <h2>[[${userInfo.getNickName}]]
+                        <h2>[[*{nickName}]]
                             <button onclick="location.href='/member/logout'">로그아웃</button>
                         </h2>
                         <img class="userImg"
@@ -84,7 +84,7 @@
                         <div class="jhuserBox1">
                             <a href="/user_review">
                                 <ul>
-                                    <li>8</li>
+                                    <li>[[${reviewNum}]]</li>
                                     <li>리뷰</li>
                                 </ul>
                             </a>

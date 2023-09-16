@@ -1,0 +1,249 @@
+.section {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 80px;
+}
+
+/* ticketPageTitle */
+.ticketPage {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ticketPageTitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ticketPage .ticketTag {
+    font-weight: 700;
+    font-size: 3rem;
+    padding: 50px 0 20px 15px;
+}
+
+.ticketPageTitle>button {
+    width: 100px;
+    height: 45px;
+    border: none;
+    background-color: #0065BA;
+    border-radius: 5px;
+    margin: 70px 20px 10px 0;
+}
+
+/* ticketMain */
+.ticketMain {
+    margin-top: 8px;
+}
+.startTicket {
+    height: 500px;
+    border: 1px solid black;
+    overflow-y: scroll;
+    margin: 8px 0 16px 0;
+}
+
+.ticketContents:first-of-type {
+    border-top: 1px solid #e6e6e6;
+}
+
+.ticketContents {
+    padding: 0 20px;
+    width: 100%;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.ticketContents:hover {
+    background: #fafafa;
+}
+
+.ticketTitle , .ticketInfo {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 20px;
+    align-items: end;
+    z-index: 999;
+}
+
+.ticketInfo>div>button {
+    width: 100px;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+    background-color: #0065BA;
+}
+
+.ticketTitle>p{
+    color: #aaa;
+}
+
+.ticketInfo>div>p {
+    font-weight: 600;
+}
+
+.ticketInfo>div>p>span{
+    font-weight: 400;
+}
+
+.arriveTicket {
+    height: 500px;
+    border: 1px solid black;
+    margin-top: 8px;
+    overflow-y: scroll;
+    /* display: none; */
+}
+
+/* 티켓 선택 결과 */
+.travelInfo {
+    margin-top: 24px;
+    margin-bottom: 8px
+
+}
+.startAndArriveTickets {
+    position: relative;
+
+}
+.startResult {
+    height: 100%;
+    margin-top: 24px;
+    width: 100%;
+    height: 150px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 16px 16px;
+}
+.startResultTicket {
+    display: flex;
+    height: 100%;
+}
+.going {
+    width: 100px;
+    height: 100%;
+    border-right: 1px solid #ccc;
+    margin-right: 12px;
+}
+.resultTicketContents {
+    padding: 20px 16px;
+}
+.startArrive {
+    display: flex;
+}
+.startArrive p {
+    font-size: 2.5rem;
+}
+.startArrive p:first-of-type {
+    margin-right: 16px;
+}
+.arriveStart {
+    display: flex;
+}
+.arriveStart p {
+    font-size: 2.5rem;
+}
+.arriveStart p:first-of-type {
+    margin-right: 16px;
+}
+.priceResult {
+    position: absolute;
+    right: 50px;
+
+    font-size: 2.5rem;
+    /* padding: 20px 16px; */
+    line-height: 100px;
+}
+
+.arriveResult {
+    height: 100%;
+    margin-top: 24px;
+    width: 100%;
+    height: 150px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 16px 16px;
+}
+
+.resultBtnArea {
+    text-align: right;
+    margin-top: 8px;
+}
+.resultBtnArea button {
+    width: 150px;
+    height: 48px;
+    background: rgba(0, 102, 186, 0.9);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+.resultBtnArea button:hover {
+    background: rgba(0, 102, 186);
+}
+
+
+/* /티켓 선택 결과 */
+
+
+
+
+/* modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.modal-content {
+    background-color: white;
+    width: 300px;
+    top: 50%;
+    left: 50%;
+    margin: 300px auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    transform: translate(-50% -50%);
+}
+
+.confirm, .cancel {
+    margin : 10px;
+    width: 100px;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+    transition: .3s;
+    font-size : 1.5rem;
+}
+
+.confirm>a{
+    font-size : 1.5rem;
+    display: block;
+    line-height: 45px;
+    color: #fff;
+}
+
+.confirmDelete:hover{
+    background-color: #C4033E;
+}
+
+.confirmDelete:hover>a{
+    color: #fff;
+}
+
+.cancel:hover{
+    background-color: #0065BA;
+    color: #fff;
+}
+
+button{
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.5rem;
+}

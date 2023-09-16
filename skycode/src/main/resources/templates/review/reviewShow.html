@@ -142,15 +142,16 @@
                 </form>
             </div>
         </div>
-
     </div>
+</div>
 
-    <footer th:replace="~{fragments/sub/footer::footer}"></footer>
-    <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="/js/sub/header.js"></script>
-    <script src="/js/review/reviewShow.js"></script>
-    <script src="/js/sub/footer.js"></script>
-    <script>
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/review/reviewShow.js"></script>
+<script src="/js/sub/footer.js"></script>
+<script>
     // 리뷰 경고창
     $('#reviewLink').click(function (event) {
         event.preventDefault(); // 링크의 기본 동작을 중지
@@ -163,13 +164,8 @@
             window.location.href = "/member/login";
         }
     });
-
-
-
-
-    </script>
-
-    <script th:inline="javascript">
+</script>
+<script th:inline="javascript">
     const commentWrite = () => {
         const writer = document.getElementById("commentWriter").value;
         const contents = document.getElementById("commentContents").value;
@@ -218,12 +214,7 @@
            }
         });
     }
-
-
-
-
-    </script>
-
+</script>
 
 </body>
 

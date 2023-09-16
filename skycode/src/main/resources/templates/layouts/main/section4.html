@@ -171,238 +171,215 @@
             </div>
         </div>
     </div>
-    <a href="review/reviewSub">
+    <a href="/review/reviewSub">
         <button class="addBtn" type="submit">더보기</button>
     </a>
     <!-- /cards 끝 -->
 
     <!-- 모달 시작 -->
     <div class="modal">
-        <div class="modalMain">
-            <div class="modalHeader">
-                <div class="modalTitle">항공권 예매하기</div>
-                <div class="modalCloseArea"><i class="fa-solid fa-xmark"></i></div>
-            </div>
-            <!-- modalBody -->
-            <div class="modalBody">
-                <!-- modalBody1 -->
-                <ul class="modalSchedule">
-                    <li class="modalAirplaneSA">
-                        <ul class="modalAirplaneList">
-                            <li class="modalAirplaneStart">
-                                <p>출발</p>
-                                <button class="startBtn">어디서 떠나시나요?</button>
-                            </li>
-                            <li class="modalAirplaneArrive">
-                                <p>도착</p>
-                                <button class="arriveBtn">어디로 떠나시나요?</button>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- /modalBody1 -->
-                    <li class="modalAirplaneDate">
-                        <p>탑승일</p>
-                        <button class="dateBtn">
-                            탑승일을 선택하세요.
-                        </button>
-                    </li>
-                    <li class="modalPersonNum">
-                        <p>인원 및 좌석등급</p>
-                        <button class="personNumBtn">
-                            <strong>성인1,전체</strong>
-                        </button>
-                    </li>
-                    <li class="modalSearchBtn">
-                        <button>검색</button>
-                    </li>
-                </ul>
-            </div>
-            <!-- /modalBody -->
-            <div class="modalContents">
-                <div class="modalContentLeft">
-                    <div class="modalContentLeftArea">
-                        <h3>
-                            출발지를
-                            <br>
-                            선택해주세요
-                        </h3>
-                    </div>
+        <!-- <form action="/ticket/ticketList" method="post"> -->
+        <form action="/ticket/ticketSearch" method="POST">
+            <div class="modalMain">
+                <div class="modalHeader">
+                    <div class="modalTitle">항공권 예매하기</div>
+                    <div class="modalCloseArea"><i class="fa-solid fa-xmark"></i></div>
                 </div>
+                <!-- modalBody -->
 
-                <div class="modalContentCenter">
-                    <div class="modalContentCenterArea">
-                        <input type="text" placeholder="도시 또는 공항 이름으로 검색">
-                        <div class="scrollContent">
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modalContentRight">
-                    <div class="modalContentRightArea">
-                        <div class="modalTravelPopular">
-                            <h3>주요 인기도시</h3>
-                            <ul class="travelPopularList">
-                                <li>
-                                    <input type="radio" class="popularCity" id="radArrKimpo">
-                                    <label for="radArrKimpo">김포</label>
+                <div class="modalBody">
+                    <!-- modalBody1 -->
+                    <ul class="modalSchedule">
+                        <li class="modalAirplaneSA">
+                            <ul class="modalAirplaneList">
+                                <li class="modalAirplaneStart">
+                                    <p>출발</p>
+                                    <label for="start_value">어디서 떠나시나요?</label>
+                                    <input type="button" class="startBtn" id="start_value">
                                 </li>
-                                <li>
-                                    <input type="radio" class="popularCity" id="radArrIncheon">
-                                    <label for="radArrIncheon">인천</label>
-                                </li>
-                                <li>
-                                    <input type="radio" class="popularCity" id="radArrKansai">
-                                    <label for="radArrKansai">오사카</label>
-                                </li>
-                                <li>
-                                    <input type="radio" class="popularCity" id="radArrFukuoka">
-                                    <label for="radArrFukuoka">후쿠오카</label>
-                                </li>
-                                <li>
-                                    <input type="radio" class="popularCity" id="radArrHaneda">
-                                    <label for="radArrHaneda">하네다</label>
-                                </li>
-                                <li>
-                                    <input type="radio" class="popularCity" id="radArrGuam">
-                                    <label for="radArrGuam">괌</label>
-                                </li>
-                                <li>
-                                    <input type="radio" class="popularCity" id="radArrSapporo">
-                                    <label for="radArrSapporo">삿포로</label>
-                                </li>
-                                <li>
-                                    <input type="radio" class="popularCity" id="radArrSaipan">
-                                    <label for="radArrSaipan">사이판</label>
-                                </li>
-                                <li>
-                                    <input type="radio" class="popularCity" id="radArrOkinawa">
-                                    <label for="radArrOkinawa">오키나와</label>
-                                </li>
-                                <li>
-                                    <input type="radio" class="popularCity" id="radArrNarita">
-                                    <label for="radArrNarita">나리타</label>
+                                <li class="modalAirplaneArrive">
+                                    <p>도착</p>
+                                    <label for="arrive_value">어디서 떠나시나요?</label>
+                                    <input type="button" class="arriveBtn" id="arrive_value">
                                 </li>
                             </ul>
-                        </div>
+                        </li>
+                        <!-- /modalBody1 -->
+                        <li class="modalAirplaneDate">
+                            <p>탑승일</p>
+                            <label for="date_value">탑승일을 선택하세요</label>
+                            <input type="button" class="dateBtn" id="date_value">
+                        </li>
+                        <li class="modalPersonNum">
+                            <p>인원 수</p>
+                            <label for="pNum_value">인원수를 선택하세요</label>
+                            <input type="button" class="personNumBtn" id="pNum_value">
+                        </li>
+                        <li class="modalSeatGrade">
+                            <p>좌석등급</p>
+                            <label for="grade_value">좌석등급을 선택하세요</label>
+                            <input type="button" class="airplaneSeatGrade" id="grade_value">
+                        </li>
+                        <li class="modalSearchBtn">
+                            <button type="submit">검색</button>
+                        </li>
+                    </ul>
+                </div>
 
-                        <div class="modalFlightList">
-                            <h3>국내</h3>
-                            <ul class="domesticList">
+                <!-- /modalBody -->
+                <div class="modalContents">
+                    <div class="modalContentLeft">
+                        <div class="modalContentLeftArea">
+                            <h3>출발지를 선택하세요</h3>
+                            <input type="hidden" name="startValue">
+                            <ul class="startAirplaneList">
                                 <li>
-                                    <input type="radio" id="domesticSeoul" class="domesticTravel">
-                                    <label for="domesticSeoul">
-                                        <figure>
-                                            <img src="mainImages/SEOUL.png" alt="seoulImg">
-                                        </figure>
-                                        서울
-                                    </label>
+                                    <input type="checkbox" class="startCity" id="startIncheon" value="ICN">
+                                    <label for="startIncheon">인천</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="domesticJeju" class="domesticTravel">
-                                    <label for="domesticJeju">
-                                        <figure>
-                                            <img src="mainImages/JEJU.png" alt="jejuImg">
-                                        </figure>
-                                        제주
-                                    </label>
+                                    <input type="checkbox" class="startCity" id="startJeju" value="CJU">
+                                    <label for="startJeju">제주</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="domesticBusan" class="domesticTravel">
-                                    <label for="domesticBusan">
-                                        <figure>
-                                            <img src="mainImages/BUSAN.png" alt="busanImg">
-                                        </figure>
-                                        부산
-                                    </label>
+                                    <input type="checkbox" class="startCity" id="startNarita" value="NRT">
+                                    <label for="startNarita">나리타</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="domesticCheongju" class="domesticTravel">
-                                    <label for="domesticCheongju">
-                                        <figure>
-                                            <img src="mainImages/CHEONGJU.png" alt="cheongjuImg">
-                                        </figure>
-                                        청주
-                                    </label>
+                                    <input type="checkbox" class="startCity" id="startHaneda" value="HND">
+                                    <label for="startHaneda">하네다</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="domesticGwangju" class="domesticTravel">
-                                    <label for="domesticGwangju">
-                                        <figure>
-                                            <img src="mainImages/GWANGJU.png" alt="gwangjuImg">
-                                        </figure>
-                                        광주
-                                    </label>
+                                    <input type="checkbox" class="startCity" id="startLosAngeles" value="LAX">
+                                    <label for="startLosAngeles">로스앤젤레스</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="domesticDaegu" class="domesticTravel">
-                                    <label for="domesticDaegu">
-                                        <figure>
-                                            <img src="mainImages/DAEGU.png" alt="daeguImg">
-                                        </figure>
-                                        대구
-                                    </label>
+                                    <input type="checkbox" class="startCity" id="startSanFrancisco" value="SFO">
+                                    <label for="startSanFrancisco">샌프란시스코</label>
+                                </li>
+
+                                <li>
+                                    <input type="checkbox" class="startCity" id="startLasVegas" value="LAS">
+                                    <label for="startLasVegas">라스베이거스</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="domesticYeosu" class="domesticTravel">
-                                    <label for="domesticYeosu">
-                                        <figure>
-                                            <img src="mainImages/YEOSU.png" alt="yeosuImg">
-                                        </figure>
-                                        여수
-                                    </label>
+                                    <input type="checkbox" class="startCity" id="startGuam" value="GUM">
+                                    <label for="startGuam">괌</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="domesticUlsan" class="domesticTravel">
-                                    <label for="domesticUlsan">
-                                        <figure>
-                                            <img src="mainImages/ULSAN.png" alt="ulsanImg">
-                                        </figure>
-                                        울산
-                                    </label>
+                                    <input type="checkbox" class="startCity" id="startBudapest" value="BUD">
+                                    <label for="startBudapest">부다페스트</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="domesticGunsan" class="domesticTravel">
-                                    <label for="domesticGunsan">
-                                        <figure>
-                                            <img src="mainImages/GUNSAN.png" alt="gunsanImg">
-                                        </figure>
-                                        군산
-                                    </label>
+                                    <input type="checkbox" class="startCity" id="startBangkok" value="BKK">
+                                    <label for="startBangkok">방콕</label>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="modalContentLeftAreaD">
+                            <h3>도착지를 선택해주세요</h3>
+                            <input type="hidden" name="arriveValue">
+                            <ul class="arriveAirplaneList">
+                                <li>
+                                    <input type="checkbox" class="arriveCity" id="arriveIncheon" value="ICN">
+                                    <label for="arriveIncheon">인천</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="domesticYangyang" class="domesticTravel">
-                                    <label for="domesticYangyang">
-                                        <figure>
-                                            <img src="mainImages/YANGYANG.png" alt="yangyangImg">
-                                        </figure>
-                                        양양
-                                    </label>
+                                    <input type="checkbox" class="arriveCity" id="arriveJeju" value="CJU">
+                                    <label for="arriveJeju">제주</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="domesticPohang" class="domesticTravel">
-                                    <label for="domesticPohang">
-                                        <figure>
-                                            <img src="mainImages/POHANG.png" alt="pohangImg">
-                                        </figure>
-                                        포항
-                                    </label>
+                                    <input type="checkbox" class="arriveCity" id="arriveNarita" value="NRT">
+                                    <label for="arriveNarita">나리타</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="domesticWonju" class="domesticTravel">
-                                    <label for="domesticWonju">
-                                        <figure>
-                                            <img src="mainImages/WONJU.png" alt="wonjuImg">
-                                        </figure>
-                                        원주
-                                    </label>
+                                    <input type="checkbox" class="arriveCity" id="arriveHaneda" value="HND">
+                                    <label for="arriveHaneda">하네다</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="arriveCity" id="arriveLosAngeles" value="LAX">
+                                    <label for="arriveLosAngeles">로스앤젤레스</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="arriveCity" id="arriveSanFrancisco" value="SFO">
+                                    <label for="arriveSanFrancisco">샌프란시스코</label>
+                                </li>
+
+                                <li>
+                                    <input type="checkbox" class="arriveCity" id="arriveLasVegas" value="LAS">
+                                    <label for="arriveLasVegas">라스베이거스</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="arriveCity" id="arriveGuam" value="GUM">
+                                    <label for="arriveGuam">괌</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="arriveCity" id="arriveBudapest" value="BUD">
+                                    <label for="arriveBudapest">부다페스트</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="arriveCity" id="arriveBangkok" value="BKK">
+                                    <label for="arriveBangkok">방콕</label>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                </div>
-            </div> <!-- /modalContents 끝-->
-        </div> <!-- /modalMain 끝 -->
+                    <div class="modalContentCenter">
+                        <div class="modalContentCenterArea">
+                            <!-- calendar -->
+                            <div>
+                                <label for="startTravel">출국일</label>
+                                <input type="date" id="startTravel" class="travelStartDate" name="startDate">
+                            </div>
+                            <div>
+                                <label for="endTravel">귀국일</label>
+                                <input type="date" id="endTravel" class="travelEndDate" name="endDate">
+                            </div>
+                            <!-- /calendar -->
+                        </div>
+                    </div>
+                    <div class="modalContentRight">
+                        <div class="modalContentRightArea">
+                            <div class="personNumber">
+                                <h3>인원수 선택</h3>
+                                <div class="numArea">
+                                    <label for="adultNum">성인</label>
+                                    <input type="number" value="0" id="adultNum" min="0" name="adultNum">
+                                </div>
+                                <div class="numArea">
+                                    <label for="teenagerNum">청소년</label>
+                                    <input type="number" value="0" id="teenagerNum" min="0" name="teenagerNum">
+                                </div>
+                                <div class="numArea">
+                                    <label for="childNum">유아</label>
+                                    <input type="number" value="0" id="childNum" min="0" name="childNum">
+                                </div>
+                            </div>
+                            <div class="seatGrade">
+                                <h3>좌석 등급</h3>
+                                <input type="hidden" name="seatGrade">
+                                <ul class="domesticList">
+                                    <li>
+                                        <input type="radio" id="economySeat" class="economy" name="grade">
+                                        <label for="economySeat">이코노미석</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="businessSeat" class="business" name="grade">
+                                        <label for="businessSeat">비즈니스석</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="firstClassSeat" class="firstClass" name="grade">
+                                        <label for="firstClassSeat">일등석</label>
+                                    </li>
+                                </ul>
+                            </div><!-- seatGrade -->
+                        </div>
+                    </div>
+                </div> <!-- /modalContents 끝-->
+            </div> <!-- /modalMain 끝 -->
+        </form>
+        <!-- </form> -->
     </div> <!-- /modal 끝 -->
     <button class="btnOpenPopup"><i class="fa-solid fa-plane-up"></i></button>
     <!-- 모달 끝 -->
