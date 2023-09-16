@@ -56,24 +56,22 @@ public class InquiryController {
 
     // 1 대 1 문의 등록시 전송하는 것
     @PostMapping("/inquiry/inquiry")
-    public String submitInquiry(@Valid InquiryForm inquiryForm, BindingResult bindingResult,
-                                @RequestParam(name = "isPrivate", defaultValue = "false") boolean isPrivate,
-                                Principal principal) {
+    public ModelAndView submitInquiry(@Valid InquiryForm inquiryForm, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+        System.out.println("왜!!!");
         if (bindingResult.hasErrors()) {
-            return "news/inquiry/inquiry";
-        }
-
-        // 현재 로그인한 사용자의 역할을 가져옵니다.
-        String role = userService.getUserRole(principal.getName());
-
-        // private 페이지에 접근 가능한지 확인합니다.
-        if (isPrivate && (role.equals("PUBLISHER") || role.equals("ADMIN"))) {
+            modelAndView.setViewName("news/inquiry/inquiry");
+        } else {
+            System.out.println("이유가 뭐야");
             Inquiry inquiryEntity = inquiryForm.toEntity();
             Inquiry savedInquiry = inquiryService.saveInquiry(inquiryEntity);
-            return "redirect:/news/inquiry/inquiryList";
-        } else {
-            return "error";
+
+            modelAndView.setViewName("redirect:/news/inquiry/inquiryList");
+            modelAndView.addObject("successMessage", "문의가 등록되었습니다.");
+
         }
+
+        return modelAndView;
     }
 
 
