@@ -41,6 +41,11 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Long>{
 
     List<ReviewEntity> findByMemberEntityId(Long memberId);
 
+    @Query("SELECT r FROM ReviewEntity r WHERE r.id = :reviewId")
+    ReviewEntity findWithCommentCount(@Param("reviewId") Long reviewId);  // 댓글 수
+
+
+
 //    List<ReviewEntity> findByReviewTitleContainingOrContentsContaining(String keyword, String keyword1);
 
 

@@ -2,7 +2,6 @@ package teamproject.skycode.myPage;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -18,14 +17,18 @@ import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.login.MemberService;
 import teamproject.skycode.myPage.users.MemberEditFormDto;
 import teamproject.skycode.myPage.users.PasswordFormDto;
+import teamproject.skycode.review.CommentEntity;
+import teamproject.skycode.review.CommentRepository;
+import teamproject.skycode.review.ReviewEntity;
+import teamproject.skycode.review.ReviewRepository;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,10 +37,22 @@ public class MyPageController {
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
     private final MemberService memberService;
+    private final ReviewRepository reviewRepository;
 
     //---------------------------/user------------------------//
     @GetMapping(value = "user") // 유저 모두 보기
-    public String user() {
+    public String user(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         return "myPage/users/user";
     }
 
@@ -46,13 +61,13 @@ public class MyPageController {
     @GetMapping(value = "/user/edit") // 회원 정보 폼
     public String userEdit(Model model, Principal principal) {
         // 유저 로그인
-        String user = "";
         if (principal != null) {
-            user = principal.getName();
+            String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
             model.addAttribute("userInfo", userInfo);
-            MemberEditFormDto memberEditFormDto = memberService.getMemberDtl(userInfo.getId());
-            model.addAttribute("memberEditFormDto", memberEditFormDto);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
         }
         return "myPage/users/edit";
     }
@@ -81,6 +96,17 @@ public class MyPageController {
     public String userDelete(@PathVariable("memberId") Long memberId,
                              Authentication authentication, HttpServletRequest request,
                              HttpServletResponse response, Principal principal, Model model) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         MemberEntity member = memberRepository.findById(memberId)
                 .orElseThrow(EntityNotFoundException::new);
         model.addAttribute("passwordFormDto", new PasswordFormDto());
@@ -103,21 +129,53 @@ public class MyPageController {
 
     //---------------------------/user/collections------------------------//
     @GetMapping(value = "/user/collections")
-    public String userCollections() {
+    public String userCollections(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         return "myPage/users/collections";
     }
 
 
     //---------------------------/user/praise------------------------//
     @GetMapping(value = "/user/praise")
-    public String userPraise() {
+    public String userPraise(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         return "myPage/users/praise";
     }
 
 
     //---------------------------/user/edit_password------------------------//
     @GetMapping(value = "/user/edit_password")
-    public String userEditPw(Model model) {
+    public String userEditPw(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
 
         model.addAttribute("passwordFormDto", new PasswordFormDto());
         return "myPage/users/edit_password";
@@ -156,49 +214,134 @@ public class MyPageController {
 
     //---------------------------/user_shopping/orderList------------------------//
     @GetMapping(value = "/user_shopping/orderList")
-    public String userOrderList() {
+    public String userOrderList(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         return "myPage/shopping/orderList";
     }
 
 
     //---------------------------/user_shopping/cart------------------------//
     @GetMapping(value = "/user_shopping/cart")
-    public String userCart() {
+    public String userCart(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         return "myPage/shopping/cart";
     }
 
 
     //---------------------------/user_shopping/point------------------------//
     @GetMapping(value = "/user_shopping/point")
-    public String userPoint() {
+    public String userPoint(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         return "myPage/shopping/point";
     }
 
 
     //---------------------------/user_shopping/coupon------------------------//
     @GetMapping(value = "/user_shopping/coupon")
-    public String userCoupon() {
+    public String userCoupon(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         return "myPage/shopping/coupon";
     }
 
 
     //---------------------------/user_shopping/questions------------------------//
     @GetMapping(value = "/user_shopping/questions")
-    public String userQuestions() {
+    public String userQuestions(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         return "myPage/shopping/questions";
     }
 
 
     //---------------------------/user_trip/tripTool------------------------//
     @GetMapping(value = "/user_trip/tripTool")
-    public String userTripTool() {
+    public String userTripTool(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         return "myPage/trip/tripTool";
     }
 
 
     //---------------------------/user_review------------------------//
     @GetMapping(value = "/user_review")
-    public String userReview() {
+    public String userReview(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+
+            // 각 ReviewEntity에 대한 CommentEntity의 총 수를 가져오기
+            for (ReviewEntity reviewEntity : review) {
+                ReviewEntity reviewWithCommentCount = reviewRepository.findWithCommentCount(reviewEntity.getId());
+                reviewEntity.setCommentCount(reviewWithCommentCount.getCommentEntityList().size());
+            }
+
+            model.addAttribute("reviews", review);
+        }
         return "myPage/review/review";
     }
 

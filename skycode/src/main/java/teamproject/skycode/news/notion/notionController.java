@@ -14,12 +14,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import teamproject.skycode.login.MemberEntity;
+import teamproject.skycode.login.MemberRepository;
+import teamproject.skycode.review.ReviewEntity;
+import teamproject.skycode.review.ReviewRepository;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,19 +37,14 @@ public class notionController {
     @Autowired
     private NotionRepository notionRepository;
 
-    @Autowired
-    private NotionService notionService;
+    private final NotionService notionService;
+    private final NotionViewCountService notionViewCountService;
+    private final NotionViewCountRepository notionViewCountRepository;
+    private final ObjectMapper objectMapper;
+    private final HikariConfig validator;
 
-    @Autowired
-    private NotionViewCountService notionViewCountService;
-
-    @Autowired
-    private NotionViewCountRepository notionViewCountRepository;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-    private HikariConfig validator;
-
+    private final MemberRepository memberRepository;
+    private final ReviewRepository reviewRepository;
 
     @Autowired
     public void NotionController(NotionRepository notionRepository) {
@@ -54,7 +54,18 @@ public class notionController {
 
     // 공지사항 등록 화면
     @GetMapping(value = "/notionUp")
-    public String newsNotionUp(Model model){
+    public String newsNotionUp(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum", reviewNum);
+        }
+
         model.addAttribute("notionForm", new NotionForm());
         System.out.println("등록화면");
         return "news/notion/notionUp";
@@ -76,7 +87,7 @@ public class notionController {
         try {
             if (!file.isEmpty()) {
                 String originalFilename = file.getOriginalFilename(); // 파일 이름 가져오기
-                if(originalFilename != null && !originalFilename.isEmpty()) { // 파일 이름이 null 또는 빈 문자열인지 확인
+                if (originalFilename != null && !originalFilename.isEmpty()) { // 파일 이름이 null 또는 빈 문자열인지 확인
                     String fileName = originalFilename;
                     Path filePath = Paths.get(uploadDir + fileName);
                     Files.createDirectories(filePath.getParent()); // 디렉토리가 없으면 생성
@@ -121,10 +132,21 @@ public class notionController {
     // 공지사항 리스트 출력
     @GetMapping("/notion/notion")
     public String notionList(
-            Model model,
+            Model model, Principal principal,
             @RequestParam(required = false, defaultValue = "0") int page,
             @RequestParam(required = false) String sortBy
-    ){
+    ) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum", reviewNum);
+        }
+
         int pageSize = 4;
         Pageable pageable;
 
@@ -177,9 +199,19 @@ public class notionController {
     }
 
 
-
     @GetMapping("/notion/notionSub/{id}")
-    public String showNotionById(@PathVariable Long id, Model model) {
+    public String showNotionById(@PathVariable Long id, Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum", reviewNum);
+        }
+
         Notion notion = notionService.getNotionById(id);
 
         if (notion != null) {
@@ -199,14 +231,24 @@ public class notionController {
     }
 
     @PostMapping("/notion/delete")
-    public String deleteNotion(@RequestParam Long notionId){
+    public String deleteNotion(@RequestParam Long notionId) {
         notionService.deleteNotion(notionId);
         System.out.println("삭제");
         return "redirect:/news/notion/notion";
     }
 
     @GetMapping("/notion/edit/{notionId}")
-    public String showEditForm(@PathVariable Long notionId, Model model){
+    public String showEditForm(@PathVariable Long notionId, Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum", reviewNum);
+        }
 
         Notion notion = notionService.findById(notionId);
 
@@ -223,7 +265,7 @@ public class notionController {
     }
 
     @PostMapping("/notionUp/edit")
-    public String editNotion(@ModelAttribute("notionForm") NotionForm notionForm){
+    public String editNotion(@ModelAttribute("notionForm") NotionForm notionForm) {
 
         Notion existingNotion = notionService.findById(notionForm.getId());
 
