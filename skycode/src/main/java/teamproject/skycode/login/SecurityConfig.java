@@ -1,7 +1,6 @@
 package teamproject.skycode.login;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,14 +9,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import teamproject.skycode.constant.Role;
 
 import java.net.URLEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Autowired
-    MemberService memberService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -30,7 +28,7 @@ public class SecurityConfig {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-                .logoutSuccessUrl("/member/login?logout=" + URLEncoder.encode("로그아웃 되었습니다","UTF-8"))
+                .logoutSuccessUrl("/member/login?logout=" + URLEncoder.encode("로그아웃 되었습니다", "UTF-8"))
                 .clearAuthentication(true) /*권한정보 제거*/
         ;
 
@@ -45,12 +43,12 @@ public class SecurityConfig {
         ;
 
         http.authorizeRequests()
-                .mvcMatchers("*").permitAll()
-                .mvcMatchers("/css/**", "/js/**", "/img/**", "/mainImages/**","/subImages/**").permitAll() // 전체 공개
-                .mvcMatchers("/", "/member/**", "/images/**","/skycode/**", "/SkyCodeProject/**").permitAll() // 전체공개
-//                .antMatchers("/user_shopping/orderList").hasAnyAuthority(Role.USER.name(),Role.ADMIN.name())
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .anyRequest().authenticated()/* 그 외 모든 요청은 인증된 사용자만 접근이 가능하게 처리*/
+                .mvcMatchers("/user/**", "/user_shopping/**", "/user_trip/**",
+                        "/user_review/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                .mvcMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
+                .mvcMatchers("/", "/member/**", "/review/**", "/ticket/**", "/map/**", "/event/**", "/news/**").permitAll()
+                .mvcMatchers("/css/**", "/js/**", "/img/**", "/mainImages/**", "/subImages/**").permitAll()
+                .anyRequest().authenticated()/* 그 외 모든 요청은 인증된 사용자만 접근이 가능하게 처리*/
         ;
 
         http.exceptionHandling()

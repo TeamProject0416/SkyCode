@@ -8,9 +8,12 @@ import teamproject.skycode.event.EventEntity;
 import teamproject.skycode.event.EventRepository;
 import teamproject.skycode.login.MemberEntity;
 import teamproject.skycode.login.MemberRepository;
+import teamproject.skycode.review.ReviewEntity;
+import teamproject.skycode.review.ReviewRepository;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -18,17 +21,19 @@ import java.util.List;
 public class MainController {
     private final EventRepository eventRepository;
     private final MemberRepository memberRepository;
+    private final ReviewRepository reviewRepository;
 
     @GetMapping(value = "/")
     public String skyCode(Model model, Principal principal) {
 
         // 유저 로그인
-        String user = "";
         if (principal != null) {
-            user = principal.getName();
+            String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
             model.addAttribute("userInfo", userInfo);
-            model.addAttribute("user", user);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
         }
 
         // 이벤트 캐러셀
