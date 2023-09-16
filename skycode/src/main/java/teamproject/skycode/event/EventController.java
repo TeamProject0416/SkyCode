@@ -14,6 +14,8 @@ import teamproject.skycode.constant.EventStatus;
 import teamproject.skycode.constant.Role;
 import teamproject.skycode.login.MemberEntity;
 import teamproject.skycode.login.MemberRepository;
+import teamproject.skycode.review.ReviewEntity;
+import teamproject.skycode.review.ReviewRepository;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -27,6 +29,7 @@ public class EventController {
 
     private final EventService eventService;
     private final MemberRepository memberRepository;
+    private final ReviewRepository reviewRepository;
 
     @GetMapping(value = {"/ongoing", "/ongoing/{page}"}) // 진행 페이지
     public String ongoingEvent(@PathVariable(name = "page", required = false) Integer page,
@@ -42,14 +45,17 @@ public class EventController {
         model.addAttribute("maxPage", 5); // 페이지당 표시할 최대 페이지 수
 
         // 유저 로그인
-        String user = "";
         if (principal != null) {
-            user = principal.getName();
+            String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
             model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum", reviewNum);
+
             // ADMIN 권한 확인
             Role admin = userInfo.getRole();
-            if(admin.equals(Role.ADMIN)){
+            if (admin.equals(Role.ADMIN)) {
                 model.addAttribute("admin", admin);
             }
         }
@@ -71,14 +77,17 @@ public class EventController {
         model.addAttribute("maxPage", 5); // 페이지당 표시할 최대 페이지 수
 
         // 유저 로그인
-        String user = "";
         if (principal != null) {
-            user = principal.getName();
+            String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
             model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum", reviewNum);
+
             // ADMIN 권한 확인
             Role admin = userInfo.getRole();
-            if(admin.equals(Role.ADMIN)){
+            if (admin.equals(Role.ADMIN)) {
                 model.addAttribute("admin", admin);
             }
         }
@@ -99,14 +108,17 @@ public class EventController {
         model.addAttribute("maxPage", 5); // 페이지당 표시할 최대 페이지 수
 
         // 유저 로그인
-        String user = "";
         if (principal != null) {
-            user = principal.getName();
+            String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
             model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum", reviewNum);
+
             // ADMIN 권한 확인
             Role admin = userInfo.getRole();
-            if(admin.equals(Role.ADMIN)){
+            if (admin.equals(Role.ADMIN)) {
                 model.addAttribute("admin", admin);
             }
         }
@@ -115,7 +127,18 @@ public class EventController {
     }
 
     @GetMapping(value = "/new") // 이벤트 등록
-    public String newEventForm(Model model) {
+    public String newEventForm(Model model, Principal principal) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum", reviewNum);
+        }
+
         model.addAttribute("eventFormDto", new EventFormDto());
         return "event/eventForm";
     }
@@ -151,7 +174,7 @@ public class EventController {
             model.addAttribute("userInfo", userInfo);
             // ADMIN 권한 확인
             Role admin = userInfo.getRole();
-            if(admin.equals(Role.ADMIN)){
+            if (admin.equals(Role.ADMIN)) {
                 model.addAttribute("admin", admin);
             }
         }
@@ -161,7 +184,18 @@ public class EventController {
 
     @GetMapping(value = "/{eventId}/edit") // 이벤트 수정폼
     public String eventEdit(@PathVariable("eventId") Long eventId,
-                            Model model) {
+                            Principal principal, Model model) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         EventFormDto eventFormDto = eventService.getEventDtl(eventId);
         model.addAttribute("eventFormDto", eventFormDto);
         return "event/eventForm";

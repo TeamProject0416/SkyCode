@@ -38,72 +38,28 @@
                         <li><a href="/review/newReview">리뷰쓰기</a></li>
                     </ul>
                     <div class="subTab">
-                        <!-- 여기서부터 작성 -->
-                        <!-- 섹션1 -->
-                        <div class="oej_bigBox">
-                            <div class="oej_smallBox1">
-                                <h1>큰제목</h1>
-                                <p class="oej_small"> 작은 제목</p>
-                                <p class="oej_smallP">2023-09-14</p>
+                        <th:block th:each="review : ${reviews}">
+                            <div class="oej_bigBox">
+                                <div class="oej_smallBox1" th:attr="data-review-id=${review.id}">
+                                    <h1>[[${review.reviewTitle}]]</h1>
+                                    <p class="oej_small">[[${review.contents}]]</p>
+                                    <p class="oej_smallP">[[${review.reviewTime}]]</p>
 
-                                <div class="oej_p">
-                                    <div class="oej_psmall">
-                                        <p><i class="fas fa-eye"></i>조회수</p>
-                                        <p><i class="fa-regular fa-thumbs-up"></i>댓글수</p>
+                                    <div class="oej_p">
+                                        <div class="oej_psmall">
+                                            <p><i class="fas fa-eye"></i>조회수 : [[${review.reviewHits}]]</p>
+                                            <p><i class="fa-regular fa-thumbs-up"></i>댓글수 : [[${review.commentCount}]]</p>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="oej_smallBox2">
-                                    <div class="smallBox3">
-                                        <img src="subImages/naver.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 섹션2 -->
-                        <div class="oej_bigBox">
-                            <div class="oej_smallBox1">
-                                <h1>큰제목</h1>
-                                <p class="oej_small"> 작은 제목</p>
-                                <p class="oej_smallP">2023-09-14</p>
-
-                                <div class="oej_p">
-                                    <div class="oej_psmall">
-                                        <p><i class="fas fa-eye"></i>조회수</p>
-                                        <p><i class="fa-regular fa-thumbs-up"></i>댓글수</p>
-                                    </div>
-                                </div>
-
-                                <div class="oej_smallBox2">
-                                    <div class="smallBox3">
-                                        <img src="subImages/naver.png" alt="">
+                                    <div class="oej_smallBox2">
+                                        <div class="smallBox3">
+                                            <img th:src="${review.miniImgUrl}" th:alt="${review.miniOriImgName}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                        <!-- 섹션3 -->
-                        <div class="oej_bigBox">
-                            <div class="oej_smallBox1">
-                                <h1>큰제목</h1>
-                                <p class="oej_small"> 작은 제목</p>
-                                <p class="oej_smallP">2023-09-14</p>
-
-                                <div class="oej_p">
-                                    <div class="oej_psmall">
-                                        <p><i class="fas fa-eye"></i>조회수</p>
-                                        <p><i class="fa-regular fa-thumbs-up"></i>댓글수</p>
-                                    </div>
-                                </div>
-
-                                <div class="oej_smallBox2">
-                                    <div class="smallBox3">
-                                        <img src="subImages/naver.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </th:block>
                     </div>
                 </div>
             </div>
@@ -114,6 +70,17 @@
 
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.oej_smallBox1').click(function() {
+        const reviewId = $(this).data('review-id');
+
+        const reviewDetailUrl = '/review/' + reviewId;
+
+        window.location.href = reviewDetailUrl;
+    });
+});
+</script>
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
 </body>

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css">
-    <link th:href="@{/css/reset.css}" rel="stylesheet">
-    <link th:href="@{/css/typo.css}" rel="stylesheet">
-    <link th:href="@{/css/review/reviewStyle.css}" rel="stylesheet">
-    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
-    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css">
+  <link th:href="@{/css/reset.css}" rel="stylesheet">
+  <link th:href="@{/css/typo.css}" rel="stylesheet">
+  <link th:href="@{/css/review/reviewStyle.css}" rel="stylesheet">
+  <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+  <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 </head>
 
@@ -80,31 +80,31 @@
     <div class="reviewAllArea">
       <div class="reviewBoard">
         <th:block th:each="review : ${paging}">
-        <div class="reviewContents">
-          <div class="reviewInfo">
-            <div class="reviewUser">
-              <a th:href="@{/reviewShow/{id} (id=${review.id})}">
-                <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
-                <div>
-                  <p class="reviewUserNickName" th:text="${review.nickName}">보라돌이</p>
-                  <span th:text="'조회수 : ' + ${review.reviewHits}"></span>
-                </div>
-              </a>
+          <div class="reviewContents">
+            <div class="reviewInfo">
+              <div class="reviewUser">
+                <a th:href="@{/reviewShow/{id} (id=${review.id})}">
+                  <img src="/subImages/searchUser.png" alt="" class="reviewUserImg">
+                  <div>
+                    <p class="reviewUserNickName" th:text="${review.nickName}">보라돌이</p>
+                    <span th:text="'조회수 : ' + ${review.reviewHits}"></span>
+                  </div>
+                </a>
+              </div>
+              <div class="userReviewText">
+                <a th:href="@{/review/{id} (id=${review.id})}">
+                  <h2 class="userReviewTitle" th:text="${review.reviewTitle}"></h2>
+                  <p th:text="${review.contents}"></p>
+                  <!--                <span th:text="${#temporals.format(review.reviewCreatedTime, 'yyyy-MM-dd')}"></span>-->
+                  <span th:text="${review.reviewTime}"></span>
+                </a>
+              </div>
+              <div class="reviewImg">
+                <a th:href="'/review/' + ${review.id}"><img th:src="${review.miniImgUrl}"
+                                                            th:alt="${review.miniImgName}"></a>
+              </div>
             </div>
-            <div class="userReviewText">
-              <a th:href="@{/review/{id} (id=${review.id})}">
-                <h2 class="userReviewTitle" th:text="${review.reviewTitle}"></h2>
-                <p th:text="${review.contents}"></p>
-<!--                <span th:text="${#temporals.format(review.reviewCreatedTime, 'yyyy-MM-dd')}"></span>-->
-                <span th:text="${review.reviewTime}"></span>
-              </a>
-            </div>
-            <div class="reviewImg">
-              <a th:href="'/review/' + ${review.id}"><img th:src="${review.miniImgUrl}"
-                                                        th:alt="${review.miniImgName}"></a>
-            </div>
-          </div>
-        </div> <!--/reviewContents-->
+          </div> <!--/reviewContents-->
         </th:block>
 
         <!-- 페이징 처리 시작 -->
@@ -141,7 +141,7 @@
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
 
 <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-  <script>
+<script>
     // 리뷰 경고창
     $('#reviewLink').click(function (event) {
         event.preventDefault(); // 링크의 기본 동작을 중지

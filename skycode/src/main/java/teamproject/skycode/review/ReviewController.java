@@ -25,41 +25,37 @@ import java.util.List;
 @RequestMapping("review")
 public class ReviewController {
     private final ReviewService reviewService;
+    private final ReviewRepository reviewRepository;
     private final CommentService commentService;
     private final MemberRepository memberRepository;
 
 
     @GetMapping(value = "/newReview")
     public String newReviewForm(Model model, Principal principal) {
-        String user = "";
+
+        // 유저 로그인
         if (principal != null) {
-            user = principal.getName();
+            String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
             model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
         }
+
         model.addAttribute("reviewFormDto", new ReviewDto());
         return "review/newReview";
     }
 
     //  리뷰 생성 (Post)
     @PostMapping(value = "/create")
-    public String createReview(@Valid ReviewDto reviewDto, BindingResult bindingResult,
-                               Model model, Principal principal,
+    public String createReview(@Valid ReviewDto reviewDto, BindingResult bindingResult, Model model,
                                @RequestParam("reviewImgFile1") MultipartFile reviewImgFile1,
                                @RequestParam("reviewImgFile2") MultipartFile reviewImgFile2) {
         if (bindingResult.hasErrors()) {
             return "review/newReview";
         }
         try {
-            // 유저 로그인
-            if (principal != null) {
-                String user = principal.getName();
-                MemberEntity memberEntity = memberRepository.findByEmail(user);
-                reviewDto.setEmail(user);
-                reviewDto.setMemberId(memberEntity.getId());
-                reviewDto.setNickName(memberEntity.getNickName());
-            }
-
             reviewService.saveReview(reviewDto, reviewImgFile1, reviewImgFile2);
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,20 +68,23 @@ public class ReviewController {
     @GetMapping(value = "/reviewSub")
     public String reviewSub(@RequestParam(value = "page", defaultValue = "0") int page,
                             Principal principal, Model model) {
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         Page<ReviewEntity> paging = this.reviewService.getList(page);
         List<ReviewEntity> bestReviews = reviewService.getTop3BestReviews();
 
         model.addAttribute("bestReviews", bestReviews);
         model.addAttribute("paging", paging);
         model.addAttribute("maxPage", 5);
-
-        // 로그인 된 사람만
-        String user = "";
-        if (principal != null) {
-            user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-        }
 
         return "review/reviewSub";
     }
@@ -95,6 +94,16 @@ public class ReviewController {
     @GetMapping(value = "/{reviewId}")
     public String reviewDetail(@PathVariable("reviewId") Long reviewId,
                                Principal principal, Model model) {
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+        }
+
         /*
             해당 게시글의 조회수를 하나 올리고
             게시글 데이터를 가져와서 reviewShow.html에 출력
@@ -102,19 +111,9 @@ public class ReviewController {
         reviewService.updateHits(reviewId);
 
         ReviewDto reviewDto = reviewService.getReviewDtl(reviewId);
-
         List<CommentDTO> commentDTOList = commentService.findAll(reviewId);
-
         model.addAttribute("commentList", commentDTOList);
-
         model.addAttribute("reviewDto", reviewDto);
-
-        // 유저 로그인
-        if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-        }
 
         return "review/reviewShow";
     }
@@ -124,12 +123,16 @@ public class ReviewController {
     @GetMapping(value = "/{reviewId}/edit")
     public String reviewEdit(@PathVariable("reviewId") Long reviewId,
                              Model model,Principal principal) {
-        String user = "";
+        // 유저 로그인
         if (principal != null) {
-            user = principal.getName();
+            String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
             model.addAttribute("userInfo", userInfo);
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
         }
+
         ReviewDto reviewDto = reviewService.getReviewDtl(reviewId);
         model.addAttribute("reviewFormDto", reviewDto);
         return "review/newReview";
