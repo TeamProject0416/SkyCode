@@ -14,15 +14,25 @@
     <style>
         .admin{
             position: relative;
+            display: flex;
+            justify-content: space-between;
             top: 100px;
             height: 600px;
         }
         .admin a{
             font-size: 2rem;
-            color: #aaaaaa;
+            color: #ffffff;
         }
-        .admin a:hover{
-            color: #4b4b4b;
+
+        .admin>div{
+            padding: 10px;
+            /*width: 50px;*/
+            height: 60px;
+            margin: 10px;
+            background-color: #003999;
+        }
+        .admin>div:hover{
+            border-radius: 30px;
         }
     </style>
 
@@ -40,6 +50,7 @@
         <div><a th:href="@{/event/new}">이벤트 등록</a></div>
         <div><a th:href="@{/coupon/new}">쿠폰 등록</a></div>
         <div><a th:href="@{/member/list}">회원 목록</a></div>
+        <div><a th:href="@{/ticket/new}">티켓 등록</a></div>
     </div>
 
 
