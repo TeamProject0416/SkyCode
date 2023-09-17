@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/news/faq/faqStyle.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        .admin{
+            position: relative;
+            top: 100px;
+            height: 600px;
+        }
+        .admin a{
+            font-size: 2rem;
+            color: #aaaaaa;
+        }
+        .admin a:hover{
+            color: #4b4b4b;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+
+    <div class="admin">
+        <div><a th:href="@{/news/notionUp}">공지사항 등록</a></div>
+        <div><a th:href="@{/news/faqUp}">자주 묻는 질문 등록</a></div>
+        <div><a th:href="@{/event/new}">이벤트 등록</a></div>
+        <div><a th:href="@{/coupon/new}">쿠폰 등록</a></div>
+        <div><a th:href="@{/member/list}">회원 목록</a></div>
+    </div>
+
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+<script src="/js/news/faqTab.js"></script>
+<script src="/js/news/faq.js"></script>
+
+</body>
+</html>
