@@ -9,7 +9,7 @@
     <link th:href="@{/css/sub/header.css}" rel="stylesheet">
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/review/newReview.css}">
-    <!--    <link rel="stylesheet" th:href="@{/css/event/eventForm.css}">-->
+    <!--    <link rel="stylesheet" th:href="@{/css/review/reviewForm.css}">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 </head>
@@ -32,7 +32,24 @@
                 <input type="text" class="titleInput" name="reviewTitle"
                        placeholder="제목을 입력해주세요" th:field="*{reviewTitle}">
             </div>
-            <p th:if="${#fields.hasErrors('reviewTitle')}" th:errors="*{reviewTitle}" class="fieldError">Incorrect data</p>
+            <div>
+                <div>
+                    <label class="reviewStart">여행 시작일</label>
+                    <input name="reviewStart" th:field="*{reviewStart}" type="date">
+                    <p th:if="${#fields.hasErrors('reviewStart')}" th:errors="*{reviewStart}" class="fieldError">
+                        Incorrect data
+                    </p>
+                </div>
+                <div>
+                    <label class="reviewEnd">여행 종료일</label>
+                    <input name="reviewEnd" th:field="*{reviewEnd}" type="date">
+                    <p th:if="${#fields.hasErrors('reviewEnd')}" th:errors="*{reviewEnd}" class="fieldError">
+                        Incorrect data
+                    </p>
+                </div>
+            </div>
+            <p th:if="${#fields.hasErrors('reviewTitle')}" th:errors="*{reviewTitle}" class="fieldError">Incorrect
+                data</p>
 
             <div class="contentArea">
                 <label class="contents">내용</label>
@@ -73,7 +90,9 @@
                 </button>
             </div>
         </form>
-        <a href="/review/reviewSub"><button type="submit" class="btn cancelBtn">취소</button></a>
+        <a href="/review/reviewSub">
+            <button type="submit" class="btn cancelBtn">취소</button>
+        </a>
     </div>
 </div>
 
@@ -108,6 +127,7 @@
             reader.readAsDataURL(input.files[0]);
         }
     };
+
 </script>
 <script src="/js/sub/header.js"></script>
 <script src="/js/review/reviewSub.js"></script>

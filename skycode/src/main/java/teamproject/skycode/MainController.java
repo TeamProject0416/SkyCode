@@ -37,6 +37,10 @@ public class MainController {
         }
 
         // 이벤트 캐러셀
+        List<ReviewEntity> review = reviewRepository.findAllByOrderByReviewHitsDesc();
+        model.addAttribute("reviews", review);
+
+        // 이벤트 캐러셀
         List<EventEntity> event = eventRepository.findByONGOING();
         model.addAttribute("events", event);
         return "main";

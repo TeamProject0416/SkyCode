@@ -44,6 +44,8 @@ public class ReviewEntity extends BaseEntity {
     private String bigOriImgName; // 큰 원본 이미지 파일명
     private String bigImgUrl; // 큰 이미지 조회 경로
     private String reviewTime; // "yyyy-MM-dd"
+    private String reviewStart; // 여행 시작일 "yyyy-MM-dd"
+    private String reviewEnd; // 여행 종료일 "yyyy-MM-dd"
 
     @OneToMany(mappedBy = "reviewEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList = new ArrayList<>();
