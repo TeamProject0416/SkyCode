@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.common.FileService;
+import teamproject.skycode.constant.ActionType;
 import teamproject.skycode.myPage.users.MemberEditFormDto;
+import teamproject.skycode.point.*;
 
 import javax.persistence.EntityNotFoundException;
 import java.io.File;
@@ -19,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Service
 @Transactional
@@ -26,6 +29,9 @@ import java.time.LocalDateTime;
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
+    private final PointRepository pointRepository;
+    private final Member_PointRepository memberPointRepository;
+    private final PointHistoryRepository pointHistoryRepository;
     private final FileService fileService;
 
     @Value("${imgLocation}")
@@ -34,6 +40,38 @@ public class MemberService implements UserDetailsService {
     public MemberEntity saveMember(MemberEntity member) {
         validateDuplicateMember(member);
         DuplicateNicknameMember(member);
+
+        // 기존에 저장된 "회원가입 보너스 포인트"를 가져오기
+        PointEntity point = pointRepository.findByPointName("회원가입을 축하합니다");
+
+        if (point == null) {
+            // 기존에 저장된 포인트가 없다면 새로운 포인트 엔티티 생성
+            point = new PointEntity();
+            point.setPointName("회원가입을 축하합니다");
+            point.setPointNum(1000); // 포인트 지급
+            point = pointRepository.save(point); // 새로운 포인트를 저장하고 ID를 얻음
+        }
+
+        pointRepository.save(point);
+
+        // 사용자와 포인트 간의 관계를 맺어줌
+        Member_PointEntity memberPoint = new Member_PointEntity();
+        memberPoint.setMemberEntity(member); // 사용자 정보
+        memberPoint.setMemberEmail(member.getEmail());
+        memberPoint.setPoint(1000);
+        memberPoint.setPointEntity(point); // 포인트 정보
+        memberPointRepository.save(memberPoint);
+
+        // 포인트 지급 이력 생성
+        PointHistoryEntity earnedHistory = new PointHistoryEntity();
+        earnedHistory.setMemberPointEntity(memberPoint);
+        earnedHistory.setPointsEarned(1000); // 지급한 포인트 양 설정
+        earnedHistory.setUsageDate(new Date()); // 지급 일자 설정
+        earnedHistory.setPointName(point.getPointName()); // 포인트 이름 저장
+        earnedHistory.setActionType(ActionType.EARNED); // 포인트 지급 이력인 경우 설정
+
+        pointHistoryRepository.save(earnedHistory); // 포인트 지급 이력 저장
+
         return memberRepository.save(member);
     }
 

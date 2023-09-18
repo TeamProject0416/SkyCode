@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import teamproject.skycode.constant.ActionType;
 import teamproject.skycode.coupon.CouponEntity;
 import teamproject.skycode.coupon.CouponRepository;
 import teamproject.skycode.coupon.Member_CouponEntity;
@@ -24,6 +25,9 @@ import teamproject.skycode.myPage.users.MemberEditFormDto;
 import teamproject.skycode.myPage.users.PasswordFormDto;
 import teamproject.skycode.news.inquiry.Inquiry;
 import teamproject.skycode.news.inquiry.InquiryRepository;
+import teamproject.skycode.point.PointEntity;
+import teamproject.skycode.point.PointHistoryEntity;
+import teamproject.skycode.point.PointHistoryRepository;
 import teamproject.skycode.review.ReviewEntity;
 import teamproject.skycode.review.ReviewRepository;
 
@@ -45,6 +49,7 @@ public class MyPageController {
     private final MemberRepository memberRepository;
     private final ReviewRepository reviewRepository;
     private final CouponRepository couponRepository;
+    private final PointHistoryRepository pointHistoryRepository;
     private final Member_CouponRepository memberCouponRepository;
 
     private final InquiryRepository inquiryRepository;
@@ -61,7 +66,7 @@ public class MyPageController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
         }
 
         return "myPage/users/user";
@@ -85,7 +90,7 @@ public class MyPageController {
 
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
         }
         return "myPage/users/edit";
     }
@@ -122,7 +127,7 @@ public class MyPageController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
         }
 
         MemberEntity member = memberRepository.findById(memberId)
@@ -156,7 +161,7 @@ public class MyPageController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
         }
 
         model.addAttribute("passwordFormDto", new PasswordFormDto());
@@ -205,7 +210,9 @@ public class MyPageController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
+
+
         }
 
         return "myPage/shopping/orderList";
@@ -223,7 +230,27 @@ public class MyPageController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
+
+            // 포인트 히스토리
+            List<PointHistoryEntity> historys = pointHistoryRepository.findByMemberPointEntity_MemberEntityId(userInfo.getId());
+            model.addAttribute("historys", historys);
+
+            // 총 포인트 합산
+            int totalPoints = 0;
+            int totalPointsUsed = 0;
+
+            for (PointHistoryEntity history : historys) {
+                if (history.getActionType() == ActionType.EARNED) {
+                    totalPoints += history.getPointsEarned();
+                } else if (history.getActionType() == ActionType.USED) {
+                    totalPointsUsed += history.getPointsUsed();
+                }
+            }
+
+            int total = totalPoints - totalPointsUsed;
+            model.addAttribute("total", total);
+
         }
 
         return "myPage/shopping/point";
@@ -241,7 +268,7 @@ public class MyPageController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
 
             // 쿠폰 목록
             List<Member_CouponEntity> MemberCouponList = memberCouponRepository.findByMemberEmail(user);
@@ -254,7 +281,7 @@ public class MyPageController {
     }
 
     @PostMapping("/user/couponDownload") // 쿠폰 다운로드
-    public String couponDownload(@Valid CouponDto couponDto, BindingResult bindingResult, Model model,Principal principal) {
+    public String couponDownload(@Valid CouponDto couponDto, BindingResult bindingResult, Model model, Principal principal) {
 
         if (bindingResult.hasErrors()) {
             return "/user_shopping/coupon";
@@ -299,14 +326,11 @@ public class MyPageController {
 
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
 
             List<Inquiry> inquiryList = inquiryRepository.findByWriterId(userInfo.getId());
-            int inquiryNum = inquiryList.size();
-            model.addAttribute("inquiryList",inquiryList);
-
+            model.addAttribute("inquiryList", inquiryList);
         }
-
         return "myPage/shopping/questions";
     }
 
@@ -323,7 +347,7 @@ public class MyPageController {
 
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
 
             // 각 ReviewEntity에 대한 CommentEntity의 총 수를 가져오기
             for (ReviewEntity reviewEntity : review) {

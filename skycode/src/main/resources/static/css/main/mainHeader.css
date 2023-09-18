@@ -283,9 +283,13 @@ nav>.main>li {
 }
 
 .jhuserBox2>ul>li>a>div {
+padding-right : 50px;
     height: 36px;
-    width: 50px;
     background: url(/mainImages/nextUserPage.png) no-repeat right center;
+}
+
+.jhuserBox2>ul>li>a>div>span {
+color: #0065BA;
 }
 
 .jhuserBox3 {

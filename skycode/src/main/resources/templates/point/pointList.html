@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/coupon/coupon.css}" rel="stylesheet">
+
+</head>
+
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<section class="section">
+    <div class="couponPage">
+        <div class="couponPageTitle">
+            <h2 class="couponTag">#포인트</h2>
+            <button><a href="/point/new">포인트 등록</a></button>
+        </div>
+        <div class="couponMain">
+            <div class="couponBoard">
+                <th:block th:each="point: ${points}">
+                    <div class="couponContents">
+                        <div class="couponTitle">
+                            <h2>[[${point.pointName}]]</h2>
+                        </div>
+                        <div class="couponInfo">
+                            <div>
+                                <p>포인트 : <span>[[${point.pointNum}]]</span></p>
+                            </div>
+                            <div>
+                                <button><a th:href="'/point/' + ${point.id} + '/edit'">수정</a></button>
+                                <button class="deleteBtn"><a>삭제</a></button>
+                            </div>
+                            <div class="deleteModal modal">
+                                <div class="modal-content">
+                                    <p>포인트 정보를 삭제하시겠습니까?</p>
+                                    <button class="confirmDelete"><a th:href="'/point/' + ${point.id} + '/delete'">삭제</a></button>
+                                    <button class="cancelDelete">취소</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+    function openModal() {
+        $(".deleteModal").css("display", "block");
+    }
+
+    function closeModal() {
+        $(".deleteModal").css("display", "none");
+    }
+
+    $(".deleteBtn").click(function() {
+        openModal(); // 모달 열기
+    });
+
+    // 삭제 확인 버튼 클릭 시 처리
+    $(".confirmDelete").click(function() {
+        console.log("삭제되었습니다.");
+        closeModal(); // 모달 닫기
+    });
+
+    // 취소 버튼 클릭 시 모달 닫기
+        $(".cancelDelete").click(function() {
+        closeModal(); // 모달 닫기
+    });
+</script>
+<script src="/js/sub/header.js"></script>
+<script src="/js/sub/footer.js"></script>
+<script>
+
+</script>
+</body>
+
+</html>

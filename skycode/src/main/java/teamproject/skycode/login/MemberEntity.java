@@ -10,6 +10,7 @@ import teamproject.skycode.constant.Gender;
 import teamproject.skycode.constant.Role;
 import teamproject.skycode.coupon.Member_CouponEntity;
 import teamproject.skycode.myPage.users.MemberEditFormDto;
+import teamproject.skycode.point.Member_PointEntity;
 import teamproject.skycode.review.ReviewEntity;
 
 import javax.persistence.*;
@@ -64,6 +65,9 @@ public class MemberEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Member_CouponEntity> member_CouponEntityList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Member_PointEntity> member_pointEntityList = new ArrayList<>();
 
     public static MemberEntity createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         MemberEntity member = new MemberEntity();
