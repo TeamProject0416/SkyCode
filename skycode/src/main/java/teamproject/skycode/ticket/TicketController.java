@@ -131,19 +131,27 @@ public class TicketController {
 
     @PostMapping(value = "/payment")
     public String Payments(
-            @RequestParam(name = "goingResultTotalPrice") Integer goingResultTotalPrice,
-            @RequestParam(name = "comingResultTotalPrice") Integer comingResultTotalPrice,
+            @RequestParam(name = "goingResultTotalPrice") int goingResultTotalPrice,
+            @RequestParam(name = "comingResultTotalPrice") int comingResultTotalPrice,
             Model model
     ) {
 
-        Integer goingPrice = goingResultTotalPrice;
-        Integer comingPrice = comingResultTotalPrice;
-        Integer resultPrice = goingPrice + comingPrice;
+        int goingPrice = goingResultTotalPrice;
+        int comingPrice = comingResultTotalPrice;
+        int resultPrice = goingPrice + comingPrice;
+        System.err.println(goingPrice);
+        System.err.println(comingPrice);
+        System.err.println(resultPrice);
+
 
         model.addAttribute("resultPrice", resultPrice);
 
-        return "tosspayments/tossPayments";
+        return "tosspayments/pay";
     }
+//    @GetMapping(value = "/payment")
+//    public String payments() {
+//        return "tosspayments/pay";
+//    }
 
 
 

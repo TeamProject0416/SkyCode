@@ -21,117 +21,114 @@
             <h2 class="ticketTag">#티켓</h2>
         </div>
         <hr>
-
-            <div class="ticketMain">
-                <div class="ticketBoard">
-                    <h3>출국 편</h3>
-                    <div class="goingInfo">
-                        <p> 출발지 : <span class="goingResultStart"></span></p>
-                        <p> 도착지 : <span class="goingResultArrive"></span></p>
-                        <p> 비행시간 : <span class="goingStartArriveTime"></span></p>
-                        <p> 좌석등급 : <span class="goingUserSelectGrade"></span></p>
-                        <p> 가는 편 금액 : <span class="goingResultTotalPrice"></span></p>
-                    </div>
-                    <div class="startTicket">
-                        <th:block th:each="goingTicket: ${goingTickets}">
-                            <div class="ticketContents">
-                                <div class="ticketTitle">
-                                    <p> 출발지 : <span>[[${goingTicket.ticketStart}]]</span></p>
-                                    <p> 도착지 : <span>[[${goingTicket.ticketEnd}]]</span></p>
-                                    <p> 비행기 시간 : <span>[[${goingTicket.ticketStartDate}]] [[${goingTicket.ticketStartTime}]] ~ [[${goingTicket.ticketEndDate}]] [[${goingTicket.ticketEndTime}]]</span>
-                                    </p>
-                                </div>
-                                <div class="ticketInfo">
-                                    <div>
-                                        <p> firstClass 상태 : <span>[[${goingTicket.firstStatus}]]</span></p>
-                                        <p> firstClass 수량 : <span>[[${goingTicket.firstNum}]]</span> (장)</p>
-                                        <p> firstClass 가격 : <span>[[${goingTicket.firstPrice}]]</span> (원)</p>
-                                    </div>
-                                    <div>
-                                        <p> businessClass 상태 : <span>[[${goingTicket.businessStatus}]]</span></p>
-                                        <p> businessClass 수량 : <span>[[${goingTicket.businessNum}]]</span> (장)</p>
-                                        <p> businessClass 가격 : <span>[[${goingTicket.businessPrice}]]</span> (원)</p>
-                                    </div>
-                                    <div>
-                                        <p> economyClass 상태 : <span>[[${goingTicket.economyStatus}]]</span></p>
-                                        <p> economyClass 수량 : <span>[[${goingTicket.economyNum}]]</span> (장)</p>
-                                        <p> economyClass 가격 : <span>[[${goingTicket.economyPrice}]]</span> (원)</p>
-                                    </div>
-
-                                    <div>
-                                        <button class="collectBtn" onclick="showStartTicketInfo(this)">선택</button>
-                                    </div>
-
-                                </div>
-                            </div><!-- ticketContents -->
-                        </th:block>
-                    </div><!-- /startTicket -->
-
-                    <h3>입국 편</h3>
-                    <div class="comingInfo">
-                        <p> 출발지 : <span class="comingResultStart"></span></p>
-                        <p> 도착지 : <span class="comingResultArrive"></span></p>
-                        <p> 비행시간 : <span class="comingStartArriveTime"></span></p>
-                        <p> 좌석등급 : <span class="comingUserSelectGrade"></span></p>
-                        <p> 오는 편 금액 : <span class="comingResultTotalPrice"></span></p>
-                    </div>
-                    <div class="arriveTicket">
-                        <th:block th:each="comingTicket: ${comingTickets}">
-                            <div class="ticketContents">
-                                <div class="ticketTitle">
-                                    <p> 출발지 : <span>[[${comingTicket.ticketEnd}]]</span></p>
-                                    <p> 도착지 : <span>[[${comingTicket.ticketStart}]]</span></p>
-                                    <p> 비행기 시간 : <span>[[${comingTicket.ticketStartDate}]] [[${comingTicket.ticketStartTime}]] ~ [[${comingTicket.ticketEndDate}]] [[${comingTicket.ticketEndTime}]]</span>
-                                    </p>
-                                </div>
-
-                                <div class="ticketInfo">
-                                    <div>
-                                        <p> firstClass 상태 : <span>[[${comingTicket.firstStatus}]]</span></p>
-                                        <p> firstClass 수량 : <span>[[${comingTicket.firstNum}]]</span> (장)</p>
-                                        <p> firstClass 가격 : <span>[[${comingTicket.firstPrice}]]</span> (원)</p>
-                                    </div>
-                                    <div>
-                                        <p> businessClass 상태 : <span>[[${comingTicket.businessStatus}]]</span></p>
-                                        <p> businessClass 수량 : <span>[[${comingTicket.businessNum}]]</span> (장)</p>
-                                        <p> businessClass 가격 : <span>[[${comingTicket.businessPrice}]]</span> (원)</p>
-                                    </div>
-                                    <div>
-                                        <p> economyClass 상태 : <span>[[${comingTicket.economyStatus}]]</span></p>
-                                        <p> economyClass 수량 : <span>[[${comingTicket.economyNum}]]</span> (장)</p>
-                                        <p> economyClass 가격 : <span>[[${comingTicket.economyPrice}]]</span> (원)</p>
-                                    </div>
-
-                                    <div>
-                                        <!-- <button><a th:href="'/ticket/' + ${ticket.id} + '/edit'">수정</a></button> -->
-                                        <button class="collectBtn" onclick="showArriveTicketInfo(this)">선택</button>
-                                    </div>
-                                </div>
-                            </div><!-- ticketContents -->
-                        </th:block>
-                    </div><!--arriveTicket-->
-                </div><!--ticketBoard-->
-
-                <hr>
-                <p>총 금액 : <span class="resultTotalPrice"></span></p>
-                <div class="resultBtnArea">
-                    <button>결제하기</button>
-                    <form action="/ticket/payment" method="post">
-                        <div class="resultPriceModal modal">
-                            <div class="modal-content">
-                                <p class="resultTotalPrice"></p>
-                                <p>구매하시겠습니까?</p>
-                                <button class="confirm">
-                                    결제
-        <!--                                <a href="#">결제</a>-->
-                                </button>
-                                <button class="cancel">취소</button>
+        <div class="ticketMain">
+            <div class="ticketBoard">
+                <h3>출국 편</h3>
+                <div class="goingInfo">
+                    <p> 출발지 : <span class="goingResultStart"></span></p>
+                    <p> 도착지 : <span class="goingResultArrive"></span></p>
+                    <p> 비행시간 : <span class="goingStartArriveTime"></span></p>
+                    <p> 좌석등급 : <span class="goingUserSelectGrade"></span></p>
+                    <p> 가는 편 금액 : <span class="goingResultTotalPrice"></span></p>
+                </div>
+                <div class="startTicket">
+                    <th:block th:each="goingTicket: ${goingTickets}">
+                        <div class="ticketContents">
+                            <div class="ticketTitle">
+                                <p> 출발지 : <span>[[${goingTicket.ticketStart}]]</span></p>
+                                <p> 도착지 : <span>[[${goingTicket.ticketEnd}]]</span></p>
+                                <p> 비행기 시간 : <span>[[${goingTicket.ticketStartDate}]] [[${goingTicket.ticketStartTime}]] ~ [[${goingTicket.ticketEndDate}]] [[${goingTicket.ticketEndTime}]]</span>
+                                </p>
                             </div>
-                        </div>
-                    </form>
-                </div>  <!--결제-->
-            </div>
+                            <div class="ticketInfo">
+                                <div>
+                                    <p> firstClass 상태 : <span>[[${goingTicket.firstStatus}]]</span></p>
+                                    <p> firstClass 수량 : <span>[[${goingTicket.firstNum}]]</span> (장)</p>
+                                    <p> firstClass 가격 : <span>[[${goingTicket.firstPrice}]]</span> (원)</p>
+                                </div>
+                                <div>
+                                    <p> businessClass 상태 : <span>[[${goingTicket.businessStatus}]]</span></p>
+                                    <p> businessClass 수량 : <span>[[${goingTicket.businessNum}]]</span> (장)</p>
+                                    <p> businessClass 가격 : <span>[[${goingTicket.businessPrice}]]</span> (원)</p>
+                                </div>
+                                <div>
+                                    <p> economyClass 상태 : <span>[[${goingTicket.economyStatus}]]</span></p>
+                                    <p> economyClass 수량 : <span>[[${goingTicket.economyNum}]]</span> (장)</p>
+                                    <p> economyClass 가격 : <span>[[${goingTicket.economyPrice}]]</span> (원)</p>
+                                </div>
 
+                                <div>
+                                    <button class="collectBtn" onclick="showStartTicketInfo(this)">선택</button>
+                                </div>
+
+                            </div>
+                        </div><!-- ticketContents -->
+                    </th:block>
+                </div><!-- /startTicket -->
+
+                <h3>입국 편</h3>
+                <div class="comingInfo">
+                    <p> 출발지 : <span class="comingResultStart"></span></p>
+                    <p> 도착지 : <span class="comingResultArrive"></span></p>
+                    <p> 비행시간 : <span class="comingStartArriveTime"></span></p>
+                    <p> 좌석등급 : <span class="comingUserSelectGrade"></span></p>
+                    <p> 오는 편 금액 : <span class="comingResultTotalPrice"></span></p>
+
+                </div>
+                <div class="arriveTicket">
+                    <th:block th:each="comingTicket: ${comingTickets}">
+                        <div class="ticketContents">
+                            <div class="ticketTitle">
+                                <p> 출발지 : <span>[[${comingTicket.ticketEnd}]]</span></p>
+                                <p> 도착지 : <span>[[${comingTicket.ticketStart}]]</span></p>
+                                <p> 비행기 시간 : <span>[[${comingTicket.ticketStartDate}]] [[${comingTicket.ticketStartTime}]] ~ [[${comingTicket.ticketEndDate}]] [[${comingTicket.ticketEndTime}]]</span>
+                                </p>
+                            </div>
+
+                            <div class="ticketInfo">
+                                <div>
+                                    <p> firstClass 상태 : <span>[[${comingTicket.firstStatus}]]</span></p>
+                                    <p> firstClass 수량 : <span>[[${comingTicket.firstNum}]]</span> (장)</p>
+                                    <p> firstClass 가격 : <span>[[${comingTicket.firstPrice}]]</span> (원)</p>
+                                </div>
+                                <div>
+                                    <p> businessClass 상태 : <span>[[${comingTicket.businessStatus}]]</span></p>
+                                    <p> businessClass 수량 : <span>[[${comingTicket.businessNum}]]</span> (장)</p>
+                                    <p> businessClass 가격 : <span>[[${comingTicket.businessPrice}]]</span> (원)</p>
+                                </div>
+                                <div>
+                                    <p> economyClass 상태 : <span>[[${comingTicket.economyStatus}]]</span></p>
+                                    <p> economyClass 수량 : <span>[[${comingTicket.economyNum}]]</span> (장)</p>
+                                    <p> economyClass 가격 : <span>[[${comingTicket.economyPrice}]]</span> (원)</p>
+                                </div>
+
+                                <div>
+                                    <!-- <button><a th:href="'/ticket/' + ${ticket.id} + '/edit'">수정</a></button> -->
+                                    <button class="collectBtn" onclick="showArriveTicketInfo(this)">선택</button>
+                                </div>
+                            </div>
+                        </div><!-- ticketContents -->
+                    </th:block>
+                </div><!--arriveTicket-->
+            </div><!--ticketBoard-->
+
+            <hr>
+
+            <div class="resultBtnArea">
+                <button>결제하기</button>
+                <div class="resultPriceModal modal">
+                    <div class="modal-content">
+                        <form action="/ticket/payment" method="post">
+                            <input type="text" class="goingPriceValue" name="goingResultTotalPrice">
+                            <input type="text" class="comingPriceValue" name="comingResultTotalPrice">
+                            <p>구매하시겠습니까?</p>
+                            <button class="confirm">결제</button>
+                        </form>
+                        <button class="cancel">취소</button>
+                    </div>
+                </div>
+            </div>  <!--결제-->
+        </div>
     </div>
 </section>
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>
@@ -196,7 +193,8 @@
             goingResultArrive = goingInfo.querySelector(".goingResultArrive"),
             goingStartArriveTime = goingInfo.querySelector(".goingStartArriveTime"),
             goingUserSelectGrade = goingInfo.querySelector(".goingUserSelectGrade"),
-            goingResultTotalPrice = goingInfo.querySelector(".goingResultTotalPrice");
+            goingResultTotalPrice = goingInfo.querySelector(".goingResultTotalPrice"),
+            goingPriceValue = document.querySelector(".goingPriceValue");
         let changeGrade = getGradeDescription(userSeatGrade);
 
         goingResultStart.innerText = `${departure}`;
@@ -204,6 +202,8 @@
         goingStartArriveTime.innerText = `${flightTime}`;
         goingUserSelectGrade.innerText = `${changeGrade}`;
         goingResultTotalPrice.innerText = `${startTotalPrice}`;
+        goingPriceValue.value = parseInt(`${startTotalPrice}`);
+
 
 
         alert("선택되었습니다.");
@@ -247,7 +247,8 @@
             comingResultArrive = comingInfo.querySelector(".comingResultArrive"),
             comingStartArriveTime = comingInfo.querySelector(".comingStartArriveTime"),
             comingUserSelectGrade = comingInfo.querySelector(".comingUserSelectGrade"),
-            comingResultTotalPrice = comingInfo.querySelector(".comingResultTotalPrice");
+            comingResultTotalPrice = comingInfo.querySelector(".comingResultTotalPrice"),
+            comingPriceValue = document.querySelector(".comingPriceValue");
         let changeGrade = getGradeDescription(userSeatGrade);
 
         comingResultStart.innerText = `${departure}`;
@@ -255,6 +256,8 @@
         comingStartArriveTime.innerText = `${flightTime}`;
         comingUserSelectGrade.innerText = `${changeGrade}`;
         comingResultTotalPrice.innerText = `${arriveTotalPrice}`;
+        comingPriceValue.value = `${arriveTotalPrice}`;
+        // comingPriceValue.value = parseInt(`${arriveTotalPrice}`);
 
         alert("선택되었습니다.");
 
