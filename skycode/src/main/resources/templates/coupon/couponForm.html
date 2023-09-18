@@ -71,8 +71,7 @@
             <div class="pack">
                 <div>
                     <label class="couponStart">쿠폰 시작일</label>
-                    <input class="oej_y" name="couponStart" th:field="*{couponStart}" type="date" value="xxx"
-                           min="yyy" max="zzz">
+                    <input name="couponStart" th:field="*{couponStart}" type="date">
                     <p th:if="${#fields.hasErrors('couponStart')}" th:errors="*{couponStart}" class="fieldError">
                         Incorrect
                         data
@@ -80,8 +79,7 @@
                 </div>
                 <div>
                     <label class="couponEnd">쿠폰 종료일</label>
-                    <input class="oej_y" name="couponEnd" th:field="*{couponEnd}" type="date" value="xxx" min="yyy"
-                           max="zzz">
+                    <input name="couponEnd" th:field="*{couponEnd}" type="date">
                     <p th:if="${#fields.hasErrors('couponEnd')}" th:errors="*{couponEnd}" class="fieldError">
                         Incorrect
                         data

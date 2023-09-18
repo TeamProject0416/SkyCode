@@ -37,7 +37,18 @@
                         <li class="on"><a href="/user_shopping/questions">나의문의내역</a></li>
                     </ul>
                     <div class="subTab">
-                        2-5
+                        <th:block th:each="inquiry: ${inquiryList}">
+                            <div class="QContents">
+                                <div class="QInfo">
+                                    <h2>[[${inquiry.inquiryTitle}]]</h2>
+                                    <p>[[${inquiry.inquiryContent}]]</p>
+                                    <p>[[${inquiry.type}]]</p>
+                                    <p>[[${inquiry.isPrivate}]]</p>
+                                    <p>[[${inquiry.regTime}]]</p>
+                                    <a th:href="'/inquiry/' + ${inquiry.id}"></a>
+                                </div>
+                            </div>
+                        </th:block>
                     </div>
                 </div>
             </div>
