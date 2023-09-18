@@ -25,36 +25,41 @@
     <div class="nyInquiryShowSubContainer">
         <div class="nyInquiryShowTitle">
             <span class="nyTitle" th:text="${inquiry.inquiryTitle}">제목</span>
-            <span class="nyTitleDate" th:text="${#temporals.format(inquiry.regTime, 'yyyy.MM.dd')}">날짜</span>
-            <span th:text="${viewCount}">조회수</span>
+
+            <span class="nyTitleDate" th:text="${#temporals.format(inquiry.regTime, 'yyyy.MM.dd')}">날짜</span> <i class="fa-regular fa-thumbs-up oej_i"></i>
+
+            <span class="oej_check" th:text="${viewCount}">조회수</span><i class="fa-regular fa-calendar oej_calendar"></i>
         </div>
         <div class="nyInquiryShowContent">
             <!-- 문의 내용 이미지 등 출력 -->
             <p th:text="${inquiry.inquiryContent}">문의 내용</p>
         </div>
         <!-- 삭제 버튼 -->
-            <form th:if="${userInfo != null and userInfo.email == inquiry.writer.email}" th:action="@{/news/inquiry/delete}" method="post">
-                <input type="hidden" name="inquiryId" th:value="${inquiry.id}" />
-                <button type="submit">삭제</button>
-            </form>
-            <!-- 수정 버튼 -->
-            <a th:if="${userInfo != null and userInfo.email == inquiry.writer.email}" th:href="@{'/news/inquiry/edit/' + ${inquiry.id}}" class="editButton">수정</a>
+        <form th:if="${userInfo != null and userInfo.email == inquiry.writer.email}" th:action="@{/news/inquiry/delete}"
+              method="post">
+            <input type="hidden" name="inquiryId" th:value="${inquiry.id}"/>
+            <button class="oej_delete" type="submit">삭제</button>
+        </form>
+        <!-- 수정 버튼 -->
+        <a th:if="${userInfo != null and userInfo.email == inquiry.writer.email}"
+           th:href="@{'/news/inquiry/edit/' + ${inquiry.id}}" class="editButton">수정</a>
         <div class="nyNotionGoText" th:if="${T(teamproject.skycode.login.MemberUtils).isAdmin()}">
-        <div class="nyInquiryResponseForm">
-            <form th:action="@{/news/inquiry/respond}" method="post">
-                <input type="hidden" name="inquiryId" th:value="${inquiry.id}" />
-                <textarea name="responseContent" rows="5" cols="50" placeholder="답변 내용을 입력하세요"></textarea>
-                <button type="submit">답변하기</button>
-            </form>
-        </div>
+            <div class="nyInquiryResponseForm">
+                <form th:action="@{/news/inquiry/respond}" method="post">
+                    <input type="hidden" name="inquiryId" th:value="${inquiry.id}"/>
+                    <textarea name="responseContent" rows="5" cols="50" placeholder="답변 내용을 입력하세요"></textarea>
+                    <button type="submit">답변하기</button>
+                </form>
+            </div>
         </div>
         <div class="nyInquiryResponseContent">
             <p th:if="${inquiry.responseContent}" th:text="${inquiry.responseContent}"></p>
             <p th:unless="${inquiry.responseContent}">답변이 아직 등록되지 않았습니다.</p>
         </div>
 
-    <div class="nyInquiryShowList">
-        <a th:href="@{/news/inquiry/inquiryList}">목록보기</a>
+        <div class="nyInquiryShowList">
+            <a th:href="@{/news/inquiry/inquiryList}">목록보기</a>
+        </div>
     </div>
 
 </section>

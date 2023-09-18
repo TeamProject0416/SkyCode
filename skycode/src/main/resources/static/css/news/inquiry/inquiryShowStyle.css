@@ -8,6 +8,7 @@
     top: 150px;
     font-size: 3rem;
 }
+
 .nyInquiryShowWrap h2,
 .nyInquiryShowWrap .nyInquiryShowList {
     text-align: center;
@@ -23,11 +24,12 @@
     padding: 10px 30px;
     border-bottom: 2px solid #8888884c;
 }
-.nyInquiryShowTitle .nyTitleDate {
+/* .nyInquiryShowTitle .nyTitleDate {
     font-size: 1.6rem;
     color: #888;
     line-height: 50px;
-}
+} */
+
 .nyInquiryShowWrap .nyInquiryShowSubContainer .nyInquiryShowContent{
     font-size: 1.6rem;
     padding: 20px;
@@ -67,4 +69,133 @@
 .nyInquiryShowWrap .nyInquiryShowList a:hover{
     background: #0065BA;
     color: #fff;
+}
+
+
+
+/* 여기서부터 수정했습니다. */
+/* 날짜 css 위에 내용 밑으로 옮겼습니다. */
+
+/* 조회수  날짜 */
+
+.nyInquiryShowTitle .nyTitleDate {
+    top:52px;
+    width: 120px;
+    right: 70px;
+    position: absolute;
+    font-size: 1.6rem;
+    color: #888;
+    line-height: 50px;
+    padding-left: 40px;
+}
+
+.nyInquiryShowTitle .oej_calendar {
+    position: absolute;
+    display: flex;
+    right: 155px;
+    padding-top: 8px;
+}
+
+.nyTitle {
+    margin-left: 10px;
+}
+
+
+.nyInquiryShowTitle .oej_check {
+    top:52px;
+    width: 120px;
+    right: 190px;
+    position: absolute;
+    font-size: 1.6rem;
+    color: #888;
+    line-height: 50px;
+    padding-left: 50px;
+}
+
+.nyInquiryShowTitle .oej_i {
+    position: absolute;
+    display: flex;
+   right: 270px;
+   padding-top: 8px;
+}
+
+
+/* 문의내용 텍스트 */
+.nyInquiryShowContent {
+    margin-left: 30px;
+    margin-top:10px;
+    width: 900px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* 삭제 수정 버튼 */
+
+
+.oej_delete {
+    position: absolute;
+    right: 210px;
+    top: 160px;
+    width: 100px;
+    height: 40px;
+    background: #0065BA;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid  #0065BA;
+    border-radius: 10px;
+    color: #fff;
+}
+
+/* 수정 */
+.editButton {
+    display: flex;
+    position: absolute;
+    right: 90px;
+    top: 160px;
+    width: 100px;
+    height: 40px;
+    background: #0065BA;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid  #0065BA;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    justify-content: center;
+    font-size: 15px;
+    padding-top: 5px;
+}
+
+/* 답변내용 */
+
+.nyInquiryResponseForm textarea {
+    margin-left: 30px;
+    margin-top: 30px;
+    width: 1000px;
+    padding-top: 50px;
+    padding-left: 10px;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.nyInquiryResponseForm button {
+    position: absolute;
+    right: 90px;
+    width: 100px;
+    margin-top: 120px;
+    margin-left: 10px;
+    height: 40px;
+    background: #0065BA;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid  #0065BA;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.nyInquiryResponseContent {
+    margin-left: 30px;
+    color:  #d34913;
+    font-size: 15px;
 }
