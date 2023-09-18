@@ -22,11 +22,13 @@
     <div class="nyNewsSubContainer">
         <div class="nyNewsTitle">
             <span class="nyTitle" th:text="${notion.notionTitle}">제목</span>
-            <span class="nyTitleDate" th:text="${#temporals.format(notion.regTime, 'yyyy.MM.dd')}">날짜</span>
-            <span class="nyTitleDate" th:text="${viewCount}">조회수</span>
+            <span class="nyTitleDate1" th:text="${#temporals.format(notion.regTime, 'yyyy.MM.dd')}">
+               날짜</span><i class="fa-regular fa-calendar oej_i"></i>
+            <span class="nyTitleDate" th:text="${viewCount}">
+               조회수</span> <i class="fas fa-eye oej_i_1"></i>
         </div>
         <div class="nyNewsContent">
-<!--            <img src="${'/images/' + notion.fileName}" alt=""/>-->
+            <!--            <img src="${'/images/' + notion.fileName}" alt=""/>-->
             <img th:src="@{'/img/notion/'+${notion.fileName}}" alt="이미지">
             <p th:text="${notion.notionContent}">공지사항에 대한 정보</p>
         </div>
@@ -45,4 +47,6 @@
 <script src="/js/sub/header.js"></script>
 <script src="/js/sub/footer.js"></script>
 </body>
+</html>
+
 </html>

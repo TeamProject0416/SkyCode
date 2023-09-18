@@ -16,17 +16,8 @@
     border-top: 2px solid #333;
     /* border-bottom: 2px solid #333; */
 }
-.nyNewsTitle{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 30px;
-    border-bottom: 2px solid #8888884c;
-}
-.nyNewsTitle .nyTitleDate {
-    font-size: 1.6rem;
-    color: #888;
-    line-height: 50px;
-}
+
+
 .nyNewsWrap .nyNewsSubContainer .nyNewsContent{
     font-size: 1.6rem;
     padding: 20px;
@@ -66,4 +57,50 @@
 .nyNewsWrap .nyNewsList a:hover{
     background: #0065BA;
     color: #fff;
+}
+
+/* 위에있는 내용 가져오면서 수정했습니다. */
+.nyNewsTitle{
+    display: flex;
+    justify-content: right;
+    padding: 10px 30px;
+    border-bottom: 2px solid #8888884c;
+}
+
+.nyNewsTitle .nyTitle {
+    position: absolute;
+    left:80px;
+
+}
+
+.nyNewsTitle .nyTitleDate {
+    display: flex;
+    font-size: 1.6rem;
+    width: 130px;
+    color: #888;
+    line-height: 50px;
+    margin-right: -25px;
+    padding-left: 50px;
+}
+
+.nyNewsTitle .nyTitleDate1 {
+    display: flex;
+    font-size: 1.6rem;
+    width: 130px;
+    color: #888;
+    line-height: 50px;
+    margin-right: 0px;
+    padding-left: 40px;
+}
+
+.oej_i {
+    position: absolute;
+    margin-top: 10px;
+    margin-right: 200px;
+}
+
+.oej_i_1 {
+    position: absolute;
+    margin-top: 10px;
+    margin-right: 60px;
 }

@@ -28,7 +28,7 @@
         <h2>문의하기</h2>
         <form id="inquiry" th:action="@{/news/inquiry/inquiry}" method="post" th:object="${inquiryForm}">
             <input type="hidden" th:field="*{id}">
-            <input type="hidden" th:field="*{email}">
+            <input type="hidden" th:field="*{writer}" th:value="${inquiryForm.writer}" />
             <input type="hidden" th:field="*{nickName}">
             <input type="hidden" th:field="*{writer}">
             <input>
