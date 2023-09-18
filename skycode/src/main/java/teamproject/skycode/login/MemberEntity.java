@@ -8,6 +8,7 @@ import teamproject.skycode.constant.Gender;
 import teamproject.skycode.constant.Role;
 import teamproject.skycode.myPage.users.MemberEditFormDto;
 import teamproject.skycode.review.ReviewEntity;
+import teamproject.skycode.order.Order;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -57,7 +58,8 @@ public class MemberEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ReviewEntity> reviewEntityList = new ArrayList<>();
-
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Order> orderList = new ArrayList<>();
     public static MemberEntity createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         MemberEntity member = new MemberEntity();
         member.setName(memberFormDto.getName());

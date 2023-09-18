@@ -49,9 +49,6 @@ public interface TicketRepository extends JpaRepository<TicketEntity, Long> {
             @Param("endDate") String endDate
     );
 
-    Integer findByFirstPrice(Integer firstPrice);
-    Integer findByBusinessPrice(Integer businessPrice);
-    Integer findByEconomyPrice(Integer economyPrice);
 
 
 }

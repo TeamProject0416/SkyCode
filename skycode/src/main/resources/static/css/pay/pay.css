@@ -87,28 +87,46 @@
 }
 /* /오는 편 */
 
+/* 쿠폰 포인트 총 금액*/
 .couponAndPointArea {
     display: flex;
     margin-top: 24px;
     width: 100%;
     justify-content: space-between;
-
 }
+
 .couponArea {
     border: 1px solid black;
-
-}
-.couponArea input {
     width: 100%;
+    text-align: center;
+}
+.couponArea #couponList {
+    width: 100px;
+    height: 25px;
+    margin-bottom: 20px;
 }
 .pointArea {
+    text-align: center;
     border: 1px solid black;
-
+    width: 100%;
 }
+
+.resultTotalPrice {
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    width: 100%;
+}
+.resultTotalPrice h2 {
+    margin-right: 24px;
+}
+/* /쿠폰 포인트 총 금액*/
+
 
 .resultBtnArea {
     text-align: right;
-    margin-top: 8px;
+    margin-top: 16px;
 }
 
 .resultBtnArea button {

@@ -120,6 +120,11 @@
                     <div class="modal-content">
                         <form action="/ticket/payment" method="post">
                             <input type="text" class="goingPriceValue" name="goingResultTotalPrice">
+                            <input type="text" name="goingResultStart">
+                            <input type="text" name="goingResultArrive">
+                            <input type="text" name="goingStartArriveTime">
+                            <input type="text" name="goingUserSelectGrade">
+                            <input type="text" name="comingStartArriveTime">
                             <input type="text" class="comingPriceValue" name="comingResultTotalPrice">
                             <p>구매하시겠습니까?</p>
                             <button class="confirm">결제</button>
@@ -194,7 +199,12 @@
             goingStartArriveTime = goingInfo.querySelector(".goingStartArriveTime"),
             goingUserSelectGrade = goingInfo.querySelector(".goingUserSelectGrade"),
             goingResultTotalPrice = goingInfo.querySelector(".goingResultTotalPrice"),
-            goingPriceValue = document.querySelector(".goingPriceValue");
+            goingPriceValue = document.querySelector(".goingPriceValue"),
+
+            goingStart = document.querySelector('input[name="goingResultStart"]'),
+            goingArrive = document.querySelector('input[name="goingResultArrive"]'),
+            goingTime = document.querySelector('input[name="goingStartArriveTime"]'),
+            userGrade = document.querySelector('input[name="goingUserSelectGrade"]');
         let changeGrade = getGradeDescription(userSeatGrade);
 
         goingResultStart.innerText = `${departure}`;
@@ -203,8 +213,10 @@
         goingUserSelectGrade.innerText = `${changeGrade}`;
         goingResultTotalPrice.innerText = `${startTotalPrice}`;
         goingPriceValue.value = parseInt(`${startTotalPrice}`);
-
-
+        goingStart.value = `${departure}`;
+        goingArrive.value = `${destination}`;
+        goingTime.value = `${flightTime}`;
+        userGrade.value = `${changeGrade}`;
 
         alert("선택되었습니다.");
     }
@@ -248,7 +260,8 @@
             comingStartArriveTime = comingInfo.querySelector(".comingStartArriveTime"),
             comingUserSelectGrade = comingInfo.querySelector(".comingUserSelectGrade"),
             comingResultTotalPrice = comingInfo.querySelector(".comingResultTotalPrice"),
-            comingPriceValue = document.querySelector(".comingPriceValue");
+            comingPriceValue = document.querySelector(".comingPriceValue"),
+            comingTime = document.querySelector('input[name="comingStartArriveTime"]');
         let changeGrade = getGradeDescription(userSeatGrade);
 
         comingResultStart.innerText = `${departure}`;
@@ -257,6 +270,7 @@
         comingUserSelectGrade.innerText = `${changeGrade}`;
         comingResultTotalPrice.innerText = `${arriveTotalPrice}`;
         comingPriceValue.value = `${arriveTotalPrice}`;
+        comingTime.value = `${flightTime}`;
         // comingPriceValue.value = parseInt(`${arriveTotalPrice}`);
 
         alert("선택되었습니다.");

@@ -42,7 +42,6 @@ public class TicketFormDto {
     private TicketCountry ticketStart; // 출발지
     @NotNull(message = "도착지는 필수 입력 값입니다.")
     private TicketCountry ticketEnd; // 도착지
-
     @NotBlank(message = "출발일은 필수 입력 값입니다.")
     private String ticketStartDate; // "yyyy-MM-dd" 출발일
     @NotBlank(message = "도착일은 필수 입력 값입니다.")

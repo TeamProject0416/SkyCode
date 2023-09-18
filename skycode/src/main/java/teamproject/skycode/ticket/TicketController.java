@@ -19,7 +19,6 @@ import java.util.List;
 @RequestMapping("/ticket")
 @RequiredArgsConstructor
 public class TicketController {
-
     private final TicketService ticketService;
 
     @GetMapping(value = {"/list", "/list/{page}"}) // 진행 페이지
@@ -100,17 +99,6 @@ public class TicketController {
             TicketFormDto ticketFormDto,
             Model model) {
 
-        // 받아온 데이터를 사용하거나 처리하는 로직을 추가합니다.
-        System.err.println("출발지: " + startValue);
-        System.err.println("도착지: " + arriveValue);
-        System.err.println("출국일: " + startDate);
-        System.err.println("귀국일: " + endDate);
-        System.err.println("성인: " + adultNum);
-        System.err.println("청소년: " + teenagerNum);
-        System.err.println("유아: " + childNum);
-        System.err.println("좌석 등급: " + seatGrade);
-
-
         Integer totalNum = adultNum + teenagerNum + childNum;
         String userGrade = seatGrade;
 
@@ -131,19 +119,35 @@ public class TicketController {
 
     @PostMapping(value = "/payment")
     public String Payments(
-            @RequestParam(name = "goingResultTotalPrice") int goingResultTotalPrice,
-            @RequestParam(name = "comingResultTotalPrice") int comingResultTotalPrice,
-            Model model
+        @RequestParam(name = "goingResultTotalPrice") int goingResultTotalPrice,
+        @RequestParam(name = "goingResultStart") String goingResultStart,
+        @RequestParam(name = "goingResultArrive") String goingResultArrive,
+        @RequestParam(name = "goingStartArriveTime") String goingStartArriveTime,
+        @RequestParam(name = "goingUserSelectGrade") String goingUserSelectGrade,
+        @RequestParam(name = "comingStartArriveTime") String comingStartArriveTime,
+        @RequestParam(name = "comingResultTotalPrice") int comingResultTotalPrice,
+        Model model
     ) {
-
         int goingPrice = goingResultTotalPrice;
         int comingPrice = comingResultTotalPrice;
         int resultPrice = goingPrice + comingPrice;
-        System.err.println(goingPrice);
-        System.err.println(comingPrice);
-        System.err.println(resultPrice);
+
+        TicketResultDto ticketResult = new TicketResultDto();
+        ticketResult.setStart(goingResultStart);
+        ticketResult.setArrive(goingResultArrive);
+        ticketResult.setGoingTime(goingStartArriveTime);
+        ticketResult.setUserGrade(goingUserSelectGrade);
+        ticketResult.setComingTime(comingStartArriveTime);
+        ticketResult.setGoingPrice(goingResultTotalPrice);
+        ticketResult.setComingPrice(comingResultTotalPrice);
 
 
+//        model.addAttribute("goingStart", goingResultStart);
+//        model.addAttribute("goingArrive", goingResultArrive);
+//        model.addAttribute("goingTime", goingStartArriveTime);
+//        model.addAttribute("userGrade", goingUserSelectGrade);
+//        model.addAttribute("comingTime", comingStartArriveTime);
+        model.addAttribute("ticketResult", ticketResult);
         model.addAttribute("resultPrice", resultPrice);
 
         return "tosspayments/pay";
