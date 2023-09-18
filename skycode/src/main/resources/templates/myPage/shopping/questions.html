@@ -6,11 +6,18 @@
     <link th:href="@{/css/reset.css}" rel="stylesheet">
     <link th:href="@{/css/typo.css}" rel="stylesheet">
     <link th:href="@{/css/myPage/common.css}" rel="stylesheet">
+    <link th:href="@{/css/myPage/questions/questions.css}" rel="stylesheet">
     <link th:href="@{/css/sub/header.css}" rel="stylesheet">
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
-    <style>
 
-    </style>
+
+<!--    <link rel="stylesheet" href="css/reset.css">-->
+<!--    <link rel="stylesheet" href="css/typo.css">-->
+<!--    <link rel="stylesheet" href="css/question.css">-->
+<!--    <link rel="stylesheet" href="css/myPage_JHstyle.css">-->
+<!--    <link rel="stylesheet" href="css/nysubfooter.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 </head>
 
 <body>
@@ -38,17 +45,31 @@
                     </ul>
                     <div class="subTab">
                         <th:block th:each="inquiry: ${inquiryList}">
+                            <!-- 은준css작성한부분 -->
                             <div class="QContents">
                                 <div class="QInfo">
-                                    <h2>[[${inquiry.inquiryTitle}]]</h2>
-                                    <p>[[${inquiry.inquiryContent}]]</p>
-                                    <p>[[${inquiry.type}]]</p>
-                                    <p>[[${inquiry.isPrivate}]]</p>
-                                    <p>[[${inquiry.regTime}]]</p>
-                                    <a th:href="'/inquiry/' + ${inquiry.id}"></a>
+                                    <h2>제목 : <span>[[${inquiry.inquiryTitle}]]</span></h2>
+                                    <p class="oej_txt">내용 : <span>[[${inquiry.inquiryContent}]]</span></p>
+
+
+                                    <div class="oej_box">
+                                        <p class="oej_category">카테고리 : <span>[[${inquiry.type}]]</span></p>
+                                        <!--                                    <p>[[${inquiry.isPrivate}]]</p>-->
+                                        <p class="oej_open"><i class="fa-solid fa-lock"></i>공개여부 : <span
+                                                th:text="${inquiry.isPrivate ? '비공개' : '공개'}">여기는 알아서 저장된 </span>
+                                        </p>
+                                        <p class="oej_time">[[${inquiry.regTime}]]</p>   <!--이건 등록 시간 입니다-->
+                                        <p class="oej_answer">답변 :
+                                            <span th:text="${inquiry.responseContent != null and inquiry.responseContent != ''
+                                            ? inquiry.responseContent
+                                            : '아직 등록되지 않았습니다.'}">여기도 알아서 내용이 나옵니다</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </th:block>
+                        <!--// 이부분은 나중에 링크를 넣을 예정 무시하고 주석처리 해놓으시면 됩니다
+                                    <a th:href="'/inquiry/' + ${inquiry.id}"></a>-->
                     </div>
                 </div>
             </div>
