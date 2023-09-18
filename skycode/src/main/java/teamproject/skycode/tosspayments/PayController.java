@@ -12,8 +12,8 @@ public class PayController {
         return "tosspayments/pay";
     }
 
-    @PostMapping(value = "/tossPayments")
-    public String tossPayments() {
-        return "tosspayments/tossPayments";
-    }
+//    @PostMapping(value = "/tossPayments")
+//    public String tossPayments() {
+//        return "tosspayments/tossPayments";
+//    }
 }
