@@ -6,14 +6,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import teamproject.skycode.event.EventEntity;
+import teamproject.skycode.event.EventFormDto;
+import teamproject.skycode.event.EventRepository;
 import teamproject.skycode.login.MemberEntity;
 import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.review.ReviewEntity;
 import teamproject.skycode.review.ReviewRepository;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/coupon")
@@ -23,7 +28,8 @@ public class CouponController {
     private final CouponRepository couponRepository;
     private final MemberRepository memberRepository;
     private final ReviewRepository reviewRepository;
-
+    private final EventRepository eventRepository;
+    private final Member_CouponRepository memberCouponRepository;
 
     @GetMapping(value = "/list") // 진행중인 쿠폰 목록 보이기
     public String couponList(Model model, Principal principal) {
@@ -35,7 +41,7 @@ public class CouponController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
         }
 
         List<CouponEntity> coupons = couponRepository.findByONGOING();
@@ -52,7 +58,7 @@ public class CouponController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
         }
 
         List<CouponEntity> coupons = couponRepository.findByEND();
@@ -69,7 +75,7 @@ public class CouponController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
         }
 
         model.addAttribute("couponFormDto", new CouponFormDto());
@@ -102,7 +108,7 @@ public class CouponController {
             model.addAttribute("userInfo", userInfo);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
+            model.addAttribute("reviewNum", reviewNum);
         }
 
         CouponFormDto couponFormDto = couponService.getCouponDtl(couponId);
@@ -132,6 +138,36 @@ public class CouponController {
 
         // 삭제 후 리다이렉션할 URL을 반환
         return "redirect:/coupon/list";
+    }
+
+    @GetMapping("/{eventId}/couponDownload") // 쿠폰 다운로드
+    public String couponDownload(@PathVariable("eventId") Long eventId, Principal principal) {
+
+        EventEntity event = eventRepository.findById(eventId)
+                .orElseThrow(EntityNotFoundException::new);
+        String couponCode = event.getCouponCode(); //couponCode
+
+        CouponEntity coupon = couponRepository.findByCode(couponCode);
+        Optional<CouponEntity> couponEntityList = couponRepository.findById(coupon.getId());
+        CouponEntity couponEntity = couponEntityList.get(); // couponEntity
+
+        String user = principal.getName(); // MemberEmail
+        MemberEntity userInfo = memberRepository.findByEmail(user);
+
+        Optional<MemberEntity> memberEntityList = memberRepository.findById(userInfo.getId());
+        MemberEntity memberEntity = memberEntityList.get(); // memberEntity
+
+        // Member_CouponEntity 생성 및 저장
+        Member_CouponEntity memberCouponEntity = new Member_CouponEntity();
+        memberCouponEntity.setCouponCode(couponCode);
+        memberCouponEntity.setMemberEmail(user);
+        memberCouponEntity.setMemberEntity(memberEntity);
+        memberCouponEntity.setCouponEntity(couponEntity);
+
+        memberCouponRepository.save(memberCouponEntity);
+
+        return "redirect:/event/" + eventId;
+
     }
 
 }

@@ -10,10 +10,6 @@
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link th:href="@{/css/myPage/review/review.css}" rel="stylesheet">
-
-    <style>
-
-    </style>
 </head>
 
 <body>
@@ -26,7 +22,6 @@
         <ul class="mainTab firstTab">
             <li><a href="/user">#프로필</a></li>
             <li><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
-            <li><a href="/user_trip/tripTool">#여행 도구</a></li>
             <li class="on"><a href="/user_review">#나의 리뷰</a></li>
         </ul>
         <div class="subTab">
@@ -38,7 +33,10 @@
                         <li><a href="/review/newReview">리뷰쓰기</a></li>
                     </ul>
                     <div class="subTab">
-                        <th:block th:each="review : ${reviews}">
+                        <th:block th:if="${#lists.isEmpty(reviews)}">
+                            <p class="AllNull">아직 등록된 리뷰가 없습니다.</p>
+                        </th:block>
+                        <th:block th:unless="${#lists.isEmpty(reviews)}" th:each="review : ${reviews}">
                             <div class="oej_bigBox">
                                 <div class="oej_smallBox1" th:attr="data-review-id=${review.id}">
                                     <h1>[[${review.reviewTitle}]]</h1>

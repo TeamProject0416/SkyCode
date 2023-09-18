@@ -137,20 +137,6 @@ nav>.main>li {
     cursor: pointer;
 }
 
-.cartMenu {
-    border: none;
-    background: transparent;
-    width: 40px;
-    height: 40px;
-    font-size: 15px;
-    position: absolute;
-    top: 20px;
-    right: 70px;
-    text-indent: -9999px;
-    background: url(/subImages/Cart.png) no-repeat center;
-    cursor: pointer;
-}
-
 .alarmMenu {
     border: none;
     background: transparent;

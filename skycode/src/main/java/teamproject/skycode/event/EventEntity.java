@@ -41,6 +41,8 @@ public class EventEntity extends BaseEntity {
 
     private String eventTime; // "yyyy-MM-dd"
 
+    private String couponCode;  // 등록할 쿠폰 코드
+
     public void updateEventImg(String miniImgName, String miniOriImgName, String miniImgUrl,
                                String bigImgName, String bigOriImgName, String bigImgUrl) {
         this.miniImgName = miniImgName;
@@ -55,6 +57,7 @@ public class EventEntity extends BaseEntity {
         this.eventTitle = eventFormDto.getEventTitle();
         this.content = eventFormDto.getContent();
         this.eventStatus = eventFormDto.getEventStatus();
+        this.couponCode = eventFormDto.getCouponCode();
 
         this.miniImgName = eventFormDto.getMiniImgName();
         this.miniOriImgName = eventFormDto.getMiniOriImgName();

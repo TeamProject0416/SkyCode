@@ -1,17 +1,16 @@
-
-.oej_bigBox{
-    top:50px;
+.oej_bigBox {
+    top: 50px;
     position: relative;
     max-width: 1320px;
     height: 200px;
-    border-bottom:none;
+    border-bottom: none;
 }
 
 .oej_smallBox1 {
     position: absolute;
-    width:100%;
+    width: 100%;
     height: 200px;
-   border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
 
 }
 
@@ -21,10 +20,10 @@
 }
 
 .oej_smallBox1 h1 {
-  padding-left: 100px;
+    padding-left: 100px;
     width: 700px;
-      height:57px
-    color: #4b4b4b
+    height: 57px;
+    color: #4b4b4b;
 }
 
 /* 날짜 */
@@ -40,7 +39,7 @@
 .oej_smallP {
     position: absolute;
     width: 200px;
-    height:62px;
+    height: 62px;
     top: 0;
     margin-right: 420px;
     padding-left: 115px;
@@ -54,7 +53,7 @@
     display: flex;
     bottom: 0;
     width: 200px;
-    height:62px;
+    height: 62px;
     margin-right: 420px;
     /* padding-left: 60px; */
     padding-right: 0px;
@@ -66,7 +65,7 @@
     display: flex;
     padding-left: 39px;
     width: 200px;
-   margin-top:20px;
+    margin-top: 20px;
 }
 
 .oej_p p i {
@@ -87,7 +86,7 @@
 .smallBox3 {
     width: 250px;
     height: 200px;
-   padding-top: 10px;
+    padding-top: 10px;
     margin: 0 auto;
 }
 
@@ -96,4 +95,11 @@
     margin-left: 10px;
     left: 105px;
     width: 45%;
+}
+
+/* 등록된 리뷰가 없을때 */
+.AllNull {
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 150px 0;
 }

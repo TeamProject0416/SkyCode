@@ -197,6 +197,7 @@
             cursor: pointer;
         }
 
+
     </style>
 </head>
 
@@ -209,7 +210,6 @@
         <ul class="mainTab firstTab">
             <li class="on"><a href="/user">#프로필</a></li>
             <li><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
-            <li><a href="/user_trip/tripTool">#여행 도구</a></li>
             <li><a href="/user_review">#나의 리뷰</a></li>
         </ul>
         <div class="subTab">
@@ -219,7 +219,6 @@
                     <ul class="mainTab">
                         <li><a href="/user">모두 보기</a></li>
                         <li class="on"><a href="/user/edit">회원정보수정</a></li>
-                        <li><a href="/user/collections">스크랩북</a></li>
                         <li><a href="/user/praise">좋아요</a></li>
                         <li><a href="/user/edit_password">비밀번호 변경</a></li>
                     </ul>
@@ -227,7 +226,8 @@
                     <div class="deleteModal modal">
                         <div class="modal-content">
                             <p>탈퇴하시겠습니까?</p>
-                            <button class="confirmDelete"><a th:href="'/user/delete/' + ${memberEditFormDto.id}">삭제</a></button>
+                            <button class="confirmDelete"><a th:href="'/user/delete/' + ${memberEditFormDto.id}">삭제</a>
+                            </button>
                             <button class="cancelDelete">취소</button>
                         </div>
                     </div>
@@ -370,6 +370,7 @@
         $(".cancelDelete").click(function() {
         closeModal(); // 모달 닫기
     });
+
 
 
 

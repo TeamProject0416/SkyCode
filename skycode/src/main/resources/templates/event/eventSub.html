@@ -40,7 +40,11 @@
         <div class="eventImg">
             <img th:src="${eventFormDto.bigImgUrl}" th:alt="${eventFormDto.bigImgName}">
         </div>
-        <div class="getCoupon"><a href="#">쿠폰 받기!!</a></div>
+
+        <div class="getCoupon">
+            <a th:href="'/coupon/' + ${eventFormDto.id} + '/couponDownload'">쿠폰 받기!!</a>
+        </div>
+
     </div>
 </section>
 <footer th:replace="~{fragments/sub/footer::footer}"></footer>

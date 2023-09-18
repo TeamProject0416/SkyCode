@@ -22,7 +22,6 @@
         <ul class="mainTab firstTab">
             <li><a href="/user">#프로필</a></li>
             <li class="on"><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
-            <li><a href="/user_trip/tripTool">#여행 도구</a></li>
             <li><a href="/user_review">#나의 리뷰</a></li>
         </ul>
         <div class="subTab">
@@ -31,7 +30,6 @@
                 <div class="tabBox secondTab">
                     <ul class="mainTab">
                         <li><a href="/user_shopping/orderList">결제내역조회</a></li>
-                        <li><a href="/user_shopping/cart">장바구니</a></li>
                         <li><a href="/user_shopping/point">포인트</a></li>
                         <li><a href="/user_shopping/coupon">쿠폰</a></li>
                         <li class="on"><a href="/user_shopping/questions">나의문의내역</a></li>
@@ -43,7 +41,6 @@
                                     <h2>제목 : <span>[[${inquiry.inquiryTitle}]]</span></h2>
                                     <p>내용 : <span>[[${inquiry.inquiryContent}]]</span></p>
                                     <p>카테고리 : <span>[[${inquiry.type}]]</span></p>
-                                    <!--                                    <p>[[${inquiry.isPrivate}]]</p>-->
                                     <p>공개여부 : <span
                                             th:text="${inquiry.isPrivate ? '비공개' : '공개'}">여기는 알아서 저장된 내용으로 나옵니다</span>
                                     </p>
