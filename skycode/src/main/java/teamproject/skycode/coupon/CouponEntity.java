@@ -6,6 +6,8 @@ import teamproject.skycode.common.BaseEntity;
 import teamproject.skycode.constant.CouponStatus;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -40,6 +42,8 @@ public class CouponEntity extends BaseEntity {
 
     private String couponEnd; // 쿠폰 종료일 "yyyy-MM-dd"
 
+    @OneToMany(mappedBy = "couponEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Member_CouponEntity> member_CouponEntityList = new ArrayList<>();
 
     public Integer getCouponNum() {
         return couponNum;

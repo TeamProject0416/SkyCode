@@ -33,13 +33,11 @@
                     <option value="SELL">판매중</option>
                     <option value="SOLD_OUT">품절</option>
                 </select>
-                <select  class="oej_sale3" th:field="*{economyStatus}">
+                <select class="oej_sale3" th:field="*{economyStatus}">
                     <option value="SELL">판매중</option>
                     <option value="SOLD_OUT">품절</option>
                 </select>
             </div>
-
-
 
 
             <div class="pack">
@@ -62,18 +60,22 @@
             <div class="pack">
                 <div class="oej_pack1">
                     <label class="firstPrice">firstClass 가격</label>
-                    <input class="oej_num0" type="number" th:field="*{firstPrice}" name="firstPrice" placeholder="ex) 1000(원)">
+                    <input class="oej_num0" type="number" th:field="*{firstPrice}" name="firstPrice"
+                           placeholder="ex) 1000(원)">
                     <p th:if="${#fields.hasErrors('firstPrice')}" th:errors="*{firstPrice}" class="oej_fieldError">
                         Incorrect data</p></div>
 
                 <div class="oej_pack1">
                     <label class="businessPrice">businessClass 가격</label>
-                    <input  class="oej_num" type="number" th:field="*{businessPrice}" name="businessPrice" placeholder="ex) 10%">
-                    <p th:if="${#fields.hasErrors('businessPrice')}" th:errors="*{businessPrice}" class="oej_fieldError">
+                    <input class="oej_num" type="number" th:field="*{businessPrice}" name="businessPrice"
+                           placeholder="ex) 10%">
+                    <p th:if="${#fields.hasErrors('businessPrice')}" th:errors="*{businessPrice}"
+                       class="oej_fieldError">
                         Incorrect data</p></div>
                 <div class="oej_packEc">
                     <label class="economyPrice">economyClass 가격</label>
-                    <input class="oej_num1" type="number" th:field="*{economyPrice}" name="economyPrice" placeholder="ex) 10%">
+                    <input class="oej_num1" type="number" th:field="*{economyPrice}" name="economyPrice"
+                           placeholder="ex) 10%">
                     <p th:if="${#fields.hasErrors('economyPrice')}" th:errors="*{economyPrice}" class="oej_fieldError">
                         Incorrect data</p>
                 </div>
@@ -140,7 +142,8 @@
                 <div class="oej_packStart">
                     <label class="ticketEndDate">도착일</label>
                     <input class="oej_ticketEnd" name="ticketEndDate" th:field="*{ticketEndDate}" type="date">
-                    <p th:if="${#fields.hasErrors('ticketEndDate')}" th:errors="*{ticketEndDate}" class="oej_fieldError">
+                    <p th:if="${#fields.hasErrors('ticketEndDate')}" th:errors="*{ticketEndDate}"
+                       class="oej_fieldError">
                         Incorrect data
                     </p>
                 </div>
@@ -150,7 +153,8 @@
                 <div class="oej_SStart">
                     <label class="ticketStart">출발 시간</label>
                     <input class="oej_time" type="time" name="ticketStartTime" th:field="*{ticketStartTime}">
-                    <p th:if="${#fields.hasErrors('ticketStartTime')}" th:errors="*{ticketStartTime}" class="oej_fieldError">
+                    <p th:if="${#fields.hasErrors('ticketStartTime')}" th:errors="*{ticketStartTime}"
+                       class="oej_fieldError">
                         Incorrect
                         data
                     </p>
@@ -163,7 +167,8 @@
                 <div class="oej_SStart">
                     <label class="ticketEnd">도착 시간</label>
                     <input class="oej_timeEnd" type="time" name="ticketEndTime" th:field="*{ticketEndTime}">
-                    <p th:if="${#fields.hasErrors('ticketEndTime')}" th:errors="*{ticketEndTime}" class="oej_fieldError">
+                    <p th:if="${#fields.hasErrors('ticketEndTime')}" th:errors="*{ticketEndTime}"
+                       class="oej_fieldError">
                         Incorrect
                         data
                     </p>

@@ -44,12 +44,12 @@
                         <li><a href="/news/faq/faq">Q&A</a></li>
                     </ul>
                 </li>
+                <li th:if="${!#strings.isEmpty(admin)}">
+                    <a href="/admin">관리페이지</a>
+                </li>
             </ul>
         </nav>
         <div class="search_user">
-            <a>
-                <img class="jhicon cart" src="/subImages/Cart.png" alt="">
-            </a>
             <a>
                 <img class="jhicon searchBtn" src="/subImages/alarmMenu.png" alt="">
             </a>
@@ -66,9 +66,6 @@
                     <div class="jhModalUserBg"></div>
                     <div class="jhUser">
                         <button class="closeMenu">X</button>
-                        <a href="/user_shopping/cart">
-                            <button class="jhicon cartMenu">장바구니</button>
-                        </a>
                         <a href="#">
                             <button class="jhicon alarmMenu">내 알람</button>
                         </a>
@@ -109,7 +106,7 @@
                                 <li><a href="/user">프로필
                                     <div></div>
                                 </a></li>
-                                <li><a href="/user_trip/tripTool">여행도구
+                                <li><a href="/user_shopping/questions">문의
                                     <div></div>
                                 </a></li>
                                 <li><a href="/user/edit">설정

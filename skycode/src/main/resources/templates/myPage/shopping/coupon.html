@@ -106,6 +106,13 @@
         font-size: 1.3rem;
         color: #ccc;
     }
+
+    /* 등록된 리뷰가 없을때 */
+    .AllNull {
+        font-size: 1.8rem;
+        text-align: center;
+        padding: 150px 0;
+    }
     </style>
 </head>
 
@@ -118,7 +125,6 @@
         <ul class="mainTab firstTab">
             <li><a href="/user">#프로필</a></li>
             <li class="on"><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
-            <li><a href="/user_trip/tripTool">#여행 도구</a></li>
             <li><a href="/user_review">#나의 리뷰</a></li>
         </ul>
         <div class="subTab">
@@ -127,7 +133,6 @@
                 <div class="tabBox secondTab">
                     <ul class="mainTab">
                         <li><a href="/user_shopping/orderList">결제내역조회</a></li>
-                        <li><a href="/user_shopping/cart">장바구니</a></li>
                         <li><a href="/user_shopping/point">포인트</a></li>
                         <li class="on"><a href="/user_shopping/coupon">쿠폰</a></li>
                         <li><a href="/user_shopping/questions">나의문의내역</a></li>
@@ -135,48 +140,52 @@
                     <div class="subTab">
                         <div>
                             <div class="couponinput">
-                                <label for="myPageCoupon">쿠폰 등록</label>
-                                <input type="text" id="myPageCoupon" placeholder="쿠폰코드를 입력해주세요">
-                                <button type="submit">등록</button>
+                                <form action="/user/couponDownload" method="post" th:object="${couponDto}">
+                                    <label for="myPageCoupon">쿠폰 등록</label>
+                                    <input type="text" th:field="*{couponCode}" id="myPageCoupon"
+                                           placeholder="쿠폰코드를 입력해주세요">
+                                    <button type="submit">등록</button>
+                                    <p th:if="${#fields.hasErrors('couponCode')}" th:errors="*{couponCode}"
+                                       class="fieldError">Incorrect data</p>
+                                </form>
                             </div>
+
                             <div class="couponBox">
-                                <div>
-                                    <p>쿠폰받기</p>
-                                    <ul class="couponTextBox">
-                                        <li>10% 할인</li>
-                                        <li>
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                        </li>
-                                        <li>
-                                            2023-08-23 ~ 2023-09-30
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <p>쿠폰받기</p>
-                                    <ul class="couponTextBox">
-                                        <li>10% 할인</li>
-                                        <li>
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                        </li>
-                                        <li>
-                                            2023-08-23 ~ 2023-09-30
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <p>쿠폰받기</p>
-                                    <ul class="couponTextBox">
-                                        <li>10% 할인</li>
-                                        <li>
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                        </li>
-                                        <li>
-                                            2023-08-23 ~ 2023-09-30
-                                        </li>
-                                    </ul>
-                                </div>
+
+                                <th:block th:unless="${#lists.isEmpty(memberCouponList)}"
+                                          th:each="coupon: ${memberCouponList}">
+                                    <div>
+                                        <p>쿠폰받기</p>
+                                        <ul class="couponTextBox">
+                                            <li>[[${coupon.couponEntity.couponName}]]</li>
+                                            <li>
+                                                <span th:if="${coupon.couponEntity.couponPrice} != null">
+                                                    · 할인금액 : [[${coupon.couponEntity.couponPrice}]]원
+                                                    <br>
+                                                </span>
+                                                <span th:if="${coupon.couponEntity.couponRatio} != null">
+                                                    · 할인율 : [[${coupon.couponEntity.couponRatio}]]%
+                                                    <br>
+                                                </span>
+                                                <span th:if="${coupon.couponEntity.maxPrice} != null">
+                                                    · 최대 할인 금액 : [[${coupon.couponEntity.maxPrice}]]원
+                                                    <br>
+                                                </span>
+                                                <span th:if="${coupon.couponEntity.useMinPrice} != null">
+                                                    · 최소 사용 금액 : [[${coupon.couponEntity.useMinPrice}]]원
+                                                </span>
+                                            </li>
+                                            <li>
+                                                [[${coupon.couponEntity.couponStart}]] ~
+                                                [[${coupon.couponEntity.couponEnd}]]
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </th:block>
                             </div>
+                            <th:block th:if="${#lists.isEmpty(memberCouponList)}">
+                                <p class="AllNull">아직 등록된 쿠폰이 없습니다.</p>
+                            </th:block>
                         </div>
                     </div>
                 </div>

@@ -11,6 +11,11 @@
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
     <link th:href="@{/css/coupon/couponForm.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        .fieldError {
+          color: #bd2130;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,11 +41,16 @@
                     <input type="text" th:field="*{couponName}" name="couponName" placeholder="쿠폰 이름을 입력해주세요">
                     <p th:if="${#fields.hasErrors('couponName')}" th:errors="*{couponName}" class="fieldError">
                         Incorrect
-                        data</p>
+                        data
+                    </p>
                 </div>
                 <div>
                     <label class="couponNum">쿠폰 수량</label>
                     <input type="number" th:field="*{couponNum}" name="couponNum" placeholder="ex) 1000(장)">
+                    <p th:if="${#fields.hasErrors('couponNum')}" th:errors="*{couponNum}" class="fieldError">
+                        Incorrect
+                        data
+                    </p>
                 </div>
             </div>
             <div class="pack">
@@ -65,6 +75,10 @@
                 <div>
                     <label class="useMinPrice">최소 사용 금액(원)</label>
                     <input type="number" th:field="*{useMinPrice}" name="useMinPrice" placeholder="ex) 10000(원)">
+                    <p th:if="${#fields.hasErrors('useMinPrice')}" th:errors="*{useMinPrice}" class="fieldError">
+                        Incorrect
+                        data
+                    </p>
                 </div>
             </div>
 
@@ -86,7 +100,6 @@
                     </p>
                 </div>
             </div>
-
             <div class="btnArea" th:if="${#strings.isEmpty(couponFormDto.id)}">
                 <button th:formaction="@{/coupon/new}" type="submit" class="btn createBtn">저장</button>
             </div>

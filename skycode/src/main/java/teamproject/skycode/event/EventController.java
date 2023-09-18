@@ -30,7 +30,6 @@ public class EventController {
     private final EventService eventService;
     private final MemberRepository memberRepository;
     private final ReviewRepository reviewRepository;
-
     @GetMapping(value = {"/ongoing", "/ongoing/{page}"}) // 진행 페이지
     public String ongoingEvent(@PathVariable(name = "page", required = false) Integer page,
                                Principal principal, Model model) {
@@ -225,5 +224,7 @@ public class EventController {
         // 삭제 후 리다이렉션할 URL을 반환
         return "redirect:/event/ongoing";
     }
+
+
 
 }
