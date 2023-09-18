@@ -40,15 +40,24 @@
                         <th:block th:each="inquiry: ${inquiryList}">
                             <div class="QContents">
                                 <div class="QInfo">
-                                    <h2>[[${inquiry.inquiryTitle}]]</h2>
-                                    <p>[[${inquiry.inquiryContent}]]</p>
-                                    <p>[[${inquiry.type}]]</p>
-                                    <p>[[${inquiry.isPrivate}]]</p>
-                                    <p>[[${inquiry.regTime}]]</p>
-                                    <a th:href="'/inquiry/' + ${inquiry.id}"></a>
+                                    <h2>제목 : <span>[[${inquiry.inquiryTitle}]]</span></h2>
+                                    <p>내용 : <span>[[${inquiry.inquiryContent}]]</span></p>
+                                    <p>카테고리 : <span>[[${inquiry.type}]]</span></p>
+                                    <!--                                    <p>[[${inquiry.isPrivate}]]</p>-->
+                                    <p>공개여부 : <span
+                                            th:text="${inquiry.isPrivate ? '비공개' : '공개'}">여기는 알아서 저장된 내용으로 나옵니다</span>
+                                    </p>
+                                    <p>[[${inquiry.regTime}]]</p>   <!--이건 등록 시간 입니다-->
+                                    <p>답변 :
+                                        <span th:text="${inquiry.responseContent != null and inquiry.responseContent != ''
+                                        ? inquiry.responseContent
+                                        : '아직 등록되지 않았습니다.'}">여기도 알아서 내용이 나옵니다</span>
+                                    </p>
                                 </div>
                             </div>
                         </th:block>
+                        <!--// 이부분은 나중에 링크를 넣을 예정 무시하고 주석처리 해놓으시면 됩니다
+                                    <a th:href="'/inquiry/' + ${inquiry.id}"></a>-->
                     </div>
                 </div>
             </div>

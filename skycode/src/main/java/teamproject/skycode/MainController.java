@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import teamproject.skycode.event.EventEntity;
 import teamproject.skycode.event.EventRepository;
 import teamproject.skycode.login.MemberEntity;
@@ -35,7 +37,6 @@ public class MainController {
             int reviewNum = review.size();
             model.addAttribute("reviewNum",reviewNum);
         }
-
         // 이벤트 캐러셀
         List<ReviewEntity> review = reviewRepository.findAllByOrderByReviewHitsDesc();
         model.addAttribute("reviews", review);
@@ -45,4 +46,5 @@ public class MainController {
         model.addAttribute("events", event);
         return "main";
     }
+
 }
