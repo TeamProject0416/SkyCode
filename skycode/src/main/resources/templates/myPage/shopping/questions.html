@@ -6,11 +6,18 @@
     <link th:href="@{/css/reset.css}" rel="stylesheet">
     <link th:href="@{/css/typo.css}" rel="stylesheet">
     <link th:href="@{/css/myPage/common.css}" rel="stylesheet">
+    <link th:href="@{/css/myPage/questions/questions.css}" rel="stylesheet">
     <link th:href="@{/css/sub/header.css}" rel="stylesheet">
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
-    <style>
 
-    </style>
+
+<!--    <link rel="stylesheet" href="css/reset.css">-->
+<!--    <link rel="stylesheet" href="css/typo.css">-->
+<!--    <link rel="stylesheet" href="css/question.css">-->
+<!--    <link rel="stylesheet" href="css/myPage_JHstyle.css">-->
+<!--    <link rel="stylesheet" href="css/nysubfooter.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 </head>
 
 <body>
@@ -22,6 +29,7 @@
         <ul class="mainTab firstTab">
             <li><a href="/user">#프로필</a></li>
             <li class="on"><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
+            <li><a href="/user_trip/tripTool">#여행 도구</a></li>
             <li><a href="/user_review">#나의 리뷰</a></li>
         </ul>
         <div class="subTab">
@@ -30,26 +38,33 @@
                 <div class="tabBox secondTab">
                     <ul class="mainTab">
                         <li><a href="/user_shopping/orderList">결제내역조회</a></li>
+                        <li><a href="/user_shopping/cart">장바구니</a></li>
                         <li><a href="/user_shopping/point">포인트</a></li>
                         <li><a href="/user_shopping/coupon">쿠폰</a></li>
                         <li class="on"><a href="/user_shopping/questions">나의문의내역</a></li>
                     </ul>
                     <div class="subTab">
                         <th:block th:each="inquiry: ${inquiryList}">
+                            <!-- 은준css작성한부분 -->
                             <div class="QContents">
                                 <div class="QInfo">
                                     <h2>제목 : <span>[[${inquiry.inquiryTitle}]]</span></h2>
-                                    <p>내용 : <span>[[${inquiry.inquiryContent}]]</span></p>
-                                    <p>카테고리 : <span>[[${inquiry.type}]]</span></p>
-                                    <p>공개여부 : <span
-                                            th:text="${inquiry.isPrivate ? '비공개' : '공개'}">여기는 알아서 저장된 내용으로 나옵니다</span>
-                                    </p>
-                                    <p>[[${inquiry.regTime}]]</p>   <!--이건 등록 시간 입니다-->
-                                    <p>답변 :
-                                        <span th:text="${inquiry.responseContent != null and inquiry.responseContent != ''
-                                        ? inquiry.responseContent
-                                        : '아직 등록되지 않았습니다.'}">여기도 알아서 내용이 나옵니다</span>
-                                    </p>
+                                    <p class="oej_txt">내용 : <span>[[${inquiry.inquiryContent}]]</span></p>
+
+
+                                    <div class="oej_box">
+                                        <p class="oej_category">카테고리 : <span>[[${inquiry.type}]]</span></p>
+                                        <!--                                    <p>[[${inquiry.isPrivate}]]</p>-->
+                                        <p class="oej_open"><i class="fa-solid fa-lock"></i>공개여부 : <span
+                                                th:text="${inquiry.isPrivate ? '비공개' : '공개'}">여기는 알아서 저장된 </span>
+                                        </p>
+                                        <p class="oej_time">[[${inquiry.regTime}]]</p>   <!--이건 등록 시간 입니다-->
+                                        <p class="oej_answer">답변 :
+                                            <span th:text="${inquiry.responseContent != null and inquiry.responseContent != ''
+                                            ? inquiry.responseContent
+                                            : '아직 등록되지 않았습니다.'}">여기도 알아서 내용이 나옵니다</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </th:block>

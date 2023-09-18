@@ -1,0 +1,129 @@
+/* 티켓 선택 결과 */
+.travelInfo {
+    margin-top: 24px;
+    margin-bottom: 8px
+}
+
+.goingComingTickets {
+    position: relative;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* 가는 편 */
+.goingResult {
+    margin-top: 24px;
+    height: 150px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 16px 16px;
+}
+
+.ticketInfo {
+    display: flex;
+    height: 100%;
+}
+
+.going {
+    width: 100px;
+    height: 100%;
+    border-right: 1px solid #ccc;
+    margin-right: 12px;
+}
+
+.resultTicketContents {
+    padding: 0 24px;
+}
+
+.goingComing {
+    display: flex;
+}
+
+.goingComing p {
+    font-size: 1.5rem;
+}
+
+.goingComing p:first-of-type {
+    margin-right: 16px;
+}
+
+/* /가는 편 */
+
+/* 오는 편 */
+.comingResult {
+    margin-top: 24px;
+    height: 150px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 16px 16px;
+}
+
+.coming {
+    width: 100px;
+    height: 100%;
+    border-right: 1px solid #ccc;
+    margin-right: 12px;
+}
+
+.comingGoing {
+    display: flex;
+}
+
+.comingGoing p {
+    font-size: 1.5rem;
+}
+
+.comingGoing p:first-of-type {
+    margin-right: 16px;
+}
+
+.priceResult {
+    position: absolute;
+    right: 50px;
+
+    font-size: 1.5rem;
+    /* padding: 20px 16px; */
+    line-height: 100px;
+}
+/* /오는 편 */
+
+.couponAndPointArea {
+    display: flex;
+    margin-top: 24px;
+    width: 100%;
+    justify-content: space-between;
+
+}
+.couponArea {
+    border: 1px solid black;
+
+}
+.couponArea input {
+    width: 100%;
+}
+.pointArea {
+    border: 1px solid black;
+
+}
+
+.resultBtnArea {
+    text-align: right;
+    margin-top: 8px;
+}
+
+.resultBtnArea button {
+    width: 150px;
+    height: 48px;
+    background: rgba(0, 102, 186, 0.9);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.resultBtnArea button:hover {
+    background: rgba(0, 102, 186);
+}
+
+/* /티켓 선택 결과 */

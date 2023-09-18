@@ -162,16 +162,50 @@ public class TicketController {
         System.err.println("청소년: " + teenagerNum);
         System.err.println("유아: " + childNum);
         System.err.println("좌석 등급: " + seatGrade);
+
+
         Integer totalNum = adultNum + teenagerNum + childNum;
+        String userGrade = seatGrade;
 
         // 모델에 데이터를 추가하고, 결과 페이지로 이동합니다.
         List<TicketEntity> resultGoingList = ticketService.ticketGoinhEntityList(startValue, arriveValue, startDate);
         List<TicketEntity> resultComingList = ticketService.ticketComingEntityList(arriveValue, startValue, endDate);
 
-         model.addAttribute("goingTickets", resultGoingList); // 가는 편 리스트
+
+
+//        뷰에 모델 추가
+//        model.addAttribute("userSelectGrade", userSelectGrade);
+        model.addAttribute("totalNum",totalNum);
+        model.addAttribute("userSeatGrade",userGrade);
+        model.addAttribute("goingTickets", resultGoingList); // 가는 편 리스트
         model.addAttribute("comingTickets", resultComingList); // 오는 편 리스트
         return "ticket/ticketSearch"; // 결과를 보여줄 뷰 페이지의 경로를 반환
     }
+
+    @PostMapping(value = "/payment")
+    public String Payments(
+            @RequestParam(name = "goingResultTotalPrice") int goingResultTotalPrice,
+            @RequestParam(name = "comingResultTotalPrice") int comingResultTotalPrice,
+            Model model
+    ) {
+
+        int goingPrice = goingResultTotalPrice;
+        int comingPrice = comingResultTotalPrice;
+        int resultPrice = goingPrice + comingPrice;
+        System.err.println(goingPrice);
+        System.err.println(comingPrice);
+        System.err.println(resultPrice);
+
+
+        model.addAttribute("resultPrice", resultPrice);
+
+        return "tosspayments/pay";
+    }
+//    @GetMapping(value = "/payment")
+//    public String payments() {
+//        return "tosspayments/pay";
+//    }
+
 
 
 }

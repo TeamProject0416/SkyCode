@@ -43,20 +43,17 @@
             <div class="pack">
                 <div class="oej_pack1">
                     <label class="firstNum">firstClass 수량</label>
-                    <input class="oej_num0" type="number" th:field="*{firstNum}" name="firstNum"
-                           placeholder="ex) 1000(장)">
+                    <input class="oej_num0" type="number" th:field="*{firstNum}" name="firstNum" placeholder="ex) 1000(장)" value="firstClass">
                     <p th:if="${#fields.hasErrors('firstNum')}" th:errors="*{firstNum}" class="oej_fieldError">
                         Incorrect data</p></div>
                 <div class="oej_pack1">
                     <label class="businessNum">businessClass 수량</label>
-                    <input class="oej_num" type="number" th:field="*{businessNum}" name="businessNum"
-                           placeholder="ex) 1000(장)">
+                    <input  class="oej_num" type="number" th:field="*{businessNum}" name="businessNum" placeholder="ex) 1000(장)" value="businessClass">
                     <p th:if="${#fields.hasErrors('businessNum')}" th:errors="*{businessNum}" class="oej_fieldError">
                         Incorrect data</p></div>
                 <div class="oej_packEc">
                     <label class="economyNum">economyClass 수량</label>
-                    <input class="oej_num1" type="number" th:field="*{economyNum}" name="economyNum"
-                           placeholder="ex) 1000(장)">
+                    <input class="oej_num1" type="number" th:field="*{economyNum}" name="economyNum" placeholder="ex) 1000(장)" value="economyClass">
                     <p th:if="${#fields.hasErrors('economyNum')}" th:errors="*{economyNum}" class="oej_fieldError">
                         Incorrect data</p></div>
             </div>

@@ -150,7 +150,7 @@
   }
 
 
-
+  /* 여기서부터 작성했습니다 */
   /* 댓글작성 */
 
 .oej_bigbox {
@@ -321,15 +321,15 @@ position: absolute;
 
 .oej_button2 {
   position: absolute;
-  top: 93px;
-  right: -130px;
-  width: 90px;
-  height: 35px;
-  border-radius: 10px;
-  color: #fff;
-  outline: none;
-  cursor: pointer;
- border: 1px solid rgba(0, 102, 186, 0.8);
- background: rgba(0, 102, 186, 0.8) ;
+  right: 35px;
+   width: 90px;
+   height: 35px;
+   top:53px;
+   border-radius: 10px;
+   color: #fff;
+   outline: none;
+   cursor: pointer;
+  border: 1px solid rgba(0, 102, 186, 0.8);
+  background: rgba(0, 102, 186, 0.8) ;
 }
 

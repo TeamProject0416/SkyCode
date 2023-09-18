@@ -5,5 +5,6 @@ public enum TicketCountry {
     NRT, HND, // Japan (Narita, Haneda)
     LAX, SFO, LAS, // USA (LosAngeles, SanFrancisco, LasVegas)
     GUM, BUD, BKK, // (Guam, Budapest, Bangkok)
+
     // 여행 지역
 }
