@@ -28,7 +28,6 @@ public class MemberFormDto {
     private String password;
 
     private String address;
-
     @Pattern(regexp = "^(01[1|6|7|8|9|0])-(\\d{3,4})-(\\d{4})$", message = "01x-xxxx-xxxx의 형식으로 작성해주세요")
     private String phoneNum;
 

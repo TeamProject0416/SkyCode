@@ -144,23 +144,6 @@ public class MyPageController {
         return "redirect:/";
     }
 
-    //---------------------------/user/praise------------------------//
-    @GetMapping(value = "/user/praise")
-    public String userPraise(Model model, Principal principal) {
-
-        // 유저 로그인
-        if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
-        }
-
-        return "myPage/users/praise";
-    }
-
 
     //---------------------------/user/edit_password------------------------//
     @GetMapping(value = "/user/edit_password")

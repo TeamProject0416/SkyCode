@@ -36,7 +36,13 @@
         }
 
         .editHeader>a {
-            color: #ff4a4a;
+            color: #C4033E;
+        }
+
+        .editEmail > .red,
+        .editName > .red{
+            width: 300px;
+            color: #C4033E;
         }
 
         .editHeader>a:hover {
@@ -198,6 +204,8 @@
         }
 
 
+
+
     </style>
 </head>
 
@@ -219,7 +227,6 @@
                     <ul class="mainTab">
                         <li><a href="/user">모두 보기</a></li>
                         <li class="on"><a href="/user/edit">회원정보수정</a></li>
-                        <li><a href="/user/praise">좋아요</a></li>
                         <li><a href="/user/edit_password">비밀번호 변경</a></li>
                     </ul>
 
@@ -244,10 +251,12 @@
                                 <div class="editEmail">
                                     <span>이메일</span>
                                     <input type="text" th:value="*{email}" name="email" placeholder="email" readonly>
+                                    <span class="red"> * 이메일은 변경이 불가능합니다</span>
                                 </div>
                                 <div class="editName">
                                     <span>이름</span>
                                     <input type="text" th:value="*{name}" name="name" placeholder="Name" readonly>
+                                    <span class="red"> * 이름은 변경이 불가능합니다</span>
                                 </div>
                                 <div class="editNickname">
                                     <span>닉네임</span>
@@ -273,6 +282,10 @@
                                 <div class="editBrithday">
                                     <span>생일</span>
                                     <input type="date" th:value="*{birthday}" name="birthday">
+                                </div>
+                                <div class="address">
+                                    <span>주소</span>
+                                    <input type="text" th:value="*{address}" name="address">
                                 </div>
                                 <div class="editImg">
                                     <span>프로필이미지</span>
@@ -370,9 +383,6 @@
         $(".cancelDelete").click(function() {
         closeModal(); // 모달 닫기
     });
-
-
-
 
 </script>
 <script src="/js/sub/header.js"></script>

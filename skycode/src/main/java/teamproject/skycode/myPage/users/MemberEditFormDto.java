@@ -29,6 +29,7 @@ public class MemberEditFormDto {
 
     private String phoneNum;
 
+    private String address;
     private String birthday;
 
     private Gender gender;

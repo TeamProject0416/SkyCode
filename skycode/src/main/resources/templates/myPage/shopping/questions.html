@@ -38,23 +38,23 @@
                 <div class="tabBox secondTab">
                     <ul class="mainTab">
                         <li><a href="/user_shopping/orderList">결제내역조회</a></li>
-                        <li><a href="/user_shopping/cart">장바구니</a></li>
                         <li><a href="/user_shopping/point">포인트</a></li>
                         <li><a href="/user_shopping/coupon">쿠폰</a></li>
                         <li class="on"><a href="/user_shopping/questions">나의문의내역</a></li>
                     </ul>
                     <div class="subTab">
-                        <th:block th:each="inquiry: ${inquiryList}">
+                        <th:block th:if="${#lists.isEmpty(inquiry)}">
+                            <p class="AllNull">아직 등록된 문의가 없습니다.</p>
+                        </th:block>
+                        <th:block th:unless="${#lists.isEmpty(inquiry)}" th:each="inquiry: ${inquiryList}">
                             <!-- 은준css작성한부분 -->
                             <div class="QContents">
                                 <div class="QInfo">
                                     <h2>제목 : <span>[[${inquiry.inquiryTitle}]]</span></h2>
                                     <p class="oej_txt">내용 : <span>[[${inquiry.inquiryContent}]]</span></p>
 
-
                                     <div class="oej_box">
                                         <p class="oej_category">카테고리 : <span>[[${inquiry.type}]]</span></p>
-                                        <!--                                    <p>[[${inquiry.isPrivate}]]</p>-->
                                         <p class="oej_open"><i class="fa-solid fa-lock"></i>공개여부 : <span
                                                 th:text="${inquiry.isPrivate ? '비공개' : '공개'}">여기는 알아서 저장된 </span>
                                         </p>

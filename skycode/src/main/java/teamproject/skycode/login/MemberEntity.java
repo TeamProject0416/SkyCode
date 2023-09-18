@@ -85,6 +85,7 @@ public class MemberEntity extends BaseEntity {
         this.name = memberEditFormDto.getName();
         this.birthday = memberEditFormDto.getBirthday();
         this.phoneNum = memberEditFormDto.getPhoneNum();
+        this.address = memberEditFormDto.getAddress();
         this.email = memberEditFormDto.getEmail();
         this.nickName = memberEditFormDto.getNickName();
         this.gender = memberEditFormDto.getGender();
