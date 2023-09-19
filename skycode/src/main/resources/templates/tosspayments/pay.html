@@ -57,6 +57,7 @@
                 <p>쿠폰 사용</p>
                 <label for="couponList">쿠폰</label>
                 <select name="couponList" id="couponList">
+                    <option value="0">쿠폰을 선택하세요.</option>
                     <option value="10">쿠폰1</option>
                     <option value="20">쿠폰2</option>
                     <option value="30">쿠폰3</option>
@@ -83,6 +84,10 @@
 
 
 <script>
+    // amount 변수 선언과 초기화
+    let amount;
+    // 초기 금액 저장
+    let initialPrice = parseInt(document.querySelector(".resultPrice").textContent);
     // 포인트 적용 버튼 클릭 이벤트 처리
     document.getElementById("applyPointButton").addEventListener("click", function () {
         // 입력된 포인트 값을 가져옴
@@ -90,16 +95,23 @@
 
 
         // 포인트 값이 유효한지 확인
-        if (!isNaN(pointPrice) && pointPrice > 0) {
-            // 현재 총 금액 가져오기 (여기서는 예시로 100000으로 가정)
-            let resultPrice = document.querySelector(".resultPrice1").textContent;
+        if (!isNaN(pointPrice) && pointPrice >= 0) {
+
+
+            // 현재 총 금액 가져오기
+            let resultPrice = initialPrice;
 
             // 포인트를 총 금액에서 빼기
-            var newTotalPrice = resultPrice - pointPrice;
+            resultPrice = resultPrice - pointPrice;
+
+            // 정수로 반올림
+            resultPrice = Math.round(resultPrice);
 
             // 결과를 화면에 업데이트
-            document.querySelector(".resultPrice").textContent = newTotalPrice + " 원";
-
+            document.querySelector(".resultPrice").textContent = resultPrice;
+            // 쿠폰 선택을 다시 활성화
+            document.getElementById("couponList").removeAttribute("disabled");
+            amount = resultPrice;
             // 서버로 포인트 값을 전송하려면 여기에서 AJAX 또는 폼 제출을 사용할 수 있습니다.
             // 필요한 경우 서버와의 통신을 추가하세요.
         } else {
@@ -108,9 +120,32 @@
         }
     });
 
+    // 쿠폰 선택 이벤트 처리
+    document.getElementById("couponList").addEventListener("change", function () {
+        // 입력된 포인트 값을 가져옴
+        let pointPrice = parseInt(document.getElementById("pointPrice").value);
 
+        // 포인트 값이 이미 입력되어 있다면 쿠폰 선택을 막고 알림창 띄우기
+        if (!isNaN(pointPrice) && pointPrice > 0) {
+            alert("포인트 입력값이 이미 있습니다. 쿠폰을 선택할 수 없습니다.");
+            // 이 부분에서 쿠폰 선택을 초기 상태로 되돌릴 수 있으나, 쿠폰 선택을 막는 방법은 상황에 따라 다를 수 있습니다.
+            document.getElementById("couponList").setAttribute("disabled", "disabled");
+        } else {
+            // 선택한 쿠폰의 값을 가져옴
+            let selectedCouponValue = parseInt(this.value);
+            // 현재 총 금액 가져오기
+            let resultPrice = initialPrice;
+            // 선택한 쿠폰 값(할인율)을 적용하여 새로운 금액 계산
+            let discountedPrice = resultPrice * (1 - selectedCouponValue / 100);
 
-    let resultPrice = document.querySelector(".resultPrice").textContent;
+            // 정수로 반올림
+            discountedPrice = Math.round(discountedPrice);
+            amount = discountedPrice;
+            // 결과를 화면에 업데이트
+            document.querySelector(".resultPrice").textContent = discountedPrice;
+        }
+    });
+
 
     // ------ 클라이언트 키로 객체 초기화 ------
     var clientKey = 'test_ck_Z1aOwX7K8meO1QmzDgA8yQxzvNPG'
@@ -123,7 +158,7 @@
             // 결제 정보 파라미터
             // 더 많은 결제 정보 파라미터는 결제창 Javascript SDK에서 확인하세요.
             // https://docs.tosspayments.com/reference/js-sdk
-            amount: resultPrice, // 결제 금액
+            amount: amount, // 결제 금액
             orderId: 'm963ympgEq8ASzECXaT4u', // 주문 ID(주문 ID는 상점에서 직접 만들어주세요.)
             orderName: '테스트 결제', // 주문명
             customerName: '김토스', // 구매자 이름
@@ -137,7 +172,7 @@
             .catch(function (error) {
                 if (error.code === 'USER_CANCEL') {
                     // 결제 고객이 결제창을 닫았을 때 에러 처리
-                    alert(결제가 취소되었습니다. 메인 화면으로 이동합니다.);
+                    alert("결제가 취소되었습니다.");
                 } else if (error.code === 'INVALID_CARD_COMPANY') {
                     // 유효하지 않은 카드 코드에 대한 에러 처리
                 }
