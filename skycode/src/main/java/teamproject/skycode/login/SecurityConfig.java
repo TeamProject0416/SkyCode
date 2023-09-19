@@ -38,8 +38,7 @@ public class SecurityConfig {
                         "/ticket/**",
                         "/coupon/**",
                         "/comment/**",
-                        "/user/**",
-                        "/tosspayments/**"
+                        "/user/**","/api/**","payment/**"
                 ) //csrf예외처리
         ;
 
@@ -47,7 +46,7 @@ public class SecurityConfig {
                 .mvcMatchers("/user/**", "/user_shopping/**", "/user_trip/**",
                         "/user_review/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .mvcMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
-                .mvcMatchers("/", "/member/**", "/review/**", "/ticket/**", "/map/**", "/event/**", "/news/**", "/tosspayments/**").permitAll()
+                .mvcMatchers("/", "/member/**", "/review/**", "/ticket/**", "/map/**", "/event/**", "/news/**", "/payment/**").permitAll()
                 .mvcMatchers("/css/**", "/js/**", "/img/**", "/mainImages/**", "/subImages/**").permitAll()
                 .anyRequest().authenticated()/* 그 외 모든 요청은 인증된 사용자만 접근이 가능하게 처리*/
         ;

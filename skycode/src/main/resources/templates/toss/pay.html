@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
     <link th:href="@{/css/pay/pay.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
     <!-- 토스페이먼츠 결제창 SDK 추가 -->
     <script src="https://js.tosspayments.com/v1/payment"></script>
 </head>
 <body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
 <div class="ticketResult">
     <h2 class="travelInfo">결제</h2>
     <hr>
@@ -22,13 +28,13 @@
                 </div>
                 <div class="resultTicketContents resultGoingComing">
                     <div class="goingComing">
-                        <p> 출발지 : [[${ticketResult.start}]] <i class="fa-solid fa-arrow-right"></i></p>
-                        <p> 도착지 : [[${ticketResult.arrive}]]</p>
+                        <p> 출발지 : [[${orderDto.goingStart}]] <i class="fa-solid fa-arrow-right"></i></p>
+                        <p> 도착지 : [[${orderDto.goingArrive}]]</p>
                     </div>
-                    <p> 비행기 시간 : [[${ticketResult.goingTime}]]<span>[[${ticketResult.userGrade}]]</span></p>
+                    <p> 비행기 시간 : [[${orderDto.goingTime}]]<span>[[${orderDto.userGrade}]]</span></p>
                 </div>
                 <div class="priceResult">
-                    <p>총 금액 : <span>[[${ticketResult.goingPrice}]]</span> 원</p>
+                    <p>총 금액 : <span>[[${orderDto.goingPrice}]]</span> 원</p>
                 </div>
             </div>
         </div>
@@ -40,18 +46,19 @@
                 </div>
                 <div class="resultTicketContents resultComingGoing">
                     <div class="comingGoing">
-                        <p> 출발지 : [[${ticketResult.arrive}]] <i class="fa-solid fa-arrow-right"></i></p>
-                        <p> 도착지 : [[${ticketResult.start}]]</p>
+                        <p> 출발지 : [[${orderDto.comingStart}]] <i class="fa-solid fa-arrow-right"></i></p>
+                        <p> 도착지 : [[${orderDto.comingArrive}]]</p>
                     </div>
-                    <p> 비행기 시간 : [[${ticketResult.comingTime}]]<span>[[${ticketResult.userGrade}]]</span></p>
+                    <p> 비행기 시간 : [[${orderDto.comingTime}]]<span>[[${orderDto.userGrade}]]</span></p>
                 </div>
                 <div class="priceResult">
-                    <p>총 금액 : <span>[[${ticketResult.comingPrice}]]</span> 원</p>
+                    <p>총 금액 : <span>[[${orderDto.comingPrice}]]</span> 원</p>
                 </div>
             </div>
         </div>
 
         <h2>쿠폰 및 포인트</h2>
+
         <div class="couponAndPointArea">
             <div class="couponArea">
                 <p>쿠폰 사용</p>
@@ -73,6 +80,9 @@
                 <h2>총 금액 : <span th:text="${resultPrice}" class="resultPrice"></span> 원</h2>
             </div>
         </div>
+        <p> 쿠폰과 포인트 중 한 가지만 사용이 가능합니다.</p>
+        <span>[[${orderDto.memberId}]]</span>
+        <span>[[${orderDto.memberName}]]</span>
 
         <div class="resultBtnArea">
             <button type="submit" id="payment-button" class="payButton">결제하기</button>
@@ -81,11 +91,15 @@
     <!-- </form> -->
 </div>
 
-
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
 
 <script>
+    const going = "[[${orderDto.goingStart}]]",
+        coming = "[[${orderDto.goingArrive}]]",
+        userName = "[[${orderDto.memberName}]]";
+
     // amount 변수 선언과 초기화
-    let amount;
+    let amount = parseInt(document.querySelector(".resultPrice").textContent);;
     // 초기 금액 저장
     let initialPrice = parseInt(document.querySelector(".resultPrice").textContent);
     // 포인트 적용 버튼 클릭 이벤트 처리
@@ -95,15 +109,19 @@
 
 
         // 포인트 값이 유효한지 확인
-        if (!isNaN(pointPrice) && pointPrice >= 0) {
+        if (!isNaN(pointPrice) && pointPrice >= 0 && amount >= pointPrice) {
+            // 입력된 포인트 값을 가져옴
+            let couponList = parseInt(document.getElementById("couponList").value);
 
-
+            if (!isNaN(couponList) && couponList > 0) {
+                alert("쿠폰 입력값이 이미 있습니다. 포인트를 입력 할 수 없습니다.");
+                document.getElementById("pointPrice").setAttribute("disabled", "disabled");
+                document.getElementById("pointPrice").value = "";
+            } else {
             // 현재 총 금액 가져오기
             let resultPrice = initialPrice;
-
             // 포인트를 총 금액에서 빼기
             resultPrice = resultPrice - pointPrice;
-
             // 정수로 반올림
             resultPrice = Math.round(resultPrice);
 
@@ -111,14 +129,16 @@
             document.querySelector(".resultPrice").textContent = resultPrice;
             // 쿠폰 선택을 다시 활성화
             document.getElementById("couponList").removeAttribute("disabled");
+
             amount = resultPrice;
             // 서버로 포인트 값을 전송하려면 여기에서 AJAX 또는 폼 제출을 사용할 수 있습니다.
             // 필요한 경우 서버와의 통신을 추가하세요.
+            }
         } else {
             // 유효하지 않은 포인트 값이 입력된 경우 처리 (예: 경고 메시지)
             alert("유효한 포인트 값을 입력하세요.");
         }
-    });
+    })
 
     // 쿠폰 선택 이벤트 처리
     document.getElementById("couponList").addEventListener("change", function () {
@@ -130,6 +150,7 @@
             alert("포인트 입력값이 이미 있습니다. 쿠폰을 선택할 수 없습니다.");
             // 이 부분에서 쿠폰 선택을 초기 상태로 되돌릴 수 있으나, 쿠폰 선택을 막는 방법은 상황에 따라 다를 수 있습니다.
             document.getElementById("couponList").setAttribute("disabled", "disabled");
+            document.getElementById("couponList").value = "";
         } else {
             // 선택한 쿠폰의 값을 가져옴
             let selectedCouponValue = parseInt(this.value);
@@ -140,11 +161,13 @@
 
             // 정수로 반올림
             discountedPrice = Math.round(discountedPrice);
+            document.getElementById("pointPrice").removeAttribute("disabled");
+
             amount = discountedPrice;
             // 결과를 화면에 업데이트
             document.querySelector(".resultPrice").textContent = discountedPrice;
         }
-    });
+    })
 
 
     // ------ 클라이언트 키로 객체 초기화 ------
@@ -160,9 +183,9 @@
             // https://docs.tosspayments.com/reference/js-sdk
             amount: amount, // 결제 금액
             orderId: 'm963ympgEq8ASzECXaT4u', // 주문 ID(주문 ID는 상점에서 직접 만들어주세요.)
-            orderName: '테스트 결제', // 주문명
-            customerName: '김토스', // 구매자 이름
-            successUrl: 'https://docs.tosspayments.com/guides/payment/test-success', // 결제 성공 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
+            orderName: going + "" + coming + "왕복 항공권", // 주문명
+            customerName: userName, // 구매자 이름
+            successUrl: 'https://localhost/payment/success', // 결제 성공 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
             failUrl: 'https://docs.tosspayments.com/guides/payment/test-fail', // 결제 실패 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
         })
             // ------결제창을 띄울 수 없는 에러 처리 ------

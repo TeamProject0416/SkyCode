@@ -10,8 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import teamproject.skycode.constant.TicketCountry;
+import teamproject.skycode.login.MemberEntity;
+import teamproject.skycode.login.MemberRepository;
+import teamproject.skycode.order.Order;
+import teamproject.skycode.order.OrderDto;
+import teamproject.skycode.order.OrderService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,11 +26,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TicketController {
     private final TicketService ticketService;
+    private final OrderService orderService;
+    private final MemberRepository memberRepository;
 
     @GetMapping(value = {"/list", "/list/{page}"}) // 진행 페이지
     public String skyTicket(@PathVariable(name = "page", required = false) Integer page, Model model) {
         int pageSize = 3; // 페이지당 표시할 이벤트 수
         Pageable pageable = PageRequest.of(page != null ? page : 0, pageSize, Sort.by("id").descending());
+
+
 
         // EventStatus.ONGOING 값을 사용하여 데이터 조회
         Page<TicketEntity> ticketPage = ticketService.getTicketPage(pageable);
@@ -126,37 +136,41 @@ public class TicketController {
         @RequestParam(name = "goingUserSelectGrade") String goingUserSelectGrade,
         @RequestParam(name = "comingStartArriveTime") String comingStartArriveTime,
         @RequestParam(name = "comingResultTotalPrice") int comingResultTotalPrice,
+        Principal principal,
         Model model
     ) {
         int goingPrice = goingResultTotalPrice;
         int comingPrice = comingResultTotalPrice;
         int resultPrice = goingPrice + comingPrice;
 
-        TicketResultDto ticketResult = new TicketResultDto();
-        ticketResult.setStart(goingResultStart);
-        ticketResult.setArrive(goingResultArrive);
-        ticketResult.setGoingTime(goingStartArriveTime);
-        ticketResult.setUserGrade(goingUserSelectGrade);
-        ticketResult.setComingTime(comingStartArriveTime);
-        ticketResult.setGoingPrice(goingResultTotalPrice);
-        ticketResult.setComingPrice(comingResultTotalPrice);
+        OrderDto orderDto = new OrderDto();
+        orderDto.setGoingStart(goingResultStart);
+        orderDto.setGoingArrive(goingResultArrive);
+        orderDto.setGoingTime(goingStartArriveTime);
+        orderDto.setGoingPrice(goingResultTotalPrice);
 
+        orderDto.setUserGrade(goingUserSelectGrade);
 
-//        model.addAttribute("goingStart", goingResultStart);
-//        model.addAttribute("goingArrive", goingResultArrive);
-//        model.addAttribute("goingTime", goingStartArriveTime);
-//        model.addAttribute("userGrade", goingUserSelectGrade);
-//        model.addAttribute("comingTime", comingStartArriveTime);
-        model.addAttribute("ticketResult", ticketResult);
+        orderDto.setComingStart(goingResultArrive);
+        orderDto.setComingArrive(goingResultStart);
+        orderDto.setComingTime(comingStartArriveTime);
+        orderDto.setComingPrice(comingResultTotalPrice);
+        orderDto.setTotalPrice(resultPrice);
+
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity memberEntity = memberRepository.findByEmail(user);
+            orderDto.setEmail(user);
+            orderDto.setMemberId(memberEntity.getId());
+            orderDto.setMemberName(memberEntity.getName());
+        }
+
+//        orderService.saveTicketResult(orderDto);
+
+        model.addAttribute("orderDto", orderDto);
         model.addAttribute("resultPrice", resultPrice);
 
-        return "tosspayments/pay";
+        return "toss/pay";
     }
-//    @GetMapping(value = "/payment")
-//    public String payments() {
-//        return "tosspayments/pay";
-//    }
-
-
-
 }

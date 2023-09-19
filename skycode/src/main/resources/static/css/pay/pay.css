@@ -1,18 +1,23 @@
 /* 티켓 선택 결과 */
+.ticketResult {
+    position: relative;
+    top: 110px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 .travelInfo {
-    margin-top: 24px;
     margin-bottom: 8px
 }
 
 .goingComingTickets {
     position: relative;
-    margin: 0 auto;
-    max-width: 1200px;
 }
-
+.goingComingTickets>h2 {
+    margin-top: 16px;
+}
 /* 가는 편 */
 .goingResult {
-    margin-top: 24px;
+    margin-top: 8px;
     height: 150px;
     border: 1px solid #000;
     border-radius: 5px;
@@ -40,11 +45,11 @@
 }
 
 .goingComing p {
-    font-size: 1.5rem;
+    font-size: 3rem;
 }
 
 .goingComing p:first-of-type {
-    margin-right: 16px;
+    margin-right: 32px;
 }
 
 /* /가는 편 */
@@ -70,11 +75,11 @@
 }
 
 .comingGoing p {
-    font-size: 1.5rem;
+    font-size: 3rem;
 }
 
 .comingGoing p:first-of-type {
-    margin-right: 16px;
+    margin-right: 32px;
 }
 
 .priceResult {
