@@ -15,6 +15,8 @@ import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.order.Order;
 import teamproject.skycode.order.OrderDto;
 import teamproject.skycode.order.OrderService;
+import teamproject.skycode.review.ReviewEntity;
+import teamproject.skycode.review.ReviewRepository;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -28,6 +30,7 @@ public class TicketController {
     private final TicketService ticketService;
     private final OrderService orderService;
     private final MemberRepository memberRepository;
+    private final ReviewRepository reviewRepository;
 
     @GetMapping(value = {"/list", "/list/{page}"}) // 진행 페이지
     public String skyTicket(@PathVariable(name = "page", required = false) Integer page,

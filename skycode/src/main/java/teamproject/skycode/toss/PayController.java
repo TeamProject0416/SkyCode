@@ -1,4 +1,4 @@
-package teamproject.skycode.tosspayments;
+package teamproject.skycode.toss;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -7,10 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import teamproject.skycode.login.MemberEntity;
 import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.order.Order;
@@ -61,7 +63,7 @@ public class PayController {
 
                 Order order = new Order();
                 System.err.println(order);
-                order.setMemberEntity(memberEntity);;
+                order.setMemberEntity(memberEntity);
                 order.setGoingStart(orderDto.getGoingStart());
                 order.setGoingArrive(orderDto.getGoingArrive());
                 order.setComingStart(orderDto.getComingStart());
@@ -76,6 +78,8 @@ public class PayController {
                 orderRepository.save(order);
                 System.err.println(order.getMemberEntity());
                 System.err.println(order.getTotalPrice());
+                System.err.println(order.getComingArrive());
+
 
 //                memberRepository.save(memberEntity); // 업데이트를 데이터베이스에 저장
 
@@ -93,5 +97,12 @@ public class PayController {
         }
         return ResponseEntity.ok().body(paymentService.paymentTest(paymentReq));
     }
+
+    @GetMapping("/payment/success/end")
+    public String getPaymentEndPage(Model model, RedirectAttributes redirectAttributes) {
+
+        return "toss/success";
+    }
+
 
 }
