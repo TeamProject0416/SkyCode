@@ -6,6 +6,6 @@ import teamproject.skycode.ticket.TicketEntity;
 
 
 @Repository
-public interface OrderRepository extends JpaRepository<TicketEntity, Long> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
 
 }
