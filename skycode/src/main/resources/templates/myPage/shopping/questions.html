@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,80 +10,73 @@
     <link th:href="@{/css/myPage/questions/questions.css}" rel="stylesheet">
     <link th:href="@{/css/sub/header.css}" rel="stylesheet">
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
-
-
-<!--    <link rel="stylesheet" href="css/reset.css">-->
-<!--    <link rel="stylesheet" href="css/typo.css">-->
-<!--    <link rel="stylesheet" href="css/question.css">-->
-<!--    <link rel="stylesheet" href="css/myPage_JHstyle.css">-->
-<!--    <link rel="stylesheet" href="css/nysubfooter.css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 </head>
 
 <body>
-<header th:replace="~{fragments/sub/header::header}"></header>
+    <header th:replace="~{fragments/sub/header::header}"></header>
 
-<section class="myPageSection">
-    <!-- section -->
-    <div class="tabBox">
-        <ul class="mainTab firstTab">
-            <li><a href="/user">#프로필</a></li>
-            <li class="on"><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
-            <li><a href="/user_review">#나의 리뷰</a></li>
-        </ul>
-        <div class="subTab">
-            <!-- 탭2 -->
-            <div>
-                <div class="tabBox secondTab">
-                    <ul class="mainTab">
-                        <li><a href="/user_shopping/orderList">결제내역조회</a></li>
-                        <li><a href="/user_shopping/point">포인트</a></li>
-                        <li><a href="/user_shopping/coupon">쿠폰</a></li>
-                        <li class="on"><a href="/user_shopping/questions">나의문의내역</a></li>
-                    </ul>
-                    <div class="subTab">
-                        <th:block th:if="${#lists.isEmpty(inquiryList)}">
+    <section class="myPageSection">
+        <!-- section -->
+        <div class="tabBox">
+            <ul class="mainTab firstTab">
+                <li><a href="/user">#프로필</a></li>
+                <li class="on"><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
+                <li><a href="/user_review">#나의 리뷰</a></li>
+            
+            </ul>
+            <div class="subTab">
+                <!-- 탭2 -->
+                <div>
+                    <div class="tabBox secondTab">
+                        <ul class="mainTab">
+                            <li><a href="/user_shopping/orderList">결제내역조회</a></li>
+                            <li><a href="/user_shopping/point">포인트</a></li>
+                            <li><a href="/user_shopping/coupon">쿠폰</a></li>
+                            <li class="on"><a href="/user_shopping/questions">나의문의내역</a></li>
+                        </ul>
+                        <div class="subTab">
+                            <th:block th:if="${#lists.isEmpty(inquiryList)}">
                             <p class="AllNull">아직 등록된 문의가 없습니다.</p>
                         </th:block>
-                        <th:block th:unless="${#lists.isEmpty(inquiryList)}" th:each="inquiry: ${inquiryList}">
-                            <!-- 은준css작성한부분 -->
-                            <div class="QContents">
-                                <div class="QInfo">
-                                    <h2>제목 : <span>[[${inquiry.inquiryTitle}]]</span></h2>
-                                    <p class="oej_txt">내용 : <span>[[${inquiry.inquiryContent}]]</span></p>
-
-                                    <div class="oej_box">
-                                        <p class="oej_category">카테고리 : <span>[[${inquiry.type}]]</span></p>
-                                        <p class="oej_open"><i class="fa-solid fa-lock"></i>공개여부 : <span
-                                                th:text="${inquiry.isPrivate ? '비공개' : '공개'}">여기는 알아서 저장된 </span>
-                                        </p>
-                                        <p class="oej_time">[[${inquiry.regTime}]]</p>   <!--이건 등록 시간 입니다-->
-                                        <p class="oej_answer">답변 :
-                                            <span th:text="${inquiry.responseContent != null and inquiry.responseContent != ''
+                            <th:block th:unless="${#lists.isEmpty(inquiryList)}" th:each="inquiry: ${inquiryList}">
+                                <div class="QContents">
+                                    <div class="Qinfo">
+                                        <h2>제목 : [[${inquiry.inquiryTitle}]]</h2>
+                                        <div class="oej_box1">
+                                            <p class="oej_txt">내용 : [[${inquiry.inquiryContent}]]</p>
+                                        </div>
+                                        <div class="oej_category">
+                                            <p>카테고리 : <span>[[${inquiry.type}]]</span></p>
+                                            <p class="oej_open"><i class="fa-solid fa-lock"></i>공개여부 : <span
+                                                    th:text="${inquiry.isPrivate ? '비공개' : '공개'}"> 공개</span>
+                                            </p>
+                                        </div>
+                                        <div class="oej_box2">
+                                            <p class="oej_answer">답변 :
+                                                <span th:text="${inquiry.responseContent != null and inquiry.responseContent != ''
                                             ? inquiry.responseContent
                                             : '아직 등록되지 않았습니다.'}">여기도 알아서 내용이 나옵니다</span>
-                                        </p>
+                                            </p>
+                                        </div>
+                                        <p class="oej_time">[[${inquiry.regTime}]]</p> 
                                     </div>
                                 </div>
-                            </div>
-
-
-
-
-                        </th:block>
-                        <!--// 이부분은 나중에 링크를 넣을 예정 무시하고 주석처리 해놓으시면 됩니다
+                            </th:block>
+                            <!--// 이부분은 나중에 링크를 넣을 예정 무시하고 주석처리 해놓으시면 됩니다
                                     <a th:href="'/inquiry/' + ${inquiry.id}"></a>-->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<footer th:replace="~{fragments/sub/footer::footer}"></footer>
-<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script src="/js/sub/header.js"></script>
-<script src="/js/sub/footer.js"></script>
+    <footer th:replace="~{fragments/sub/footer::footer}"></footer>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="/js/sub/header.js"></script>
+    <script src="/js/sub/footer.js"></script>
 </body>
+
 </html>

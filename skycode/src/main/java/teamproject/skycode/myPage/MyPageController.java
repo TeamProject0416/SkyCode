@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import teamproject.skycode.constant.ActionType;
+import teamproject.skycode.constant.Role;
 import teamproject.skycode.coupon.CouponEntity;
 import teamproject.skycode.coupon.CouponRepository;
 import teamproject.skycode.coupon.Member_CouponEntity;
@@ -51,7 +52,6 @@ public class MyPageController {
     private final CouponRepository couponRepository;
     private final PointHistoryRepository pointHistoryRepository;
     private final Member_CouponRepository memberCouponRepository;
-
     private final InquiryRepository inquiryRepository;
 
 
@@ -59,15 +59,10 @@ public class MyPageController {
     @GetMapping(value = "user") // 유저 모두 보기
     public String user(Model model, Principal principal) {
 
-        // 유저 로그인
-        if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum", reviewNum);
-        }
+
+        // 유저 로그인 모달 함수
+        populateAdminModel(model, principal);
+
 
         return "myPage/users/user";
     }
@@ -77,21 +72,17 @@ public class MyPageController {
     @GetMapping(value = "/user/edit") // 회원 정보 폼
     public String userEdit(Model model, Principal principal) {
 
+        // 유저 로그인 모달 함수
+        populateAdminModel(model, principal);
 
         // 유저 로그인
         if (principal != null) {
             String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            System.err.println("sdasdfsdf");
-
             MemberEditFormDto memberEditFormDto = memberService.getMemberDtl(userInfo.getId());
             model.addAttribute("memberEditFormDto", memberEditFormDto);
-
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum", reviewNum);
         }
+
         return "myPage/users/edit";
     }
 
@@ -120,15 +111,10 @@ public class MyPageController {
                              Authentication authentication, HttpServletRequest request,
                              HttpServletResponse response, Principal principal, Model model) {
 
-        // 유저 로그인
-        if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum", reviewNum);
-        }
+
+        // 유저 로그인 모달 함수
+        populateAdminModel(model, principal);
+
 
         MemberEntity member = memberRepository.findById(memberId)
                 .orElseThrow(EntityNotFoundException::new);
@@ -154,15 +140,10 @@ public class MyPageController {
     @GetMapping(value = "/user/edit_password")
     public String userEditPw(Model model, Principal principal) {
 
-        // 유저 로그인
-        if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum", reviewNum);
-        }
+
+        // 유저 로그인 모달 함수
+        populateAdminModel(model, principal);
+
 
         model.addAttribute("passwordFormDto", new PasswordFormDto());
         return "myPage/users/edit_password";
@@ -203,17 +184,8 @@ public class MyPageController {
     @GetMapping(value = "/user_shopping/orderList")
     public String userOrderList(Model model, Principal principal) {
 
-        // 유저 로그인
-        if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum", reviewNum);
-
-
-        }
+        // 유저 로그인 모달 함수
+        populateAdminModel(model, principal);
 
         return "myPage/shopping/orderList";
     }
@@ -223,35 +195,8 @@ public class MyPageController {
     @GetMapping(value = "/user_shopping/point")
     public String userPoint(Model model, Principal principal) {
 
-        // 유저 로그인
-        if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum", reviewNum);
-
-            // 포인트 히스토리
-            List<PointHistoryEntity> historys = pointHistoryRepository.findByMemberPointEntity_MemberEntityId(userInfo.getId());
-            model.addAttribute("historys", historys);
-
-            // 총 포인트 합산
-            int totalPoints = 0;
-            int totalPointsUsed = 0;
-
-            for (PointHistoryEntity history : historys) {
-                if (history.getActionType() == ActionType.EARNED) {
-                    totalPoints += history.getPointsEarned();
-                } else if (history.getActionType() == ActionType.USED) {
-                    totalPointsUsed += history.getPointsUsed();
-                }
-            }
-
-            int total = totalPoints - totalPointsUsed;
-            model.addAttribute("total", total);
-
-        }
+        // 유저 로그인 모달 함수
+        populateAdminModel(model, principal);
 
         return "myPage/shopping/point";
     }
@@ -261,15 +206,12 @@ public class MyPageController {
     @GetMapping(value = "/user_shopping/coupon")
     public String userCoupon(Model model, Principal principal) {
 
+        // 유저 로그인 모달 함수
+        populateAdminModel(model, principal);
+
         // 유저 로그인
         if (principal != null) {
             String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum", reviewNum);
-
             // 쿠폰 목록
             List<Member_CouponEntity> MemberCouponList = memberCouponRepository.findByMemberEmail(user);
             model.addAttribute("memberCouponList", MemberCouponList);
@@ -318,16 +260,13 @@ public class MyPageController {
     @GetMapping(value = "/user_shopping/questions")
     public String userQuestions(Model model, Principal principal) {
 
+        // 유저 로그인 모달 함수
+        populateAdminModel(model, principal);
+
         // 유저 로그인
         if (principal != null) {
             String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum", reviewNum);
-
             List<Inquiry> inquiryList = inquiryRepository.findByWriterId(userInfo.getId());
             model.addAttribute("inquiryList", inquiryList);
         }
@@ -339,25 +278,72 @@ public class MyPageController {
     @GetMapping(value = "/user_review")
     public String userReview(Model model, Principal principal) {
 
+        // 유저 로그인 모달 함수
+        populateAdminModel(model, principal);
+
         // 유저 로그인
         if (principal != null) {
             String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum", reviewNum);
 
             // 각 ReviewEntity에 대한 CommentEntity의 총 수를 가져오기
             for (ReviewEntity reviewEntity : review) {
                 ReviewEntity reviewWithCommentCount = reviewRepository.findWithCommentCount(reviewEntity.getId());
                 reviewEntity.setCommentCount(reviewWithCommentCount.getCommentEntityList().size());
             }
-
             model.addAttribute("reviews", review);
         }
+
         return "myPage/review/review";
+    }
+
+    private void populateAdminModel(Model model, Principal principal) {
+        // 유저 로그인
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            model.addAttribute("userInfo", userInfo);
+
+            // 리뷰수
+            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
+            int reviewNum = review.size();
+            model.addAttribute("reviewNum",reviewNum);
+
+            // 문의수
+            List<Inquiry> inquiryList = inquiryRepository.findByWriterId(userInfo.getId());
+            int inquiryNum = inquiryList.size();
+            model.addAttribute("inquiryNum", inquiryNum);
+
+            // 쿠폰수
+            List<Member_CouponEntity> couponList = memberCouponRepository.findByMemberEmail(user);
+            int couponNum = couponList.size();
+            model.addAttribute("couponNum", couponNum);
+
+            // ADMIN 권한 확인
+            Role admin = userInfo.getRole();
+            if (admin.equals(Role.ADMIN)) {
+                model.addAttribute("admin", admin);
+            }
+
+            // 포인트 히스토리
+            List<PointHistoryEntity> historys = pointHistoryRepository.findByMemberPointEntity_MemberEntityId(userInfo.getId());
+            model.addAttribute("historys", historys);
+
+            // 총 포인트 합산
+            int totalPoints = 0;
+            int totalPointsUsed = 0;
+
+            for (PointHistoryEntity history : historys) {
+                if (history.getActionType() == ActionType.EARNED) {
+                    totalPoints += history.getPointsEarned();
+                } else if (history.getActionType() == ActionType.USED) {
+                    totalPointsUsed += history.getPointsUsed();
+                }
+            }
+            int total = totalPoints - totalPointsUsed;
+            model.addAttribute("total", total);
+        }
     }
 
 }
