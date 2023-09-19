@@ -109,6 +109,8 @@ public class ReviewController {
             String user = principal.getName();
             MemberEntity userInfo = memberRepository.findByEmail(user);
             model.addAttribute("userInfo", userInfo);
+            String nickname = userInfo.getNickName();
+            model.addAttribute("nickname", nickname);
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
             model.addAttribute("reviewNum", reviewNum);

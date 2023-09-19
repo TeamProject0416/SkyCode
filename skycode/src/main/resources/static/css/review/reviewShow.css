@@ -1,335 +1,269 @@
 .wrap {
-    position: relative;
-    top: 150px;
-  }
-  .container {
-    width: 100%;
-    height: 100%;
-  }
+  position: relative;
+  top: 150px;
+  height: 100%;
+}
+.container {
+  width: 100%;
+  height: 100%;
+}
 
-  .userReviewArea {
-    width: 1320px;
-    height: 900px;
-    margin: 0 auto;
-    /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); */
+.userReviewArea {
+  width: 1320px;
+  height: 900px;
+  margin: 0 auto;
+  /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); */
 
-  }
+}
 
-  .userReviewTop {
-    height: 80px;
-    border-bottom: 1px solid #000;
-  }
+.userReviewTop {
+  height: 80px;
+  border-bottom: 1px solid #000;
+}
 
-  .userInfo {
-    display: flex;
-    align-items: center;
-    height: 100%;
-  }
+.userInfo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
 
-  .userInfo .userIcon i {
-    font-size: 5rem;
-    margin-left: 2px;
-  }
+.userInfo .userIcon i {
+  font-size: 5rem;
+  margin-left: 2px;
+}
 
-  .userInfo .userNE {
-    margin-left: 16px;
-  }
+.userInfo .userNE {
+  margin-left: 16px;
+}
 
-  .userInfo .userNE .userEmail {
-    margin-top: -8px;
-  }
+.userInfo .userNE .userEmail {
+  margin-top: -8px;
+}
 
-  .userInfo .newBtn {
-    width: 100%;
-    text-align: right;
-  }
+.userInfo .newBtn {
+  width: 100%;
+  text-align: right;
+}
 
-  .userInfo .newBtn a button {
-    width: 120px;
-    height: 50px;
-    border-radius: 10px;
-    border: none;
-    background: rgba(0, 102, 186, 0.8);
-    padding: 0 8px;
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.5rem;
-  }
+.userInfo .newBtn a button {
+  width: 120px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(0, 102, 186, 0.8);
+  padding: 0 8px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
 
-  .userInfo .newBtn:hover a button {
-    background: rgba(0, 102, 186);
-  }
+.userInfo .newBtn:hover a button {
+  background: rgba(0, 102, 186);
+}
 
-  .userReviewContent {
-    width: 100%;
-    height: 750px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.userReviewContent {
+  width: 100%;
+  height: 750px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .slideShow {
-    position: relative;
-    width: 600px;
-    height: 100%;
-    overflow: hidden;
-  }
+.slideShow {
+  position: relative;
+  width: 600px;
+  height: 100%;
+  overflow: hidden;
+}
 
-  .sliders {
-    width: 300%;
-    height: 600px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: .3s;
-  }
+.sliders {
+  width: 300%;
+  height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: .3s;
+}
 
-  .sliders li {
-    width: 100%;
-  }
+.sliders li {
+  width: 100%;
+}
 
-  .slideShow .pnBtn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 3rem;
-    color: #fff;
-  }
+.slideShow .pnBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: #fff;
+}
 
-  .slideShow .rightBtn {
-    right: 20px;
-  }
+.slideShow .rightBtn {
+  right: 20px;
+}
 
-  .slideShow .leftBtn {
-    left: 20px;
-  }
+.slideShow .leftBtn {
+  left: 20px;
+}
 
-  .userReviewContent .contentArea {
-    width: 700px;
-    height: 100%;
-    padding: 90px 16px;
-    /* 800 180  mainContent height = 620 */
-  }
+.userReviewContent .contentArea {
+  width: 700px;
+  height: 100%;
+  padding: 90px 16px;
+  /* 800 180  mainContent height = 620 */
+}
 
-  .userReviewContent .contentArea .mainContent {
-    margin-top: 8px;
-    line-height: 1.6;
-  }
+.userReviewContent .contentArea .mainContent {
+  margin-top: 8px;
+  line-height: 1.6;
+}
 
-  .userReviewBt {
-    height: 70px;
-    border-top: 1px solid #000;
-  }
-  .btns {
-    text-align: right;
-    line-height: 70px;
-  }
-  .btns a button {
-    width: 100px;
-    height: 50px;
-    border-radius: 10px;
-    border: none;
-    background: rgba(0, 102, 186, 0.8);
-    padding: 0 8px;
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.5rem;
-  }
-  .userReviewBt .btns .editBtn:hover {
-    background: rgba(0, 102, 186);
-  }
-  .userReviewBt .btns .deleteBtn:hover {
-    background: rgba(0, 102, 186);
-  }
-  .userReviewBt .btns a:not(.btns a:last-of-type) {
-    margin-right: 8px;
-  }
+.userReviewBt {
+  height: 70px;
+  border-top: 1px solid #000;
+}
+.btns {
+  text-align: right;
+  line-height: 70px;
+}
+.btns a button {
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(0, 102, 186, 0.8);
+  padding: 0 8px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.userReviewBt .btns .editBtn:hover {
+  background: rgba(0, 102, 186);
+}
+.userReviewBt .btns .deleteBtn:hover {
+  background: rgba(0, 102, 186);
+}
+.userReviewBt .btns a:not(.btns a:last-of-type) {
+  margin-right: 8px;
+}
 
 
-  /* 여기서부터 작성했습니다 */
-  /* 댓글작성 */
+/* 여기서부터 작성했습니다 */
+/* 댓글작성 */
 
 .oej_bigbox {
-   position: relative;
-    width: 1320px;
-    height: 600px;
-    top:30px;
-    margin: 0 auto;
+  width: 1320px;
+  top: 150px;
+  margin: 0 auto;
+}
+
+.allBox {
+width: 100%;
 }
 
 .oej_box {
-  position: absolute;
-  /* display: flex; */
-  width: 100%;
-  height: 160px;
-   border-bottom: 1px solid #ccc;
-  }
-
-.oej_icon {
-  position: relative;
-  width: 100px;
-  top: 33px;
-  line-height: 80px;
-  height: 80px;
+width: 100%;
+margin-top: 0px;
+height : 160px;
+display : flex;
+ justify-content : space-between;
+ text-align : center;
+ align-items : center;
+ padding : 20px;
+ border-bottom:1px solid #ccc;
 }
 
-.oej_icon i{
-  position: absolute;
-  /* left: 10px; */
-  top: 0px;
-  width: 100px;
-  height: 80px;
- padding-left: 28px;
-  line-height: 80px;
- font-size:40px;
+.oej_box img{
+width: 70px;
+height: 70px;
+line-height: 80px;
+border-radius: 50%;
+border:1px solid #ccc;
 }
 
 /* 내용 */
 #commentContents {
-  position: absolute;
- left: 100px;
-  top:33px;
-  width: 1060px;
-  height: 80px;
-  padding-left: 10px;
-  border-width: 0 0 1px;
-  outline: none;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+width: 1060px;
+height: 80px;
+padding-left: 10px;
+border-width: 0 0 1px;
+outline: none;
+border-radius: 10px;
+border: 1px solid #ccc;
 }
 
 /* 댓글 */
 #reviewLink {
-  position: absolute;
- right: 35px;
-  width: 90px;
-  height: 35px;
-  top:53px;
-  border-radius: 10px;
-  color: #fff;
-  outline: none;
-  cursor: pointer;
- border: 1px solid rgba(0, 102, 186, 0.8);
- background: rgba(0, 102, 186, 0.8) ;
+width: 90px;
+height: 35px;
+border-radius: 10px;
+color: #fff;
+outline: none;
+cursor: pointer;
+border: 1px solid rgba(0, 102, 186, 0.8);
+background: rgba(0, 102, 186, 0.8) ;
 }
 
-.oej_button {
-  position: absolute;
-  top:240px;
- right: 10px;
- width: 90px;
-  height: 35px;
- border-radius: 10px;
-  outline: none;
-  color: #fff;
-  cursor: pointer;
-  border: 1px solid rgba(0, 102, 186, 0.8);
-  background: rgba(0, 102, 186, 0.8) ;
-}
+.oej_button2 {
+right: 35px;
+width: 90px;
+height: 35px;
+top:60px;
+border-radius: 10px;
+color: #fff;
+outline: none;
+border: 1px solid rgba(0, 102, 186, 0.8);
+background: rgba(0, 102, 186, 0.8) ;
 
+}
 
 /* 댓글 출력 부분 */
 
 #comment-list {
-  position: relative;
-  top:80px;
   width: 100%;
-  height: 160px;
+ padding: 0 20px;
 }
 
-#comment-list i {
-position: absolute;
-  top: 15px;
-  left: -105px;
-  width: 100px;
-  height: 80px;
- padding-left: 28px;
-  line-height: 80px;
- font-size:40px;
-}
-
-.oej_form {
-  position: absolute;
-  width: 1060px;
-  height: 160px;
-  top: 0px;
-  left: 100px;
-}
-
-.oej_content {
-  position: absolute;
-  top: 12px;
-  left: 20px;
-}
-
-.oej_time2{
-  position: relative;
-  display: flex;
-  width: 500px;
-  height: 60px;
-  left:0px;
-}
-
-.oej_time {
-  position: absolute;
-  top: 20px;
-  left: 0px;
-}
-
-#contents2 {
-  display: flex;
-  position: absolute;
-  width: 200px;
-  height: 30px;
-  top:20px;
-  left: 70px;
-  border-width: 0 0 1px;
-  border-bottom: 1px solid #ccc;
-  outline: none;
-  padding-left: 10px;
-}
-
-.oej_smallBox {
-  position: relative;
-  display: flex;
+.oej_comment {
   width: 100%;
-  height: 60px;
 }
 
-#contents {
-  /* display: flex; */
-  position: absolute;
-  top: 60px;
-  height: 95px;
-  width: 1060px;
-  outline: none;
-  border-radius: 10px;
-  padding-left: 10px;
-  border: 1px solid #ccc;
+.oej_print {
+    width: 100%;
+    padding-bottom:20px;
+    display: flex;
+
 }
 
- .oej_name{
-  position: absolute;
-  top: 100px;
-  left: -80px;
+.oej_Writer{
+margin-left:20px;
+padding:10px;
+padding-top:25px;
+margin-right : 30px;
 }
 
+.oej_Writer > .oej_img2{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border:1px solid #ccc;
+}
 
-.oej_button2 {
-  position: absolute;
-  right: 35px;
-   width: 90px;
-   height: 35px;
-   top:53px;
-   border-radius: 10px;
-   color: #fff;
-   outline: none;
-   cursor: pointer;
-  border: 1px solid rgba(0, 102, 186, 0.8);
-  background: rgba(0, 102, 186, 0.8) ;
+.oej_Writer > p {
+    text-align : center;
+     align-items : center;
+}
+
+.textBox{
+padding-top:25px;
+   width:100%;
+}
+
+.textBox > p {
+    padding:10px;
+    max-width:600px;
 }
 
