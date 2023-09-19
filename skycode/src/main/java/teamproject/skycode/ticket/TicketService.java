@@ -80,9 +80,4 @@ public class TicketService {
         return ticketRepository.findByComingTicket(arriveValue, startValue, endDate);
     }
 
-    public List<TicketEntity> ticketPrice(Integer firstPrice) {
-
-        return null;
-    }
-
 }

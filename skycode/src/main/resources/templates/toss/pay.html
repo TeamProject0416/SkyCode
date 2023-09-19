@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/reset.css}" rel="stylesheet">
+    <link th:href="@{/css/typo.css}" rel="stylesheet">
+    <link th:href="@{/css/pay/pay.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/header.css}" rel="stylesheet">
+    <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
+    <!-- 토스페이먼츠 결제창 SDK 추가 -->
+    <script src="https://js.tosspayments.com/v1/payment"></script>
+</head>
+<body>
+<header th:replace="~{fragments/sub/header::header}"></header>
+
+<div class="ticketResult">
+    <h2 class="travelInfo">결제</h2>
+    <hr>
+    <!-- <form action="tosspayments/tossPayments" method="post"> -->
+    <div class="goingComingTickets">
+        <h2>티켓 정보</h2>
+        <!-- 가는 편 -->
+        <div class="goingResult">
+            <div class="goingResultTicket ticketInfo">
+                <div class="going">
+                    <h2>가는 편</h2>
+                </div>
+                <div class="resultTicketContents resultGoingComing">
+                    <div class="goingComing">
+                        <p> 출발지 : [[${orderDto.goingStart}]] <i class="fa-solid fa-arrow-right"></i></p>
+                        <p> 도착지 : [[${orderDto.goingArrive}]]</p>
+                    </div>
+                    <p> 비행기 시간 : [[${orderDto.goingTime}]]<span>[[${orderDto.userGrade}]]</span></p>
+                </div>
+                <div class="priceResult">
+                    <p>총 금액 : <span>[[${orderDto.goingPrice}]]</span> 원</p>
+                </div>
+            </div>
+        </div>
+        <!-- 오는 편 -->
+        <div class="comingResult">
+            <div class="comingResultTicket ticketInfo">
+                <div class="coming">
+                    <h2>오는 편</h2>
+                </div>
+                <div class="resultTicketContents resultComingGoing">
+                    <div class="comingGoing">
+                        <p> 출발지 : [[${orderDto.comingStart}]] <i class="fa-solid fa-arrow-right"></i></p>
+                        <p> 도착지 : [[${orderDto.comingArrive}]]</p>
+                    </div>
+                    <p> 비행기 시간 : [[${orderDto.comingTime}]]<span>[[${orderDto.userGrade}]]</span></p>
+                </div>
+                <div class="priceResult">
+                    <p>총 금액 : <span>[[${orderDto.comingPrice}]]</span> 원</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>쿠폰 및 포인트</h2>
+
+        <div class="couponAndPointArea">
+            <div class="couponArea">
+                <p>쿠폰 사용</p>
+                <label for="couponList">쿠폰</label>
+                <select name="couponList" id="couponList">
+                    <option value="0">쿠폰을 선택하세요.</option>
+                    <option value="10">쿠폰1</option>
+                    <option value="20">쿠폰2</option>
+                    <option value="30">쿠폰3</option>
+                </select>
+            </div>
+            <div class="pointArea">
+                <p>포인트 사용</p>
+                <label for="pointPrice">포인트</label>
+                <input type="text" name="pointPrice" id="pointPrice">
+                <button type="submit" id="applyPointButton">확인</button>
+            </div>
+            <div class="resultTotalPrice">
+                <h2>총 금액 : <span th:text="${resultPrice}" class="resultPrice"></span> 원</h2>
+            </div>
+        </div>
+        <p> 쿠폰과 포인트 중 한 가지만 사용이 가능합니다.</p>
+        <span>[[${orderDto.memberId}]]</span>
+        <span>[[${orderDto.memberName}]]</span>
+
+        <div class="resultBtnArea">
+            <button type="submit" id="payment-button" class="payButton">결제하기</button>
+        </div>
+    </div>
+    <!-- </form> -->
+</div>
+
+<footer th:replace="~{fragments/sub/footer::footer}"></footer>
+
+<script>
+    const going = "[[${orderDto.goingStart}]]",
+        coming = "[[${orderDto.goingArrive}]]",
+        userName = "[[${orderDto.memberName}]]";
+
+    // amount 변수 선언과 초기화
+    let amount = parseInt(document.querySelector(".resultPrice").textContent);;
+    // 초기 금액 저장
+    let initialPrice = parseInt(document.querySelector(".resultPrice").textContent);
+    // 포인트 적용 버튼 클릭 이벤트 처리
+    document.getElementById("applyPointButton").addEventListener("click", function () {
+        // 입력된 포인트 값을 가져옴
+        var pointPrice = parseInt(document.getElementById("pointPrice").value);
+
+
+        // 포인트 값이 유효한지 확인
+        if (!isNaN(pointPrice) && pointPrice >= 0 && amount >= pointPrice) {
+            // 입력된 포인트 값을 가져옴
+            let couponList = parseInt(document.getElementById("couponList").value);
+
+            if (!isNaN(couponList) && couponList > 0) {
+                alert("쿠폰 입력값이 이미 있습니다. 포인트를 입력 할 수 없습니다.");
+                document.getElementById("pointPrice").setAttribute("disabled", "disabled");
+                document.getElementById("pointPrice").value = "";
+            } else {
+            // 현재 총 금액 가져오기
+            let resultPrice = initialPrice;
+            // 포인트를 총 금액에서 빼기
+            resultPrice = resultPrice - pointPrice;
+            // 정수로 반올림
+            resultPrice = Math.round(resultPrice);
+
+            // 결과를 화면에 업데이트
+            document.querySelector(".resultPrice").textContent = resultPrice;
+            // 쿠폰 선택을 다시 활성화
+            document.getElementById("couponList").removeAttribute("disabled");
+
+            amount = resultPrice;
+            // 서버로 포인트 값을 전송하려면 여기에서 AJAX 또는 폼 제출을 사용할 수 있습니다.
+            // 필요한 경우 서버와의 통신을 추가하세요.
+            }
+        } else {
+            // 유효하지 않은 포인트 값이 입력된 경우 처리 (예: 경고 메시지)
+            alert("유효한 포인트 값을 입력하세요.");
+        }
+    })
+
+    // 쿠폰 선택 이벤트 처리
+    document.getElementById("couponList").addEventListener("change", function () {
+        // 입력된 포인트 값을 가져옴
+        let pointPrice = parseInt(document.getElementById("pointPrice").value);
+
+        // 포인트 값이 이미 입력되어 있다면 쿠폰 선택을 막고 알림창 띄우기
+        if (!isNaN(pointPrice) && pointPrice > 0) {
+            alert("포인트 입력값이 이미 있습니다. 쿠폰을 선택할 수 없습니다.");
+            // 이 부분에서 쿠폰 선택을 초기 상태로 되돌릴 수 있으나, 쿠폰 선택을 막는 방법은 상황에 따라 다를 수 있습니다.
+            document.getElementById("couponList").setAttribute("disabled", "disabled");
+            document.getElementById("couponList").value = "";
+        } else {
+            // 선택한 쿠폰의 값을 가져옴
+            let selectedCouponValue = parseInt(this.value);
+            // 현재 총 금액 가져오기
+            let resultPrice = initialPrice;
+            // 선택한 쿠폰 값(할인율)을 적용하여 새로운 금액 계산
+            let discountedPrice = resultPrice * (1 - selectedCouponValue / 100);
+
+            // 정수로 반올림
+            discountedPrice = Math.round(discountedPrice);
+            document.getElementById("pointPrice").removeAttribute("disabled");
+
+            amount = discountedPrice;
+            // 결과를 화면에 업데이트
+            document.querySelector(".resultPrice").textContent = discountedPrice;
+        }
+    })
+
+
+    // ------ 클라이언트 키로 객체 초기화 ------
+    var clientKey = 'test_ck_Z1aOwX7K8meO1QmzDgA8yQxzvNPG'
+    var tossPayments = TossPayments(clientKey)
+
+    var button = document.getElementById('payment-button') // 충전하기 버튼
+    button.addEventListener('click', function () {
+        // ------ 결제창 띄우기 ------
+        tossPayments.requestPayment('카드', { // 결제수단 파라미터 (카드, 계좌이체, 가상계좌, 휴대폰 등)
+            // 결제 정보 파라미터
+            // 더 많은 결제 정보 파라미터는 결제창 Javascript SDK에서 확인하세요.
+            // https://docs.tosspayments.com/reference/js-sdk
+            amount: amount, // 결제 금액
+            orderId: 'm963ympgEq8ASzECXaT4u', // 주문 ID(주문 ID는 상점에서 직접 만들어주세요.)
+            orderName: going + "" + coming + "왕복 항공권", // 주문명
+            customerName: userName, // 구매자 이름
+            successUrl: 'https://localhost/payment/success', // 결제 성공 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
+            failUrl: 'https://docs.tosspayments.com/guides/payment/test-fail', // 결제 실패 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
+        })
+            // ------결제창을 띄울 수 없는 에러 처리 ------
+            // 메서드 실행에 실패해서 reject 된 에러를 처리하는 블록입니다.
+            // 결제창에서 발생할 수 있는 에러를 확인하세요.
+            // https://docs.tosspayments.com/reference/error-codes#결제창공통-sdk-에러
+            .catch(function (error) {
+                if (error.code === 'USER_CANCEL') {
+                    // 결제 고객이 결제창을 닫았을 때 에러 처리
+                    alert("결제가 취소되었습니다.");
+                } else if (error.code === 'INVALID_CARD_COMPANY') {
+                    // 유효하지 않은 카드 코드에 대한 에러 처리
+                }
+            });
+    })
+</script>
+</body>
+</html>
