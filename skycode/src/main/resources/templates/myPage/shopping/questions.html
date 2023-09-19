@@ -42,10 +42,10 @@
                         <li class="on"><a href="/user_shopping/questions">나의문의내역</a></li>
                     </ul>
                     <div class="subTab">
-                        <th:block th:if="${#lists.isEmpty(inquiry)}">
+                        <th:block th:if="${#lists.isEmpty(inquiryList)}">
                             <p class="AllNull">아직 등록된 문의가 없습니다.</p>
                         </th:block>
-                        <th:block th:unless="${#lists.isEmpty(inquiry)}" th:each="inquiry: ${inquiryList}">
+                        <th:block th:unless="${#lists.isEmpty(inquiryList)}" th:each="inquiry: ${inquiryList}">
                             <!-- 은준css작성한부분 -->
                             <div class="QContents">
                                 <div class="QInfo">
