@@ -25,7 +25,6 @@ import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.List;
 
-@RequestMapping("/member")
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -49,7 +48,7 @@ public class MemberController {
         }
     }
 
-    @GetMapping(value = "/new")
+    @GetMapping(value = "/member/new")
     public String memberForm(Model model, Principal principal) {
 
         model.addAttribute("memberFormDto", new MemberFormDto());
@@ -60,7 +59,7 @@ public class MemberController {
         return "member/memberForm";
     }
 
-    @PostMapping(value = "/new")
+    @PostMapping(value = "/member/new")
     public String memberSave(@Valid MemberFormDto memberFormDto,
                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -80,7 +79,7 @@ public class MemberController {
         }
     }
 
-    @GetMapping(value = "/login")
+    @GetMapping(value = "/member/login")
     public String loginMember(@RequestParam(name = "logout", required = false) String logout,
                               @RequestParam(name = "message", required = false) String message,
                               Principal principal, Model model) {
@@ -97,7 +96,7 @@ public class MemberController {
         return "/member/memberLoginForm";
     }
 
-    @GetMapping(value = "/login/error")
+    @GetMapping(value = "/member/login/error")
     public String loginError(Model model, Principal principal) {
 
         // 유저 로그인 모달 함수
@@ -109,7 +108,7 @@ public class MemberController {
 
 
     //---------------------------/admin------------------------//
-    @GetMapping(value = "/list")
+    @GetMapping(value = "/admin/member/list")
     public String memberList(Model model , Principal principal) {
 
         // 유저 로그인 모달 함수
@@ -120,7 +119,7 @@ public class MemberController {
         return "/member/list";
     }
 
-    @GetMapping("/delete/{memberId}")
+    @GetMapping("/admin/member/delete/{memberId}")
     public String memberDelete(@PathVariable("memberId") Long memberId) {
         MemberEntity member = memberRepository.findById(memberId)
                 .orElseThrow(EntityNotFoundException::new);

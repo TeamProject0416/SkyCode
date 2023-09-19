@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/coupon")
 @RequiredArgsConstructor
 public class CouponController {
     private final CouponService couponService;
@@ -39,7 +38,7 @@ public class CouponController {
     private final Member_CouponRepository memberCouponRepository;
     private final PointHistoryRepository pointHistoryRepository;
 
-    @GetMapping(value = "/list") // 진행중인 쿠폰 목록 보이기
+    @GetMapping(value = "/admin/coupon/list") // 진행중인 쿠폰 목록 보이기
     public String couponList(Model model, Principal principal) {
 
         // 유저 로그인 모달 함수
@@ -49,7 +48,7 @@ public class CouponController {
         return "coupon/couponList";
     }
 
-    @GetMapping(value = "/end") // 종료된 쿠폰 목록 보이기
+    @GetMapping(value = "/admin/coupon/end") // 종료된 쿠폰 목록 보이기
     public String couponEnd(Model model, Principal principal) {
 
         // 유저 로그인 모달 함수
@@ -60,7 +59,7 @@ public class CouponController {
         return "coupon/couponEnd";
     }
 
-    @GetMapping(value = "/new") // 쿠폰 만들기
+    @GetMapping(value = "/admin/coupon/new") // 쿠폰 만들기
     public String couponNew(Model model, Principal principal) {
 
         // 유저 로그인 모달 함수
@@ -70,7 +69,7 @@ public class CouponController {
         return "coupon/couponForm";
     }
 
-    @PostMapping(value = "/new") // 쿠폰 등록
+    @PostMapping(value = "/admin/coupon/new") // 쿠폰 등록
     public String newCoupon(@Valid CouponFormDto couponFormDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
 
@@ -83,10 +82,10 @@ public class CouponController {
             model.addAttribute("errorMessage", "쿠폰 등록 중 에러가 발생하였습니다");
             return "coupon/couponForm";
         }
-        return "redirect:/coupon/list";
+        return "redirect:/admin/coupon/list";
     }
 
-    @GetMapping(value = "/{couponId}/edit") // 쿠폰 수정폼
+    @GetMapping(value = "/admin/coupon/{couponId}/edit") // 쿠폰 수정폼
     public String couponEdit(@PathVariable("couponId") Long couponId,
                              Principal principal, Model model) {
 
@@ -98,7 +97,7 @@ public class CouponController {
         return "coupon/couponForm";
     }
 
-    @PostMapping(value = "/update") // 쿠폰 수정
+    @PostMapping(value = "/admin/coupon/update") // 쿠폰 수정
     public String couponUpdate(@Valid CouponFormDto couponFormDto, BindingResult bindingResult,
                                Model model) {
         if (bindingResult.hasErrors()) {
@@ -110,19 +109,20 @@ public class CouponController {
             model.addAttribute("errorMessage", "쿠폰 등록 중 에러가 발생하였습니다");
             return "coupon/couponForm";
         }
-        return "redirect:/coupon/list";
+        return "redirect:/admin/coupon/list";
     }
 
-    @GetMapping("/{couponId}/delete") // 쿠폰 삭제
+    @GetMapping("/admin/coupon/{couponId}/delete") // 쿠폰 삭제
     public String deleteCoupon(@PathVariable("couponId") Long couponId) {
         // 쿠폰 삭제 로직을 구현
         couponService.deleteCoupon(couponId);
 
         // 삭제 후 리다이렉션할 URL을 반환
-        return "redirect:/coupon/list";
+        return "redirect:/admin/coupon/list";
     }
 
-    @GetMapping("/{eventId}/couponDownload") // 쿠폰 다운로드
+
+    @GetMapping("/coupon/{eventId}/couponDownload") // 쿠폰 다운로드
     public String couponDownload(@PathVariable("eventId") Long eventId, Principal principal) {
 
         EventEntity event = eventRepository.findById(eventId)
@@ -132,6 +132,7 @@ public class CouponController {
         CouponEntity coupon = couponRepository.findByCode(couponCode);
         Optional<CouponEntity> couponEntityList = couponRepository.findById(coupon.getId());
         CouponEntity couponEntity = couponEntityList.get(); // couponEntity
+
 
         String user = principal.getName(); // MemberEmail
         MemberEntity userInfo = memberRepository.findByEmail(user);
@@ -145,6 +146,8 @@ public class CouponController {
         memberCouponEntity.setMemberEmail(user);
         memberCouponEntity.setMemberEntity(memberEntity);
         memberCouponEntity.setCouponEntity(couponEntity);
+
+
 
         memberCouponRepository.save(memberCouponEntity);
 

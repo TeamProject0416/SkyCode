@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
->
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,58 +8,75 @@
     <link th:href="@{/css/typo.css}" rel="stylesheet">
     <link th:href="@{/css/sub/header.css}" rel="stylesheet">
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
-    <link th:href="@{/css/news/faq/faqStyle.css}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
     <style>
-        .admin{
+        .admin {
             position: relative;
+            top: 90px;
+            width: 100%;
+        }
+
+        .admin>div {
+            padding-top: 100px;
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        .admin>div>div {
             display: flex;
             justify-content: space-between;
-            top: 100px;
-            height: 600px;
-        }
-        .admin a{
-            font-size: 2rem;
-            color: #ffffff;
+            padding: 20px;
         }
 
-        .admin>div{
-            padding: 10px;
-            /*width: 50px;*/
-            height: 60px;
-            margin: 10px;
-            background-color: #003999;
+        .admin>div>div>a {
+            font-size: 2rem;
+            line-height: 50px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #eee;
+            transition: .3s;
         }
-        .admin>div:hover{
-            border-radius: 30px;
+
+        .admin>div>div>a:hover {
+            color: #ffffff;
+            background: #003999;
         }
     </style>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 </head>
 
 <body>
-<header th:replace="~{fragments/sub/header::header}"></header>
+    <header th:replace="~{fragments/sub/header::header}"></header>
+    <section class="admin">
+        <div>
+            <div>
+                <a th:href="@{/admin/member/list}">회원 목록</a>
+                <a th:href="@{/admin/news/faqUp}">자주 묻는 질문 등록</a>
+                <a th:href="@{/admin/news/notionUp}">공지사항 등록</a>
+            </div>
+
+            <div>
+                <a th:href="@{/admin/point/new}">포인트 등록</a>
+                <a th:href="@{/admin/point/list}">포인트 목록</a>
+                <a th:href="@{/admin/ticket/new}">티켓 등록</a>
+                <a th:href="@{/admin/ticket/new}">티켓 목록</a>
+            </div>
+
+            <div>
+                <a th:href="@{/admin/event/new}">이벤트 등록</a>
+                <a th:href="@{/event/ongoing}">이벤트 목록</a>
+                <a th:href="@{/admin/coupon/list}">쿠폰 목록</a>
+                <a th:href="@{/admin/coupon/new}">쿠폰 등록</a>
+            </div>
+        </div>
+
+    </section>
 
 
-    <div class="admin">
-        <div><a th:href="@{/news/notionUp}">공지사항 등록</a></div>
-        <div><a th:href="@{/news/faqUp}">자주 묻는 질문 등록</a></div>
-        <div><a th:href="@{/event/new}">이벤트 등록</a></div>
-        <div><a th:href="@{/coupon/new}">쿠폰 등록</a></div>
-        <div><a th:href="@{/member/list}">회원 목록</a></div>
-        <div><a th:href="@{/ticket/new}">티켓 등록</a></div>
-    </div>
-
-
-<footer th:replace="~{fragments/sub/footer::footer}"></footer>
-
-<script src="/js/sub/header.js"></script>
-<script src="/js/sub/footer.js"></script>
-<script src="/js/news/faqTab.js"></script>
-<script src="/js/news/faq.js"></script>
+    <footer th:replace="~{fragments/sub/footer::footer}"></footer>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="/js/sub/header.js"></script>
+    <script src="/js/sub/footer.js"></script>
 
 </body>
+
 </html>

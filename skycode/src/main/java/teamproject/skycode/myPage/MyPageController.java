@@ -44,7 +44,6 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 public class MyPageController {
-
     private final PasswordEncoder passwordEncoder;
     private final MemberService memberService;
     private final MemberRepository memberRepository;
@@ -59,10 +58,8 @@ public class MyPageController {
     @GetMapping(value = "user") // 유저 모두 보기
     public String user(Model model, Principal principal) {
 
-
         // 유저 로그인 모달 함수
         populateAdminModel(model, principal);
-
 
         return "myPage/users/user";
     }
@@ -111,7 +108,6 @@ public class MyPageController {
                              Authentication authentication, HttpServletRequest request,
                              HttpServletResponse response, Principal principal, Model model) {
 
-
         // 유저 로그인 모달 함수
         populateAdminModel(model, principal);
 
@@ -140,10 +136,8 @@ public class MyPageController {
     @GetMapping(value = "/user/edit_password")
     public String userEditPw(Model model, Principal principal) {
 
-
         // 유저 로그인 모달 함수
         populateAdminModel(model, principal);
-
 
         model.addAttribute("passwordFormDto", new PasswordFormDto());
         return "myPage/users/edit_password";

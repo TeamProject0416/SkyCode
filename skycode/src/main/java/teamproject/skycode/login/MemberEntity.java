@@ -25,7 +25,7 @@ import java.util.List;
 public class MemberEntity extends BaseEntity {
 
     @Id
-    @Column(name = "Member_id")
+    @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

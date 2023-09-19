@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 public class Member_CouponEntity {
     @Id
-    @Column(name = "MemCoupon_id")
+    @Column(name = "memCoupon_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  Long id;
 

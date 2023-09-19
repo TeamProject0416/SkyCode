@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/event")
 @RequiredArgsConstructor
 public class EventController {
 
@@ -41,7 +40,7 @@ public class EventController {
     private final Member_CouponRepository memberCouponRepository;
     private final PointHistoryRepository pointHistoryRepository;
 
-    @GetMapping(value = {"/ongoing", "/ongoing/{page}"}) // 진행 페이지
+    @GetMapping(value = {"/event/ongoing", "/event/ongoing/{page}"}) // 진행 페이지
     public String ongoingEvent(@PathVariable(name = "page", required = false) Integer page,
                                Principal principal, Model model) {
 
@@ -60,7 +59,7 @@ public class EventController {
         return "/event/eventongoing";
     }
 
-    @GetMapping(value = {"/end", "/end/{page}"}) // 종료 페이지
+    @GetMapping(value = {"/event/end", "/event/end/{page}"}) // 종료 페이지
     public String endEvent(@PathVariable(name = "page", required = false) Integer page,
                            Principal principal, Model model) {
 
@@ -78,7 +77,7 @@ public class EventController {
         return "/event/eventend";
     }
 
-    @GetMapping(value = {"/winner", "/winner/{page}"}) // 당첨자 페이지
+    @GetMapping(value = {"/event/winner", "/event/winner/{page}"}) // 당첨자 페이지
     public String eventWinner(@PathVariable(name = "page", required = false) Integer page,
                               Principal principal, Model model) {
         int pageSize = 3; // 페이지당 표시할 이벤트 수
@@ -95,7 +94,7 @@ public class EventController {
         return "/event/eventwinner";
     }
 
-    @GetMapping(value = "/new") // 이벤트 등록
+    @GetMapping(value = "/admin/event/new") // 이벤트 등록
     public String newEventForm(Model model, Principal principal) {
 
         // 유저 로그인 모달 함수
@@ -104,7 +103,7 @@ public class EventController {
         return "event/eventForm";
     }
 
-    @PostMapping(value = "/new") // 이벤트 등록
+    @PostMapping(value = "/admin/event/new") // 이벤트 등록
     public String createEvent(@Valid EventFormDto eventFormDto, BindingResult bindingResult, Model model,
                               @RequestParam("eventImgFile1") MultipartFile eventImgFile1,
                               @RequestParam("eventImgFile2") MultipartFile eventImgFile2) {
@@ -121,7 +120,7 @@ public class EventController {
         return "redirect:/event/ongoing";
     }
 
-    @GetMapping(value = "/{eventId}") // 이벤트 상세페이지
+    @GetMapping(value = "/event/{eventId}") // 이벤트 상세페이지
     public String eventDtl(@PathVariable("eventId") Long eventId, Model model,
                            Principal principal) {
         EventFormDto eventFormDto = eventService.getEventDtl(eventId);
@@ -132,7 +131,7 @@ public class EventController {
         return "event/eventSub";
     }
 
-    @GetMapping(value = "/{eventId}/edit") // 이벤트 수정폼
+    @GetMapping(value = "/admin/event/{eventId}/edit") // 이벤트 수정폼
     public String eventEdit(@PathVariable("eventId") Long eventId,
                             Principal principal, Model model) {
         // 유저 로그인 모달 함수
@@ -142,7 +141,7 @@ public class EventController {
         return "event/eventForm";
     }
 
-    @PostMapping(value = "/update") // 이벤트 수정
+    @PostMapping(value = "/admin/event/update") // 이벤트 수정
     public String eventUpdate(@Valid EventFormDto eventFormDto, BindingResult bindingResult,
                               @RequestParam("eventImgFile1") MultipartFile eventImgFile1,
                               @RequestParam("eventImgFile2") MultipartFile eventImgFile2,
@@ -159,7 +158,7 @@ public class EventController {
         return "redirect:/event/ongoing";
     }
 
-    @GetMapping("/{eventId}/delete") // 이벤트 삭제
+    @GetMapping("/admin/event/{eventId}/delete") // 이벤트 삭제
     public String deleteEvent(@PathVariable("eventId") Long eventId) {
         // 이벤트 삭제 로직을 구현
         eventService.deleteEvent(eventId);

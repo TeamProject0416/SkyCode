@@ -27,7 +27,7 @@
     <h2 class="newCoupon">#포인트 정보 등록하기</h2>
     <hr>
     <div class="container">
-        <form class="formContainer" action="/point/new" method="post" th:object="${pointFormDto}">
+        <form class="formContainer" action="/admin/point/new" method="post" th:object="${pointFormDto}">
             <input type="hidden" th:field="*{id}">
             <div class="pack">
                 <div>
@@ -48,10 +48,10 @@
                 </div>
             </div>
             <div class="btnArea" th:if="${#strings.isEmpty(pointFormDto.id)}">
-                <button th:formaction="@{/point/new}" type="submit" class="btn createBtn">저장</button>
+                <button th:formaction="@{/admin/point/new}" type="submit" class="btn createBtn">저장</button>
             </div>
             <div class="btnArea" th:unless="${#strings.isEmpty(pointFormDto.id)}">
-                <button th:formaction="@{/point/update}" type="submit" class="btn createBtn">수정
+                <button th:formaction="@{/admin/point/update}" type="submit" class="btn createBtn">수정
                 </button>
             </div>
 

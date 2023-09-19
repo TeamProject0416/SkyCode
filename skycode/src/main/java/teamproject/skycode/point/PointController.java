@@ -19,17 +19,15 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequestMapping("/point")
+@RequestMapping("/admin/point")
 @RequiredArgsConstructor
 public class PointController {
     private final PointService pointService;
     private final MemberRepository memberRepository;
     private final ReviewRepository reviewRepository;
-    private final EventRepository eventRepository;
     private final PointRepository pointRepository;
-    private final Member_PointRepository memberPointRepository;
 
-    @GetMapping(value = "/list") // 진행중인 쿠폰 목록 보이기
+    @GetMapping(value = "/list") // 진행중인 포인트 목록 보이기
     public String pointList(Model model, Principal principal) {
 
         // 유저 로그인
@@ -47,7 +45,7 @@ public class PointController {
         return "point/pointList";
     }
 
-    @GetMapping(value = "/new") // 쿠폰 만들기
+    @GetMapping(value = "/new") // 포인트 만들기
     public String pointNew(Model model, Principal principal) {
 
         if (principal != null) {
@@ -63,7 +61,7 @@ public class PointController {
         return "point/pointForm";
     }
 
-    @PostMapping(value = "/new") // 쿠폰 등록
+    @PostMapping(value = "/new") // 포인트 등록
     public String newPoint(@Valid PointFormDto pointFormDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
 
@@ -73,13 +71,13 @@ public class PointController {
             pointService.savePoint(pointFormDto);
         } catch (Exception e) {
 
-            model.addAttribute("errorMessage", "쿠폰 등록 중 에러가 발생하였습니다");
+            model.addAttribute("errorMessage", "포인트 등록 중 에러가 발생하였습니다");
             return "point/pointForm";
         }
-        return "redirect:/point/list";
+        return "redirect:/admin/point/list";
     }
 
-    @GetMapping(value = "/{pointId}/edit") // 쿠폰 수정폼
+    @GetMapping(value = "/{pointId}/edit") // 포인트 수정폼
     public String pointEdit(@PathVariable("pointId") Long pointId,
                              Principal principal, Model model) {
 
@@ -97,7 +95,7 @@ public class PointController {
         return "point/pointForm";
     }
 
-    @PostMapping(value = "/update") // 쿠폰 수정
+    @PostMapping(value = "/update") // 포인트 수정
     public String pointUpdate(@Valid PointFormDto pointFormDto, BindingResult bindingResult,
                                Model model) {
         if (bindingResult.hasErrors()) {
@@ -106,19 +104,19 @@ public class PointController {
         try {
             pointService.updatePoint(pointFormDto);
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "쿠폰 등록 중 에러가 발생하였습니다");
+            model.addAttribute("errorMessage", "포인트 등록 중 에러가 발생하였습니다");
             return "point/pointForm";
         }
-        return "redirect:/point/list";
+        return "redirect:/admin/point/list";
     }
 
-    @GetMapping("/{pointId}/delete") // 쿠폰 삭제
+    @GetMapping("/{pointId}/delete") // 포인트 삭제
     public String deletePoint(@PathVariable("pointId") Long pointId) {
-        // 쿠폰 삭제 로직을 구현
+        // 포인트 삭제 로직을 구현
         pointService.deletePoint(pointId);
 
         // 삭제 후 리다이렉션할 URL을 반환
-        return "redirect:/point/list";
+        return "redirect:/admin/point/list";
     }
 
 }

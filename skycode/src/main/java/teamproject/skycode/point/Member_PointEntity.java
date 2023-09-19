@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 public class Member_PointEntity {
     @Id
-    @Column(name = "MemPoint_id")
+    @Column(name = "memPoint_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  Long id;
 

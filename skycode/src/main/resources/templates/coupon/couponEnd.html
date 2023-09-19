@@ -19,11 +19,11 @@
     <div class="couponPage">
         <div class="couponPageTitle">
             <h2 class="couponTag">#쿠폰</h2>
-            <button><a href="/new">쿠폰 등록</a></button>
+            <button><a href="/admin/coupon/new">쿠폰 등록</a></button>
         </div>
         <div class="currentPage">
-            <span><a href="list">진행중 쿠폰</a></span>
-            <span class="active"><a href="end">종료된 쿠폰</a></span>
+            <span><a href="/admin/coupon/list">진행중 쿠폰</a></span>
+            <span class="active"><a href="/admin/coupon/end">종료된 쿠폰</a></span>
         </div>
         <div class="couponMain">
             <div class="couponBoard">
@@ -43,13 +43,13 @@
                                 <p> 최소 사용 금액 : <span>[[${coupon.useMinPrice}]]</span></p>
                             </div>
                             <div>
-                                <button><a th:href="'/coupon/' + ${coupon.id} + '/edit'">수정</a></button>
+                                <button><a th:href="'/admin/coupon/' + ${coupon.id} + '/edit'">수정</a></button>
                                 <button class="deleteBtn"><a>삭제</a></button>
                             </div>
                             <div class="deleteModal modal">
                                 <div class="modal-content">
                                     <p>쿠폰을 삭제하시겠습니까?</p>
-                                    <button class="confirmDelete"><a th:href="'/coupon/' + ${coupon.id} + '/delete'">삭제</a></button>
+                                    <button class="confirmDelete"><a th:href="'/admin/coupon/' + ${coupon.id} + '/delete'">삭제</a></button>
                                     <button class="cancelDelete">취소</button>
                                 </div>
                             </div>

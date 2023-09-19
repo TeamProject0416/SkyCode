@@ -29,7 +29,6 @@ public class TicketController {
     private final MemberRepository memberRepository;
     private final ReviewRepository reviewRepository;
 
-
     @GetMapping(value = {"/list", "/list/{page}"}) // 진행 페이지
     public String skyTicket(@PathVariable(name = "page", required = false) Integer page,
                             Model model, Principal principal) {

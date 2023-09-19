@@ -99,9 +99,6 @@ public class InquiryController {
         return modelAndView;
     }
 
-
-
-
     // 1 대 1 문의 리스트 화면 출력
     @GetMapping("/inquiry/inquiryList")
     public String getInquiries(
@@ -138,9 +135,6 @@ public class InquiryController {
         return "news/inquiry/inquiryList"; // Return the Thymeleaf template name
     }
 
-
-
-
     // 1 대 1 문의 서브페이지 화면으로 보내기
     @PostMapping("inquiry/inquiryShow")
     public String submitInquiry(@ModelAttribute InquiryForm inquiryForm, Model model, Principal principal) {
@@ -172,8 +166,6 @@ public class InquiryController {
         // You can return an error view or redirect to an error page
         return "error"; // Change to the appropriate view name
     }
-
-
 
     // 1 대 1 문의 서브페이지 화면 출력
     @GetMapping("/inquiry/show/{id}")
