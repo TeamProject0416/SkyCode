@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import teamproject.skycode.common.BaseEntity;
 import teamproject.skycode.constant.Gender;
 import teamproject.skycode.constant.Role;
+import teamproject.skycode.coupon.Member_CouponEntity;
 import teamproject.skycode.myPage.users.MemberEditFormDto;
 import teamproject.skycode.review.ReviewEntity;
 
@@ -60,6 +61,9 @@ public class MemberEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ReviewEntity> reviewEntityList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Member_CouponEntity> member_CouponEntityList = new ArrayList<>();
 
     public static MemberEntity createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         MemberEntity member = new MemberEntity();

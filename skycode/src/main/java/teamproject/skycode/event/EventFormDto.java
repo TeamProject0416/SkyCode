@@ -31,6 +31,8 @@ public class EventFormDto {
     private String bigOriImgName; // 큰 원본 이미지 파일명
     private String bigImgUrl; // 큰 이미지 조회 경로
 
+    private String couponCode;  // 등록할 쿠폰 코드
+
     private static ModelMapper modelMapper = new ModelMapper();
 
     public EventEntity createEvent() {

@@ -207,13 +207,13 @@ function updateLabel() {
 
   if (economyRadio.checked) {
     selectedGrade = "이코노미석";
-    seatGradeInput.value = "이코노미석";
+    seatGradeInput.value = "economyClass";
   } else if (businessRadio.checked) {
     selectedGrade = "비즈니스석";
-    seatGradeInput.value = "비즈니스석";
+    seatGradeInput.value = "businessClass";
   } else if (firstClassRadio.checked) {
     selectedGrade = "일등석";
-    seatGradeInput.value = "일등석";
+    seatGradeInput.value = "firstClass";
   }
 
   labelForGradeValue.textContent = `좌석등급: ${selectedGrade}`;

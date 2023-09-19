@@ -12,17 +12,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import teamproject.skycode.coupon.CouponEntity;
+import teamproject.skycode.coupon.CouponRepository;
+import teamproject.skycode.coupon.Member_CouponEntity;
+import teamproject.skycode.coupon.Member_CouponRepository;
 import teamproject.skycode.login.MemberEntity;
-import teamproject.skycode.login.MemberFormDto;
 import teamproject.skycode.login.MemberRepository;
 import teamproject.skycode.login.MemberService;
+import teamproject.skycode.myPage.user_shopping.CouponDto;
 import teamproject.skycode.myPage.users.MemberEditFormDto;
 import teamproject.skycode.myPage.users.PasswordFormDto;
 import teamproject.skycode.news.inquiry.Inquiry;
 import teamproject.skycode.news.inquiry.InquiryRepository;
-import teamproject.skycode.news.inquiry.InquiryService;
-import teamproject.skycode.review.CommentEntity;
-import teamproject.skycode.review.CommentRepository;
 import teamproject.skycode.review.ReviewEntity;
 import teamproject.skycode.review.ReviewRepository;
 
@@ -33,6 +34,7 @@ import javax.validation.Valid;
 import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,8 +44,9 @@ public class MyPageController {
     private final MemberService memberService;
     private final MemberRepository memberRepository;
     private final ReviewRepository reviewRepository;
+    private final CouponRepository couponRepository;
+    private final Member_CouponRepository memberCouponRepository;
 
-    private final InquiryService inquiryService;
     private final InquiryRepository inquiryRepository;
 
 
@@ -141,25 +144,6 @@ public class MyPageController {
         return "redirect:/";
     }
 
-
-    //---------------------------/user/collections------------------------//
-    @GetMapping(value = "/user/collections")
-    public String userCollections(Model model, Principal principal) {
-
-        // 유저 로그인
-        if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
-        }
-
-        return "myPage/users/collections";
-    }
-
-
     //---------------------------/user/praise------------------------//
     @GetMapping(value = "/user/praise")
     public String userPraise(Model model, Principal principal) {
@@ -245,24 +229,6 @@ public class MyPageController {
     }
 
 
-    //---------------------------/user_shopping/cart------------------------//
-    @GetMapping(value = "/user_shopping/cart")
-    public String userCart(Model model, Principal principal) {
-
-        // 유저 로그인
-        if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
-        }
-
-        return "myPage/shopping/cart";
-    }
-
-
     //---------------------------/user_shopping/point------------------------//
     @GetMapping(value = "/user_shopping/point")
     public String userPoint(Model model, Principal principal) {
@@ -293,9 +259,48 @@ public class MyPageController {
             List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
             int reviewNum = review.size();
             model.addAttribute("reviewNum",reviewNum);
+
+            // 쿠폰 목록
+            List<Member_CouponEntity> MemberCouponList = memberCouponRepository.findByMemberEmail(user);
+            model.addAttribute("memberCouponList", MemberCouponList);
         }
 
+        model.addAttribute("couponDto", new CouponDto());
+
         return "myPage/shopping/coupon";
+    }
+
+    @PostMapping("/user/couponDownload") // 쿠폰 다운로드
+    public String couponDownload(@Valid CouponDto couponDto, BindingResult bindingResult, Model model,Principal principal) {
+
+        if (bindingResult.hasErrors()) {
+            return "/user_shopping/coupon";
+        }
+        try {
+            String couponCode = couponDto.getCouponCode(); //couponCode
+            CouponEntity coupon = couponRepository.findByCode(couponCode);
+            Optional<CouponEntity> couponEntityList = couponRepository.findById(coupon.getId());
+            CouponEntity couponEntity = couponEntityList.get(); // couponEntity
+
+            String user = principal.getName(); // MemberEmail
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+
+            Optional<MemberEntity> memberEntityList = memberRepository.findById(userInfo.getId());
+            MemberEntity memberEntity = memberEntityList.get(); // memberEntity
+
+            // Member_CouponEntity 생성 및 저장
+            Member_CouponEntity memberCouponEntity = new Member_CouponEntity();
+            memberCouponEntity.setCouponCode(couponCode);
+            memberCouponEntity.setMemberEmail(user);
+            memberCouponEntity.setMemberEntity(memberEntity);
+            memberCouponEntity.setCouponEntity(couponEntity);
+
+            memberCouponRepository.save(memberCouponEntity);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다");
+            return "/user_shopping/coupon";
+        }
+        return "redirect:/user_shopping/coupon";
     }
 
 
@@ -320,24 +325,6 @@ public class MyPageController {
         }
 
         return "myPage/shopping/questions";
-    }
-
-
-    //---------------------------/user_trip/tripTool------------------------//
-    @GetMapping(value = "/user_trip/tripTool")
-    public String userTripTool(Model model, Principal principal) {
-
-        // 유저 로그인
-        if (principal != null) {
-            String user = principal.getName();
-            MemberEntity userInfo = memberRepository.findByEmail(user);
-            model.addAttribute("userInfo", userInfo);
-            List<ReviewEntity> review = reviewRepository.findByMemberEntityId(userInfo.getId());
-            int reviewNum = review.size();
-            model.addAttribute("reviewNum",reviewNum);
-        }
-
-        return "myPage/trip/tripTool";
     }
 
 
