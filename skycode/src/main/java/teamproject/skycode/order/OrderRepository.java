@@ -1,11 +1,14 @@
 package teamproject.skycode.order;
 
+import com.querydsl.core.types.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import teamproject.skycode.constant.OrderStatus;
 import teamproject.skycode.login.MemberEntity;
+
+import java.util.List;
 
 
 @Repository
@@ -32,4 +35,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     );
 
     OrderEntity findByTotalPriceAndOrderStatusAndMemberEntity(int paymentAmount, OrderStatus orderStatus, MemberEntity memberEntity);
+
+    List<OrderEntity> findByMemberEntityId(Long id);
 }
