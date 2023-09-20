@@ -27,7 +27,7 @@
     <h2 class="newCoupon">#쿠폰 등록하기</h2>
     <hr>
     <div class="container">
-        <form class="formContainer" action="/coupon/new" method="post" th:object="${couponFormDto}">
+        <form class="formContainer" action="/admin/coupon/new" method="post" th:object="${couponFormDto}">
             <input type="hidden" th:field="*{id}">
             <div>
                 <select th:field="*{couponStatus}" class="custom-select">
@@ -101,10 +101,10 @@
                 </div>
             </div>
             <div class="btnArea" th:if="${#strings.isEmpty(couponFormDto.id)}">
-                <button th:formaction="@{/coupon/new}" type="submit" class="btn createBtn">저장</button>
+                <button th:formaction="@{/admin/coupon/new}" type="submit" class="btn createBtn">저장</button>
             </div>
             <div class="btnArea" th:unless="${#strings.isEmpty(couponFormDto.id)}">
-                <button th:formaction="@{/coupon/update}" type="submit" class="btn createBtn">수정
+                <button th:formaction="@{/admin/coupon/update}" type="submit" class="btn createBtn">수정
                 </button>
             </div>
 

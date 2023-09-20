@@ -39,6 +39,8 @@ public class SecurityConfig {
                         "/coupon/**",
                         "/comment/**",
                         "/user/**",
+                        "/admin/**",
+                        "/point/**",
                         "/tosspayments/**"
                 ) //csrf예외처리
         ;

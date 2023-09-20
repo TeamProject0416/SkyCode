@@ -108,3 +108,10 @@
   margin: 10px auto;
     display: block;
 }
+
+/* 등록된 리뷰가 없을때 */
+.AllNull {
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 150px 0;
+}

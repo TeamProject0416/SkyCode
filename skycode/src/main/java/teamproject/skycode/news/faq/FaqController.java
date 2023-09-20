@@ -28,7 +28,6 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/news")
 public class FaqController {
 
     private final FaqRepository faqRepository;
@@ -37,7 +36,7 @@ public class FaqController {
     private final FaqService faqService;
 
 
-    @GetMapping(value = "/faqUp")
+    @GetMapping(value = "/admin/news/faqUp")
     public String newsFaqUp(Model model, Principal principal){
 
         // 유저 로그인
@@ -55,7 +54,7 @@ public class FaqController {
         return "news/faq/faqUp";
     }
 
-    @PostMapping(value = "/faq/faq")
+    @PostMapping(value = "/admin/news/faq/faq")
     public String createFaq(@ModelAttribute FaqForm faqForm, Model model){
         if (faqForm.getFaqQuestion().isEmpty() || faqForm.getFaqAnswer().isEmpty()) {
             // 필수 필드가 비어있는 경우
@@ -71,7 +70,7 @@ public class FaqController {
     private static final int PAGE_SIZE = 10; // You can change this to your desired page size
 
 
-    @GetMapping("/faq/faq")
+    @GetMapping("/news/faq/faq")
     public String faqPage(
             @RequestParam(name = "page", defaultValue = "1") int page,
             Model model, Principal principal
@@ -115,14 +114,5 @@ public class FaqController {
         return authorities.stream()
                 .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
     }
-
-//    @GetMapping(value = "/faq/faq")
-//    public String newsFaq(Model model){
-//        List<Faq> faqs = faqService.getAllFaqs();
-//        model.addAttribute("faqs", faqs);
-//        return "news/faq/faq";
-//    }
-
-
 
 }

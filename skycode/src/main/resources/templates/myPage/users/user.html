@@ -1,62 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
+
 <body>
 
 </body>
-</html><!DOCTYPE html>
+
+</html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
   <link th:href="@{/css/reset.css}" rel="stylesheet">
+
+  <link href="/resources/static/css/reset.css" rel="stylesheet">
+  <link href="/resources/static/css/typo.css" rel="stylesheet">
+  <link href="/resources/static/css/myPage/common.css" rel="stylesheet">
+
   <link th:href="@{/css/typo.css}" rel="stylesheet">
   <link th:href="@{/css/myPage/common.css}" rel="stylesheet">
   <link th:href="@{/css/sub/header.css}" rel="stylesheet">
   <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
   <style>
+    .user {
+      width: 1000px;
+      position: relative;
+      display: flex;
+      padding: 50px;
+      margin: 50px auto 0;
+      border: 1px solid #eee;
+      box-shadow: 0 1px 3px 0 #dbdbdb;
+      border-radius: 10px;
+    }
 
+    .userImgBox {
+      border: 1px solid #eee;
+      box-shadow: 0 1px 3px 0 #dbdbdb;
+      padding: 30px;
+      margin-right: 80px;
+    }
+
+    .userImgBox>img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+    }
+
+    .userImgBox>p {
+      padding-top: 30px;
+      text-align: center;
+    }
+
+    .userInfoBox {
+      padding: 30px;
+    }
+
+    .userInfoBox>p:not(:last-of-type) {
+      padding-bottom: 18px;
+    }
+
+    .user:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      border-radius: 0 10px;
+      border-color: #003999 #003999 transparent transparent;
+      border-style: solid;
+      border-width: 80px;
+    }
+
+    .user:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      border-radius: 0 10px;
+      border-color: #dbdbdb #dbdbdb transparent transparent;
+      border-color: #fff #fff transparent transparent ;
+      border-style: solid;
+      border-width: 45px;
+    }
   </style>
 </head>
 
 <body>
-<header th:replace="~{fragments/sub/header::header}"></header>
+  <header th:replace="~{fragments/sub/header::header}"></header>
 
-<section class="myPageSection">
-  <!-- section -->
-  <div class="tabBox">
-    <ul class="mainTab firstTab">
-      <li class="on"><a href="/user">#프로필</a></li>
-      <li><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
-      <li><a href="/user_review">#나의 리뷰</a></li>
-    </ul>
-    <div class="subTab">
-      <!-- 탭1 -->
-      <div>
-        <div class="tabBox secondTab">
-          <ul class="mainTab">
-            <li class="on"><a href="/user">모두 보기</a></li>
-            <li><a href="/user/edit">회원정보수정</a></li>
-            <li><a href="/user/praise">좋아요</a></li>
-            <li><a href="/user/edit_password">비밀번호 변경</a></li>
-          </ul>
-          <div class="subTab">
-            <div>
-              1-1의 내용
+  <section class="myPageSection">
+    <!-- section -->
+    <div class="tabBox">
+      <ul class="mainTab firstTab">
+        <li class="on"><a href="/user">#프로필</a></li>
+        <li><a href="/user_shopping/orderList">#나의 쇼핑</a></li>
+        <li><a href="/user_review">#나의 리뷰</a></li>
+      </ul>
+      <div class="subTab">
+        <!-- 탭1 -->
+        <div>
+          <div class="tabBox secondTab">
+            <ul class="mainTab">
+              <li class="on"><a href="/user">모두 보기</a></li>
+              <li><a href="/user/edit">회원정보수정</a></li>
+              <li><a href="/user/edit_password">비밀번호 변경</a></li>
+            </ul>
+            <div class="subTab">
+              <div class="user">
+                <div class="userImgBox">
+                  <img class="userImgFile"
+                    th:src=" ${userInfo.userImgUrl} != null ? ${userInfo.userImgUrl} : '/subImages/UserImg.png'"
+                    th:alt="${userInfo.userImgUrl} != null ? ${userInfo.userImgName} : '썸네일 이미지' ">
+                  <p>[[${userInfo.nickName}]]님 환영합니다.</p>
+                </div>
+                <div class="userInfoBox">
+                  <p>이름 : [[${userInfo.name}]]</p>
+                  <p>성별 : [[${userInfo.gender}]]</p>
+                  <p>핸드폰 번호 : [[${userInfo.phoneNum}]]</p>
+                  <p>생년월일 : [[${userInfo.birthday}]]</p>
+                  <p>이메일 : [[${userInfo.email}]]</p>
+                  <p>주소 : [[${userInfo.address}]]</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer th:replace="~{fragments/sub/footer::footer}"></footer>
-<script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script src="/js/sub/header.js"></script>
-<script src="/js/sub/footer.js"></script>
+  <footer th:replace="~{fragments/sub/footer::footer}"></footer>
+  <script src="https:cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script src="/js/sub/header.js"></script>
+  <script src="/js/sub/footer.js"></script>
 </body>
+
 </html>

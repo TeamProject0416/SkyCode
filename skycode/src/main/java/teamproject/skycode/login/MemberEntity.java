@@ -10,6 +10,7 @@ import teamproject.skycode.constant.Gender;
 import teamproject.skycode.constant.Role;
 import teamproject.skycode.coupon.Member_CouponEntity;
 import teamproject.skycode.myPage.users.MemberEditFormDto;
+import teamproject.skycode.point.Member_PointEntity;
 import teamproject.skycode.review.ReviewEntity;
 import teamproject.skycode.order.Order;
 
@@ -25,7 +26,7 @@ import java.util.List;
 public class MemberEntity extends BaseEntity {
 
     @Id
-    @Column(name = "Member_id")
+    @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -64,6 +65,11 @@ public class MemberEntity extends BaseEntity {
     private List<ReviewEntity> reviewEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Order> orderList = new ArrayList<>();
+    private List<Member_CouponEntity> member_CouponEntityList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Member_PointEntity> member_pointEntityList = new ArrayList<>();
+
     public static MemberEntity createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         MemberEntity member = new MemberEntity();
         member.setName(memberFormDto.getName());
@@ -84,6 +90,7 @@ public class MemberEntity extends BaseEntity {
         this.name = memberEditFormDto.getName();
         this.birthday = memberEditFormDto.getBirthday();
         this.phoneNum = memberEditFormDto.getPhoneNum();
+        this.address = memberEditFormDto.getAddress();
         this.email = memberEditFormDto.getEmail();
         this.nickName = memberEditFormDto.getNickName();
         this.gender = memberEditFormDto.getGender();

@@ -1,38 +1,41 @@
-
 .QContents {
-     position: relative;
-     top: 50px;
-    max-width: 900px;
+    position: relative;
+    max-width: 1000px;
     margin: 0 auto;
-    height: 650px;
-    margin-bottom: 50px;
-  border-bottom: 2px solid #ccc;
+    border-bottom: 1px solid #eee;
+}
+
+.Qinfo {
+    position: relative;
+    max-width: 850px;
+    padding: 40px 0;
+    margin: 0 auto;
+    border-bottom: 1px solid #eee;
 }
 
 /* 첫번째말풍선 */
-
-.QInfo {
-    position: absolute;
-        width: 350px;
-        height: 200px;
-        top: 120px;
-        left: 30px;
-        background-color: #87c0f5;
-        border: 8px solid #003999;
-        border-radius: 30px;
-        box-shadow: 2px 2px 4px #003999;;
+.oej_box1 {
+    position: relative;
+    max-width: 350px;
+    background-color: #0065BA;
+    border: 5px solid #0065BA;
+    border-radius: 30px;
+    color: #fff;
+    padding: 20px;
+    box-shadow: 5px 5px 5px 0 #00000040;
 }
-    .QInfo:before {
-        border: 25px solid;
-        border-color: transparent #003999 transparent transparent;
-        content: "";
-        position: absolute;
-        top: 50%;
-        right: 100%;
-        transform: translateY(-50%);
-  }
 
-  .QInfo:after {
+.oej_box1:before {
+    border: 17px solid;
+    border-color: transparent #0065BA transparent transparent;
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+}
+
+.oej_box1:after {
     content: "";
     position: absolute;
     width: 0;
@@ -40,49 +43,41 @@
     top: 50%;
     right: 100%;
     transform: translateY(-50%);
-    border: 14px solid;
-    border-color: transparent #87c0f5 transparent transparent;
-  }
-
-
+    border: 10px solid;
+    border-color: transparent #0065BA transparent transparent;
+}
 
 /* 제목 */
-.QInfo h2{
-    display: flex;
-    font-size: 2.3rem;
-    width: 330px;
-    height: 50px;
-    line-height: 50px;
-    margin-top: -60px;
+.Qinfo>h2 {
+    font-size: 1.8rem;
+    padding-left: 20px;
+    padding-bottom: 3px;
+    font-weight: 600;
 }
 
 /* 내용 */
-.QInfo .oej_txt {
-    font-size: 1.9rem;
-    width: 330px;
-    height: 200px;
-   display: flex;
-   padding-left: 15px;
-   padding-top: 10px;
-    color: #000000;
+.oej_box1>.oej_txt {
+    font-size: 1.6rem;
+    width: 290px;
+    word-wrap: break-word;
 }
 
 /* 두번째 말풍선 */
-.oej_box {
-    position: absolute;
-    width: 350px;
-    height: 200px;
-    top: 230px;
-    right: -145%;
-    background-color: #e3eefc;
-    border: 8px solid #003999;;
+.oej_box2 {
+    position: relative;
+    max-width: 350px;
+    background-color: #8ED3FF;
+    border: 5px solid #8ED3FF;
     border-radius: 30px;
-    box-shadow: 2px 2px 4px #003999;;
+    margin-left: auto;
+    padding: 20px;
+    box-shadow: 5px 5px 5px 0 #00000040;
+
 }
 
-.oej_box:before {
-    border: 25px solid;
-    border-color: transparent transparent transparent #003999;
+.oej_box2:before {
+    border: 17px solid;
+    border-color: transparent transparent transparent #8ED3FF;
     content: "";
     position: absolute;
     top: 50%;
@@ -90,7 +85,7 @@
     transform: translateY(-50%);
 }
 
-.oej_box:after {
+.oej_box2:after {
     content: "";
     position: absolute;
     width: 0;
@@ -98,60 +93,42 @@
     top: 50%;
     left: 100%;
     transform: translateY(-50%);
-    border: 14px solid;
-    border-color: transparent transparent transparent #e3eefc;
+    border: 10px solid;
+    border-color: transparent transparent transparent #8ED3FF;
 }
 
-
 /* 카테고리 */
-.oej_box .oej_category{
-    width: 210px;
-    height: 30px;
-    line-height: 30px;
-    margin-top: -40px;
-   margin-right: -50px;
-    padding-left: 10px;
+.oej_category {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
 }
 
 /* 공개여부 */
- .oej_open {
-    margin-top: -30px;
-   margin-left: 210px;
-    width: 140px;
-    height: 30px;
-    line-height: 30px;
-
-}
-
- .oej_open i {
-    font-size: 25px;
-    padding-right: 10px;
+.oej_open>i {
+    font-size: 17px;
+    padding-right: 5px;
     color: #0065BA;
 }
 
-
 /* 등록시간 */
-
 .oej_time {
-    position: absolute;
-    width: auto;
-    height: 40px;
-    line-height: 40px;
-    right: 30px;
-    top:200px;
-
+    text-align: end;
+    padding-right: 20px;
+    padding-top: 3px;
 }
 
 /* 답변 */
-
 .oej_answer {
-    font-size: 2.0rem;
-    width: 320px;
-    height: 200px;
-    padding-left: 30px;
-    padding-top: 10px;
+    font-size: 1.6rem;
+    width: 290px;
+    word-wrap: break-word;
 }
 
 
-
-
+/* 등록된 리뷰가 없을때 */
+.AllNull {
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 150px 0;
+}

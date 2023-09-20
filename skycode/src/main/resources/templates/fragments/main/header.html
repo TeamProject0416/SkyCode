@@ -101,7 +101,6 @@
                         <img class="userImg"
                              th:unless="${#strings.isEmpty(userInfo.getUserOriImgName)}"
                              th:src="*{userImgUrl}" th:alt="*{userOriImgName}">
-
                         <div class="jhuserBox1">
                             <a href="/user_review">
                                 <ul>
@@ -109,10 +108,10 @@
                                     <li>리뷰</li>
                                 </ul>
                             </a>
-                            <a href="/user/praise">
+                            <a href="/user_shopping/questions">
                                 <ul>
-                                    <li>5</li>
-                                    <li>좋아요</li>
+                                    <li>[[${inquiryNum}]]</li>
+                                    <li>문의</li>
                                 </ul>
                             </a>
                             <a href="/user_shopping/coupon">
@@ -130,8 +129,8 @@
                                 <li><a href="/user">프로필
                                     <div></div>
                                 </a></li>
-                                <li><a href="/user_shopping/questions">문의
-                                    <div></div>
+                                <li><a href="/user_shopping/point">포인트
+                                    <div><span>[[${total}]] </span>p</div>
                                 </a></li>
                                 <li><a href="/user/edit">설정
                                     <div></div>
@@ -141,10 +140,10 @@
                         <div class="jhuserBox3">
                             <div></div>
                             <ul>
-                                <li><a href="#">이벤트</a></li>
-                                <li><a href="#">공지사항</a></li>
-                                <li><a href="#">고객센터</a></li>
-                                <li><a href="#">Q&A</a></li>
+                                <li><a href="/event/ongoing">이벤트</a></li>
+                                <li><a href="/news/notion/notion">공지사항</a></li>
+                                <li><a href="/news/inquiry/inquiryList">1:1문의</a></li>
+                                <li><a href="/news/faq/faq">Q&A</a></li>
                             </ul>
                             <img src="/mainImages/banner123.png" alt="">
                         </div>

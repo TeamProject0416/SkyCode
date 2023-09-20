@@ -19,14 +19,14 @@
             <h2 class="eventSubTag"><a href="/event/ongoing">#이벤트</a></h2>
             <div>
                 <button th:if="${!#strings.isEmpty(admin)}" >
-                    <a th:href="'/event/' + ${eventFormDto.id} + '/edit'">수정</a>
+                    <a th:href="'/admin/event/' + ${eventFormDto.id} + '/edit'">수정</a>
                 </button>
                 <button class="deleteBtn" th:if="${!#strings.isEmpty(admin)}"><a>삭제</a></button>
             </div>
             <div class="deleteModal modal">
                 <div class="modal-content">
                     <p>이벤트를 삭제하시겠습니까?</p>
-                    <button class="confirmDelete"><a th:href="'/event/' + ${eventFormDto.id} + '/delete'">삭제</a></button>
+                    <button class="confirmDelete"><a th:href="'/admin/event/' + ${eventFormDto.id} + '/delete'">삭제</a></button>
                     <button class="cancelDelete">취소</button>
                 </div>
             </div>
