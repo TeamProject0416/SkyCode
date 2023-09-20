@@ -82,7 +82,7 @@ public class MainController {
             model.addAttribute("total", total);
         }
 
-        // 이벤트 캐러셀
+        // 리뷰 캐러셀
         List<ReviewEntity> review = reviewRepository.findAllByOrderByReviewHitsDesc();
         model.addAttribute("reviews", review);
 
