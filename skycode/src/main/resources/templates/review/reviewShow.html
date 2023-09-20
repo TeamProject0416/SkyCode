@@ -184,37 +184,32 @@ const commentWrite = () => {
            for (let i in res) {
                //output += "<div class='oej_print'>";
                //output += "<p class='oej_Writer'>" + res[i].commentWriter + "</p>";
+               //output += "<img class='oej_img2' src='/subImages/user.png' alt='' style='max-width: 70px; max-height: 70px;'>";
                //output += "<p class='oej_text'>" + res[i].commentContents + "</p>";
 
                <!--내가 수정한 부분-->
-            output += "<div class='oej_print'>";
-            output += "<div class='oej_Writer'>";
-            output += "<img class='oej_img2' src='/subImages/user.png' alt='' style='max-width: 70px; max-height: 70px;'>";
-            output += "<p class='oej_Writer'>" + res[i].commentWriter + "</p>";
-            output += "</div>";
-            output += "<div class='textBox'>";
-            output += "<p class='textBox'>" + res[i].commentWriter + "</p>";
-            output += "<p class='textBox'>" + res[i].commentContents + "</p>";
-            output += "</div>";
+                 output += "<div class='oej_print'>";
+                  output += "<div class='oej_Writer'>";
+                  output += "<img class='oej_img2' src='/subImages/user.png' alt='' style='max-width: 70px; max-height: 70px;'>";
+                  output += "<p>" + res[i].commentWriter + "</p>";
+                  output += "</div>";
+                  output += "<div class='textBox'>";
 
-
-        //output += "<div class='oej_print'>";
-        //output += "<div class='oej_Writer'>";
-        //output += "<img class='oej_img2' src='/subImages/user.png' alt='' style='max-width: 70px; max-height: 70px;'>";
-        //output += "<p class='oej_Writer'>" + res[i].commentWriter + "</p>";
-        output += "</div>";
-        output += "<div class='textBox'>";
-        output += "<p class='oej_text'>" + res[i].commentContents + "</p>";
-
-
-
-               // LocalDateTime 값을 포맷하여 출력
+                  // LocalDateTime 값을 포맷하여 출력
                let commentCreatedTime = new Date(res[i].commentCreatedTime);
                let formattedDate = commentCreatedTime.getFullYear() + '-' +
                ('0' + (commentCreatedTime.getMonth() + 1)).slice(-2) + '-' +
                ('0' + commentCreatedTime.getDate()).slice(-2);
 
-               output += "<p class='oej_date'>" + formattedDate + "</p>";
+              output += "<p class='oej_text'>작성시간 : " + formattedDate + "</p>";
+
+<!--                 output += "<p class='oej_text' > " + res[i].commentCreatedTime + "</p>";-->
+                 // output += "<p class='oej_createdTime'>" + res[i].commentCreatedTime + "</p>";
+                  output += "<p class='oej_text'>내용 : " + res[i].commentContents + "</p>";
+                  output += "</div>";
+                  output += "</div>";
+
+
                output += "</div>";
            }
            output += "</div>";
@@ -230,15 +225,6 @@ const commentWrite = () => {
        }
     });
 }
-
-
-
-
-
-
-
-
-
 </script>
 
 </body>

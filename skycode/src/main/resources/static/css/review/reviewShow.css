@@ -215,6 +215,7 @@ top:60px;
 border-radius: 10px;
 color: #fff;
 outline: none;
+cursor: pointer;
 border: 1px solid rgba(0, 102, 186, 0.8);
 background: rgba(0, 102, 186, 0.8) ;
 
@@ -266,4 +267,3 @@ padding-top:25px;
     padding:10px;
     max-width:600px;
 }
-
