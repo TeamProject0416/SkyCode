@@ -2,9 +2,6 @@ package teamproject.skycode.ticket;
 
 import lombok.Getter;
 import lombok.Setter;
-import teamproject.skycode.constant.TicketCountry;
-
-import java.time.LocalDate;
 
 @Getter
 @Setter

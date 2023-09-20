@@ -9,15 +9,15 @@ import teamproject.skycode.login.MemberEntity;
 
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
-    @Query("SELECT o FROM Order o WHERE o.goingStart = :goingStart " +
+    @Query("SELECT o FROM OrderEntity o WHERE o.goingStart = :goingStart " +
             "AND o.goingArrive = :goingArrive AND o.goingTime = :goingTime " +
             "AND o.goingPrice = :goingPrice AND o.userGrade = :userGrade " +
             "AND o.comingStart = :comingStart AND o.comingArrive = :comingArrive " +
             "AND o.comingTime = :comingTime AND o.comingPrice = :comingPrice " +
             "AND o.totalPrice = :totalPrice AND o.memberEntity = :memberEntity")
-    Order findByDuplicateFields(
+    OrderEntity findByDuplicateFields(
             @Param("goingStart") String goingStart,
             @Param("goingArrive") String goingArrive,
             @Param("goingTime") String goingTime,
@@ -31,5 +31,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             @Param("memberEntity") MemberEntity memberEntity
     );
 
-    Order findByTotalPriceAndOrderStatusAndMemberEntity(int paymentAmount, OrderStatus orderStatus, MemberEntity memberEntity);
+    OrderEntity findByTotalPriceAndOrderStatusAndMemberEntity(int paymentAmount, OrderStatus orderStatus, MemberEntity memberEntity);
 }
