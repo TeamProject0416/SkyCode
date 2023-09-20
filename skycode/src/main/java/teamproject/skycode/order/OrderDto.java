@@ -7,6 +7,7 @@ import teamproject.skycode.constant.OrderStatus;
 @Getter
 @Setter
 public class OrderDto {
+    private Long id;
     // 가는 편
     private String goingStart; // 출발지
     private String goingArrive; // 도착지

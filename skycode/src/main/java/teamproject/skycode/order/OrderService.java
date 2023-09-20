@@ -44,28 +44,20 @@ public class OrderService {
     public void saveTicketResult(OrderDto orderDto) {
         System.err.println("여기는?.?");
         // 중복 체크를 위해 필요한 데이터를 OrderDto에서 추출합니다.
-        String goingStart = orderDto.getGoingStart();
-        System.err.println(goingStart);
-        String goingArrive = orderDto.getGoingArrive();
-        System.err.println(goingArrive);
-        String goingTime = orderDto.getGoingTime();
-        System.err.println(goingTime);
-        Integer goingPrice = orderDto.getGoingPrice();
-        System.err.println(goingPrice);
-        String userGrade = orderDto.getUserGrade();
-        System.err.println(userGrade);
-        String comingStart = orderDto.getComingStart();
-        System.err.println(comingStart);
-        String comingArrive = orderDto.getComingArrive();
-        System.err.println(comingArrive);
-        String comingTime = orderDto.getComingTime();
-        System.err.println(comingTime);
-        Integer comingPrice = orderDto.getComingPrice();
-        System.err.println(comingPrice);
-        Integer totalPrice = orderDto.getTotalPrice();
-        System.err.println(totalPrice);
 
-        System.err.println("아이디 찾기이" + orderDto.getMemberId());
+        String goingStart = orderDto.getGoingStart();
+        String goingArrive = orderDto.getGoingArrive();
+        String goingTime = orderDto.getGoingTime();
+        Integer goingPrice = orderDto.getGoingPrice();
+        String userGrade = orderDto.getUserGrade();
+        String comingStart = orderDto.getComingStart();
+        String comingArrive = orderDto.getComingArrive();
+        String comingTime = orderDto.getComingTime();
+        Integer comingPrice = orderDto.getComingPrice();
+        Integer totalPrice = orderDto.getTotalPrice();
+        OrderStatus status = orderDto.getOrderStatus();
+        System.err.println("123123"+status);
+
 
         MemberEntity memberEntity = memberRepository.findById(orderDto.getMemberId())
                 .orElseThrow(EntityNotFoundException::new);
@@ -77,7 +69,8 @@ public class OrderService {
                 comingStart, comingArrive, comingTime, comingPrice, totalPrice,
                 memberEntity
         );
-        System.err.println("existingOrder:" + existingOrder);
+
+
 
         // 중복 주문이 없을 경우에만 주문을 저장합니다.
         if (existingOrder == null) {
@@ -96,12 +89,12 @@ public class OrderService {
             order.setOrderStatus(OrderStatus.ONGOING);
             order.setOrderDate(LocalDateTime.now());
             order.setMemberEntity(memberEntity);
-            System.err.println("order: " + order);
 
             orderRepository.save(order);
         } else {
-            // 멤버를 찾을 수 없는 경우에 대한 처리
-            throw new EntityNotFoundException("멤버를 찾을 수 없습니다.");
+//            중복값이 있으면
+            orderRepository.save(existingOrder);
+
         }
     }
 }

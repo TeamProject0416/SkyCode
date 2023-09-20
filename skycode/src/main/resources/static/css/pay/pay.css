@@ -1,13 +1,17 @@
 /* 티켓 선택 결과 */
+.ticketResult {
+    position: relative;
+    top: 110px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
 .travelInfo {
-    margin-top: 24px;
     margin-bottom: 8px
 }
 
 .goingComingTickets {
     position: relative;
-    margin: 0 auto;
-    max-width: 1200px;
+
 }
 
 /* 가는 편 */

@@ -164,7 +164,6 @@ public class TicketController {
         List<TicketEntity> resultComingList = ticketService.ticketComingEntityList(arriveValue, startValue, endDate);
 
 
-
 //        뷰에 모델 추가
 //        model.addAttribute("userSelectGrade", userSelectGrade);
         model.addAttribute("totalNum",totalNum);
@@ -187,14 +186,11 @@ public class TicketController {
         Model model
     ) {
 
-
-
         int goingPrice = goingResultTotalPrice;
         int comingPrice = comingResultTotalPrice;
         int resultPrice = goingPrice + comingPrice;
 
         OrderDto orderDto = new OrderDto();
-
         orderDto.setGoingStart(goingResultStart);
         orderDto.setGoingArrive(goingResultArrive);
         orderDto.setGoingTime(goingStartArriveTime);
