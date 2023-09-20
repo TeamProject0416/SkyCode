@@ -1,5 +1,6 @@
 package teamproject.skycode.myPage;
 
+import com.querydsl.core.types.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,6 +27,8 @@ import teamproject.skycode.myPage.users.MemberEditFormDto;
 import teamproject.skycode.myPage.users.PasswordFormDto;
 import teamproject.skycode.news.inquiry.Inquiry;
 import teamproject.skycode.news.inquiry.InquiryRepository;
+import teamproject.skycode.order.OrderEntity;
+import teamproject.skycode.order.OrderRepository;
 import teamproject.skycode.point.PointEntity;
 import teamproject.skycode.point.PointHistoryEntity;
 import teamproject.skycode.point.PointHistoryRepository;
@@ -52,6 +55,7 @@ public class MyPageController {
     private final PointHistoryRepository pointHistoryRepository;
     private final Member_CouponRepository memberCouponRepository;
     private final InquiryRepository inquiryRepository;
+    private final OrderRepository orderRepository;
 
 
     //---------------------------/user------------------------//
@@ -180,6 +184,14 @@ public class MyPageController {
 
         // 유저 로그인 모달 함수
         populateAdminModel(model, principal);
+
+        if (principal != null) {
+            String user = principal.getName();
+            MemberEntity userInfo = memberRepository.findByEmail(user);
+            List<OrderEntity> ticketOrders = orderRepository.findByMemberEntityId(userInfo.getId());
+
+            model.addAttribute("ticketOrders", ticketOrders);
+        }
 
         return "myPage/shopping/orderList";
     }
