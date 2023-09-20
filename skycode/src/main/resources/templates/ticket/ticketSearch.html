@@ -119,13 +119,13 @@
                 <div class="resultPriceModal modal">
                     <div class="modal-content">
                         <form action="/ticket/payment" method="post">
-                            <input type="text" class="goingPriceValue" name="goingResultTotalPrice">
-                            <input type="text" name="goingResultStart">
-                            <input type="text" name="goingResultArrive">
-                            <input type="text" name="goingStartArriveTime">
-                            <input type="text" name="goingUserSelectGrade">
-                            <input type="text" name="comingStartArriveTime">
-                            <input type="text" class="comingPriceValue" name="comingResultTotalPrice">
+                            <input type="hidden" class="goingPriceValue" name="goingResultTotalPrice">
+                            <input type="hidden" name="goingResultStart">
+                            <input type="hidden" name="goingResultArrive">
+                            <input type="hidden" name="goingStartArriveTime">
+                            <input type="hidden" name="goingUserSelectGrade">
+                            <input type="hidden" name="comingStartArriveTime">
+                            <input type="hidden" class="comingPriceValue" name="comingResultTotalPrice">
                             <p>구매하시겠습니까?</p>
                             <button class="confirm">결제</button>
                         </form>
