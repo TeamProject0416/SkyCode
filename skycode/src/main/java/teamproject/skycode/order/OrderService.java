@@ -72,7 +72,7 @@ public class OrderService {
 
         System.err.println("memberEntity:" + memberEntity);
         // 중복 체크를 위한 데이터를 사용하여 중복 주문을 찾습니다.
-        Order existingOrder = orderRepository.findByDuplicateFields(
+        OrderEntity existingOrder = orderRepository.findByDuplicateFields(
                 goingStart, goingArrive, goingTime, goingPrice, userGrade,
                 comingStart, comingArrive, comingTime, comingPrice, totalPrice,
                 memberEntity
@@ -82,7 +82,7 @@ public class OrderService {
         // 중복 주문이 없을 경우에만 주문을 저장합니다.
         if (existingOrder == null) {
             System.err.println("중복값이 없어용!");
-            Order order = new Order();
+            OrderEntity order = new OrderEntity();
             order.setGoingStart(goingStart);
             order.setGoingArrive(goingArrive);
             order.setComingStart(comingStart);

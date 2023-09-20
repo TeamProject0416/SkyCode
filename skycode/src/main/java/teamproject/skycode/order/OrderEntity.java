@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Table(name = "orderEntity")
 @Getter
 @Setter
-public class Order {
+public class OrderEntity {
     @Id
     @Column(name = "order_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,7 +46,7 @@ public class Order {
 
     public boolean isDuplicate(OrderRepository orderRepository) {
         // 중복 체크 로직을 여기에 구현
-        Order existingOrder = orderRepository.findByDuplicateFields(
+        OrderEntity existingOrder = orderRepository.findByDuplicateFields(
                 this.goingStart, this.goingArrive, this.goingTime, this.goingPrice,
                 this.userGrade, this.comingStart, this.comingArrive, this.comingTime,
                 this.comingPrice, this.totalPrice, this.memberEntity

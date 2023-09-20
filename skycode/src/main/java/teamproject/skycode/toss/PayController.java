@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import teamproject.skycode.constant.OrderStatus;
 import teamproject.skycode.login.MemberEntity;
 import teamproject.skycode.login.MemberRepository;
-import teamproject.skycode.order.Order;
+import teamproject.skycode.order.OrderEntity;
 import teamproject.skycode.order.OrderDto;
 import teamproject.skycode.order.OrderRepository;
 
@@ -49,7 +49,7 @@ public class PayController {
             if (memberEntity != null) {
                 int paymentAmount = paymentReq.getAmount();
 
-                Order order = orderRepository.findByTotalPriceAndOrderStatusAndMemberEntity(paymentAmount, OrderStatus.ONGOING, memberEntity);
+                OrderEntity order = orderRepository.findByTotalPriceAndOrderStatusAndMemberEntity(paymentAmount, OrderStatus.ONGOING, memberEntity);
                 System.err.println("order: " + order);
 
                 if (order != null) {
@@ -73,7 +73,7 @@ public class PayController {
                 // 리다이렉트 응답을 반환합니다.
                 // 결제 성공후 메인화면으로 이동
                 HttpHeaders headers = new HttpHeaders();
-                headers.add("Location", "/payment/success/end?amount=" + amount);
+                headers.add("Location", "/");
                 return new ResponseEntity<>(headers, HttpStatus.FOUND);
             } else {
                 String failureMessage = "결제가 실패했습니다. 다시 시도해주세요.";
