@@ -10,6 +10,7 @@
     <link th:href="@{/css/sub/footer.css}" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/review/reviewShow.css}">
 
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
@@ -18,6 +19,7 @@
 
 <div class="wrap">
     <div class="container">
+
         <div class="userReviewArea">
             <div class="userReviewTop">
                 <div class="userInfo">
@@ -96,54 +98,44 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- 댓글 작성 부분 -->
-    <div class="oej_bigbox">
-        <div class="oej_box">
-            <div class="comment-write">
+        <!-- 댓글 작성 부분 -->
+        <div class="oej_bigbox">
+
+            <div class="allBox">
+
                 <!-- css 다 끝나고 나서 작성자 type hidden으로 바꾸기 -->
-                <div class="oej_icon">
-
-                    <!-- input창에 있는  th:value="${nickname}"  id="commentWriter1" 이거 2개 i 태그로 옮겨 놨습니다-->
-                    <!-- <input type="text"   placeholder="작성자">  -->
-
-                    <i th:value="${nickname}" class="fa-solid fa-circle-user commentWriter"></i>
+                <div class="oej_box">
+                    <input type="hidden" th:value="${nickname}" placeholder="작성자" id="commentWriter">
+                    <img class="oej_img" src="/subImages/user.png" alt="">
+                    <input type="text" id="commentContents" placeholder="내용">
+                    <button th:if="${#strings.isEmpty(userInfo)}" id="reviewLink">댓글작성</button>
+                    <button class="oej_button2" th:unless="${#strings.isEmpty(userInfo)}" onclick="commentWrite()">댓글작성
+                    </button>
                 </div>
-                <input type="text" id="commentContents" placeholder="내용">
-                <button th:if="${#strings.isEmpty(userInfo)}" id="reviewLink">댓글작성</button>
-                <button class="oej_button2" th:unless="${#strings.isEmpty(userInfo)}" onclick="commentWrite()">댓글작성
-                </button>
                 <!--        이  버튼은 둘중에 하나만 보이는거라 두개 같이 두셔야해요_지혜        -->
-            </div>
 
 
-            <!-- 댓글 출력 수정 부분 -->
-            <div id="error-message" style="color: red;"></div>
-            <div id="comment-list">
-                <form class="oej_form">
-                    <label class="oej_name" for="contents">작성자</label>
-                    <i th:value="${nickname}" class="fa-solid fa-circle-user commentWriter"></i>
-
-
-                    <div class="oej_smallBox">
-                        <!-- <label class="oej_content" for="contents">내용</label> -->
-                        <input id="contents" name="contents" placeholder="내용을 입력하세요"></input>
-
-                        <div class="oej_time2">
-                            <label class="oej_time" for="contents">작성시간</label>
-                            <input id="contents2" name="contents" ></input>
+                <!-- 댓글 출력 부분 -->
+                <div id="error-message" style="color: red;"></div>
+                <div id="comment-list">
+                    <!-- 출력부분? -->
+                    <div class="oej_print" th:each="comment: ${commentList}">
+                        <div class="oej_Writer">
+                            <img class="oej_img2" src="/subImages/user.png" alt="">
+                            <p th:text="${comment.commentWriter}">작성자</p>
+                        </div>
+                        <div class="textBox">
+                            <p th:text="${#temporals.format(comment.commentCreatedTime, 'yyyy-MM-dd')}">
+                                작성시간</p>
+                            <p th:text="${comment.commentContents}">내용</p>
                         </div>
                     </div>
-
-                    <div th:each="comment: ${commentList}">
-                        <p th:text="${comment.commentWriter}"></p>
-                        <p th:text="${comment.commentContents}"></p>
-                        <p th:text="${comment.commentCreatedTime}"></p>
-                    </div>
-                </form>
+                </div>
             </div>
+
         </div>
+
     </div>
 </div>
 
@@ -154,68 +146,99 @@
 <script src="/js/review/reviewShow.js"></script>
 <script src="/js/sub/footer.js"></script>
 <script>
-    // 리뷰 경고창
-    $('#reviewLink').click(function (event) {
-        event.preventDefault(); // 링크의 기본 동작을 중지
+// 리뷰 경고창
+$('#reviewLink').click(function (event) {
+    event.preventDefault(); // 링크의 기본 동작을 중지
 
-        // 경고 창을 표시
-        var confirmation = confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?");
+    // 경고 창을 표시
+    var confirmation = confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?");
 
-        if (confirmation) {
-            // 사용자가 확인을 클릭한 경우 로그인 페이지로 이동
-            window.location.href = "/member/login";
-        }
-    });
+    if (confirmation) {
+        // 사용자가 확인을 클릭한 경우 로그인 페이지로 이동
+        window.location.href = "/member/login";
+    }
+});
+
+
 </script>
 <script th:inline="javascript">
-    const commentWrite = () => {
-        const writer = document.getElementById("commentWriter").value;
-        const contents = document.getElementById("commentContents").value;
-        console.log("작성자: ", writer);
-        console.log("내용: ", contents);
-        const id = [[${reviewDto.id}]];    // 게시글 번호
-        $.ajax({
-           // 요청방식: post, 요청주소: /comment/save, 요청데이터: 작성자, 작성내용, 게시글번호
-           type: "post",
-           url: "/comment/save",
-           data: {
-               "commentWriter": writer,
-               "commentContents": contents,
-               "reviewId": id
-           },
-           success: function (res) {
-               console.log("요청성공", res);
-               let output = "<table>";
-               output += "<th>작성자</th>";
-               output += "<th>내용</th>";
-               output += "<th>작성시간</th></tr>";
+const commentWrite = () => {
+    const writer = document.getElementById("commentWriter").value;
+    const contents = document.getElementById("commentContents").value;
+    console.log("작성자: ", writer);
+    console.log("내용: ", contents);
+    const id = [[${reviewDto.id}]];    // 게시글 번호
+    $.ajax({
+       // 요청방식: post, 요청주소: /comment/save, 요청데이터: 작성자, 작성내용, 게시글번호
+       type: "post",
+       url: "/comment/save",
+       data: {
+           "commentWriter": writer,
+           "commentContents": contents,
+           "reviewId": id
+       },
+       success: function (res) {
+           console.log("요청성공", res);
+           let output ='';
 
-               for (let i in res) {
-                   output += "<tr>";
-                   output += "<td>" + res[i].commentWriter + "</td>";
-                   output += "<td>" + res[i].commentContents + "</td>";
+           for (let i in res) {
+               //output += "<div class='oej_print'>";
+               //output += "<p class='oej_Writer'>" + res[i].commentWriter + "</p>";
+               //output += "<p class='oej_text'>" + res[i].commentContents + "</p>";
 
-                   // LocalDateTime 값을 포맷하여 출력
-                   let commentCreatedTime = new Date(res[i].commentCreatedTime);
-                   let formattedDate = commentCreatedTime.getFullYear() + '-' +
-                   ('0' + (commentCreatedTime.getMonth() + 1)).slice(-2) + '-' +
-                   ('0' + commentCreatedTime.getDate()).slice(-2);
+               <!--내가 수정한 부분-->
+            output += "<div class='oej_print'>";
+            output += "<div class='oej_Writer'>";
+            output += "<img class='oej_img2' src='/subImages/user.png' alt='' style='max-width: 70px; max-height: 70px;'>";
+            output += "<p class='oej_Writer'>" + res[i].commentWriter + "</p>";
+            output += "</div>";
+            output += "<div class='textBox'>";
+            output += "<p class='textBox'>" + res[i].commentWriter + "</p>";
+            output += "<p class='textBox'>" + res[i].commentContents + "</p>";
+            output += "</div>";
 
-                   output += "<td>" + formattedDate + "</td>";
-                   output += "</tr>";
-               }
-               output += "</table>";
-               document.getElementById('comment-list').innerHTML = output;
-               document.getElementById('commentContents').value = '';
-           },
-           error: function (err) {
-               // console.log("요청실패", err);
-               alert("댓글 등록에 실패했습니다.");
-               let errorMessageElement = document.getElementById('error-message');
-               errorMessageElement.textContent = "댓글 저장에 실패했습니다. 다시 시도하세요.";
+
+        //output += "<div class='oej_print'>";
+        //output += "<div class='oej_Writer'>";
+        //output += "<img class='oej_img2' src='/subImages/user.png' alt='' style='max-width: 70px; max-height: 70px;'>";
+        //output += "<p class='oej_Writer'>" + res[i].commentWriter + "</p>";
+        output += "</div>";
+        output += "<div class='textBox'>";
+        output += "<p class='oej_text'>" + res[i].commentContents + "</p>";
+
+
+
+               // LocalDateTime 값을 포맷하여 출력
+               let commentCreatedTime = new Date(res[i].commentCreatedTime);
+               let formattedDate = commentCreatedTime.getFullYear() + '-' +
+               ('0' + (commentCreatedTime.getMonth() + 1)).slice(-2) + '-' +
+               ('0' + commentCreatedTime.getDate()).slice(-2);
+
+               output += "<p class='oej_date'>" + formattedDate + "</p>";
+               output += "</div>";
            }
-        });
-    }
+           output += "</div>";
+           console.log(output);
+           document.getElementById('comment-list').innerHTML = output;
+           document.getElementById('commentContents').value = '';
+       },
+       error: function (err) {
+           // console.log("요청실패", err);
+           alert("댓글 등록에 실패했습니다.");
+           let errorMessageElement = document.getElementById('error-message');
+           errorMessageElement.textContent = "댓글 저장에 실패했습니다. 다시 시도하세요.";
+       }
+    });
+}
+
+
+
+
+
+
+
+
+
 </script>
 
 </body>
